@@ -1,0 +1,30 @@
+{
+  "student_id": 1,
+  "topic": "SQL JOIN",
+  "interactions": [
+    {
+      "study_minutes": 18,
+      "errors": 4,
+      "attempts": 3,
+      "repetitions": 2,
+      "navigation_count": 8,
+      "score_percentage": 45
+    },
+    {
+      "study_minutes": 22,
+      "errors": 3,
+      "attempts": 4,
+      "repetitions": 3,
+      "navigation_count": 10,
+      "score_percentage": 55
+    },
+    {
+      "study_minutes": 16,
+      "errors": 2,
+      "attempts": 2,
+      "repetitions": 1,
+      "navigation_count": 6,
+      "score_percentage": 60
+    }
+  ]
+}
