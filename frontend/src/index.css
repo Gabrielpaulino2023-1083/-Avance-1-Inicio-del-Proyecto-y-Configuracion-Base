@@ -1,0 +1,105 @@
+:root {
+  --color-bg: #fdf5f7;
+  --color-surface: #ffffff;
+  --color-text: #3a2e35;
+  --color-text-soft: #8c7681;
+  --color-accent: #b2577e;
+  --color-accent-soft: #e8c7d4;
+  --color-border: #f0dce3;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 8px rgba(178, 87, 126, 0.06);
+}
+
+.app-nav__brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-accent);
+}
+
+.app-nav__links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav__links a {
+  text-decoration: none;
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.app-nav__links a:hover {
+  color: var(--color-accent);
+}
+
+.app-nav__links a.active {
+  color: var(--color-accent);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.app-content {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.screen-placeholder {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 4px 20px rgba(178, 87, 126, 0.07);
+}
+
+.screen-placeholder h1 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.screen-placeholder p {
+  color: var(--color-text-soft);
+  margin-bottom: 0;
+}
