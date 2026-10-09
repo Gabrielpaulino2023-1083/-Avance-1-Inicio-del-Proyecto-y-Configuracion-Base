@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (contraseñas, JWT_SECRET). Solo se sube .env.example
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Cobertura de pruebas (las pruebas las realiza QA)
+coverage/
