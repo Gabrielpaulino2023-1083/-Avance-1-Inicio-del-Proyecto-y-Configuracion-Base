@@ -1,23 +1,35 @@
 :root {
-  --color-bg: #fdf5f7;
-  --color-surface: #ffffff;
-  --color-text: #3a2e35;
-  --color-text-soft: #8c7681;
-  --color-accent: #b2577e;
-  --color-accent-soft: #e8c7d4;
-  --color-border: #f0dce3;
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
+  --bg: #f8f6f2;
+  --surface: #ffffff;
+  --ink: #111315;
+  --ink-soft: #5d636b;
+  --line: #e4e0d8;
+  --line-strong: #c9c3b8;
 
+  --carbon: #111315;
+  --carbon-2: #1e232b;
+  --carbon-3: #2c3440;
+
+  --accent: #c7a35d;
+  --accent-hover: #e0c185;
+  --accent-dark: #8f6f2f;
+  --accent-tint: #f3ead7;
+
+  --success: #4fae7b;
+  --danger: #a4281f;
+  --danger-bg: #fbeceb;
+
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.6;
 }
@@ -25,6 +37,8 @@ body {
 a {
   color: inherit;
 }
+
+/* ---------- Estructura con navegación ---------- */
 
 .app-shell {
   min-height: 100vh;
@@ -35,31 +49,30 @@ a {
 .app-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2rem;
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 1px 8px rgba(178, 87, 126, 0.06);
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
 }
 
 .app-nav__brand {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.15rem;
-  color: var(--color-accent);
+  color: var(--carbon);
 }
 
 .app-nav__links {
   display: flex;
-  gap: 1.75rem;
+  gap: 1.5rem;
   list-style: none;
-  margin: 0;
+  margin: 0 auto 0 0;
   padding: 0;
 }
 
 .app-nav__links a {
   text-decoration: none;
-  color: var(--color-text-soft);
+  color: var(--ink-soft);
   font-size: 0.95rem;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid transparent;
@@ -67,39 +80,240 @@ a {
 }
 
 .app-nav__links a:hover {
-  color: var(--color-accent);
+  color: var(--ink);
 }
 
 .app-nav__links a.active {
-  color: var(--color-accent);
+  color: var(--ink);
   font-weight: 600;
-  border-bottom: 2px solid var(--color-accent);
+  border-bottom-color: var(--accent);
+}
+
+.app-nav__user {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.app-nav__name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.app-nav__logout {
+  font: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.app-nav__logout:hover {
+  background: var(--accent-tint);
+  border-color: var(--accent);
 }
 
 .app-content {
   flex: 1;
   width: 100%;
-  max-width: 640px;
+  max-width: 760px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
 }
 
 .screen-placeholder {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   padding: 2.25rem 2rem;
-  box-shadow: 0 4px 20px rgba(178, 87, 126, 0.07);
 }
 
 .screen-placeholder h1 {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
-  color: var(--color-text);
-  margin-bottom: 0.6rem;
+  font-weight: 600;
+  font-size: 1.7rem;
+  margin: 0 0 0.6rem;
 }
 
 .screen-placeholder p {
-  color: var(--color-text-soft);
-  margin-bottom: 0;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- Login ---------- */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+}
+
+.login-aside {
+ background: linear-gradient(135deg, #111315 0%, #1e232b 60%, #2c3440 100%);
+  color: #f8f6f2;
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.login-aside__brand {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.login-aside__title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  max-width: 16ch;
+}
+
+.login-aside__text {
+  color: #b9bcc2;
+  max-width: 40ch;
+  margin: 0;
+}
+
+.login-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: var(--surface);
+}
+
+.login-panel {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-panel h1 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.9rem;
+  margin: 0 0 0.4rem;
+}
+
+.login-panel > p {
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.field input {
+  font: inherit;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.field-error,
+.form-error {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.form-error {
+  background: var(--danger-bg);
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+}
+
+.login-form button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent); 
+  color: var(--carbon);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.login-form button:hover:not(:disabled) {
+background: var(--accent-hover);
+}
+
+.login-form button:focus-visible {
+  outline: 2px solid var(--carbon);
+  outline-offset: 2px;
+}
+
+.login-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-hint {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  background: var(--accent-tint);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-aside {
+    padding: 1.75rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .login-aside__title {
+    font-size: 1.6rem;
+  }
+
+  .login-aside__text {
+    display: none;
+  }
+
+  .app-nav {
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
 }

@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 const links = [
   { to: "/", label: "Dashboard" },
@@ -8,6 +9,14 @@ const links = [
 ];
 
 export default function AppLayout() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
+
   return (
     <div className="app-shell">
       <nav className="app-nav">
@@ -25,6 +34,24 @@ export default function AppLayout() {
             </li>
           ))}
         </ul>
+        <div className="app-nav__user">
+          {user ? (
+            <>
+              <span className="app-nav__name">{user.nombre}</span>
+              <button
+                type="button"
+                className="app-nav__logout"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className="app-nav__logout">
+              Iniciar sesión
+            </NavLink>
+          )}
+        </div>
       </nav>
       <main className="app-content">
         <Outlet />
