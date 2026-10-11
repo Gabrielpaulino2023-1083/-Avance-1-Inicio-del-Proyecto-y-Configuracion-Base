@@ -3,22 +3,15 @@ openapi: 3.0.3
 info:
   title: API del Motor de Aprendizaje Adaptativo
   version: 1.0.0
-  description: |
-    API REST  del proyecto
-    **Motor de Aprendizaje Adaptativo Basado en Comportamiento del Estudiante**.
-
-  
+  description: API REST del proyecto Motor de Aprendizaje Adaptativo Basado en Comportamiento del Estudiante.
 
 servers:
   - url: http://localhost:3000
-    description: Desarrollo
+    description: Desarrollo local
 
 tags:
   - name: Salud
     description: Estado del servicio
-  - name: Autenticación
-    description: Registro, inicio de sesión y datos del usuario autenticado
-
 paths:
   /api/health:
     get:
@@ -107,6 +100,70 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /api/students/{id}:
+    get:
+      tags: [Estudiantes]
+      operationId: getStudentSummary
+      summary: Resumen del estudiante
+      description: |
+        Un estudiante solo puede consultar su propio id; docentes y administradores pueden consultar cualquiera.
+
+        **Datos reales:** nombre, apellido, email, rol, `cursosActivos` y `cursos`.
+
+        **Datos simulados** (`simulado: true`): porcentaje, módulos, actividades, nota promedio y horas de estudio.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StudentId'
+      responses:
+        '200':
+          description: Resumen del estudiante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSummaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/students/{id}/progress:
+    get:
+      tags: [Estudiantes]
+      operationId: getStudentProgress
+      summary: Progreso y recomendación del estudiante
+      description: |
+        Mismas reglas de acceso que el resumen.
+        Por ahora todos los datos son simulados (`simulado: true`), con el formato final.
+        Más adelante vendrán de las interacciones y del motor adaptativo.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StudentId'
+      responses:
+        '200':
+          description: Progreso del estudiante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentProgressResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -114,6 +171,17 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: Token obtenido en `POST /api/auth/login`.
+
+  parameters:
+    StudentId:
+      name: id
+      in: path
+      required: true
+      description: Id del estudiante
+      schema:
+        type: integer
+        minimum: 1
+        example: 4
 
   responses:
     BadRequest:
@@ -131,6 +199,24 @@ components:
           example:
             success: false
             message: Credenciales inválidas
+    Forbidden:
+      description: No tienes permiso para esta acción
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: No tienes permiso para ver este estudiante
+    NotFound:
+      description: El recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: Estudiante no encontrado
     Conflict:
       description: El recurso ya existe
       content:
@@ -290,3 +376,142 @@ components:
               mensaje:
                 type: string
                 example: La contraseña debe tener al menos 8 caracteres
+
+    CourseEnrollment:
+      type: object
+      properties:
+        cursoId:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: Cálculo
+        seccion:
+          type: string
+          example: SEC 1
+        estado:
+          type: string
+          example: ACTIVA
+
+    StudentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        nombre:
+          type: string
+          example: Ana
+        apellido:
+          type: string
+          example: Lopez
+        email:
+          type: string
+          example: ana@example.com
+        rol:
+          type: string
+          example: ESTUDIANTE
+        cursosActivos:
+          type: integer
+          example: 1
+        cursos:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseEnrollment'
+        porcentajeCompletado:
+          type: number
+          example: 72
+        modulosFinalizados:
+          type: integer
+          example: 18
+        modulosPendientes:
+          type: integer
+          example: 7
+        actividadesPendientes:
+          type: integer
+          example: 8
+        notaPromedio:
+          type: number
+          example: 86
+        horasEstudio:
+          type: number
+          example: 32
+
+    StudentSummaryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        simulado:
+          type: boolean
+          description: true mientras parte de los datos sea simulada
+          example: true
+        student:
+          $ref: '#/components/schemas/StudentSummary'
+
+    Recommendation:
+      type: object
+      properties:
+        tema:
+          type: string
+          example: SQL JOIN
+        accion:
+          type: string
+          example: reinforce_topic
+        dificultad:
+          type: string
+          example: reduced
+        prioridad:
+          type: string
+          example: alta
+        descripcion:
+          type: string
+        motivo:
+          type: object
+          properties:
+            puntuacionPromedio:
+              type: number
+              example: 53.3
+            erroresAcumulados:
+              type: integer
+              example: 9
+            intentosPromedio:
+              type: number
+              example: 3.0
+
+    StudentProgress:
+      type: object
+      properties:
+        variaciones:
+          type: object
+          properties:
+            porcentajeSemanal:
+              type: number
+              example: 5
+            cursosMes:
+              type: integer
+              example: 1
+            actividadesSemana:
+              type: integer
+              example: -2
+            notaPuntos:
+              type: number
+              example: 3
+            horasSemana:
+              type: number
+              example: 6
+        recomendacion:
+          $ref: '#/components/schemas/Recommendation'
+
+    StudentProgressResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        simulado:
+          type: boolean
+          example: true
+        progress:
+          $ref: '#/components/schemas/StudentProgress'
