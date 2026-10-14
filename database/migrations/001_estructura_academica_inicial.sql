@@ -1,5 +1,5 @@
 BEGIN;
-
+-- Creacion de tabla usuarios, roles y relaciones entre ellos
 CREATE TABLE usuarios (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL CHECK (btrim(nombre) <> ''),
@@ -41,7 +41,7 @@ CREATE TABLE usuario_roles (
         )
     )
 );
-
+-- Creacion de tabla cursos, ediciones, secciones y relaciones entre ellos
 CREATE TABLE cursos (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     codigo TEXT NOT NULL UNIQUE CHECK (btrim(codigo) <> ''),
