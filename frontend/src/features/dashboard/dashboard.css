@@ -2,8 +2,8 @@
   --dash-deep: #111315;
   --dash-steel: #1e232b;
   --dash-slate: #2c3440;
-  --dash-gold: #c7a35d;
-  --dash-gold-soft: #e0c185;
+  --dash-gold: #c9703f;
+  --dash-gold-soft: #e3a077;
   --dash-green: #4fae7b;
   --dash-amber: #f59e0b;
   display: flex;
@@ -118,7 +118,7 @@
   height: 340px;
   top: -130px;
   right: -60px;
-  .hero__orb--a { background: rgba(199, 163, 93, 0.35); }
+  .hero__orb--a { background: rgba(201, 112, 63, 0.35); }
 }
 
 .hero__orb--b {
@@ -371,7 +371,7 @@
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: rgba(199, 163, 93, 0.16);
+  background: rgba(201, 112, 63, 0.16);
   color: var(--dash-gold);
 }
 
@@ -498,5 +498,113 @@
 @media (max-width: 520px) {
   .stats {
     grid-template-columns: 1fr;
+  }
+}
+/* ---------- Actividad reciente ---------- */
+
+.timeline {
+  padding: 1.75rem 1.75rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.timeline__title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.timeline__list {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Línea vertical que une los iconos */
+.timeline__list::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 17px;
+  width: 2px;
+  background: var(--line);
+}
+
+.timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.timeline__icon {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--accent-dark);
+  border: 2px solid var(--surface);
+}
+
+.timeline__icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.timeline__item--evaluation .timeline__icon {
+  background: #dff3e8;
+  color: #1f7a4f;
+}
+
+.timeline__item--achievement .timeline__icon {
+  background: var(--carbon);
+  color: var(--accent);
+}
+
+.timeline__item--goal .timeline__icon {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.timeline__name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.timeline__detail {
+  margin: 0.1rem 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.timeline__when {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .timeline {
+    animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.5s;
   }
 }

@@ -1,0 +1,222 @@
+/* Tema oscuro de toda la plataforma: mismo mundo visual del login.
+   Se carga al final (main.tsx) para ajustar los colores de cada pantalla.
+   Para volver al modo claro, basta con quitar su import en main.tsx. */
+
+/* ---------- Colores base ---------- */
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0c0e;
+  --surface: #15181c;
+  --ink: #f1eee7;
+  --ink-soft: #a3a19a;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --accent-dark: #e3a077;
+  --accent-tint: rgba(201, 112, 63, 0.15);
+  --danger: #ff9a8f;
+  --danger-bg: rgba(229, 101, 90, 0.12);
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(900px 520px at 90% -10%, rgba(201, 112, 63, 0.16), transparent 62%),
+    radial-gradient(760px 480px at 0% 110%, rgba(201, 112, 63, 0.09), transparent 62%),
+    #0b0c0e;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(201, 112, 63, 0.35);
+}
+
+/* ---------- Barra de navegación ---------- */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(14, 16, 19, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.app-nav__brand {
+  color: var(--ink);
+}
+
+.app-nav__logout {
+  color: var(--ink);
+}
+
+/* ---------- Tarjetas de cristal ---------- */
+
+.stat,
+.timeline,
+.panel,
+.modules,
+.exercise,
+.result-stat,
+.screen-placeholder {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.hero {
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.reco,
+.metrics {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Dashboard ---------- */
+
+.stat:hover {
+  border-color: rgba(201, 112, 63, 0.55);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.stat__delta--good {
+  background: rgba(79, 174, 123, 0.16);
+  color: #7fd6a6;
+}
+
+.stat__delta--bad {
+  background: rgba(245, 158, 11, 0.16);
+  color: #f5b94d;
+}
+
+.timeline__item--evaluation .timeline__icon {
+  background: rgba(79, 174, 123, 0.16);
+  color: #7fd6a6;
+}
+
+.timeline__item--achievement .timeline__icon {
+  background: rgba(201, 112, 63, 0.2);
+  color: #e3a077;
+}
+
+.timeline__item--goal .timeline__icon {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+/* ---------- Progreso ---------- */
+
+.bars__track {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.bars__fill {
+  background: linear-gradient(180deg, #5b6572, #3a424d);
+}
+
+.bars__fill--top {
+  background: linear-gradient(180deg, #e3a077, #c9703f);
+}
+
+.topic__bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.topic__fill--steady {
+  background: #7c8694;
+}
+
+.topic__chip--strong {
+  background: rgba(79, 174, 123, 0.16);
+  color: #7fd6a6;
+}
+
+.topic__chip--reinforce {
+  background: rgba(245, 158, 11, 0.16);
+  color: #f5b94d;
+}
+
+/* ---------- Contenido ---------- */
+
+.modules__bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.exercise__topic {
+  background: rgba(201, 112, 63, 0.16);
+  color: #e3a077;
+  border: 1px solid rgba(201, 112, 63, 0.35);
+}
+
+.choice {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.choice__letter {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.choice--selected {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+
+.choice--correct {
+  background: rgba(79, 174, 123, 0.14);
+  border-color: var(--success);
+}
+
+.choice--wrong {
+  background: var(--danger-bg);
+  border-color: #e5655a;
+}
+
+.choice:focus-visible,
+.action:focus-visible {
+  outline-color: #e3a077;
+}
+
+.feedback__box--ok {
+  background: rgba(79, 174, 123, 0.14);
+  color: #9be3bb;
+}
+
+/* ---------- Resultados ---------- */
+
+.insight {
+  border-color: rgba(201, 112, 63, 0.4);
+}
+
+.insight__link {
+  background: var(--accent);
+  color: #111315;
+}
+
+.insight__link:hover {
+  background: var(--accent-hover);
+}
+
+.insight__link:focus-visible {
+  outline-color: #e3a077;
+}
+
+.trend__line {
+  stroke: #e3a077;
+}
+
+.trend__dot {
+  fill: #15181c;
+  stroke: #e3a077;
+}
+
+.trend__dot--low {
+  fill: var(--dash-amber);
+  stroke: #f5b94d;
+}

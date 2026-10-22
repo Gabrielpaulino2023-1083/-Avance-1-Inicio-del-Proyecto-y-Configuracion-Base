@@ -1,12 +1,14 @@
-import type { LoginRequest, LoginResponse } from "../types";
+import type { LoginRequest, LoginResponse, User } from "../types";
+import { request, USE_MOCK } from "./http";
 
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
+export interface RegisterRequest {
+  nombre: string;
+  apellido: string;
+  email: string;
+  password: string;
+}
 
-// Mientras el backend no esté listo, se usan datos simulados.
-// Para usar la API real, crear un archivo .env.local con: VITE_USE_MOCK=false
-const USE_MOCK = import.meta.env.VITE_USE_MOCK !== "false";
-
-// Usuario de prueba, basado en el seed de la base de datos (estudiante@example.com).
+// Usuario de prueba para el modo simulado.
 // La contraseña es solo del simulador: no es una credencial real.
 const MOCK_EMAIL = "estudiante@example.com";
 const MOCK_PASSWORD = "estudiante123";
@@ -26,6 +28,8 @@ function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// ---------- Login ----------
+
 async function mockLogin(data: LoginRequest): Promise<LoginResponse> {
   await wait(700); // simula el tiempo de respuesta de una red real
 
@@ -36,24 +40,40 @@ async function mockLogin(data: LoginRequest): Promise<LoginResponse> {
   return MOCK_RESPONSE;
 }
 
-async function apiLogin(data: LoginRequest): Promise<LoginResponse> {
-  // PROVISIONAL: la ruta y el formato los debe confirmar el compañero de Backend.
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
+// Respuesta real de POST /api/auth/login
+interface LoginApiResponse {
+  success: boolean;
+  token: string;
+  user: User;
+}
 
-  if (!response.ok) {
-    throw new Error(
-      response.status === 401
-        ? "Correo o contraseña incorrectos."
-        : "No se pudo iniciar sesión. Intenta de nuevo."
-    );
-  }
-  return response.json();
+async function apiLogin(data: LoginRequest): Promise<LoginResponse> {
+  const result = await request<LoginApiResponse>("/auth/login", {
+    method: "POST",
+    body: data,
+  });
+  return { token: result.token, user: result.user };
 }
 
 export function login(data: LoginRequest): Promise<LoginResponse> {
   return USE_MOCK ? mockLogin(data) : apiLogin(data);
+}
+
+// ---------- Registro ----------
+
+async function mockRegister(data: RegisterRequest): Promise<void> {
+  await wait(700);
+  // Imita el error 409 del backend cuando el correo ya existe.
+  if (data.email.trim().toLowerCase() === MOCK_EMAIL) {
+    throw new Error("Ya existe un usuario con ese email");
+  }
+}
+
+async function apiRegister(data: RegisterRequest): Promise<void> {
+  // POST /api/auth/register responde 201 con { success, user }
+  await request<unknown>("/auth/register", { method: "POST", body: data });
+}
+
+export function register(data: RegisterRequest): Promise<void> {
+  return USE_MOCK ? mockRegister(data) : apiRegister(data);
 }

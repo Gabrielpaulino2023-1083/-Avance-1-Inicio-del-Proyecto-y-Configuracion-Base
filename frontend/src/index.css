@@ -10,10 +10,10 @@
   --carbon-2: #1e232b;
   --carbon-3: #2c3440;
 
-  --accent: #c7a35d;
-  --accent-hover: #e0c185;
-  --accent-dark: #8f6f2f;
-  --accent-tint: #f3ead7;
+  --accent: #c9703f;
+  --accent-hover: #dd8a5a;
+  --accent-dark: #94491f;
+  --accent-tint: #f7e8de;
 
   --success: #4fae7b;
   --danger: #a4281f;
@@ -315,5 +315,39 @@ background: var(--accent-hover);
   .app-nav {
     flex-wrap: wrap;
     gap: 0.75rem 1.5rem;
+  }
+}
+/* ---------- Registro y avisos del login ---------- */
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.login-notice {
+  margin: 0 0 1.25rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent);
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.login-switch {
+  margin: 1.5rem 0 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.login-switch a {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .field-row {
+    grid-template-columns: 1fr;
   }
 }
