@@ -61,6 +61,7 @@ const MOCK_SUMMARY: DashboardSummary = {
     recommendation:
       "Se recomienda reforzar el tema SQL JOIN con explicaciones y ejercicios guiados. Conviene ofrecer material complementario con una explicación diferente.",
   },
+  evidence: { mastery: 53.3, errors: 9, attempts: 3 },
   recentActivity: MOCK_ACTIVITY,
 };
 
@@ -142,6 +143,11 @@ function toDashboardSummary(
       difficulty: r.dificultad,
       reason: `Puntuación promedio: ${r.motivo.puntuacionPromedio}%; errores acumulados: ${r.motivo.erroresAcumulados}; intentos promedio: ${r.motivo.intentosPromedio}.`,
       recommendation: r.descripcion,
+    },
+    evidence: {
+      mastery: r.motivo.puntuacionPromedio,
+      errors: r.motivo.erroresAcumulados,
+      attempts: r.motivo.intentosPromedio,
     },
     recentActivity: MOCK_ACTIVITY,
   };

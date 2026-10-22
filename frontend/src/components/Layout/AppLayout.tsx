@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { CapIcon, LogoutIcon } from "../../features/auth/icons";
 import "./nav.css";
@@ -19,6 +19,7 @@ const ROLE_LABEL = {
 export default function AppLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+    const location = useLocation();
 
   function handleLogout() {
     logout();
@@ -87,8 +88,10 @@ export default function AppLayout() {
         </div>
       </header>
 
-      <main className="app-content">
-        <Outlet />
+        <main className="app-content">
+        <div key={location.pathname} className="page">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

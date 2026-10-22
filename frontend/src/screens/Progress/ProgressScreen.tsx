@@ -55,9 +55,10 @@ export default function ProgressScreen() {
         <TopicMastery topics={detail.topics} />
       </div>
 
-      <div className="dash__row">
-        <RecommendationCard recommendation={summary.recommendation} />
-      </div>
+           <RecommendationCard
+        recommendation={summary.recommendation}
+        evidence={summary.evidence}
+      />
     </div>
   );
 }

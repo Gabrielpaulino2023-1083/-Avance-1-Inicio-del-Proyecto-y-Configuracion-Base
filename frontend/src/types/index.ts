@@ -51,6 +51,7 @@ export interface DashboardSummary {
   studyHours: number;
   trends: StatTrends;
   recommendation: Recommendation;
+    evidence: RecommendationEvidence;
   recentActivity: ActivityItem[];
 }
 export interface StatTrends {
@@ -58,4 +59,11 @@ export interface StatTrends {
   pendingActivities: number;
   averageScore: number;
   studyHours: number;
+}
+
+// Datos que explican por qué el motor hace su recomendación.
+export interface RecommendationEvidence {
+  mastery: number; // % de dominio del tema
+  errors: number;
+  attempts: number;
 }

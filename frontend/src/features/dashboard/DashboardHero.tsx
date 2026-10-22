@@ -38,7 +38,9 @@ export default function DashboardHero({ name, summary }: Props) {
 
       <div className="hero__content">
         <p className="hero__greeting">Bienvenido, {name}</p>
-        <h1 id="hero-title">Tu aprendizaje evoluciona contigo.</h1>
+        <h1 id="hero-title">
+          Tu aprendizaje <em>evoluciona</em> contigo.
+        </h1>
         <p className="hero__lead">
           La plataforma analiza tu progreso, identifica fortalezas y adapta el
           contenido para ayudarte a alcanzar tus objetivos académicos de forma

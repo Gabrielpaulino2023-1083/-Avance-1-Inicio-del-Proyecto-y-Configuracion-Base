@@ -220,3 +220,352 @@ body {
   fill: var(--dash-amber);
   stroke: #f5b94d;
 }
+
+/* ---------- Tipografía y espacios ---------- */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+em {
+  font-style: italic;
+}
+
+/* Títulos de pantalla */
+.page-head h1 {
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  letter-spacing: -0.02em;
+}
+
+.page-head h1::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.8rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e3a077, #c9703f);
+}
+
+.page-head p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Título del hero */
+.hero h1 {
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.hero h1 em {
+  color: #e3a077;
+  font-weight: 500;
+}
+
+/* Ritmo entre secciones */
+.app-content {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.dash {
+  gap: 1.75rem;
+}
+
+.dash__row,
+.progress-row,
+.content-layout {
+  gap: 1.75rem;
+}
+
+/* Tarjetas: esquinas y aire */
+.stat {
+  border-radius: 20px;
+}
+
+.panel,
+.modules,
+.exercise,
+.timeline {
+  border-radius: 22px;
+}
+
+.panel {
+  padding: 2rem;
+}
+
+.timeline {
+  padding: 2rem 2rem 1.75rem;
+}
+
+.panel__title,
+.timeline__title,
+.reco__title,
+.modules__course {
+  font-size: 1.2rem;
+}
+
+/* Cifras grandes y alineadas */
+.stat__value {
+  font-size: 2.3rem;
+  letter-spacing: -0.02em;
+}
+
+.stat__value,
+.result-stat__value,
+.metrics__list dd,
+.ring__label strong,
+.fact strong,
+.topic__percent,
+.bars__value,
+.modules__count,
+.results-table .num {
+  font-variant-numeric: tabular-nums;
+}
+
+.results-table thead th {
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Detalles y movimiento ---------- */
+
+/* Foco visible para quien navega con teclado */
+:focus-visible {
+  outline: 2px solid #e3a077;
+  outline-offset: 2px;
+}
+
+/* Barras de desplazamiento oscuras */
+html {
+  scrollbar-color: #3a3f47 #0b0c0e;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0c0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3f47;
+  border-radius: 999px;
+  border: 2px solid #0b0c0e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a515b;
+}
+
+/* Reacción al mouse */
+.panel,
+.timeline,
+.modules,
+.exercise,
+.result-stat {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.result-stat:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 112, 63, 0.45);
+}
+
+.panel:hover,
+.timeline:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.lesson:not(.lesson--current):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.results-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.results-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Cargador */
+.dash-state[aria-busy="true"]::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: #e3a077;
+}
+
+/* ---------- Animaciones (solo si el sistema las permite) ---------- */
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page {
+    animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dash-state[aria-busy="true"]::before {
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* Botones: respuesta al clic */
+  .btn:active,
+  .action:active,
+  .insight__link:active,
+  .auth-card .auth-submit:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Progreso, contenido y resultados: se "dibujan" al abrir */
+  .topic__fill,
+  .modules__bar span {
+    transform-origin: left;
+    animation: grow-x 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.2s;
+  }
+
+  .bars__fill {
+    transform-origin: bottom;
+    animation: grow-y 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .bars__item:nth-child(1) .bars__fill { animation-delay: 0.1s; }
+  .bars__item:nth-child(2) .bars__fill { animation-delay: 0.16s; }
+  .bars__item:nth-child(3) .bars__fill { animation-delay: 0.22s; }
+  .bars__item:nth-child(4) .bars__fill { animation-delay: 0.28s; }
+  .bars__item:nth-child(5) .bars__fill { animation-delay: 0.34s; }
+  .bars__item:nth-child(6) .bars__fill { animation-delay: 0.4s; }
+  .bars__item:nth-child(7) .bars__fill { animation-delay: 0.46s; }
+
+  .trend__line {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  }
+
+  .trend__dot {
+    animation: fade-in 0.4s ease 0.9s both;
+  }
+}
+
+/* ---------- Hero: el progreso como protagonista ---------- */
+
+.hero {
+  grid-template-columns: 1fr 1.05fr;
+  padding: 3.5rem;
+}
+
+.hero__panel {
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  border-color: rgba(201, 112, 63, 0.35);
+  box-shadow:
+    0 0 60px rgba(201, 112, 63, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ring {
+  width: 220px;
+  height: 220px;
+}
+
+/* Halo de luz detrás del anillo */
+.ring::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 112, 63, 0.28), transparent 68%);
+}
+
+.ring__track,
+.ring__value {
+  stroke-width: 8;
+}
+
+.ring__value {
+  filter: drop-shadow(0 0 6px rgba(201, 112, 63, 0.7));
+}
+
+.ring__label strong {
+  font-size: 3.4rem;
+  letter-spacing: -0.03em;
+}
+
+.ring__label span {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fact strong {
+  font-size: 1.7rem;
+}
+
+@media (max-width: 1100px) {
+  .hero__panel {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
