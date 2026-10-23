@@ -1,0 +1,935 @@
+/* Tema oscuro de toda la plataforma: mismo mundo visual del login.
+   Se carga al final (main.tsx) para ajustar los colores de cada pantalla.
+   Para volver al modo claro, basta con quitar su import en main.tsx. */
+
+/* ---------- Colores base ---------- */
+
+:root {
+  color-scheme: dark;
+  --bg: #0B0A10;
+  --surface: #18151F;
+  --ink: #F4F0FA;
+  --ink-soft: #A29BAF;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --accent-dark: #A99BD8;
+  --accent-tint: rgba(169, 155, 216, 0.15);
+  --danger: #E58C97;
+  --danger-bg: rgba(229, 140, 151, 0.12);
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(900px 520px at 90% -10%, rgba(169, 155, 216, 0.16), transparent 62%),
+    radial-gradient(760px 480px at 0% 110%, rgba(169, 155, 216, 0.09), transparent 62%),
+    #0B0A10;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(169, 155, 216, 0.35);
+}
+
+/* ---------- Barra de navegación ---------- */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(14, 16, 19, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.app-nav__brand {
+  color: var(--ink);
+}
+
+.app-nav__logout {
+  color: var(--ink);
+}
+
+/* ---------- Tarjetas de cristal ---------- */
+
+.stat,
+.timeline,
+.panel,
+.modules,
+.exercise,
+.result-stat,
+.screen-placeholder {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.hero {
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.reco,
+.metrics {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Dashboard ---------- */
+
+.stat:hover {
+  border-color: rgba(169, 155, 216, 0.55);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.stat__delta--good {
+  background: rgba(120, 168, 146, 0.16);
+  color: #86B8A0;
+}
+
+.stat__delta--bad {
+  background: rgba(214, 176, 115, 0.16);
+  color: #D6B073;
+}
+
+.timeline__item--evaluation .timeline__icon {
+  background: rgba(120, 168, 146, 0.16);
+  color: #86B8A0;
+}
+
+.timeline__item--achievement .timeline__icon {
+  background: rgba(169, 155, 216, 0.2);
+  color: #A99BD8;
+}
+
+.timeline__item--goal .timeline__icon {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+/* ---------- Progreso ---------- */
+
+.bars__track {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.bars__fill {
+  background: linear-gradient(180deg, #6E6585, #3F3850);
+}
+
+.bars__fill--top {
+  background: linear-gradient(180deg, #A99BD8, #8E7FC4);
+}
+
+.topic__bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.topic__fill--steady {
+  background: #8A8396;
+}
+
+.topic__chip--strong {
+  background: rgba(120, 168, 146, 0.16);
+  color: #86B8A0;
+}
+
+.topic__chip--reinforce {
+  background: rgba(214, 176, 115, 0.16);
+  color: #D6B073;
+}
+
+/* ---------- Contenido ---------- */
+
+.modules__bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.exercise__topic {
+  background: rgba(169, 155, 216, 0.16);
+  color: #A99BD8;
+  border: 1px solid rgba(169, 155, 216, 0.35);
+}
+
+.choice {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.choice__letter {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.choice--selected {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+
+.choice--correct {
+  background: rgba(120, 168, 146, 0.14);
+  border-color: var(--success);
+}
+
+.choice--wrong {
+  background: var(--danger-bg);
+  border-color: #E58C97;
+}
+
+.choice:focus-visible,
+.action:focus-visible {
+  outline-color: #A99BD8;
+}
+
+.feedback__box--ok {
+  background: rgba(120, 168, 146, 0.14);
+  color: #A9CDBB;
+}
+
+/* ---------- Resultados ---------- */
+
+.insight {
+  border-color: rgba(169, 155, 216, 0.4);
+}
+
+.insight__link {
+  background: var(--accent);
+  color: #0B0A10;
+}
+
+.insight__link:hover {
+  background: var(--accent-hover);
+}
+
+.insight__link:focus-visible {
+  outline-color: #A99BD8;
+}
+
+.trend__line {
+  stroke: #A99BD8;
+}
+
+.trend__dot {
+  fill: #18151F;
+  stroke: #A99BD8;
+}
+
+.trend__dot--low {
+  fill: var(--dash-amber);
+  stroke: #D6B073;
+}
+
+/* ---------- Tipografía y espacios ---------- */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+em {
+  font-style: italic;
+}
+
+/* Títulos de pantalla */
+.page-head h1 {
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  letter-spacing: -0.02em;
+}
+
+.page-head h1::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 0.8rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #A99BD8, #8E7FC4);
+}
+
+.page-head p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Título del hero */
+.hero h1 {
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.hero h1 em {
+  color: #A99BD8;
+  font-weight: 500;
+}
+
+/* Ritmo entre secciones */
+.app-content {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+.dash {
+  gap: 1.75rem;
+}
+
+.dash__row,
+.progress-row,
+.content-layout {
+  gap: 1.75rem;
+}
+
+/* Tarjetas: esquinas y aire */
+.stat {
+  border-radius: 20px;
+}
+
+.panel,
+.modules,
+.exercise,
+.timeline {
+  border-radius: 22px;
+}
+
+.panel {
+  padding: 2rem;
+}
+
+.timeline {
+  padding: 2rem 2rem 1.75rem;
+}
+
+.panel__title,
+.timeline__title,
+.reco__title,
+.modules__course {
+  font-size: 1.2rem;
+}
+
+/* Cifras grandes y alineadas */
+.stat__value {
+  font-size: 2.3rem;
+  letter-spacing: -0.02em;
+}
+
+.stat__value,
+.result-stat__value,
+.metrics__list dd,
+.ring__label strong,
+.fact strong,
+.topic__percent,
+.bars__value,
+.modules__count,
+.results-table .num {
+  font-variant-numeric: tabular-nums;
+}
+
+.results-table thead th {
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Detalles y movimiento ---------- */
+
+/* Foco visible para quien navega con teclado */
+:focus-visible {
+  outline: 2px solid #A99BD8;
+  outline-offset: 2px;
+}
+
+/* Barras de desplazamiento oscuras */
+html {
+  scrollbar-color: #3A3446 #0B0A10;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0A10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A3446;
+  border-radius: 999px;
+  border: 2px solid #0B0A10;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A4358;
+}
+
+/* Reacción al mouse */
+.panel,
+.timeline,
+.modules,
+.exercise,
+.result-stat {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.result-stat:hover {
+  transform: translateY(-3px);
+  border-color: rgba(169, 155, 216, 0.45);
+}
+
+.panel:hover,
+.timeline:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.lesson:not(.lesson--current):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.results-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.results-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Cargador */
+.dash-state[aria-busy="true"]::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: #A99BD8;
+}
+
+/* ---------- Animaciones (solo si el sistema las permite) ---------- */
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page {
+    animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dash-state[aria-busy="true"]::before {
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* Botones: respuesta al clic */
+  .btn:active,
+  .action:active,
+  .insight__link:active,
+  .auth-card .auth-submit:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Progreso, contenido y resultados: se "dibujan" al abrir */
+  .topic__fill,
+  .modules__bar span {
+    transform-origin: left;
+    animation: grow-x 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.2s;
+  }
+
+  .bars__fill {
+    transform-origin: bottom;
+    animation: grow-y 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .bars__item:nth-child(1) .bars__fill { animation-delay: 0.1s; }
+  .bars__item:nth-child(2) .bars__fill { animation-delay: 0.16s; }
+  .bars__item:nth-child(3) .bars__fill { animation-delay: 0.22s; }
+  .bars__item:nth-child(4) .bars__fill { animation-delay: 0.28s; }
+  .bars__item:nth-child(5) .bars__fill { animation-delay: 0.34s; }
+  .bars__item:nth-child(6) .bars__fill { animation-delay: 0.4s; }
+  .bars__item:nth-child(7) .bars__fill { animation-delay: 0.46s; }
+
+  .trend__line {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  }
+
+  .trend__dot {
+    animation: fade-in 0.4s ease 0.9s both;
+  }
+}
+
+/* ---------- Hero: el progreso como protagonista ---------- */
+
+.hero {
+  grid-template-columns: 1fr 1.05fr;
+  padding: 3.5rem;
+}
+
+.hero__panel {
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  border-color: rgba(169, 155, 216, 0.35);
+  box-shadow:
+    0 0 60px rgba(169, 155, 216, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ring {
+  width: 220px;
+  height: 220px;
+}
+
+/* Halo de luz detrás del anillo */
+.ring::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(169, 155, 216, 0.28), transparent 68%);
+}
+
+.ring__track,
+.ring__value {
+  stroke-width: 8;
+}
+
+.ring__value {
+  filter: drop-shadow(0 0 6px rgba(169, 155, 216, 0.7));
+}
+
+.ring__label strong {
+  font-size: 3.4rem;
+  letter-spacing: -0.03em;
+}
+
+.ring__label span {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fact strong {
+  font-size: 1.7rem;
+}
+
+@media (max-width: 1100px) {
+  .hero__panel {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+/* ---------- Ajuste: hero sin recortes, sin resplandores ---------- */
+
+/* Hero: anillo arriba y cifras debajo, para que quepa en cualquier ancho */
+.hero {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.hero > * {
+  min-width: 0;
+}
+
+.hero__panel {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+
+.ring {
+  width: 200px;
+  height: 200px;
+}
+
+.ring::before {
+  display: none;
+}
+
+.ring__value {
+  filter: none;
+}
+
+.ring__label strong {
+  font-size: 3rem;
+}
+
+.hero__facts {
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.fact strong {
+  font-size: 1.5rem;
+}
+
+.fact span {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.hero__note {
+  text-align: center;
+}
+
+.hero__orb--a {
+  background: rgba(169, 155, 216, 0.2);
+}
+
+.hero__orb--b {
+  background: rgba(120, 110, 170, 0.14);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Fondos con luz mucho más tenue */
+body {
+  background:
+    radial-gradient(900px 520px at 90% -10%, rgba(169, 155, 216, 0.09), transparent 62%),
+    radial-gradient(760px 480px at 0% 110%, rgba(169, 155, 216, 0.05), transparent 62%),
+    #0b0a10;
+  background-attachment: fixed;
+}
+
+.auth {
+  background:
+    radial-gradient(900px 520px at 88% -8%, rgba(169, 155, 216, 0.12), transparent 62%),
+    radial-gradient(760px 480px at 4% 108%, rgba(169, 155, 216, 0.07), transparent 62%),
+    linear-gradient(160deg, #0e0d14 0%, #0b0a10 100%);
+}
+
+/* Tarjeta de análisis: borde fino, sin brillo ni pulso */
+.ai-card {
+  animation: none;
+  border-color: rgba(var(--tone-rgb), 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  background:
+    radial-gradient(600px 300px at 0% 0%, rgba(var(--tone-rgb), 0.1), transparent 70%),
+    linear-gradient(135deg, #14111b, #1b1724 60%, #17141f);
+}
+
+.ai-card__priority::before {
+  box-shadow: none;
+}
+
+/* Botones planos y sobrios */
+.auth-card .auth-submit {
+  background: #a99bd8;
+  color: #0b0a10;
+  box-shadow: none;
+}
+
+.auth-card .auth-submit:hover:not(:disabled) {
+  background: #bdb1e3;
+  box-shadow: none;
+}
+
+.auth-card .input input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(169, 155, 216, 0.16);
+}
+
+/* Enlace activo de la barra: sutil, sin relleno brillante */
+.topbar__nav a.active {
+  color: #e1dcf2;
+  background: rgba(169, 155, 216, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(169, 155, 216, 0.35);
+}
+
+.stat:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* El verde solo para lo positivo real; la decoración pasa al violeta */
+.lesson--done .lesson__dot {
+  background: #a99bd8;
+  border-color: #a99bd8;
+}
+
+.timeline__item--evaluation .timeline__icon {
+  background: rgba(169, 155, 216, 0.16);
+  color: #b8ace0;
+}
+
+.topic__fill--strong {
+  background: #a99bd8;
+}
+
+/* ---------- Jerarquía: no todo pesa igual ---------- */
+
+/* Nivel 1: hero y análisis, los protagonistas */
+.hero {
+  padding: 4.25rem 3.5rem;
+  border-radius: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5.4vw, 4.5rem);
+  line-height: 1.02;
+  max-width: 11ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero__lead {
+  max-width: 42ch;
+  margin-bottom: 2.25rem;
+}
+
+.ai-card {
+  padding: 3rem;
+  border-radius: 28px;
+}
+
+/* Nivel 2: métricas, con los números como protagonistas */
+.stat {
+  padding: 1.5rem;
+  border-radius: 18px;
+  border-color: transparent;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.stat__value {
+  font-size: 2.9rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.result-stat__value {
+  font-size: 2.8rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+/* Nivel 3: paneles secundarios, más discretos */
+.timeline,
+.panel,
+.modules,
+.result-stat {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .ai-card {
+    padding: 1.75rem;
+  }
+}
+
+/* ---------- Contenido: la pregunta como protagonista ---------- */
+
+.exercise {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2.5rem;
+}
+
+.exercise__question {
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 1.25rem 0 2rem;
+}
+
+.choice {
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+}
+
+.metrics__list {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 640px) {
+  .exercise {
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- Login: una frase con historia ---------- */
+
+.auth__tagline {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f8f5ff;
+}
+
+.auth__tagline em {
+  color: #b8ace0;
+  font-style: italic;
+}
+
+/* ---------- Layout más ancho ---------- */
+
+.app-content {
+  max-width: 1440px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.topbar__inner {
+  max-width: 1440px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.hero {
+  min-height: 440px;
+}
+
+/* Títulos de pantalla con más protagonismo */
+.page-head h1 {
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+}
+
+.page-head p {
+  max-width: 64ch;
+}
+
+/* Dashboard: análisis y actividad lado a lado */
+.dash__row > * {
+  min-width: 0;
+}
+
+@media (max-width: 1100px) {
+  .dash__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Contenido: curso | pregunta | actividad en pantallas anchas */
+@media (min-width: 1001px) {
+  .modules {
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .exercise {
+    grid-template-columns: 1fr 250px;
+  }
+
+  .metrics__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Resultados: evolución y "qué reforzar" juntos */
+.results-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.results-row > * {
+  min-width: 0;
+}
+
+.results-row > :only-child {
+  grid-column: 1 / -1;
+}
+
+.insight--card {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.insight__eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8ace0;
+}
+
+.insight__topic {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 1000px) {
+  .results-row {
+    grid-template-columns: 1fr;
+  }
+}
