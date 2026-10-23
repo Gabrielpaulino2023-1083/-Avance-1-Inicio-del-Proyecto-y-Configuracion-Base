@@ -1,0 +1,292 @@
+openapi: 3.0.3
+
+info:
+  title: API del Motor de Aprendizaje Adaptativo
+  version: 1.0.0
+  description: |
+    API REST  del proyecto
+    **Motor de Aprendizaje Adaptativo Basado en Comportamiento del Estudiante**.
+
+  
+
+servers:
+  - url: http://localhost:3000
+    description: Desarrollo
+
+tags:
+  - name: Salud
+    description: Estado del servicio
+  - name: Autenticación
+    description: Registro, inicio de sesión y datos del usuario autenticado
+
+paths:
+  /api/health:
+    get:
+      tags: [Salud]
+      operationId: getHealth
+      summary: Comprueba que el backend está funcionando
+      responses:
+        '200':
+          description: Backend activo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/auth/register:
+    post:
+      tags: [Autenticación]
+      operationId: register
+      summary: Registra un estudiante
+      description: Todo registro público se crea con el rol `ESTUDIANTE`. Los docentes y administradores se crean por otra vía.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/auth/login:
+    post:
+      tags: [Autenticación]
+      operationId: login
+      summary: Inicia sesión y devuelve un token JWT
+      description: Si el email no existe, la contraseña es incorrecta o el usuario está desactivado, siempre responde `401` con el mismo mensaje.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Inicio de sesión correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/auth/me:
+    get:
+      tags: [Autenticación]
+      operationId: getMe
+      summary: Datos del usuario autenticado
+      description: Devuelve los datos actuales del usuario dueño del token, consultados en la base de datos.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Usuario autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token obtenido en `POST /api/auth/login`.
+
+  responses:
+    BadRequest:
+      description: Datos inválidos o JSON mal formado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+    Unauthorized:
+      description: Credenciales inválidas, o token requerido, inválido o expirado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: Credenciales inválidas
+    Conflict:
+      description: El recurso ya existe
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: Ya existe un usuario con ese email
+    ServerError:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: Error interno del servidor
+
+  schemas:
+    HealthResponse:
+      type: object
+      required: [status, service, timestamp]
+      properties:
+        status:
+          type: string
+          example: ok
+        service:
+          type: string
+          example: backend
+        timestamp:
+          type: string
+          format: date-time
+
+    RegisterRequest:
+      type: object
+      required: [nombre, apellido, email, password]
+      properties:
+        nombre:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Ana
+        apellido:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Lopez
+        email:
+          type: string
+          format: email
+          example: ana@example.com
+        password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 72
+          example: Clave1234
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          example: ana@example.com
+        password:
+          type: string
+          format: password
+          example: Clave1234
+
+    User:
+      type: object
+      required: [id, nombre, apellido, email, rol]
+      properties:
+        id:
+          type: integer
+          example: 4
+        nombre:
+          type: string
+          example: Ana
+        apellido:
+          type: string
+          example: Lopez
+        email:
+          type: string
+          format: email
+          example: ana@example.com
+        rol:
+          type: string
+          enum: [ESTUDIANTE, DOCENTE, ADMINISTRADOR]
+          example: ESTUDIANTE
+
+    RegisterResponse:
+      type: object
+      required: [success, user]
+      properties:
+        success:
+          type: boolean
+          example: true
+        user:
+          $ref: '#/components/schemas/User'
+
+    LoginResponse:
+      type: object
+      required: [success, token, user]
+      properties:
+        success:
+          type: boolean
+          example: true
+        token:
+          type: string
+          description: JWT que se envía en el encabezado Authorization. Expira en 2 horas.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user:
+          $ref: '#/components/schemas/User'
+
+    MeResponse:
+      type: object
+      required: [success, user]
+      properties:
+        success:
+          type: boolean
+          example: true
+        user:
+          $ref: '#/components/schemas/User'
+
+    ErrorResponse:
+      type: object
+      required: [success, message]
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+
+    ValidationError:
+      type: object
+      required: [success, message]
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Datos inválidos
+        details:
+          type: array
+          description: Presente cuando falla la validación de campos.
+          items:
+            type: object
+            properties:
+              campo:
+                type: string
+                example: password
+              mensaje:
+                type: string
+                example: La contraseña debe tener al menos 8 caracteres

@@ -1,7 +1,7 @@
 # Dependencias
 node_modules/
 
-# Variables de entorno (contraseñas, claves, JWT secret)
+# Variables de entorno (contraseñas, JWT_SECRET). Solo se sube .env.example
 .env
 .env.*
 !.env.example
@@ -19,5 +19,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Cobertura de tests
+# Cobertura de pruebas (las pruebas las realiza QA)
 coverage/
