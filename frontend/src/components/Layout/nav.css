@@ -33,11 +33,11 @@
 
 .topbar__brand em {
   font-style: italic;
-  color: #e3a077;
+  color: #A99BD8;
 }
 
 .topbar__brand:focus-visible {
-  outline: 2px solid #e3a077;
+  outline: 2px solid #A99BD8;
   outline-offset: 4px;
   border-radius: 8px;
 }
@@ -48,9 +48,9 @@
   display: grid;
   place-items: center;
   border-radius: 10px;
-  background: rgba(201, 112, 63, 0.16);
-  border: 1px solid rgba(201, 112, 63, 0.35);
-  color: #e3a077;
+  background: rgba(169, 155, 216, 0.16);
+  border: 1px solid rgba(169, 155, 216, 0.35);
+  color: #A99BD8;
 }
 
 .topbar__mark .icon {
@@ -90,15 +90,15 @@
 }
 
 .topbar__nav a:focus-visible {
-  outline: 2px solid #e3a077;
+  outline: 2px solid #A99BD8;
   outline-offset: 1px;
 }
 
 .topbar__nav a.active {
-  color: #111315;
+  color: #0B0A10;
   font-weight: 600;
-  background: linear-gradient(135deg, #e3a077, #c9703f);
-  box-shadow: 0 4px 14px rgba(201, 112, 63, 0.35);
+  background: linear-gradient(135deg, #A99BD8, #8E7FC4);
+  box-shadow: 0 4px 14px rgba(169, 155, 216, 0.35);
 }
 
 /* ---------- Usuario ---------- */
@@ -117,9 +117,9 @@
   border-radius: 50%;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #e3a077;
-  background: rgba(201, 112, 63, 0.16);
-  border: 1px solid rgba(201, 112, 63, 0.4);
+  color: #A99BD8;
+  background: rgba(169, 155, 216, 0.16);
+  border: 1px solid rgba(169, 155, 216, 0.4);
 }
 
 .topbar__who {
@@ -153,12 +153,12 @@
 
 .topbar__logout:hover {
   background: var(--accent-tint);
-  border-color: rgba(201, 112, 63, 0.5);
+  border-color: rgba(169, 155, 216, 0.5);
   color: var(--ink);
 }
 
 .topbar__logout:focus-visible {
-  outline: 2px solid #e3a077;
+  outline: 2px solid #A99BD8;
   outline-offset: 2px;
 }
 

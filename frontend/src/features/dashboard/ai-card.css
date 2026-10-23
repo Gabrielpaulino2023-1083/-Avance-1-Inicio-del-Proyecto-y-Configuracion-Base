@@ -1,6 +1,6 @@
 .ai-card {
-  --tone: #e3a077;
-  --tone-rgb: 201, 112, 63;
+  --tone: #A99BD8;
+  --tone-rgb: 169, 155, 216;
   position: relative;
   overflow: hidden;
   display: grid;
@@ -9,10 +9,10 @@
   align-items: center;
   padding: 2.5rem;
   border-radius: 24px;
-  color: #ece9e2;
+  color: #EDE8F5;
   background:
     radial-gradient(600px 300px at 0% 0%, rgba(var(--tone-rgb), 0.2), transparent 70%),
-    linear-gradient(135deg, #14110f, #1c1815 60%, #16181c);
+    linear-gradient(135deg, #14111B, #1B1724 60%, #17141F);
   border: 1px solid rgba(var(--tone-rgb), 0.55);
   box-shadow:
     0 0 0 1px rgba(var(--tone-rgb), 0.12),
@@ -21,8 +21,8 @@
 }
 
 .ai-card--up {
-  --tone: #4fae7b;
-  --tone-rgb: 79, 174, 123;
+  --tone: #86B8A0;
+  --tone-rgb: 120, 168, 146;
 }
 
 .ai-card--steady {
@@ -62,13 +62,13 @@
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #f6f3ec;
+  color: #F8F5FF;
 }
 
 .ai-card__text {
   max-width: 56ch;
   margin: 0;
-  color: #cfccc4;
+  color: #D0C9DC;
 }
 
 .ai-card__foot {
@@ -126,7 +126,7 @@
 
 .ai-card__metric dt {
   font-size: 0.8rem;
-  color: #a3a19a;
+  color: #A29BAF;
 }
 
 .ai-card__metric dd {
@@ -161,7 +161,7 @@
   display: block;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--tone), #f0bd9b);
+  background: linear-gradient(90deg, var(--tone), #CFC6EA);
   transform-origin: left;
 }
 

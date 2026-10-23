@@ -279,8 +279,8 @@
   align-self: start;
   padding: 1.25rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, #111315, #1e232b);
-  color: #ece9e2;
+  background: linear-gradient(135deg, #0B0A10, #1E1A27);
+  color: #EDE8F5;
 }
 
 .metrics__title {
@@ -298,7 +298,7 @@
 
 .metrics__list dt {
   font-size: 0.78rem;
-  color: #b4b2ab;
+  color: #B0A9BD;
 }
 
 .metrics__list dd {
@@ -313,7 +313,7 @@
 .metrics__note {
   margin: 1.1rem 0 0;
   font-size: 0.78rem;
-  color: #b4b2ab;
+  color: #B0A9BD;
 }
 
 @media (max-width: 1000px) {

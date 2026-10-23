@@ -40,6 +40,10 @@ export default function AuthShell({ title, subtitle, children }: Props) {
         Aprendizaje Adaptativo
       </div>
 
+      <p className="auth__tagline">
+        Analiza. Aprende. <em>Evoluciona.</em>
+      </p>
+      
       <section className="auth-card">
         <span className="auth-card__mark">
           <CapIcon />

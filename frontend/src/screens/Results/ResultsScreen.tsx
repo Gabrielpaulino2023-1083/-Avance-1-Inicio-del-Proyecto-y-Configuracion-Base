@@ -47,20 +47,25 @@ export default function ResultsScreen() {
 
       <ResultStats evaluations={evaluations} />
 
-      {lowest.score < PASSING_SCORE && (
-        <div className="insight" role="note">
-          <p>
-            <strong>{lowest.title}</strong> quedó en {lowest.score}%, por debajo
-            del mínimo de {PASSING_SCORE}%. Practicar un poco más te ayudará a
-            subir esa nota.
-          </p>
-          <Link to="/contenido" className="insight__link">
-            Ir al ejercicio
-          </Link>
-        </div>
-      )}
+      <div className="results-row">
+        <ScoreTrend evaluations={evaluations} />
 
-      <ScoreTrend evaluations={evaluations} />
+        {lowest.score < PASSING_SCORE && (
+          <aside className="insight insight--card" role="note">
+            <span className="insight__eyebrow">Qué reforzar</span>
+            <p className="insight__topic">{lowest.title}</p>
+            <p>
+              Quedó en {lowest.score}%, por debajo del mínimo de{" "}
+              {PASSING_SCORE}%. Practicar un poco más te ayudará a subir esa
+              nota.
+            </p>
+            <Link to="/contenido" className="insight__link">
+              Ir al ejercicio
+            </Link>
+          </aside>
+        )}
+      </div>
+
       <ResultsTable evaluations={evaluations} />
     </div>
   );

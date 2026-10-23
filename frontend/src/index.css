@@ -1,21 +1,21 @@
 :root {
   --bg: #f8f6f2;
   --surface: #ffffff;
-  --ink: #111315;
+  --ink: #0B0A10;
   --ink-soft: #5d636b;
   --line: #e4e0d8;
   --line-strong: #c9c3b8;
 
-  --carbon: #111315;
-  --carbon-2: #1e232b;
-  --carbon-3: #2c3440;
+  --carbon: #0B0A10;
+  --carbon-2: #1E1A27;
+  --carbon-3: #2A2434;
 
-  --accent: #c9703f;
-  --accent-hover: #dd8a5a;
-  --accent-dark: #94491f;
-  --accent-tint: #f7e8de;
+  --accent: #8E7FC4;
+  --accent-hover: #C0B5E6;
+  --accent-dark: #5B4D9A;
+  --accent-tint: #EEEBF8;
 
-  --success: #4fae7b;
+  --success: #86B8A0;
   --danger: #a4281f;
   --danger-bg: #fbeceb;
 
@@ -154,7 +154,7 @@ a {
 }
 
 .login-aside {
- background: linear-gradient(135deg, #111315 0%, #1e232b 60%, #2c3440 100%);
+ background: linear-gradient(135deg, #0B0A10 0%, #1E1A27 60%, #2A2434 100%);
   color: #f8f6f2;
   padding: 3.5rem;
   display: flex;

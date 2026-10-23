@@ -1,11 +1,11 @@
  .dash {
-  --dash-deep: #111315;
-  --dash-steel: #1e232b;
-  --dash-slate: #2c3440;
-  --dash-gold: #c9703f;
-  --dash-gold-soft: #e3a077;
-  --dash-green: #4fae7b;
-  --dash-amber: #f59e0b;
+  --dash-deep: #0B0A10;
+  --dash-steel: #1E1A27;
+  --dash-slate: #2A2434;
+  --dash-gold: #8E7FC4;
+  --dash-gold-soft: #A99BD8;
+  --dash-green: #86B8A0;
+  --dash-amber: #D6A85F;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -56,7 +56,7 @@
 
 .btn--primary {
   background: var(--dash-gold);
-  color: #111315;
+  color: #0B0A10;
 }
 
 .btn--primary:hover {
@@ -118,7 +118,7 @@
   height: 340px;
   top: -130px;
   right: -60px;
-  .hero__orb--a { background: rgba(201, 112, 63, 0.35); }
+  .hero__orb--a { background: rgba(169, 155, 216, 0.35); }
 }
 
 .hero__orb--b {
@@ -126,7 +126,7 @@
   height: 280px;
   bottom: -130px;
   left: 28%;
-  .hero__orb--b { background: rgba(79, 174, 123, 0.18); }
+  .hero__orb--b { background: rgba(120, 168, 146, 0.18); }
 }
 
 .hero__greeting {
@@ -145,7 +145,7 @@
 }
 
 .hero__lead {
-  color: #d6d8dc;
+  color: #D5D0E0;
   max-width: 46ch;
   margin: 0 0 1.75rem;
 }
@@ -209,7 +209,7 @@
 
 .ring__label span {
   font-size: 0.8rem;
-  color: #d6d8dc;
+  color: #D5D0E0;
 }
 
 .hero__facts {
@@ -230,7 +230,7 @@
 
 .fact span {
   font-size: 0.85rem;
-  color: #d6d8dc;
+  color: #D5D0E0;
 }
 
 .fact--up strong {
@@ -240,7 +240,7 @@
 .hero__note {
   grid-column: 1 / -1;
   font-size: 0.78rem;
-  color: #aeb2b8;
+  color: #A9A3B6;
 }
 
 /* ---------- Métricas rápidas ---------- */
@@ -333,8 +333,8 @@
   gap: 1.1rem;
   padding: 2rem 2rem 2rem 2.4rem;
   border-radius: 20px;
-  color: #ece9e2;
-  background: linear-gradient(135deg, #111315, #1e232b);
+  color: #EDE8F5;
+  background: linear-gradient(135deg, #0B0A10, #1E1A27);
   box-shadow: 0 20px 50px rgba(17, 19, 21, 0.28);
 }
 
@@ -371,7 +371,7 @@
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: rgba(201, 112, 63, 0.16);
+  background: rgba(169, 155, 216, 0.16);
   color: var(--dash-gold);
 }
 
@@ -388,7 +388,7 @@
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #111315;
+  color: #0B0A10;
   background: var(--reco-tone);
 }
 
@@ -420,7 +420,7 @@
 
 .reco__why span {
   font-size: 0.88rem;
-  color: #b4b2ab;
+  color: #B0A9BD;
 }
 
 .reco__foot {

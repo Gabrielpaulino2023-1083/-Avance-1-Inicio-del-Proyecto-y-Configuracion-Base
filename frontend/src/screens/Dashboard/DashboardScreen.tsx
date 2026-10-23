@@ -30,11 +30,13 @@ export default function DashboardScreen() {
     <div className="dash">
       <DashboardHero name={user?.nombre ?? "estudiante"} summary={summary} />
       <StatCards summary={summary} />
-      <RecommendationCard
-        recommendation={summary.recommendation}
-        evidence={summary.evidence}
-      />
-      <ActivityTimeline items={summary.recentActivity} />
+      <div className="dash__row">
+        <RecommendationCard
+          recommendation={summary.recommendation}
+          evidence={summary.evidence}
+        />
+        <ActivityTimeline items={summary.recentActivity} />
+      </div>
     </div>
   );
 }
