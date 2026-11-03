@@ -3,6 +3,8 @@ const { ROLES } = require('../config/roles');
 const userModel = require('../models/userModel');
 const studentModel = require('../models/studentModel');
 const { toStudentSummaryResponse, toProgressResponse } = require('../dtos/student.dto');
+const { runEngine } = require('./engineClient');
+const { toRecommendationResponse } = require('../dtos/recommendation.dto');
 
 // TODO: reemplazar con datos reales cuando existan las tablas
 // temas, interacciones, recomendaciones, contenidos y evaluaciones.
@@ -55,4 +57,11 @@ const getProgress = async (id) => {
   return toProgressResponse(SIMULATED_PROGRESS);
 };
 
-module.exports = { getSummary, getProgress };
+// TODO: reemplazar por interacciones reales (intentos, respuestas) de la base de datos.
+const getRecommendation = async (id, topic) => {
+  await getStudentOrFail(id);
+  const result = await runEngine({ student_id: id, topic, interactions: [] });
+  return toRecommendationResponse(result);
+};
+
+module.exports = { getSummary, getProgress, getRecommendation };
