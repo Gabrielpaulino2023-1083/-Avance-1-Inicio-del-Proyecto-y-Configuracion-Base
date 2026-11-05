@@ -1,30 +1,23 @@
-openapi: 3.0.3
+﻿openapi: 3.0.3
 
 info:
   title: API del Motor de Aprendizaje Adaptativo
   version: 1.0.0
-  description: |
-    API REST  del proyecto
-    **Motor de Aprendizaje Adaptativo Basado en Comportamiento del Estudiante**.
-
-  
+  description: API REST del proyecto Motor de Aprendizaje Adaptativo Basado en Comportamiento del Estudiante.
 
 servers:
   - url: http://localhost:3000
-    description: Desarrollo
+    description: Desarrollo local
 
 tags:
   - name: Salud
     description: Estado del servicio
-  - name: Autenticación
-    description: Registro, inicio de sesión y datos del usuario autenticado
-
 paths:
   /api/health:
     get:
       tags: [Salud]
       operationId: getHealth
-      summary: Comprueba que el backend está funcionando
+      summary: Comprueba que el backend estÃ¡ funcionando
       responses:
         '200':
           description: Backend activo
@@ -37,10 +30,10 @@ paths:
 
   /api/auth/register:
     post:
-      tags: [Autenticación]
+      tags: [AutenticaciÃ³n]
       operationId: register
       summary: Registra un estudiante
-      description: Todo registro público se crea con el rol `ESTUDIANTE`. Los docentes y administradores se crean por otra vía.
+      description: Todo registro pÃºblico se crea con el rol `ESTUDIANTE`. Los docentes y administradores se crean por otra vÃ­a.
       requestBody:
         required: true
         content:
@@ -63,10 +56,10 @@ paths:
 
   /api/auth/login:
     post:
-      tags: [Autenticación]
+      tags: [AutenticaciÃ³n]
       operationId: login
-      summary: Inicia sesión y devuelve un token JWT
-      description: Si el email no existe, la contraseña es incorrecta o el usuario está desactivado, siempre responde `401` con el mismo mensaje.
+      summary: Inicia sesiÃ³n y devuelve un token JWT
+      description: Si el email no existe, la contraseÃ±a es incorrecta o el usuario estÃ¡ desactivado, siempre responde `401` con el mismo mensaje.
       requestBody:
         required: true
         content:
@@ -75,7 +68,7 @@ paths:
               $ref: '#/components/schemas/LoginRequest'
       responses:
         '200':
-          description: Inicio de sesión correcto
+          description: Inicio de sesiÃ³n correcto
           content:
             application/json:
               schema:
@@ -89,10 +82,10 @@ paths:
 
   /api/auth/me:
     get:
-      tags: [Autenticación]
+      tags: [AutenticaciÃ³n]
       operationId: getMe
       summary: Datos del usuario autenticado
-      description: Devuelve los datos actuales del usuario dueño del token, consultados en la base de datos.
+      description: Devuelve los datos actuales del usuario dueÃ±o del token, consultados en la base de datos.
       security:
         - bearerAuth: []
       responses:
@@ -107,6 +100,105 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /api/students/{id}:
+    get:
+      tags: [Estudiantes]
+      operationId: getStudentSummary
+      summary: Resumen del estudiante
+      description: |
+        Un estudiante solo puede consultar su propio id; docentes y administradores pueden consultar cualquiera.
+
+        **Datos reales:** nombre, apellido, email, rol, `cursosActivos` y `cursos`.
+
+        **Datos simulados** (`simulado: true`): porcentaje, mÃ³dulos, actividades, nota promedio y horas de estudio.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StudentId'
+      responses:
+        '200':
+          description: Resumen del estudiante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentSummaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/students/{id}/progress:
+    get:
+      tags: [Estudiantes]
+      operationId: getStudentProgress
+      summary: Progreso y recomendaciÃ³n del estudiante
+      description: |
+        Mismas reglas de acceso que el resumen.
+        Por ahora todos los datos son simulados (`simulado: true`), con el formato final.
+        MÃ¡s adelante vendrÃ¡n de las interacciones y del motor adaptativo.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StudentId'
+      responses:
+        '200':
+          description: Progreso del estudiante
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentProgressResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+
+  /api/students/{id}/recommendation:
+    post:
+      tags: [Estudiantes]
+      operationId: getStudentRecommendation
+      summary: RecomendaciÃ³n del motor adaptativo para un tema
+      description: "Por ahora la respuesta es simulada (`simulado: true`). Mismas reglas de acceso que el resumen."
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StudentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendationRequest'
+      responses:
+        '200':
+          description: RecomendaciÃ³n generada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -115,22 +207,51 @@ components:
       bearerFormat: JWT
       description: Token obtenido en `POST /api/auth/login`.
 
+  parameters:
+    StudentId:
+      name: id
+      in: path
+      required: true
+      description: Id del estudiante
+      schema:
+        type: integer
+        minimum: 1
+        example: 4
+
   responses:
     BadRequest:
-      description: Datos inválidos o JSON mal formado
+      description: Datos invÃ¡lidos o JSON mal formado
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationError'
     Unauthorized:
-      description: Credenciales inválidas, o token requerido, inválido o expirado
+      description: Credenciales invÃ¡lidas, o token requerido, invÃ¡lido o expirado
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
             success: false
-            message: Credenciales inválidas
+            message: Credenciales invÃ¡lidas
+    Forbidden:
+      description: No tienes permiso para esta acciÃ³n
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: No tienes permiso para ver este estudiante
+    NotFound:
+      description: El recurso no existe
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: Estudiante no encontrado
     Conflict:
       description: El recurso ya existe
       content:
@@ -243,7 +364,7 @@ components:
           example: true
         token:
           type: string
-          description: JWT que se envía en el encabezado Authorization. Expira en 2 horas.
+          description: JWT que se envÃ­a en el encabezado Authorization. Expira en 2 horas.
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
         user:
           $ref: '#/components/schemas/User'
@@ -277,10 +398,10 @@ components:
           example: false
         message:
           type: string
-          example: Datos inválidos
+          example: Datos invÃ¡lidos
         details:
           type: array
-          description: Presente cuando falla la validación de campos.
+          description: Presente cuando falla la validaciÃ³n de campos.
           items:
             type: object
             properties:
@@ -289,4 +410,181 @@ components:
                 example: password
               mensaje:
                 type: string
-                example: La contraseña debe tener al menos 8 caracteres
+                example: La contraseÃ±a debe tener al menos 8 caracteres
+
+    CourseEnrollment:
+      type: object
+      properties:
+        cursoId:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: CÃ¡lculo
+        seccion:
+          type: string
+          example: SEC 1
+        estado:
+          type: string
+          example: ACTIVA
+
+    StudentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        nombre:
+          type: string
+          example: Ana
+        apellido:
+          type: string
+          example: Lopez
+        email:
+          type: string
+          example: ana@example.com
+        rol:
+          type: string
+          example: ESTUDIANTE
+        cursosActivos:
+          type: integer
+          example: 1
+        cursos:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseEnrollment'
+        porcentajeCompletado:
+          type: number
+          example: 72
+        modulosFinalizados:
+          type: integer
+          example: 18
+        modulosPendientes:
+          type: integer
+          example: 7
+        actividadesPendientes:
+          type: integer
+          example: 8
+        notaPromedio:
+          type: number
+          example: 86
+        horasEstudio:
+          type: number
+          example: 32
+
+    StudentSummaryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        simulado:
+          type: boolean
+          description: true mientras parte de los datos sea simulada
+          example: true
+        student:
+          $ref: '#/components/schemas/StudentSummary'
+
+    Recommendation:
+      type: object
+      properties:
+        tema:
+          type: string
+          example: SQL JOIN
+        accion:
+          type: string
+          example: reinforce_topic
+        dificultad:
+          type: string
+          example: reduced
+        prioridad:
+          type: string
+          example: alta
+        descripcion:
+          type: string
+        motivo:
+          type: object
+          properties:
+            puntuacionPromedio:
+              type: number
+              example: 53.3
+            erroresAcumulados:
+              type: integer
+              example: 9
+            intentosPromedio:
+              type: number
+              example: 3.0
+
+    StudentProgress:
+      type: object
+      properties:
+        variaciones:
+          type: object
+          properties:
+            porcentajeSemanal:
+              type: number
+              example: 5
+            cursosMes:
+              type: integer
+              example: 1
+            actividadesSemana:
+              type: integer
+              example: -2
+            notaPuntos:
+              type: number
+              example: 3
+            horasSemana:
+              type: number
+              example: 6
+        recomendacion:
+          $ref: '#/components/schemas/Recommendation'
+
+    StudentProgressResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        simulado:
+          type: boolean
+          example: true
+        progress:
+          $ref: '#/components/schemas/StudentProgress'
+
+
+
+    RecommendationRequest:
+      type: object
+      required: [topic]
+      properties:
+        topic:
+          type: string
+          maxLength: 100
+          example: SQL JOIN
+
+    RecommendationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        simulado:
+          type: boolean
+          example: true
+        recommendation:
+          type: object
+          properties:
+            studentId:
+              type: integer
+              example: 4
+            tema:
+              type: string
+              example: SQL JOIN
+            accion:
+              type: string
+              example: reinforce_topic
+            dificultad:
+              type: string
+              example: reduced
+            recomendacion:
+              type: string

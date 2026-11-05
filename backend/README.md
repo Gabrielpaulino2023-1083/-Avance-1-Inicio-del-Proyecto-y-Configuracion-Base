@@ -2,7 +2,7 @@
 
 Esta carpeta contiene la API REST del proyecto, construida con Node.js y Express.js siguiendo la arquitectura MVC. Recibe las peticiones del frontend, aplica la lógica del sistema y maneja los datos en PostgreSQL. Será también el puente hacia el motor adaptativo en Python.
 
-Por ahora el backend cubre la autenticación: registro, inicio de sesión con token JWT y control de acceso por roles. Los endpoints de estudiantes y la integración con el motor adaptativo se incorporarán en las próximas etapas.
+Por ahora el backend cubre la autenticación (registro, inicio de sesión con token JWT y control de acceso por roles) y los endpoints de resumen y progreso del estudiante para el Dashboard. La integración con el motor adaptativo se incorporará en las próximas etapas.
 
 ## Qué contiene esta carpeta
 
@@ -12,7 +12,7 @@ Dentro de `src/` hay una carpeta por cada responsabilidad del backend:
 * `controllers/` — reciben la petición y devuelven la respuesta
 * `dtos/` — validación de los datos de entrada y forma de los datos de salida
 * `errors/` — errores propios de la aplicación
-* `middlewares/` — autenticación, autorización, validación y manejo de errores
+* `middlewares/` — autenticación, autorización, acceso a estudiantes, validación y manejo de errores
 * `models/` — consultas a la base de datos
 * `routes/` — definición de los endpoints de la API
 * `services/` — lógica de negocio
@@ -26,8 +26,19 @@ El archivo `src/app.js` arma la aplicación y `src/server.js` la enciende.
 * `POST /api/auth/register` — registra un estudiante
 * `POST /api/auth/login` — inicia sesión y devuelve un token JWT
 * `GET /api/auth/me` — datos del usuario autenticado (requiere token)
+* `GET /api/students/:id` — resumen del estudiante para el Dashboard (requiere token)
+* `GET /api/students/:id/progress` — progreso y recomendación del estudiante (requiere token)
 
-Las rutas protegidas necesitan el encabezado `Authorization: Bearer <token>`.
+Las rutas protegidas necesitan el encabezado `Authorization: Bearer <token>`. Un estudiante solo puede consultar su propio `:id`; docentes y administradores pueden consultar cualquiera.
+
+### Datos reales y datos simulados
+
+En los endpoints de estudiantes, algunos datos salen de la base de datos y otros son simulados todavía:
+
+* **Reales:** nombre, apellido, email, rol, cursos activos y lista de cursos.
+* **Simulados:** porcentaje completado, módulos, actividades pendientes, nota promedio, horas de estudio, variaciones y recomendación.
+
+Cuando la respuesta incluye `"simulado": true`, parte de sus datos todavía no viene de la base. El formato no cambiará cuando se reemplacen por datos reales, que llegarán al crearse las tablas de temas, interacciones y recomendaciones.
 
 ## Documentación interactiva (Swagger)
 
@@ -39,7 +50,7 @@ Desde ahí se pueden probar todos los endpoints. Para las rutas protegidas: hace
 
 ## Tecnologías
 
-Node.js, Express.js, PostgreSQL (`pg`), JWT (`jsonwebtoken`), `bcryptjs` para cifrar contraseñas, Zod para validar los DTOs, `dotenv` para las variables de entorno y Swagger UI para la documentación.
+Node.js, Express.js, PostgreSQL (`pg`), JWT (`jsonwebtoken`), `bcryptjs` para cifrar contraseñas, Zod para validar los DTOs, `dotenv` para las variables de entorno, `cors` para la comunicación con el frontend y Swagger UI para la documentación.
 
 ## Cómo correrlo
 
@@ -85,9 +96,10 @@ DB_NAME=motor_adaptativo
 DB_USER=postgres
 DB_PASSWORD=la_contraseña_de_tu_postgres
 JWT_SECRET=una-clave-larga-y-secreta
+CORS_ORIGIN=http://localhost:5173
 ```
 
-El archivo `.env` es personal y **no se sube a GitHub**. Cada integrante crea el suyo con su propia contraseña de PostgreSQL. Sin `JWT_SECRET` el servidor no arranca.
+`CORS_ORIGIN` es la dirección del frontend que puede llamar a la API (por defecto, el servidor de Vite en `http://localhost:5173`). El archivo `.env` es personal y **no se sube a GitHub**. Cada integrante crea el suyo con su propia contraseña de PostgreSQL. Sin `JWT_SECRET` el servidor no arranca.
 
 ### 5. Encender el servidor
 
@@ -97,9 +109,15 @@ npm start
 
 Debe aparecer `Servidor corriendo en http://localhost:3000`. Para comprobarlo, abrir http://localhost:3000/api/health.
 
+## Conexión con el frontend
+
+El frontend puede llamar directo a `http://localhost:3000` (el backend permite el origen configurado en `CORS_ORIGIN`) o usar el proxy de Vite hacia el puerto 3000. El `id` que se usa en `/api/students/:id` es el `user.id` que devuelve el login.
+
 ## Usuarios para probar
 
 Los usuarios del seed (`admin@example.com`, `docente@example.com`, `estudiante@example.com`) tienen un hash ficticio y **no pueden iniciar sesión**. Para probar el login, registrar un usuario con `POST /api/auth/register` (desde Swagger) y luego iniciar sesión con él.
+
+Para ver cursos reales en el resumen, el usuario necesita una inscripción en la tabla `inscripciones`.
 
 ## Problemas frecuentes
 
@@ -109,11 +127,11 @@ Los usuarios del seed (`admin@example.com`, `docente@example.com`, `estudiante@e
 * **`Falta JWT_SECRET`**: el archivo `.env` no existe o no tiene esa variable.
 * **`Cannot find module ...`**: falta ejecutar `npm install` dentro de `backend/`.
 * **Puerto 3000 ocupado**: cambiar `PORT` en el `.env`.
+* **Error de CORS en el navegador**: el origen del frontend no coincide con `CORS_ORIGIN`.
 
 ## Documentación
 
 El detalle de lo realizado en el backend está en `docs/backend.md`, en la raíz del repositorio.
 
-## Responsable de este módulo
 
 Backend y API REST
