@@ -126,9 +126,7 @@ Alimentan el Dashboard del frontend. El `:id` es el `user.id` que devuelve el lo
 
 Reglas de acceso:
 
-- Un estudiante solo puede consultar su propio `:id`; si consulta otro, recibe `403`.
-- Docentes y administradores pueden consultar cualquiera (pendiente: limitar al docente a los estudiantes de sus secciones).
-- Si el id no es un entero válido responde `400`, y si no existe o no es un estudiante activo, `404`.
+- Un estudiante solo puede consultar su propio `:id`; un administrador, cualquiera; un docente, solo los estudiantes inscritos en secciones que tiene asignadas (`seccion_docentes`).
 
 Datos reales y simulados:
 
@@ -238,5 +236,4 @@ El Backend recibirá la información generada por la interacción del estudiante
 
 - Reemplazar los datos simulados de los endpoints de estudiantes cuando el compañero de base de datos cree las tablas de temas, interacciones, recomendaciones, contenidos y evaluaciones (campos de comportamiento: `study_minutes`, `errors`, `attempts`, `repetitions`, `navigation_count` y `score_percentage`).
 - Definir con Daniel el formato JSON de entrada y salida del motor adaptativo y cómo Node lo invocará (Node → Python → JSON → Node).
-- Limitar al docente a los estudiantes de sus secciones.
 - Agregar cada endpoint nuevo al `openapi.yaml`.

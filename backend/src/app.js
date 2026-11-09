@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const config = require('./config/config');
 const openApiSpec = require('./config/swagger');
@@ -10,8 +11,9 @@ const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
 
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: config.corsOrigin }));
-app.use(express.json());
+app.use(express.json({ limit: '100kb' }));
 
 app.get('/', (req, res) => {
   res.json({ mensaje: 'API del Motor de Aprendizaje Adaptativo funcionando' });

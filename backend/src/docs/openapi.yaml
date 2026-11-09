@@ -12,12 +12,17 @@ servers:
 tags:
   - name: Salud
     description: Estado del servicio
+  - name: Autenticación
+    description: Registro, inicio de sesión y datos del usuario autenticado
+  - name: Estudiantes
+    description: Resumen, progreso y recomendación del estudiante (parte de los datos aún es simulada)
+
 paths:
   /api/health:
     get:
       tags: [Salud]
       operationId: getHealth
-      summary: Comprueba que el backend estÃ¡ funcionando
+      summary: Comprueba que el backend está funcionando
       responses:
         '200':
           description: Backend activo
@@ -30,10 +35,10 @@ paths:
 
   /api/auth/register:
     post:
-      tags: [AutenticaciÃ³n]
+      tags: [Autenticación]
       operationId: register
       summary: Registra un estudiante
-      description: Todo registro pÃºblico se crea con el rol `ESTUDIANTE`. Los docentes y administradores se crean por otra vÃ­a.
+      description: Todo registro público se crea con el rol `ESTUDIANTE`. Los docentes y administradores se crean por otra vía.
       requestBody:
         required: true
         content:
@@ -56,10 +61,10 @@ paths:
 
   /api/auth/login:
     post:
-      tags: [AutenticaciÃ³n]
+      tags: [Autenticación]
       operationId: login
-      summary: Inicia sesiÃ³n y devuelve un token JWT
-      description: Si el email no existe, la contraseÃ±a es incorrecta o el usuario estÃ¡ desactivado, siempre responde `401` con el mismo mensaje.
+      summary: Inicia sesión y devuelve un token JWT
+      description: Si el email no existe, la contraseña es incorrecta o el usuario está desactivado, siempre responde `401` con el mismo mensaje.
       requestBody:
         required: true
         content:
@@ -68,7 +73,7 @@ paths:
               $ref: '#/components/schemas/LoginRequest'
       responses:
         '200':
-          description: Inicio de sesiÃ³n correcto
+          description: Inicio de sesión correcto
           content:
             application/json:
               schema:
@@ -82,10 +87,10 @@ paths:
 
   /api/auth/me:
     get:
-      tags: [AutenticaciÃ³n]
+      tags: [Autenticación]
       operationId: getMe
       summary: Datos del usuario autenticado
-      description: Devuelve los datos actuales del usuario dueÃ±o del token, consultados en la base de datos.
+      description: Devuelve los datos actuales del usuario dueño del token, consultados en la base de datos.
       security:
         - bearerAuth: []
       responses:
@@ -106,11 +111,13 @@ paths:
       operationId: getStudentSummary
       summary: Resumen del estudiante
       description: |
-        Un estudiante solo puede consultar su propio id; docentes y administradores pueden consultar cualquiera.
+        Un estudiante solo puede consultar su propio id; un docente, solo estudiantes de sus secciones; un administrador, cualquiera.
 
-        **Datos reales:** nombre, apellido, email, rol, `cursosActivos` y `cursos`.
+        **Datos reales** (listados en `datosReales`): nombre, apellido, email, rol, cursos activos, lista de cursos, actividades pendientes, nota promedio y horas de estudio.
 
-        **Datos simulados** (`simulado: true`): porcentaje, mÃ³dulos, actividades, nota promedio y horas de estudio.
+        **Datos simulados** (`simulado: true`): porcentaje completado, módulos finalizados y pendientes.
+
+        `notaPromedio` es `null` cuando el estudiante aún no tiene evaluaciones calificadas.
       security:
         - bearerAuth: []
       parameters:
@@ -137,11 +144,11 @@ paths:
     get:
       tags: [Estudiantes]
       operationId: getStudentProgress
-      summary: Progreso y recomendaciÃ³n del estudiante
+      summary: Progreso y recomendación del estudiante
       description: |
         Mismas reglas de acceso que el resumen.
         Por ahora todos los datos son simulados (`simulado: true`), con el formato final.
-        MÃ¡s adelante vendrÃ¡n de las interacciones y del motor adaptativo.
+        Más adelante vendrán de las interacciones y del motor adaptativo.
       security:
         - bearerAuth: []
       parameters:
@@ -164,12 +171,11 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
-
   /api/students/{id}/recommendation:
     post:
       tags: [Estudiantes]
       operationId: getStudentRecommendation
-      summary: RecomendaciÃ³n del motor adaptativo para un tema
+      summary: Recomendación del motor adaptativo para un tema
       description: "Por ahora la respuesta es simulada (`simulado: true`). Mismas reglas de acceso que el resumen."
       security:
         - bearerAuth: []
@@ -183,7 +189,7 @@ paths:
               $ref: '#/components/schemas/RecommendationRequest'
       responses:
         '200':
-          description: RecomendaciÃ³n generada
+          description: Recomendación generada
           content:
             application/json:
               schema:
@@ -220,22 +226,22 @@ components:
 
   responses:
     BadRequest:
-      description: Datos invÃ¡lidos o JSON mal formado
+      description: Datos inválidos o JSON mal formado
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationError'
     Unauthorized:
-      description: Credenciales invÃ¡lidas, o token requerido, invÃ¡lido o expirado
+      description: Credenciales inválidas, o token requerido, inválido o expirado
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
             success: false
-            message: Credenciales invÃ¡lidas
+            message: Credenciales inválidas
     Forbidden:
-      description: No tienes permiso para esta acciÃ³n
+      description: No tienes permiso para esta acción
       content:
         application/json:
           schema:
@@ -364,7 +370,7 @@ components:
           example: true
         token:
           type: string
-          description: JWT que se envÃ­a en el encabezado Authorization. Expira en 2 horas.
+          description: JWT que se envía en el encabezado Authorization. Expira en 2 horas.
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
         user:
           $ref: '#/components/schemas/User'
@@ -398,10 +404,10 @@ components:
           example: false
         message:
           type: string
-          example: Datos invÃ¡lidos
+          example: Datos inválidos
         details:
           type: array
-          description: Presente cuando falla la validaciÃ³n de campos.
+          description: Presente cuando falla la validación de campos.
           items:
             type: object
             properties:
@@ -410,7 +416,7 @@ components:
                 example: password
               mensaje:
                 type: string
-                example: La contraseÃ±a debe tener al menos 8 caracteres
+                example: La contraseña debe tener al menos 8 caracteres
 
     CourseEnrollment:
       type: object
@@ -420,7 +426,7 @@ components:
           example: 1
         nombre:
           type: string
-          example: CÃ¡lculo
+          example: Cálculo
         seccion:
           type: string
           example: SEC 1
@@ -467,6 +473,7 @@ components:
           example: 8
         notaPromedio:
           type: number
+          nullable: true
           example: 86
         horasEstudio:
           type: number
@@ -482,6 +489,11 @@ components:
           type: boolean
           description: true mientras parte de los datos sea simulada
           example: true
+        datosReales:
+          type: array
+          description: Campos que ya salen de la base de datos
+          items:
+            type: string
         student:
           $ref: '#/components/schemas/StudentSummary'
 
@@ -550,8 +562,6 @@ components:
           example: true
         progress:
           $ref: '#/components/schemas/StudentProgress'
-
-
 
     RecommendationRequest:
       type: object

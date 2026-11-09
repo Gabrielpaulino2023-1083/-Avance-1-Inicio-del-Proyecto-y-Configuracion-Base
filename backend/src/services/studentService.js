@@ -46,10 +46,23 @@ const getStudentOrFail = async (id) => {
   return user;
 };
 
+const REAL_FIELDS = [
+  'id', 'nombre', 'apellido', 'email', 'rol', 'cursosActivos', 'cursos',
+  'actividadesPendientes', 'notaPromedio', 'horasEstudio'
+];
+
 const getSummary = async (id) => {
   const user = await getStudentOrFail(id);
-  const courses = await studentModel.findActiveCourses(id);
-  return toStudentSummaryResponse({ user, courses, metrics: SIMULATED_METRICS });
+  const [courses, real] = await Promise.all([
+    studentModel.findActiveCourses(id),
+    studentModel.findRealMetrics(id)
+  ]);
+
+  // Lo simulado se reemplaza campo por campo con lo real
+  const metrics = { ...SIMULATED_METRICS, ...real };
+  const summary = toStudentSummaryResponse({ user, courses, metrics });
+
+  return { summary, datosReales: REAL_FIELDS };
 };
 
 const getProgress = async (id) => {
