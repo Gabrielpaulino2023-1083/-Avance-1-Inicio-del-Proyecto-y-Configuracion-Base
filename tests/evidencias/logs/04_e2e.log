@@ -1,0 +1,39 @@
+▶ Frontend E2E
+  ✖ CP-UI-01 login real desde el navegador contra el backend (sin puente CORS) (7871.526764ms)
+  ✔ CP-UI-02 login válido en la pantalla (1955.343203ms)
+  ✔ CP-UI-03 login inválido en la pantalla (3010.69088ms)
+  ✔ CP-UI-04 validación de campos vacíos e inválidos en el formulario (2482.129937ms)
+  ✔ CP-UI-05 rutas protegidas sin sesión redirigen a /login (1848.527254ms)
+  ✔ CP-UI-06 registro desde la pantalla y login con la cuenta nueva (2501.148945ms)
+  ✔ CP-UI-07 navegación entre pantallas sin recarga (5189.143755ms)
+  ✔ CP-UI-08 la sesión se conserva al recargar y se borra al cerrar sesión (2891.324503ms)
+  ﹣ CP-UI-09 Dashboard con datos reales del backend (1836.05067ms) # BLOQUEADO: el Dashboard llama a /api/students/4 y /api/students/4/progress, que no existen en el backend (404). Pantalla: "Ruta no encontrada".
+  ✔ CP-UI-10 ejercicio interactivo de Contenido (3740.288292ms)
+  ﹣ CP-UI-11 envío de métricas del ejercicio al backend (4652.068028ms) # BLOQUEADO: el ejercicio no envía tiempo/intentos/errores; no existe endpoint para registrar interacciones (pendiente declarado en frontend/README.md).
+✖ Frontend E2E (38516.956143ms)
+ℹ tests 11
+ℹ suites 1
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 39173.218838
+
+✖ failing tests:
+
+test at functional/e2e_frontend.test.mjs:138:3
+✖ CP-UI-01 login real desde el navegador contra el backend (sin puente CORS) (7871.526764ms)
+  AssertionError [ERR_ASSERTION]: El navegador no pudo iniciar sesión contra el backend real. Mensaje en pantalla: "No se pudo conectar con el servidor. Verifica que el backend esté encendido.". Causa: el backend no envía cabeceras CORS (Access-Control-Allow-Origin).
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/functional/e2e_frontend.test.mjs:145:12)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1442:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

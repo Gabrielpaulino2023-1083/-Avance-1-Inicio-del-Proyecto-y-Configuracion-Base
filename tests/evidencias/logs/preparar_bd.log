@@ -1,0 +1,173 @@
+### DROP DATABASE
+DROP DATABASE
+
+
+### CREATE DATABASE
+CREATE DATABASE
+
+
+### migrations/001_estructura_academica_inicial.sql
+BEGIN
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COMMIT
+
+
+### migrations/002_modulos_temas.sql
+BEGIN
+CREATE TABLE
+CREATE TABLE
+COMMIT
+
+
+### migrations/003_actividades_intentos_respuestas.sql
+BEGIN
+SET
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE VIEW
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+COMMIT
+
+
+### security/001_roles_permisos.sql
+BEGIN
+DO
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+REVOKE
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+COMMIT
+
+
+### migrations/004_inscripcion_estudiantes.sql
+BEGIN
+SET
+CREATE FUNCTION
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+
+
+### seeds/datos_prueba.sql
+BEGIN
+INSERT 0 3
+INSERT 0 3
+INSERT 0 3
+INSERT 0 1
+INSERT 0 1
+INSERT 0 2
+INSERT 0 4
+INSERT 0 4
+INSERT 0 1
+COMMIT
+
+
+### seeds/datos_prueba_modulos_temas.sql
+BEGIN
+INSERT 0 2
+INSERT 0 4
+COMMIT
+
+
+### seeds/datos_prueba_actividades_intentos.sql
+Hash bcrypt del estudiante demo: BEGIN
+SET
+CREATE TABLE
+INSERT 0 1
+DO
+COMMIT
+            email            |             titulo              | finalidad  | intentos_calificados | promedio_porcentaje | nota_academica_porcentaje 
+-----------------------------+---------------------------------+------------+----------------------+---------------------+---------------------------
+ estudiante.demo@example.com | DEMO-003: práctica con promedio | PRACTICA   |                    2 |               50.00 |                          
+ estudiante.demo@example.com | DEMO-003: evaluación calificada | EVALUACION |                    1 |              100.00 |                    100.00
+ estudiante.demo@example.com | DEMO-003: práctica disponible   | PRACTICA   |                    0 |                     |                          
+(3 rows)
+
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
+
+
+### ALTER ROLE (password oculto)
+ALTER ROLE
+
+
+### conteo de objetos
+17 tablas, 1 vista(s), 4 usuarios
