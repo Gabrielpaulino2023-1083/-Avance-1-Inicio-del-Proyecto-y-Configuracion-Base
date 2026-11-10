@@ -7,6 +7,8 @@ import DashboardScreen from "./screens/Dashboard/DashboardScreen";
 import ContentScreen from "./screens/Content/ContentScreen";
 import ResultsScreen from "./screens/Results/ResultsScreen";
 import ProgressScreen from "./screens/Progress/ProgressScreen";
+import ManageScreen from "./screens/Manage/ManageScreen";
+
 
 export default function App() {
   return (
@@ -23,6 +25,7 @@ export default function App() {
           <Route path="/contenido" element={<ContentScreen />} />
           <Route path="/resultados" element={<ResultsScreen />} />
           <Route path="/progreso" element={<ProgressScreen />} />
+          <Route path="/gestion" element={<ManageScreen />} />
         </Route>
       </Route>
     </Routes>
