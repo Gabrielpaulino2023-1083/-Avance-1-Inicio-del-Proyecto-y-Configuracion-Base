@@ -25,7 +25,7 @@ interface ErrorBody {
 }
 
 interface RequestOptions {
-  method?: "GET" | "POST";
+  method?: "GET" | "POST" | "PUT" | "DELETE";
   body?: unknown;
   token?: string | null;
 }

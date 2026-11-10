@@ -8,20 +8,30 @@ export interface RegisterRequest {
   password: string;
 }
 
-// Usuario de prueba para el modo simulado.
-// La contraseña es solo del simulador: no es una credencial real.
+// Usuarios de prueba para el modo simulado.
+// Las contraseñas son solo del simulador: no son credenciales reales.
 const MOCK_EMAIL = "estudiante@example.com";
-const MOCK_PASSWORD = "estudiante123";
 
-const MOCK_RESPONSE: LoginResponse = {
-  token: "token-simulado",
-  user: {
-    id: 1,
-    nombre: "Estudiante",
-    apellido: "",
-    email: MOCK_EMAIL,
-    rol: "ESTUDIANTE",
-  },
+interface MockAccount {
+  password: string;
+  response: LoginResponse;
+}
+
+function mockAccount(password: string, user: User, token: string): MockAccount {
+  return { password, response: { token, user } };
+}
+
+const MOCK_ACCOUNTS: Record<string, MockAccount> = {
+  [MOCK_EMAIL]: mockAccount(
+    "estudiante123",
+    { id: 1, nombre: "Estudiante", apellido: "", email: MOCK_EMAIL, rol: "ESTUDIANTE" },
+    "token-simulado"
+  ),
+  "docente@example.com": mockAccount(
+    "docente123",
+    { id: 2, nombre: "Docente", apellido: "", email: "docente@example.com", rol: "DOCENTE" },
+    "token-simulado-docente"
+  ),
 };
 
 function wait(ms: number) {
@@ -33,11 +43,11 @@ function wait(ms: number) {
 async function mockLogin(data: LoginRequest): Promise<LoginResponse> {
   await wait(700); // simula el tiempo de respuesta de una red real
 
-  const emailOk = data.email.trim().toLowerCase() === MOCK_EMAIL;
-  if (!emailOk || data.password !== MOCK_PASSWORD) {
+  const account = MOCK_ACCOUNTS[data.email.trim().toLowerCase()];
+  if (!account || data.password !== account.password) {
     throw new Error("Correo o contraseña incorrectos.");
   }
-  return MOCK_RESPONSE;
+  return account.response;
 }
 
 // Respuesta real de POST /api/auth/login
@@ -64,7 +74,7 @@ export function login(data: LoginRequest): Promise<LoginResponse> {
 async function mockRegister(data: RegisterRequest): Promise<void> {
   await wait(700);
   // Imita el error 409 del backend cuando el correo ya existe.
-  if (data.email.trim().toLowerCase() === MOCK_EMAIL) {
+  if (MOCK_ACCOUNTS[data.email.trim().toLowerCase()]) {
     throw new Error("Ya existe un usuario con ese email");
   }
 }
