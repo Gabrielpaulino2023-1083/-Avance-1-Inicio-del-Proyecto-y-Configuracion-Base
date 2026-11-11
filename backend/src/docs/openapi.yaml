@@ -18,6 +18,8 @@ tags:
     description: Resumen, progreso y recomendación del estudiante (parte de los datos aún es simulada)
   - name: Cursos
     description: CRUD de cursos (solo administrador). Eliminar es una baja lógica (estado ARCHIVADO)
+  - name: Contenido
+    description: CRUD de módulos y temas (administrador o docente editor del curso)
 
 paths:
   /api/health:
@@ -390,6 +392,315 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /api/modulos:
+    get:
+      tags: [Contenido]
+      operationId: listModules
+      summary: Lista los módulos de un curso
+      description: Si no se envía `cursoId`, usa el curso 1. Solo administrador o docente editor del curso.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cursoId
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Lista de módulos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [Contenido]
+      operationId: createModule
+      summary: Crea un módulo
+      description: Nace en `BORRADOR` si no se indica estado. `orden` único por curso (409 si se repite).
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentBody'
+      responses:
+        '201':
+          description: Módulo creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/modulos/{id}:
+    put:
+      tags: [Contenido]
+      operationId: updateModule
+      summary: Edita un módulo
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentBody'
+      responses:
+        '200':
+          description: Módulo actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [Contenido]
+      operationId: deleteModule
+      summary: Elimina un módulo
+      description: Solo si está en `BORRADOR` y no tiene temas (409 en caso contrario).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      responses:
+        '200':
+          description: Módulo eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/modulos/{id}/estado:
+    patch:
+      tags: [Contenido]
+      operationId: changeModuleStatus
+      summary: Cambia el estado de un módulo
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentStatusBody'
+      responses:
+        '200':
+          description: Estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/modulos/{id}/temas:
+    get:
+      tags: [Contenido]
+      operationId: listTopics
+      summary: Lista los temas de un módulo
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      responses:
+        '200':
+          description: Lista de temas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [Contenido]
+      operationId: createTopic
+      summary: Crea un tema en un módulo
+      description: Nace en `BORRADOR` si no se indica estado. `orden` único por módulo (409 si se repite).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentBody'
+      responses:
+        '201':
+          description: Tema creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/temas/{id}:
+    put:
+      tags: [Contenido]
+      operationId: updateTopic
+      summary: Edita un tema
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentBody'
+      responses:
+        '200':
+          description: Tema actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [Contenido]
+      operationId: deleteTopic
+      summary: Elimina un tema
+      description: Solo si está en `BORRADOR` y no tiene actividades (409 en caso contrario).
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      responses:
+        '200':
+          description: Tema eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/temas/{id}/estado:
+    patch:
+      tags: [Contenido]
+      operationId: changeTopicStatus
+      summary: Cambia el estado de un tema
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ContentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentStatusBody'
+      responses:
+        '200':
+          description: Estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -413,6 +724,15 @@ components:
       in: path
       required: true
       description: Id del curso
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+    ContentId:
+      name: id
+      in: path
+      required: true
+      description: Id del módulo o del tema, según la ruta
       schema:
         type: integer
         minimum: 1
@@ -879,3 +1199,137 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Course'
+
+    ContentBody:
+      type: object
+      required: [nombre, descripcion, orden]
+      properties:
+        nombre:
+          type: string
+          maxLength: 150
+          example: Límites
+        descripcion:
+          type: string
+          maxLength: 1000
+          example: Introducción al estudio de límites
+        orden:
+          type: integer
+          minimum: 1
+          example: 9
+        estado:
+          type: string
+          enum: [BORRADOR, PUBLICADO, ARCHIVADO]
+          example: BORRADOR
+        cursoId:
+          type: integer
+          minimum: 1
+          description: Solo para módulos. Por defecto 1.
+          example: 1
+
+    ContentStatusBody:
+      type: object
+      required: [estado]
+      properties:
+        estado:
+          type: string
+          enum: [BORRADOR, PUBLICADO, ARCHIVADO]
+          example: PUBLICADO
+
+    Module:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        cursoId:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        orden:
+          type: integer
+        estado:
+          type: string
+          enum: [BORRADOR, PUBLICADO, ARCHIVADO]
+        totalTemas:
+          type: integer
+        actualizadoEn:
+          type: string
+          format: date-time
+
+    Topic:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        moduloId:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        orden:
+          type: integer
+        estado:
+          type: string
+          enum: [BORRADOR, PUBLICADO, ARCHIVADO]
+        actualizadoEn:
+          type: string
+          format: date-time
+
+    ModuleResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Module'
+
+    ModuleListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+
+    TopicResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Topic'
+
+    TopicListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+
+    DeleteResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 12

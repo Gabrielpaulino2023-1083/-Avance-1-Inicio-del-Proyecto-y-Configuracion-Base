@@ -2,7 +2,7 @@
 
 Esta carpeta contiene la API REST del proyecto, construida con Node.js y Express.js siguiendo la arquitectura MVC. Recibe las peticiones del frontend, aplica la lógica del sistema y maneja los datos en PostgreSQL. También es el puente hacia el motor adaptativo en Python.
 
-El backend cubre la autenticación (registro, inicio de sesión con token JWT y control de acceso por roles), los endpoints del Dashboard del estudiante (resumen, progreso y recomendación), un CRUD de cursos para administradores y la conexión con el motor adaptativo. Parte de los datos del Dashboard todavía es simulada y se irá reemplazando por datos reales de la base de datos.
+El backend cubre la autenticación (registro, inicio de sesión con token JWT y control de acceso por roles), los endpoints del Dashboard del estudiante (resumen, progreso y recomendación), un CRUD de cursos para administradores, un CRUD de módulos y temas para administradores y docentes editores, y la conexión con el motor adaptativo. Parte de los datos del Dashboard todavía es simulada y se irá reemplazando por datos reales.
 
 ## Qué contiene esta carpeta
 
@@ -43,11 +43,32 @@ El archivo `src/app.js` arma la aplicación y `src/server.js` la enciende.
 * `PUT /api/cursos/:id` — edita código, nombre y descripción
 * `PATCH /api/cursos/:id/estado` — cambia el estado a `ACTIVO` o `ARCHIVADO`
 
+**Módulos y temas (administrador o docente editor del curso)**
+
+* `GET /api/modulos` — lista módulos (`cursoId` opcional, por defecto 1)
+* `POST /api/modulos` — crea un módulo
+* `PUT /api/modulos/:id` — edita un módulo
+* `PATCH /api/modulos/:id/estado` — cambia su estado
+* `DELETE /api/modulos/:id` — elimina un módulo
+* `GET /api/modulos/:id/temas` — lista los temas de un módulo
+* `POST /api/modulos/:id/temas` — crea un tema
+* `PUT /api/temas/:id` — edita un tema
+* `PATCH /api/temas/:id/estado` — cambia su estado
+* `DELETE /api/temas/:id` — elimina un tema
+
 Las rutas protegidas necesitan el encabezado `Authorization: Bearer <token>`. Un estudiante solo puede consultar su propio `:id`; un administrador, cualquiera; un docente, solo los estudiantes de sus secciones.
 
 ### Eliminar un curso = archivarlo
 
 El CRUD de cursos no borra registros: **eliminar es una baja lógica** (estado `ARCHIVADO`), para conservar el historial. Archivar se rechaza con `409` si el curso tiene ediciones planificadas, abiertas o en curso, y un curso archivado no se puede editar ni reactivar. La administración de cursos usa funciones de PostgreSQL y el administrador sale siempre del token, nunca del cuerpo de la petición.
+
+### Módulos y temas
+
+Respuesta `{ "success": true, "data": ... }`. Cada módulo incluye `totalTemas`. Campos: `nombre`, `descripcion`, `orden` y `estado` (`BORRADOR`, `PUBLICADO`, `ARCHIVADO`). Reglas, validadas por la base de datos:
+
+* `orden` repetido dentro del curso (módulos) o del módulo (temas) → `409`.
+* El borrado es físico, solo en `BORRADOR`; con temas (módulo) o actividades (tema) → `409`.
+* Solo administrador o docente editor activo del curso; el resto, incluidos estudiantes, → `403`.
 
 ### Datos reales y datos simulados
 
@@ -92,7 +113,8 @@ Crear una base llamada `motor_adaptativo` y cargar en ella los scripts de la car
 4. `database/security/001_roles_permisos.sql`
 5. `database/migrations/004_inscripcion_estudiantes.sql`
 6. `database/migrations/005_crud_cursos.sql`
-7. `database/seeds/datos_prueba.sql` y luego `database/seeds/datos_prueba_modulos_temas.sql`
+7. `database/migrations/006_crud_modulos_temas.sql`
+8. `database/seeds/datos_prueba.sql` y luego `database/seeds/datos_prueba_modulos_temas.sql`
 
 Por ejemplo, desde la terminal (en una sola línea cada comando):
 
@@ -111,7 +133,7 @@ El backend se conecta con el rol limitado `plataforma_backend` (creado por el sc
 \password plataforma_backend
 ```
 
-### 4. Crear el administrador de pruebas (para el CRUD de cursos)
+### 4. Crear el administrador de pruebas
 
 Generar un hash bcrypt desde `backend`:
 
@@ -125,7 +147,7 @@ y ejecutar el seed por `psql`, que pedirá ese hash:
 psql -X -U postgres -d motor_adaptativo -f database/seeds/datos_prueba_administrador.sql
 ```
 
-Cuenta resultante: `administrador.demo@example.com`. La contraseña `AdminDemo-2026!` es pública y solo para desarrollo.
+Cuenta resultante: `administrador.demo@example.com`. La contraseña `AdminDemo-2026!` es pública y solo para desarrollo. El docente de pruebas (`datos_prueba_docente.sql`) se crea igual, con `DocenteDemo-2026!`.
 
 ### 5. Instalar dependencias
 
@@ -181,12 +203,12 @@ También se puede indicar otro Python con la variable `PYTHON_EXECUTABLE`. El mo
 * Cabeceras de seguridad con `helmet`.
 * Login y registro limitados a 10 peticiones por IP cada 15 minutos (`429`).
 * JSON limitado a 100 KB (`413`).
-* Conexión a PostgreSQL con el rol limitado `plataforma_backend`; la escritura de cursos, intentos e inscripciones se hace solo mediante funciones.
+* Conexión a PostgreSQL con el rol limitado `plataforma_backend`; la escritura de cursos, módulos, temas, intentos e inscripciones se hace solo mediante funciones.
 * Si un usuario tiene varios roles activos, se usa el de mayor jerarquía.
 
 ## Conexión con el frontend
 
-El frontend puede llamar directo a `http://localhost:3000` (el backend permite el origen configurado en `CORS_ORIGIN`) o usar el proxy de Vite hacia el puerto 3000. El `id` que se usa en `/api/students/:id` es el `user.id` que devuelve el login. Las rutas de cursos responden `{ "success": true, "data": ... }`.
+El frontend puede llamar directo a `http://localhost:3000` (el backend permite el origen configurado en `CORS_ORIGIN`) o usar el proxy de Vite hacia el puerto 3000. El `id` que se usa en `/api/students/:id` es el `user.id` que devuelve el login. Las rutas de cursos, módulos y temas responden `{ "success": true, "data": ... }`.
 
 ## Usuarios para probar
 
@@ -194,6 +216,7 @@ Los usuarios del seed inicial (`admin@example.com`, `docente@example.com`, `estu
 
 * Estudiante: registrar un usuario con `POST /api/auth/register` y luego iniciar sesión.
 * Administrador: `administrador.demo@example.com` (ver paso 4).
+* Docente: `docente.demo@example.com`, editor del curso `DEMO-006` (seed `datos_prueba_docente.sql`).
 
 Para ver cursos reales en el resumen, el usuario necesita una inscripción en la tabla `inscripciones`.
 
@@ -203,14 +226,42 @@ Para ver cursos reales en el resumen, el usuario necesita una inscripción en la
 * **`database "motor_adaptativo" does not exist`**: falta crear la base o el nombre de `DB_NAME` es distinto.
 * **`Roles ausentes en la base de datos`**: no se cargó el seed inicial.
 * **`Falta JWT_SECRET`**: el archivo `.env` no existe o no tiene esa variable.
-* **`Cannot find module ...`**: falta ejecutar `npm install` dentro de `backend/`.
+* **`Cannot find module ...`**: falta ejecutar `npm install` dentro de `backend/`, o falta algún archivo nuevo.
 * **Puerto 3000 ocupado**: cambiar `PORT` en el `.env`.
 * **Error de CORS en el navegador**: el origen del frontend no coincide con `CORS_ORIGIN`.
 * **`429 Demasiados intentos`**: se superó el límite de login; reiniciar el servidor o esperar 15 minutos.
-* **`403` en `/api/cursos`**: el usuario no es administrador.
+* **`403` en `/api/cursos` o `/api/modulos`**: el usuario no es administrador (o docente editor del curso).
 * **`409` al archivar un curso**: tiene ediciones pendientes o ya está archivado.
+* **`409` al eliminar un módulo o tema**: no está en `BORRADOR` o tiene temas/actividades.
 * **`500` en recomendación**: Python no está instalado o falta el entorno `.venv`.
-* **`permission denied` (42501)**: faltan las migraciones 004/005 o el script de seguridad.
+* **`permission denied` (42501)**: faltan las migraciones 004 a 006 o el script de seguridad.
+* **"Token requerido" al abrir `/api/docs`**: `contentRoutes` está montado antes que Swagger en `app.js`.
+
+## Flujos para probar
+
+1. **Administrador:** login con `administrador.demo@example.com` → crear curso → editar → activar → archivar (eliminar) → repetir el código (409).
+2. **Contenido:** crear módulo → crear tema → intentar eliminar el módulo con tema (409) → eliminar el tema → eliminar el módulo.
+3. **Estudiante:** registro → login → resumen → recomendación (404 si no tiene intentos calificados) → ruta de cursos (403).
+
+## Problemas resueltos
+
+* **Usuarios del seed sin acceso:** tienen hash ficticio; se usa el registro público y cuentas demo con hash bcrypt.
+* **Escalada de privilegios:** el registro siempre crea `ESTUDIANTE` y el actor sale del token.
+* **Conexión con `postgres`:** ahora usa el rol limitado `plataforma_backend`, que escribe solo mediante funciones.
+* **Docente con acceso a todos los estudiantes:** limitado a los de sus secciones.
+* **Usuarios con varios roles:** se usa el de mayor jerarquía.
+* **Recomendación con error 500:** el backend enviaba `interactions: []`; ahora arma las interacciones desde los intentos calificados y responde 404 si no hay.
+* **Swagger pedía token:** las rutas de contenido se montan después de Swagger.
+* **Contrato con el frontend:** rutas `/api/modulos` y `/api/temas`, formato `{ success, data }` y `cursoId` opcional.
+
+## Observaciones técnicas
+
+* Los estudiantes no pueden leer módulos y temas por estas rutas (la base exige administrador o docente editor).
+* `cursoId` es opcional y por defecto 1; el docente demo edita el curso `DEMO-006`.
+* La recomendación usa `repetitions = attempts - 1` y `navigation_count = 0` (pendiente de confirmar con el motor).
+* `horasEstudio` mide solo el tiempo dentro de las actividades.
+* `/progress`, el porcentaje completado y los módulos finalizados siguen simulados.
+* El motor adaptativo es de reglas, no de aprendizaje automático.
 
 ## Documentación
 
