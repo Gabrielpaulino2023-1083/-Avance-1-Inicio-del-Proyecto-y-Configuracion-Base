@@ -1,6 +1,6 @@
 # Contrato de integración de la base de datos
 
-Referencia: **BD-005-v1** · Actualizado: **10 de noviembre de 2026**.
+Referencia: **BD-006-v1** · Actualizado: **11 de noviembre de 2026**.
 
 Lecturas complementarias: [diccionario de datos](DICCIONARIO_DATOS_BD.md), [operaciones de cursos](CRUD_CURSOS_AVANCE_3.md) y [evidencias](../test/RESULTADO_VALIDACION_005.md).
 
@@ -15,11 +15,13 @@ La referencia de esta versión son los archivos:
 - database/security/001_roles_permisos.sql corregido
 - database/migrations/004_inscripcion_estudiantes.sql
 - database/migrations/005_crud_cursos.sql
+- database/migrations/006_crud_modulos_temas.sql
+- database/seeds/datos_prueba_docente.sql
 - database/seeds/datos_prueba_administrador.sql
 - database/seeds/datos_prueba_actividades_intentos.sql (datos de integración)
-Después de 005: 17 tablas, una vista, 17 funciones propias y nueve triggers. Diez funciones son operativas, seis son de trigger y una es auxiliar privada. La instalación completa desde cero y las pruebas de 003–005 pasaron en PGlite. El responsable confirmó además la ejecución de 005 y sus pruebas en PostgreSQL local, el seed administrativo y login/me de administrador y estudiante tras configurar DB_USER=plataforma_backend. No se inspeccionó el pool del proceso para certificar current_user; no se afirma integración HTTP de cursos por estas pruebas de autenticación.
+Después de 006: 17 tablas, una vista, 31 funciones propias y nueve triggers. 22 funciones son operativas, seis son de trigger y tres son auxiliares privadas. Las verificaciones históricas de 005 que siguen corresponden a esa entrega; 006 está probada en PGlite y pendiente de ejecución local. La instalación completa desde cero y las pruebas de 003–005 pasaron en PGlite. El responsable confirmó además la ejecución de 005 y sus pruebas en PostgreSQL local, el seed administrativo y login/me de administrador y estudiante tras configurar DB_USER=plataforma_backend. No se inspeccionó el pool del proceso para certificar current_user; no se afirma integración HTTP de cursos por estas pruebas de autenticación.
 
-001–004 están publicadas en main; 005 y esta documentación están preparadas para PR. El merge no aplica migraciones en las bases del equipo. La evidencia distingue pruebas automatizadas, resultados locales reportados e integración pendiente.
+001–005 están publicadas en main; 006 y su documentación están preparadas para PR. El merge no aplica migraciones en las bases del equipo. La evidencia distingue pruebas automatizadas, resultados locales reportados e integración pendiente.
 
 Las migraciones definen lo que existe; los permisos definen lo que la cuenta de conexión puede hacer; este contrato explica cómo usarlo. Ante una discrepancia, revisar las fuentes y acordar la corrección, no modificar el esquema por una suposición. La ejecución completa del archivo consolidado de regresión fue confirmada por el responsable de base de datos; los casos incluidos finalizaron con el resultado esperado.
 
@@ -379,3 +381,29 @@ Lista de trabajo obligatoria para agentes de integración
 El SQL y sus pruebas de cursos están listos para revisión. El responsable confirmó el seed administrativo y autenticación HTTP de ambas cuentas. Aún no se verificó el recorrido HTTP de cursos ni sus pantallas. Las decisiones del motor siguen pendientes; no se presentan como resueltas por 005.
 
 El diccionario define tipos PostgreSQL y nulabilidad; no establece automáticamente DTOs. Backend y frontend deben acordar nombres JSON, tipos serializados y mensajes de error en OpenAPI. No devolver todas las columnas de las tablas por comodidad.
+
+## Administración de módulos y temas — 006
+
+La referencia completa y vigente para este bloque es [CRUD_MODULOS_TEMAS_AVANCE_3.md](CRUD_MODULOS_TEMAS_AVANCE_3.md).
+La guía contiene firmas, parámetros, resultados, reglas, consultas para seleccionar el curso,
+errores, seed y ajustes requeridos en el frontend. No modifica las columnas del diccionario.
+
+Funciones nuevas: crear_modulo, listar_modulos_por_curso, obtener_modulo, actualizar_modulo,
+cambiar_estado_modulo, eliminar_modulo, crear_tema, listar_temas_por_modulo, obtener_tema,
+actualizar_tema, cambiar_estado_tema y eliminar_tema. Se ejecutan con actor autenticado como
+primer parámetro, y validan administrador activo o docente activo/editor del curso. Las dos
+auxiliares no tienen EXECUTE para el backend.
+
+Se conservan padres y autoría. Crear/editar acepta los tres estados del formulario. Eliminar
+requiere BORRADOR sin dependencias; 55000 si hay hijos o estado incompatible, 23505 en orden
+repetido. Cambiar estado no propaga a hijos ni modifica resultados; no implementa visibilidad
+de estudiante. Un curso archivado permite consultar, pero bloquea estas escrituras.
+
+Todos los retornos de módulos salvo eliminar incluyen total_temas BIGINT calculado para todos
+los estados. Los temas retornan sus columnas actuales. El frontend necesita curso real y el
+backend transforma snake_case a los DTOs acordados; no usar IDs fijos ni confiar en actor del body.
+
+El docente demo tiene únicamente DOCENTE y una asignación en curso_editores para DEMO-006.
+No necesita seccion_docentes para este CRUD; el seed no crea sección ni altera DEMO-003.
+La validación embebida incluye regresiones 003–006 y seed; no prueba HTTP, login local ni
+concurrencia entre sesiones. Revisar evidencia antes de declarar integrada una capacidad.
