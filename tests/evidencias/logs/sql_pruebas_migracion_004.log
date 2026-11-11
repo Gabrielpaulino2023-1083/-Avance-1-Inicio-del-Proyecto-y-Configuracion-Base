@@ -1,0 +1,23 @@
+BEGIN
+SET
+SET
+CREATE TABLE
+DO
+GRANT
+SET
+DO
+ROLLBACK
+ usuario_tras_rollback 
+-----------------------
+ postgres
+(1 row)
+
+
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 1: rol y permisos basicos.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 2: inscripcion autonoma.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 3: duplicado rechazado; se conserva una inscripcion.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 4: estudiante no puede inscribir a otra persona.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 5: inscripcion administrativa.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 6: cupo lleno rechazado incluso para administrador.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  OK 7: un cupo y una inscripcion activa; sin inscripciones residuales.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_004.sql:212: NOTICE:  PRUEBAS 004 COMPLETADAS: todos los casos basicos incluidos pasaron.

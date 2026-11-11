@@ -1,0 +1,68 @@
+BEGIN
+SET
+SET
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+DO
+GRANT
+DO
+GRANT
+GRANT
+SET
+DO
+RESET
+DO
+SET
+DO
+RESET
+DO
+ROLLBACK
+
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: No trasladar modulo a otro curso
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Rechazar actividad con tema de otro curso
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Publicacion sin preguntas
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Publicacion con una opcion
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Seleccion unica con dos correctas
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Seleccion multiple con una correcta
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Publicacion valida
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Proteger pregunta publicada
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Proteger opciones publicadas
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Cuenta inactiva no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Rol desactivado no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Inscripcion retirada no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Seccion incorrecta no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Actividad en borrador no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Disponibilidad futura no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:212: NOTICE:  OK: Disponibilidad terminada no inicia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Pruebas bajo el rol del backend
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Escritura directa bloqueada
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Clave de correccion no legible directamente
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No iniciar para otro estudiante
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Inicio, plazo y cuatro respuestas vacias
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No duplicar intento abierto
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No calificar intento abierto
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Guardar seleccion unica
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Reemplazar seleccion
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Limpiar seleccion
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No admitir varias en seleccion unica
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No admitir opcion de otra pregunta
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No admitir opciones repetidas
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No admitir elementos NULL
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No guardar respuesta ajena
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Entrega manual repetible sin cambiar fecha
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: No guardar despues de entregar
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Cero por incorrecta, incompleta, opciones extra y respuesta vacia
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Recalificar conserva fecha y puntaje
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Intento abierto excluido del promedio
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Entregado sin calificar excluido del promedio
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Seleccion exacta, promedio 50 y practica sin nota academica
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Limite de intentos agotado
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:380: NOTICE:  OK: Evaluacion con nota academica 100
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:406: NOTICE:  OK: No volver a borrador con intentos
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:406: NOTICE:  OK: No cambiar maximo con intentos
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:406: NOTICE:  OK: Archivar actividad con intentos
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:428: NOTICE:  OK: No guardar despues del vencimiento
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:428: NOTICE:  OK: Entrega solicitada despues de vencer
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:428: NOTICE:  OK: Calificar entrega vencida sin respuestas
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_migracion_003.sql:433: NOTICE:  PRUEBAS 003 COMPLETADAS: todos los casos incluidos pasaron.

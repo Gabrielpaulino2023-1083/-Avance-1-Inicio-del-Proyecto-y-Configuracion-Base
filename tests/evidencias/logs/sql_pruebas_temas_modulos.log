@@ -1,0 +1,17 @@
+BEGIN
+ROLLBACK
+BEGIN
+ROLLBACK
+BEGIN
+ROLLBACK
+BEGIN
+ROLLBACK
+
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_temas_modulos.sql:13: ERROR:  duplicate key value violates unique constraint "uq_modulos_curso_orden"
+DETAIL:  Key (curso_id, orden)=(1, 1) already exists.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_temas_modulos.sql:31: ERROR:  duplicate key value violates unique constraint "uq_temas_modulo_orden"
+DETAIL:  Key (modulo_id, orden)=(1, 1) already exists.
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_temas_modulos.sql:44: ERROR:  new row for relation "modulos" violates check constraint "modulos_orden_check"
+DETAIL:  Failing row contains (1, 1, Límites, Introducción al estudio de límites., 0, PUBLICADO, 1, 2026-11-10 16:00:53.255503+00, 2026-11-10 16:00:53.255503+00).
+psql:/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/database/test/pruebas_temas_modulos.sql:61: ERROR:  new row for relation "temas" violates check constraint "temas_orden_check"
+DETAIL:  Failing row contains (2, 1, Concepto de límite, Definición e interpretación de límites., -1, PUBLICADO, 1, 2026-11-10 16:00:53.255503+00, 2026-11-10 16:00:53.255503+00).

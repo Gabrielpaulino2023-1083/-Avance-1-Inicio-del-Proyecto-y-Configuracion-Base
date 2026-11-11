@@ -1,0 +1,21 @@
+{
+  "name": "qa-motor-adaptativo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Matriz de pruebas, pruebas automatizadas y reporte de QA del Motor de Aprendizaje Adaptativo",
+  "type": "module",
+  "scripts": {
+    "preparar-bd": "node scripts/preparar_bd.mjs",
+    "test:unit": "node --test \"unit/**/*.test.mjs\" && python -m pytest unit/motor -v -p no:cacheprovider",
+    "test:integration": "node --test --test-concurrency=1 \"integration/**/*.test.mjs\"",
+    "test:e2e": "node --test \"functional/**/*.test.mjs\"",
+    "test": "node scripts/ejecutar_todo.mjs",
+    "reporte": "node scripts/generar_reporte.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

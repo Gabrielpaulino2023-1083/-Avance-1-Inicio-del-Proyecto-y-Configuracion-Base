@@ -1,0 +1,247 @@
+◇ injected env (0) from .env
+▶ Login
+  ✔ CP-LOG-01 login con credenciales válidas (215.544768ms)
+  ✔ CP-LOG-02 login sin distinguir mayúsculas y con espacios (96.516274ms)
+  ✔ CP-LOG-03 login con contraseña incorrecta (96.316632ms)
+  ✔ CP-LOG-04 login con correo no registrado (mismo mensaje) (4.881102ms)
+  ✔ CP-LOG-05 login con campos vacíos o ausentes (7.929884ms)
+  ✖ CP-LOG-06 login con JSON mal formado (4.184463ms)
+  ✔ CP-LOG-07 login con tipos de datos incorrectos (9.498212ms)
+  ✔ CP-LOG-08 usuario con hash ficticio del seed → 401 controlado (5.012544ms)
+  ✔ CP-LOG-09 cuenta desactivada no puede entrar ni usar su token (204.769004ms)
+  ✔ CP-LOG-10 /api/auth/me con token válido (96.184305ms)
+  ✔ CP-LOG-11 /me sin token, alterado, con otro secreto o vencido (109.31504ms)
+  ✔ CP-LOG-12 intento de inyección SQL en el login (101.621152ms)
+✖ Login (955.425272ms)
+▶ CRUD de usuarios
+  ✔ CP-CRUD-01 crear (registro) con datos válidos (101.350143ms)
+  ✔ CP-CRUD-02 crear con correo duplicado (otra capitalización) (110.233453ms)
+  ✔ CP-CRUD-03 crear con datos inválidos (8.316384ms)
+  ✔ CP-CRUD-04 el registro ignora un rol enviado por el cliente (187.023497ms)
+  ✔ CP-CRUD-05 leer el usuario recién creado (192.972264ms)
+  ﹣ CP-CRUD-06 actualizar usuario / cambiar rol (95.711067ms) # BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404).
+  ﹣ CP-CRUD-07 eliminar / desactivar usuario (98.160429ms) # BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404).
+  ﹣ CP-CRUD-08 listar y consultar estudiantes (96.084736ms) # BLOQUEADO: GET /api/students/:id no está implementado en el backend (404).
+  ﹣ CP-CRUD-09 operaciones académicas por HTTP (96.533223ms) # BLOQUEADO: no hay rutas HTTP para inscripción, intentos ni resultados. La lógica está probada a nivel SQL (CP-BD-01/02).
+✔ CRUD de usuarios (987.011742ms)
+▶ Persistencia
+  ✔ CP-PER-01 el registro se guarda en PostgreSQL de forma segura (96.444614ms)
+  ✔ CP-PER-02 los datos sobreviven a un reinicio del backend (432.354588ms)
+  ✔ CP-PER-03 un registro rechazado no deja datos a medias (9.003327ms)
+  ✔ CP-PER-04 resultados persistidos del seed de integración (2.836313ms)
+✔ Persistencia (540.937904ms)
+▶ API general
+  ✔ CP-BE-09 health check y ruta inexistente (3.046317ms)
+  ﹣ CP-MOT-11 backend llama al motor: POST /api/adaptive/analyze (94.476536ms) # BLOQUEADO: POST /api/adaptive/analyze (integración backend → motor Python) no está implementado en el backend (404).
+✔ API general (97.820741ms)
+▶ Pruebas SQL existentes del repositorio
+  ✔ CP-BD-01 regresión de la migración 003 (97.286073ms)
+  ✔ CP-BD-02 pruebas de la migración 004 (inscripción) (61.091601ms)
+  ✔ CP-BD-03 restricciones de integridad: 5 rechazos esperados (58.269138ms)
+  ✔ CP-BD-04 orden de módulos y temas: 4 rechazos esperados (61.363109ms)
+  ✔ CP-BD-05 permisos del rol plataforma_backend (58.446126ms)
+✔ Pruebas SQL existentes del repositorio (337.527056ms)
+▶ Motor por línea de comandos
+  ✔ CP-MOT-09 --stdin escenario bajo devuelve JSON legible por Node (282.270744ms)
+  ✔ CP-MOT-09 --stdin escenario medio devuelve JSON legible por Node (301.846088ms)
+  ✔ CP-MOT-09 --stdin escenario alto devuelve JSON legible por Node (310.573532ms)
+  ✔ CP-MOT-10 main.py en modo local se ejecuta sin errores críticos (295.538083ms)
+  ✔ CP-VAL-12 CLI con JSON mal formado (314.503419ms)
+  ✔ CP-VAL-13 CLI con interacciones vacías (319.59339ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (314.171175ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (305.40802ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (279.622388ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (319.998876ms)
+  ✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (7.291352ms)
+✖ Motor por línea de comandos (3053.432824ms)
+ℹ tests 43
+ℹ suites 6
+ℹ pass 32
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 5
+ℹ todo 0
+ℹ duration_ms 6740.530045
+
+✖ failing tests:
+
+test at integration/backend_api.test.mjs:116:3
+✖ CP-LOG-06 login con JSON mal formado (4.184463ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Unexpected end of JSON input'
+  - 'JSON inválido'
+  
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/backend_api.test.mjs:119:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Unexpected end of JSON input',
+    expected: 'JSON inválido',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at integration/motor_cli.test.mjs:75:5
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (314.171175ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
+  Traceback (most recent call last):
+    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+      [31mmain[0m[1;31m()[0m
+      [31m~~~~[0m[1;31m^^[0m
+    File [35m"/home/claude/proj/-Avance-1-Inicio
+  Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
+      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1047:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+      at Test.postRun (node:internal/test_runner/test:1173:19)
+      at Test.run (node:internal/test_runner/test:1101:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at getActual (node:assert:609:5)
+        at Function.doesNotThrow (node:assert:777:32)
+        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1047:25)
+        at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        at Test.postRun (node:internal/test_runner/test:1173:19),
+    expected: undefined,
+    operator: 'doesNotThrow',
+    diff: 'simple'
+  }
+
+test at integration/motor_cli.test.mjs:75:5
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (305.40802ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
+  Traceback (most recent call last):
+    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+      [31mmain[0m[1;31m()[0m
+      [31m~~~~[0m[1;31m^^[0m
+    File [35m"/home/claude/proj/-Avance-1-Inicio
+  Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
+      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1047:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+      at Test.postRun (node:internal/test_runner/test:1173:19)
+      at Test.run (node:internal/test_runner/test:1101:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at getActual (node:assert:609:5)
+        at Function.doesNotThrow (node:assert:777:32)
+        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1047:25)
+        at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        at Test.postRun (node:internal/test_runner/test:1173:19),
+    expected: undefined,
+    operator: 'doesNotThrow',
+    diff: 'simple'
+  }
+
+test at integration/motor_cli.test.mjs:75:5
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (279.622388ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
+  Traceback (most recent call last):
+    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+      [31mmain[0m[1;31m()[0m
+      [31m~~~~[0m[1;31m^^[0m
+    File [35m"/home/claude/proj/-Avance-1-Inicio
+  Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
+      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1047:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+      at Test.postRun (node:internal/test_runner/test:1173:19)
+      at Test.run (node:internal/test_runner/test:1101:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at getActual (node:assert:609:5)
+        at Function.doesNotThrow (node:assert:777:32)
+        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1047:25)
+        at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        at Test.postRun (node:internal/test_runner/test:1173:19),
+    expected: undefined,
+    operator: 'doesNotThrow',
+    diff: 'simple'
+  }
+
+test at integration/motor_cli.test.mjs:75:5
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (319.998876ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
+  Traceback (most recent call last):
+    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+      [31mmain[0m[1;31m()[0m
+      [31m~~~~[0m[1;31m^^[0m
+    File [35m"/home/claude/proj/-Avance-1-Inicio
+  Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
+      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1047:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+      at Test.postRun (node:internal/test_runner/test:1173:19)
+      at Test.run (node:internal/test_runner/test:1101:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at getActual (node:assert:609:5)
+        at Function.doesNotThrow (node:assert:777:32)
+        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1047:25)
+        at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        at Test.postRun (node:internal/test_runner/test:1173:19),
+    expected: undefined,
+    operator: 'doesNotThrow',
+    diff: 'simple'
+  }
+
+test at integration/motor_cli.test.mjs:80:3
+✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (7.291352ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(input.includes("Infinity"))
+  
+      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:82:12)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1047:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+      at Test.postRun (node:internal/test_runner/test:1173:19)
+      at Test.run (node:internal/test_runner/test:1101:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

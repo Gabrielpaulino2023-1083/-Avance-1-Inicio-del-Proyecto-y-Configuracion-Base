@@ -1,0 +1,14 @@
+Preparando la base de QA "motor_adaptativo_qa" en localhost:5432
+  • Recreando la base de datos de QA
+  • Aplicando database/migrations/001_estructura_academica_inicial.sql
+  • Aplicando database/migrations/002_modulos_temas.sql
+  • Aplicando database/migrations/003_actividades_intentos_respuestas.sql
+  • Aplicando database/security/001_roles_permisos.sql
+  • Aplicando database/migrations/004_inscripcion_estudiantes.sql
+  • Aplicando database/seeds/datos_prueba.sql
+  • Aplicando database/seeds/datos_prueba_modulos_temas.sql
+  • Cargando seed de integración (cuenta demo con hash bcrypt real)
+  • Asignando la contraseña de QA al rol plataforma_backend (APP_DB_PASSWORD)
+
+Base de QA lista: 17 tablas, 1 vista(s), 4 usuarios.
+Cuenta demo: estudiante.demo@example.com
