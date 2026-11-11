@@ -32,9 +32,14 @@ const DIFFICULTY_LABEL: Record<Recommendation["difficulty"], string> = {
 interface Props {
   recommendation: Recommendation;
   evidence: RecommendationEvidence;
+  showAction?: boolean;
 }
 
-export default function RecommendationCard({ recommendation, evidence }: Props) {
+export default function RecommendationCard({
+  recommendation,
+  evidence,
+  showAction = true,
+}: Props) {
   const view = VIEW[recommendation.action];
   const mastery = Math.round(evidence.mastery);
 
@@ -55,9 +60,11 @@ export default function RecommendationCard({ recommendation, evidence }: Props) 
         <p className="ai-card__text">{recommendation.recommendation}</p>
 
         <div className="ai-card__foot">
-          <Link to="/contenido" className="btn btn--primary">
-            Ir al ejercicio
-          </Link>
+          {showAction && (
+            <Link to="/contenido" className="btn btn--primary">
+              Ir al ejercicio
+            </Link>
+          )}
           <span className="ai-card__chip">
             {DIFFICULTY_LABEL[recommendation.difficulty]}
           </span>
