@@ -73,8 +73,19 @@ const getProgress = async (id) => {
 // TODO: reemplazar por interacciones reales (intentos, respuestas) de la base de datos.
 const getRecommendation = async (id, topic) => {
   await getStudentOrFail(id);
-  const result = await runEngine({ student_id: id, topic, interactions: [] });
-  return toRecommendationResponse(result);
+  const interactions = await studentModel.findInteractionsByTopic(id, topic);
+  if (interactions.length === 0) {
+    throw new AppError(404, 'El estudiante no tiene intentos calificados en ese tema');
+  }
+  const result = await runEngine({ student_id: id, topic, interactions });
+
+  const n = interactions.length;
+  const evidence = {
+    mastery: Math.round((interactions.reduce((s, x) => s + x.score_percentage, 0) / n) * 10) / 10,
+    errors: interactions.reduce((s, x) => s + x.errors, 0),
+    attempts: Math.round((interactions.reduce((s, x) => s + x.attempts, 0) / n) * 10) / 10
+  };
+  return { ...toRecommendationResponse(result), ...evidence };
 };
 
 module.exports = { getSummary, getProgress, getRecommendation };

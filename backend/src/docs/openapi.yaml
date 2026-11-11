@@ -16,6 +16,8 @@ tags:
     description: Registro, inicio de sesión y datos del usuario autenticado
   - name: Estudiantes
     description: Resumen, progreso y recomendación del estudiante (parte de los datos aún es simulada)
+  - name: Cursos
+    description: CRUD de cursos (solo administrador). Eliminar es una baja lógica (estado ARCHIVADO)
 
 paths:
   /api/health:
@@ -144,11 +146,11 @@ paths:
     get:
       tags: [Estudiantes]
       operationId: getStudentProgress
-      summary: Progreso y recomendación del estudiante
+      summary: Progreso del estudiante
       description: |
         Mismas reglas de acceso que el resumen.
         Por ahora todos los datos son simulados (`simulado: true`), con el formato final.
-        Más adelante vendrán de las interacciones y del motor adaptativo.
+        Más adelante vendrán de los intentos del estudiante y del motor adaptativo.
       security:
         - bearerAuth: []
       parameters:
@@ -176,7 +178,10 @@ paths:
       tags: [Estudiantes]
       operationId: getStudentRecommendation
       summary: Recomendación del motor adaptativo para un tema
-      description: "Por ahora la respuesta es simulada (`simulado: true`). Mismas reglas de acceso que el resumen."
+      description: |
+        Mismas reglas de acceso que el resumen.
+        Arma una interacción por cada intento calificado del estudiante en el tema indicado (por nombre) y la envía al motor adaptativo (Python).
+        Si el estudiante no tiene intentos calificados en ese tema, responde 404.
       security:
         - bearerAuth: []
       parameters:
@@ -205,6 +210,186 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /api/cursos:
+    post:
+      tags: [Cursos]
+      operationId: createCourse
+      summary: Crea un curso
+      description: Solo administrador. El curso nace en estado `BORRADOR`; el autor sale del token.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseBody'
+      responses:
+        '201':
+          description: Curso creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    get:
+      tags: [Cursos]
+      operationId: listCourses
+      summary: Lista los cursos
+      description: Solo administrador. Ordenados por id descendente.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: estado
+          in: query
+          required: false
+          description: Filtra por estado
+          schema:
+            type: string
+            enum: [BORRADOR, ACTIVO, ARCHIVADO]
+        - name: limite
+          in: query
+          required: false
+          description: Cantidad máxima de resultados (1 a 100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: desplazamiento
+          in: query
+          required: false
+          description: Cantidad de resultados a omitir
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Lista de cursos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/cursos/{id}:
+    get:
+      tags: [Cursos]
+      operationId: getCourse
+      summary: Consulta un curso
+      description: Solo administrador.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CourseId'
+      responses:
+        '200':
+          description: Curso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [Cursos]
+      operationId: updateCourse
+      summary: Edita un curso
+      description: Solo administrador. Reemplaza código, nombre y descripción (los tres son obligatorios). No se editan cursos `ARCHIVADO`.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CourseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseBody'
+      responses:
+        '200':
+          description: Curso actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/cursos/{id}/estado:
+    patch:
+      tags: [Cursos]
+      operationId: changeCourseStatus
+      summary: Cambia el estado de un curso (activar o archivar)
+      description: |
+        Solo administrador. Transiciones permitidas: `BORRADOR` → `ACTIVO`; `BORRADOR` o `ACTIVO` → `ARCHIVADO`.
+
+        **Archivar es la baja lógica (el "eliminar" del CRUD)**: no se borra el historial. Se rechaza (409) si el curso tiene ediciones planificadas, abiertas o en curso. No hay reactivación de cursos archivados.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CourseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseStatusBody'
+      responses:
+        '200':
+          description: Estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -223,6 +408,15 @@ components:
         type: integer
         minimum: 1
         example: 4
+    CourseId:
+      name: id
+      in: path
+      required: true
+      description: Id del curso
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
 
   responses:
     BadRequest:
@@ -248,7 +442,7 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
           example:
             success: false
-            message: No tienes permiso para ver este estudiante
+            message: No tienes permiso para esta acción
     NotFound:
       description: El recurso no existe
       content:
@@ -257,16 +451,16 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
           example:
             success: false
-            message: Estudiante no encontrado
+            message: El recurso no existe
     Conflict:
-      description: El recurso ya existe
+      description: El recurso ya existe o la operación no es válida en su estado actual
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
             success: false
-            message: Ya existe un usuario con ese email
+            message: Ya existe un curso con ese código
     ServerError:
       description: Error interno del servidor
       content:
@@ -570,15 +764,12 @@ components:
         topic:
           type: string
           maxLength: 100
-          example: SQL JOIN
+          example: Operaciones y números pares
 
     RecommendationResponse:
       type: object
       properties:
         success:
-          type: boolean
-          example: true
-        simulado:
           type: boolean
           example: true
         recommendation:
@@ -589,7 +780,7 @@ components:
               example: 4
             tema:
               type: string
-              example: SQL JOIN
+              example: Operaciones y números pares
             accion:
               type: string
               example: reinforce_topic
@@ -598,3 +789,93 @@ components:
               example: reduced
             recomendacion:
               type: string
+            mastery:
+              type: number
+              description: Promedio de puntaje (0 a 100) de los intentos calificados en el tema
+              example: 66.7
+            errors:
+              type: integer
+              description: Total de respuestas con puntaje 0 en esos intentos
+              example: 2
+            attempts:
+              type: number
+              description: Promedio del número de intento
+              example: 1.5
+
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        codigo:
+          type: string
+          example: PROG-101
+        nombre:
+          type: string
+          example: Programación
+        descripcion:
+          type: string
+          example: Curso de prueba
+        estado:
+          type: string
+          enum: [BORRADOR, ACTIVO, ARCHIVADO]
+          example: BORRADOR
+        creadoPor:
+          type: integer
+          example: 8
+        creadoEn:
+          type: string
+          format: date-time
+        actualizadoEn:
+          type: string
+          format: date-time
+
+    CourseBody:
+      type: object
+      required: [codigo, nombre, descripcion]
+      properties:
+        codigo:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: PROG-101
+        nombre:
+          type: string
+          minLength: 1
+          maxLength: 150
+          example: Programación
+        descripcion:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          example: Curso de prueba
+
+    CourseStatusBody:
+      type: object
+      required: [estado]
+      properties:
+        estado:
+          type: string
+          enum: [ACTIVO, ARCHIVADO]
+          example: ACTIVO
+
+    CourseResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Course'
+
+    CourseListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'

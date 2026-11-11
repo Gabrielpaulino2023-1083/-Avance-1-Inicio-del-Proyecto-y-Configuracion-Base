@@ -80,4 +80,33 @@ const isTeacherOfStudent = async (teacherId, studentId) => {
   return rows.length > 0;
 };
 
-module.exports = { findActiveCourses, findRealMetrics, isTeacherOfStudent };
+// Una interacción por intento CALIFICADO del estudiante en el tema (por nombre).
+const findInteractionsByTopic = async (studentId, topicName) => {
+  const { rows } = await pool.query(
+    `SELECT
+       ROUND(it.puntaje_obtenido * 100.0 / it.puntaje_maximo, 2) AS score,
+       (SELECT COUNT(*) FROM respuestas r
+         WHERE r.intento_id = it.id AND r.puntaje_obtenido = 0)::int AS errors,
+       it.numero_intento AS attempts,
+       ROUND(EXTRACT(EPOCH FROM (it.entregado_en - it.iniciado_en)) / 60.0, 2) AS minutes
+     FROM intentos it
+     JOIN inscripciones i ON i.id = it.inscripcion_id
+     JOIN actividades a ON a.id = it.actividad_id
+     JOIN temas t ON t.id = a.tema_id
+     WHERE i.estudiante_id = $1
+       AND it.estado = 'CALIFICADO'
+       AND lower(t.nombre) = lower($2)
+     ORDER BY it.id`,
+    [studentId, topicName]
+  );
+  return rows.map((r) => ({
+    study_minutes: Number(r.minutes),
+    errors: r.errors,
+    attempts: r.attempts,
+    repetitions: r.attempts - 1,
+    navigation_count: 0,
+    score_percentage: Number(r.score)
+  }));
+};
+
+module.exports = { findActiveCourses, findRealMetrics, isTeacherOfStudent, findInteractionsByTopic };

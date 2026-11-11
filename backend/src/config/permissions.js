@@ -5,7 +5,8 @@ const { ROLES } = require('./roles');
 const PERMISSIONS = Object.freeze({
   'students:list': [ROLES.DOCENTE, ROLES.ADMINISTRADOR],
   'students:read': [ROLES.ESTUDIANTE, ROLES.DOCENTE, ROLES.ADMINISTRADOR],
-  'users:change-role': [ROLES.ADMINISTRADOR]
+  'users:change-role': [ROLES.ADMINISTRADOR],
+  'courses:manage': [ROLES.ADMINISTRADOR]
 });
 
 module.exports = { PERMISSIONS };
