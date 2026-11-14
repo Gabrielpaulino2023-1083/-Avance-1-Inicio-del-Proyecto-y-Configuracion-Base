@@ -399,3 +399,54 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Estado ACTIVO de los cursos */
+.mg-badge--activo {
+  color: #86b8a0;
+  border-color: rgba(134, 184, 160, 0.45);
+}
+
+/* Accesos directos del panel de administración y docente */
+.sf-actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.sf-card {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 1.4rem 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.sf-card:hover {
+  border-color: var(--accent-dark);
+}
+
+.sf-card strong {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.sf-card span {
+  color: var(--ink-soft);
+  font-size: 0.93rem;
+}
+
+.sf-card em {
+  margin-top: 0.4rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent-dark);
+}

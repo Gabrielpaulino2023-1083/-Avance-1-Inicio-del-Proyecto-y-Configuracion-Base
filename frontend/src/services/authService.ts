@@ -32,6 +32,11 @@ const MOCK_ACCOUNTS: Record<string, MockAccount> = {
     { id: 2, nombre: "Docente", apellido: "", email: "docente@example.com", rol: "DOCENTE" },
     "token-simulado-docente"
   ),
+    "administrador@example.com": mockAccount(
+    "admin12345",
+    { id: 3, nombre: "Administrador", apellido: "", email: "administrador@example.com", rol: "ADMINISTRADOR" },
+    "token-simulado-admin"
+  ),
 };
 
 function wait(ms: number) {

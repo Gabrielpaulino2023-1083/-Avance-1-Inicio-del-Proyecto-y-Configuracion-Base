@@ -8,6 +8,7 @@ import ContentScreen from "./screens/Content/ContentScreen";
 import ResultsScreen from "./screens/Results/ResultsScreen";
 import ProgressScreen from "./screens/Progress/ProgressScreen";
 import ManageScreen from "./screens/Manage/ManageScreen";
+import CoursesScreen from "./screens/Courses/CoursesScreen";
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/resultados" element={<ResultsScreen />} />
           <Route path="/progreso" element={<ProgressScreen />} />
           <Route path="/gestion" element={<ManageScreen />} />
+          <Route path="/cursos" element={<CoursesScreen />} />
         </Route>
       </Route>
     </Routes>
