@@ -1,9 +1,9 @@
+
 import json
 import sys
 from pathlib import Path
 
 from engine import process_student
-
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_FILE = BASE_DIR / "data" / "estudiante_prueba.json"

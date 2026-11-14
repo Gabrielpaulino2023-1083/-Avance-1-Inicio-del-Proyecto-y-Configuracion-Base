@@ -1,5 +1,13 @@
 const pool = require('../config/db');
 
+// Si un usuario tiene varios roles activos, se usa el de mayor jerarquía:
+// ADMINISTRADOR > DOCENTE > ESTUDIANTE.
+const ROLE_PRIORITY = `ORDER BY CASE r.codigo
+                         WHEN 'ADMINISTRADOR' THEN 1
+                         WHEN 'DOCENTE' THEN 2
+                         ELSE 3
+                       END`;
+
 const findByEmail = async (email) => {
   const { rows } = await pool.query(
     `SELECT u.id, u.nombre, u.apellido, u.email, u.activo,
@@ -8,6 +16,7 @@ const findByEmail = async (email) => {
      JOIN usuario_roles ur ON ur.usuario_id = u.id AND ur.activo = TRUE
      JOIN roles r ON r.id = ur.rol_id
      WHERE lower(u.email) = lower($1)
+     ${ROLE_PRIORITY}
      LIMIT 1`,
     [email]
   );
@@ -21,6 +30,7 @@ const findById = async (id) => {
      JOIN usuario_roles ur ON ur.usuario_id = u.id AND ur.activo = TRUE
      JOIN roles r ON r.id = ur.rol_id
      WHERE u.id = $1
+     ${ROLE_PRIORITY}
      LIMIT 1`,
     [id]
   );
