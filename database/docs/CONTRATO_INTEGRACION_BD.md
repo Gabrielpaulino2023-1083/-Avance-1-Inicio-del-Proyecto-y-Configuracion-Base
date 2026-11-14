@@ -1,6 +1,6 @@
 # Contrato de integración de la base de datos
 
-Referencia: **BD-006-v1** · Actualizado: **11 de noviembre de 2026**.
+Referencia: **BD-008-v1** · Actualizado: **13 de noviembre de 2026**.
 
 Lecturas complementarias: [diccionario de datos](DICCIONARIO_DATOS_BD.md), [operaciones de cursos](CRUD_CURSOS_AVANCE_3.md) y [evidencias](../test/RESULTADO_VALIDACION_005.md).
 
@@ -16,12 +16,16 @@ La referencia de esta versión son los archivos:
 - database/migrations/004_inscripcion_estudiantes.sql
 - database/migrations/005_crud_cursos.sql
 - database/migrations/006_crud_modulos_temas.sql
+- database/migrations/007_lectura_contenido_estudiantes.sql
+- database/migrations/008_consultas_integracion.sql
 - database/seeds/datos_prueba_docente.sql
 - database/seeds/datos_prueba_administrador.sql
 - database/seeds/datos_prueba_actividades_intentos.sql (datos de integración)
-Después de 006: 17 tablas, una vista, 31 funciones propias y nueve triggers. 22 funciones son operativas, seis son de trigger y tres son auxiliares privadas. Las verificaciones históricas de 005 que siguen corresponden a esa entrega; 006 está probada en PGlite y pendiente de ejecución local. La instalación completa desde cero y las pruebas de 003–005 pasaron en PGlite. El responsable confirmó además la ejecución de 005 y sus pruebas en PostgreSQL local, el seed administrativo y login/me de administrador y estudiante tras configurar DB_USER=plataforma_backend. No se inspeccionó el pool del proceso para certificar current_user; no se afirma integración HTTP de cursos por estas pruebas de autenticación.
+001–006 están en main. La lectura 007, el seed SQL y la recomendación HTTP del caso SQL JOIN
+se verificaron en el entorno local. 008 pasó las pruebas SQL en PostgreSQL embebido y local;
+la conexión HTTP sigue pendiente. El merge no aplica SQL.
 
-001–005 están publicadas en main; 006 y su documentación están preparadas para PR. El merge no aplica migraciones en las bases del equipo. La evidencia distingue pruebas automatizadas, resultados locales reportados e integración pendiente.
+La evidencia distingue pruebas automatizadas, resultados locales e integración pendiente.
 
 Las migraciones definen lo que existe; los permisos definen lo que la cuenta de conexión puede hacer; este contrato explica cómo usarlo. Ante una discrepancia, revisar las fuentes y acordar la corrección, no modificar el esquema por una suposición. La ejecución completa del archivo consolidado de regresión fue confirmada por el responsable de base de datos; los casos incluidos finalizaron con el resultado esperado.
 
@@ -407,3 +411,11 @@ El docente demo tiene únicamente DOCENTE y una asignación en curso_editores pa
 No necesita seccion_docentes para este CRUD; el seed no crea sección ni altera DEMO-003.
 La validación embebida incluye regresiones 003–006 y seed; no prueba HTTP, login local ni
 concurrencia entre sesiones. Revisar evidencia antes de declarar integrada una capacidad.
+
+
+## Lectura de estudiante, resultados y motor — 007/008
+
+- [007: lecturas de estudiante y cuestionario](LECTURA_ESTUDIANTES_007.md). Separar los listados de autoservicio del CRUD 006; conservar la propiedad, los plazos y la exclusión de soluciones.
+- [008: consultas de integración](CONSULTAS_INTEGRACION_008.md). Selectores por rol, dashboard por inscripción y motor por inscripción y tema. Prevalece sobre las notas históricas de consulta por nombre de este documento.
+- [Seed y reproducción](SEED_INTEGRACION_RESULTADOS.md). Usa las cuentas existentes y no reinstala migraciones.
+- [Evidencia local y HTTP](../test/RESULTADO_VALIDACION_SEED_INTEGRACION.md). La acción del motor se mostró en navegador; falta que la tarjeta consuma las cifras de la API.
