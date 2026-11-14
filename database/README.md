@@ -1,14 +1,18 @@
 # Base de datos — Plataforma educativa
 
-Estado documental: **11 de noviembre de 2026, BD-006-v1**.
-PostgreSQL almacena identidad, organización académica, inscripciones, actividades y resultados.
-El bloque nuevo de este PR es el CRUD de módulos y temas para administrador/docente editor y una cuenta
-docente de pruebas. La administración de cursos de 005 permanece disponible. Backend, frontend y motor continúan su integración por separado.
+Estado documental: **13 de noviembre de 2026, BD-008-v1**.
+Este paquete cierra el SQL del Avance 3: lectura del estudiante, seed de integración
+y consultas para selector, dashboard y motor. Las migraciones 001–006 están en main.
+La 007, el seed y la 008 se verificaron localmente. El paquete está listo para revisión y publicación mediante PR.
 
 ## Referencias para el equipo
 
 | Documento | Uso |
 |---|---|
+| [Lectura del estudiante](docs/LECTURA_ESTUDIANTES_007.md) | Módulos, temas, actividades y cuestionarios |
+| [Consultas de integración](docs/CONSULTAS_INTEGRACION_008.md) | Selector, resultados, progreso, minutos y motor |
+| [Seed SQL](docs/SEED_INTEGRACION_RESULTADOS.md) | Datos y pasos para reproducir el escenario SQL JOIN |
+| [Evidencia HTTP](test/RESULTADO_VALIDACION_SEED_INTEGRACION.md) | Validación local del seed y solicitud desde navegador |
 | [Contrato de integración](docs/CONTRATO_INTEGRACION_BD.md) | Reglas, funciones, permisos, límites e instrucciones para agentes |
 | [Diccionario de datos](docs/DICCIONARIO_DATOS_BD.md) | Tipos exactos, nulabilidad, defaults, restricciones y propuestas de serialización |
 | [CRUD de módulos y temas](docs/CRUD_MODULOS_TEMAS_AVANCE_3.md) | Funciones de 006, permisos por curso y seed docente |
@@ -33,9 +37,9 @@ seis funciones de trigger y tres auxiliares privadas.
 - Inscripción autónoma/administrativa mediante función y control de cupos.
 - Cursos: crear, listar, consultar, editar, activar y archivar mediante funciones.
 
-No existe aún progreso/finalización, tabla de contenidos, navegación, historial de
-recomendaciones ni cierre programado de intentos. No confundir la vista de resultados
-con una nota final del curso o con progreso. Estos elementos quedan fuera del PR de 006.
+008 deriva el progreso de las actividades publicadas/calificadas; no lo almacena en otra tabla.
+No hay aún navegación, historial de recomendaciones ni cierre programado de intentos.
+La vista de resultados por actividad no equivale a una nota final del curso.
 
 ## Estado y evidencia
 
@@ -43,7 +47,10 @@ con una nota final del curso o con progreso. Estos elementos quedan fuera del PR
 |---|---|
 | Migraciones 001–004 | Publicadas en main; PR #7 integró 004 el 9 de noviembre |
 | Migración 005, seed admin y documentación | Publicados en main mediante PR #9 |
-| Migración 006, seed docente y guía | Preparados para PR; pruebas en PGlite, validación local pendiente |
+| Migración 006 y seed docente | Publicados en main; instalación, login y CRUD HTTP docente comprobados localmente |
+| 007 y seed SQL | Pruebas locales aprobadas |
+| Recomendación SQL JOIN | HTTP 200 desde el navegador; métricas de tarjeta pendientes de corrección |
+| 008 | Pruebas SQL aprobadas en PGlite y PostgreSQL local; integración HTTP pendiente |
 | Instalación 001–005 y regresiones 003–005 | Ejecutadas sin errores inesperados en PostgreSQL embebido PGlite |
 | 005 y pruebas en PostgreSQL local | Ejecución correcta confirmada por el responsable |
 | Seed administrativo | Ejecución correcta confirmada por el responsable |
@@ -52,7 +59,7 @@ con una nota final del curso o con progreso. Estos elementos quedan fuera del PR
 | Endpoints HTTP y pantallas de cursos | Pendientes de integración y prueba conjunta |
 | Instalación local desde cero de todo 001–005 | Prueba completada correctamente |
 
-Validación local confirmada: la migración 006, sus pruebas y el seed docente se ejecutaron correctamente en PostgreSQL local. El login y /api/auth/me de docente.demo@example.com devolvieron el resultado esperado con rol DOCENTE. La integración HTTP del CRUD de módulos y temas, el recorrido desde frontend y las pruebas de concurrencia entre sesiones siguen pendientes de verificación.
+Validación local confirmada: la migración 006, sus pruebas y el seed docente se ejecutaron correctamente en PostgreSQL local. El login y /api/auth/me de docente.demo@example.com devolvieron el resultado esperado con rol DOCENTE. El CRUD docente por HTTP se verificó con un curso autorizado; sigue pendiente el recorrido completo desde frontend con el selector real.
 
 ## Instalación
 
@@ -73,19 +80,21 @@ SET search_path = public;
 \i 'database/migrations/004_inscripcion_estudiantes.sql'
 \i 'database/migrations/005_crud_cursos.sql'
 \i 'database/migrations/006_crud_modulos_temas.sql'
+\i 'database/migrations/007_lectura_contenido_estudiantes.sql'
+\i 'database/migrations/008_consultas_integracion.sql'
 ```
 
-004, 005 y 006 requieren los roles del script de seguridad. No ejecutar todos los archivos de
+004–008 requieren los roles del script de seguridad. No ejecutar todos los archivos de
 migrations antes de seguridad. Las migraciones estructurales se aplican una sola vez por base.
 No existe aún un ejecutor ni tabla de versiones: registrar los archivos aplicados por entorno.
 
-En una base con 001–005 y seguridad, ejecutar solo:
+En la base de desarrollo ya validada hasta 007, aplicar solo 008:
 
 ```powershell
-psql -X -U postgres -d proyectofinal_db -v ON_ERROR_STOP=1 -f database/migrations/006_crud_modulos_temas.sql
+psql -X -U postgres -d proyectofinal_db -v ON_ERROR_STOP=1 -f database/migrations/008_consultas_integracion.sql
 ```
 
-No reinstalar 005 ni 006 si ya terminaron correctamente. Si un archivo falla, detenerse;
+No reinstalar migraciones que ya terminaron correctamente. Si un archivo falla, detenerse;
 en una sesión interactiva con transacción abortada ejecutar ROLLBACK. Los archivos
 anteriores confirmados siguen aplicados. No borrar la base habitual para validar:
 crear una base independiente si se necesita repetir la instalación completa.
@@ -98,9 +107,10 @@ crear una base independiente si se necesita repetir la instalación completa.
 | seeds/datos_prueba_modulos_temas.sql | Depende del anterior; dos módulos y cuatro temas |
 | seeds/datos_prueba_actividades_intentos.sql | Requiere administrador activo y rol ESTUDIANTE; crea demo autenticable y resultados |
 | seeds/datos_prueba_docente.sql | Después de 006; requiere administrador y rol DOCENTE, crea curso DEMO-006 y editor |
+| seeds/datos_prueba_integracion_resultados.sql | Después de 007, usa el estudiante demo existente y agrega DEMO-SQL-007; reejecución sin duplicados |
 | seeds/datos_prueba_administrador.sql | Requiere administrador activo y rol ADMINISTRADOR; crea demo administrativa |
 
-Ejecutar los seeds como administrador una sola vez. No forman parte de las migraciones ni
+Ejecutar los seeds como administrador; solo el seed SQL ampliado es reejecutable sin cambios. No forman parte de las migraciones ni
 deben ejecutarse automáticamente al iniciar Express. Los IDs se consultan; no se fijan.
 Las cuentas iniciales con HASH_FICTICIO_NO_USAR no sirven para login.
 
@@ -175,15 +185,12 @@ No confundir errores esperados de pruebas manuales con un fallo inesperado de la
 006 debe imprimir `PRUEBAS 006 COMPLETADAS: todos los casos incluidos pasaron.` y ROLLBACK.
 Si falla, conservar el error y corregir la causa antes de continuar. No deshabilitar triggers.
 
-## Pendientes inmediatos y posteriores
+## Cierre e integración
 
-Para el PR: revisión de diff, publicación de los archivos y revisión por el equipo.
-Para los flujos de cursos, módulos y temas: endpoints, selector de curso, prueba docente/editor, rechazo al estudiante y capturas.
-Para la asignación semanal de BD: cerrar métricas/consultas del motor y consolidar evidencia.
-
-Después del avance: administración de otras entidades, progreso/finalización, operaciones
-sobre inscripciones, cierre de intentos abandonados y pruebas de concurrencia. El contrato
-mantiene las reglas y decisiones pendientes. No añadir tablas especulativas para desbloquear la API.
+- Publicar este paquete mediante PR; la prueba local de 008 ya pasó.
+- Backend: conectar lecturas 007, operaciones de intentos de 003 y consultas de 008.
+- Frontend: usar las métricas reales de recomendación, el selector de curso y los contratos HTTP.
+- Fuera del avance: historial de recomendaciones, navegación, cierre de intentos abandonados y concurrencia.
 
 ## Cambios y mantenimiento
 
@@ -203,5 +210,6 @@ cursos y el docente solo con curso_editores activo. Borrado físico solo en borr
 
 El frontend debe enviar el curso seleccionado, no fijar ID 1. El backend adapta total_temas
 (BIGINT) a totalTemas y mantiene el actor del JWT. No se crearon endpoints ni pantallas.
-Pruebas y seed pasaron en PGlite; la ejecución local de 006, login docente y recorrido HTTP
-siguen pendientes. No repetir los seeds ya cargados; el docente usa un curso independiente.
+Las pruebas SQL, el seed y el CRUD HTTP docente se verificaron. El recorrido desde frontend
+con el curso seleccionado sigue pendiente. No repetir el seed docente ya cargado.
+
