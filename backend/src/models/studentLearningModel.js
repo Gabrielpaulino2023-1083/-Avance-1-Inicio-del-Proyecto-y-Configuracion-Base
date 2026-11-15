@@ -10,21 +10,35 @@ const listPublishedModules = (actor, cursoId) =>
 
 const listPublishedTopics = (actor, moduloId) =>
   q('SELECT * FROM public.listar_temas_publicados_estudiante($1,$2)', [actor, moduloId]);
-const listResults = (actor, inscripcionId) =>
-  q('SELECT * FROM public.listar_resultados_estudiante($1,$2)', [actor, inscripcionId]);
 
-const listRecentActivity = (actor, inscripcionId, limite) =>
-  q('SELECT * FROM public.listar_actividad_reciente_estudiante($1,$2,$3)', [actor, inscripcionId, limite]);
+const listActivities = (actor, inscripcionId, temaId) =>
+  q('SELECT * FROM public.listar_actividades_publicadas_estudiante($1,$2,$3)',
+    [actor, inscripcionId, temaId]);
 
-const listProgress = (actor, inscripcionId) =>
-  q('SELECT * FROM public.listar_progreso_estudiante($1,$2)', [actor, inscripcionId]);
+const getQuestionnaire = (actor, intentoId) =>
+  q('SELECT * FROM public.obtener_cuestionario_estudiante($1,$2)', [actor, intentoId]);
 
-const listMinutes = (actor, inscripcionId, desde, hasta) =>
-  q(`SELECT to_char(dia_local,'YYYY-MM-DD') AS dia_local, intentos_entregados, minutos_transcurridos
-     FROM public.listar_minutos_intentos_estudiante($1,$2,$3::date,$4::date)`,
-    [actor, inscripcionId, desde, hasta]);
-
-module.exports = {
-  listEnrollments, listPublishedModules, listPublishedTopics,
-  listResults, listRecentActivity, listProgress, listMinutes
+// Inicia el intento y lee el cuestionario en la misma transacción.
+const startAttempt = async (actor, inscripcionId, actividadId) => {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const { rows } = await client.query(
+      'SELECT public.iniciar_intento($1,$2,$3) AS intento_id',
+      [actividadId, inscripcionId, actor]);
+    const { rows: preguntas } = await client.query(
+      'SELECT * FROM public.obtener_cuestionario_estudiante($1,$2)',
+      [actor, rows[0].intento_id]);
+    await client.query('COMMIT');
+    return preguntas;
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
 };
+
+module.exports = { 
+    listEnrollments, listPublishedModules, 
+    listPublishedTopics, listActivities, getQuestionnaire, startAttempt };

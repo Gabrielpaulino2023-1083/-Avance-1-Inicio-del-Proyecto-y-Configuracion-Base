@@ -13,4 +13,7 @@ router.get('/mis-inscripciones/:inscripcionId/resultados', student, c.listResult
 router.get('/mis-inscripciones/:inscripcionId/progreso', student, c.listProgress);
 router.get('/mis-inscripciones/:inscripcionId/actividad-reciente', student, c.listRecentActivity);
 router.get('/mis-inscripciones/:inscripcionId/minutos', student, c.listMinutes);
+router.get('/mis-inscripciones/:inscripcionId/temas/:temaId/actividades', student, c.listActivities);
+router.post('/mis-inscripciones/:inscripcionId/actividades/:actividadId/intentos', student, c.startAttempt);
+router.get('/mis-intentos/:intentoId/cuestionario', student, c.getQuestionnaire);
 module.exports = router;

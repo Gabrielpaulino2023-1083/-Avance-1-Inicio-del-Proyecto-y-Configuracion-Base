@@ -41,7 +41,17 @@ const listMinutes = async (req, res) => {
   ok(res, await service.listMinutes(actor(req), inscripcion(req), desde, hasta));
 };
 
+const listActivities = async (req, res) =>
+  ok(res, await service.listActivities(actor(req), inscripcion(req), parseId(req.params.temaId, 'tema')));
+
+const getQuestionnaire = async (req, res) =>
+  ok(res, await service.getQuestionnaire(actor(req), parseId(req.params.intentoId, 'intento')));
+
+const startAttempt = async (req, res) =>
+  ok(res, await service.startAttempt(actor(req), inscripcion(req), parseId(req.params.actividadId, 'actividad')), 201);
+
 module.exports = {
   listEnrollments, listModules, listTopics,
-  listResults, listProgress, listRecentActivity, listMinutes
+  listResults, listProgress, listRecentActivity, listMinutes,
+  listActivities, getQuestionnaire, startAttempt
 };

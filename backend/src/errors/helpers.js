@@ -18,6 +18,9 @@ const mapDbError = (err) => {
     case '23505': throw new AppError(409, 'Ya existe un registro en conflicto');
     case '22007':
     case '22008': throw new AppError(400, 'Fecha inválida');
+        case 'P0001':
+      console.error('[P0001]', err.message);
+      throw new AppError(409, 'No se pudo completar la operación con el intento (disponibilidad, límite de intentos o intento ya abierto)');
     default: throw err;
   }
 };

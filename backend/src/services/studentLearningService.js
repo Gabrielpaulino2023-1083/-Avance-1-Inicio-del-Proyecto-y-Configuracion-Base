@@ -1,6 +1,7 @@
 const model = require('../models/studentLearningModel');
 const { run } = require('../errors/helpers');
 const { toModuleResponse, toTopicResponse } = require('../dtos/content.dto');
+const { toActivityResponse, toQuestionnaireResponse } = require('../dtos/studentAttempt.dto');
 const {toResultResponse, toRecentActivityResponse, toProgressResponse, toMinutesResponse
 } = require('../dtos/studentDashboard.dto');
 
@@ -33,8 +34,18 @@ const listProgress = (actor, inscripcionId) =>
 
 const listMinutes = (actor, inscripcionId, desde, hasta) =>
   run(async () => (await model.listMinutes(actor, inscripcionId, desde, hasta)).map(toMinutesResponse));
+const listActivities = (actor, inscripcionId, temaId) =>
+  run(async () => (await model.listActivities(actor, inscripcionId, temaId)).map(toActivityResponse));
+
+const getQuestionnaire = (actor, intentoId) =>
+  run(async () => toQuestionnaireResponse(await model.getQuestionnaire(actor, intentoId)));
+
+const startAttempt = (actor, inscripcionId, actividadId) =>
+  run(async () => toQuestionnaireResponse(await model.startAttempt(actor, inscripcionId, actividadId)));
 
 module.exports = {
   listEnrollments, listModules, listTopics,
-  listResults, listRecentActivity, listProgress, listMinutes
+  listResults, listRecentActivity, listProgress, listMinutes,
+  getQuestionnaire, listActivities, startAttempt
+
 };
