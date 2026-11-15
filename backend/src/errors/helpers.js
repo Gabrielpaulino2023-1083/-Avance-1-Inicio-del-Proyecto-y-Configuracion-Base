@@ -16,6 +16,8 @@ const mapDbError = (err) => {
     case 'P0002': throw new AppError(404, 'El recurso no está disponible');
     case '55000': throw new AppError(409, 'La operación no es válida en el estado actual');
     case '23505': throw new AppError(409, 'Ya existe un registro en conflicto');
+    case '22007':
+    case '22008': throw new AppError(400, 'Fecha inválida');
     default: throw err;
   }
 };
