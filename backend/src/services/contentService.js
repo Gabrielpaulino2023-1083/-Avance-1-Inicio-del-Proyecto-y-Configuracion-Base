@@ -1,6 +1,6 @@
 const AppError = require('../errors/AppError');
 const model = require('../models/contentModel');
-const { toModuleResponse, toTopicResponse } = require('../dtos/content.dto.js');
+const { toModuleResponse, toTopicResponse, toManageableCourseResponse } = require('../dtos/content.dto');
 
 const DEFAULT_CURSO_ID = 1; // el frontend actual trabaja con un solo curso
 
@@ -62,7 +62,11 @@ const changeTopicStatus = (actor, id, estado) =>
 const deleteTopic = (actor, id) =>
   run('tema', async () => { await model.deleteTopic(actor, id); return { id }; });
 
+const listManageableCourses = (actor) =>
+  run('curso', async () =>
+    (await model.listManageableCourses(actor)).map(toManageableCourseResponse));
+
 module.exports = {
   listModules, createModule, updateModule, changeModuleStatus, deleteModule,
-  listTopics, createTopic, updateTopic, changeTopicStatus, deleteTopic
+  listTopics, createTopic, updateTopic, changeTopicStatus, deleteTopic, listManageableCourses
 };

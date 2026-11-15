@@ -34,7 +34,10 @@ const changeTopicStatus = async (actor, id, estado) =>
 const deleteTopic = (actor, id) =>
   q('SELECT public.eliminar_tema($1,$2)', [actor, id]);
 
+const listManageableCourses = (actor) =>
+  q('SELECT * FROM public.listar_cursos_administrables($1)', [actor]);
+
 module.exports = {
   listModules, createModule, getModule, updateModule, changeModuleStatus, deleteModule,
-  listTopics, createTopic, getTopic, updateTopic, changeTopicStatus, deleteTopic
+  listTopics, createTopic, getTopic, updateTopic, changeTopicStatus, deleteTopic, listManageableCourses
 };

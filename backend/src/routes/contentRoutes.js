@@ -10,6 +10,9 @@ const write = requirePermission('content:write');
 
 router.use(verifyToken);
 
+// Selector de curso (administrador: todos; docente: solo donde es editor)
+router.get('/cursos-administrables', write, c.listManageableCourses);
+
 // Módulos
 router.get('/modulos', read, c.listModules);
 router.post('/modulos', write, validate(contentBodyDto), c.createModule);
