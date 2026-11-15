@@ -50,8 +50,16 @@ const getQuestionnaire = async (req, res) =>
 const startAttempt = async (req, res) =>
   ok(res, await service.startAttempt(actor(req), inscripcion(req), parseId(req.params.actividadId, 'actividad')), 201);
 
+const saveSelection = async (req, res) =>
+  ok(res, await service.saveSelection(
+    actor(req), parseId(req.params.respuestaId, 'respuesta'), req.body.opciones));
+
+const submitAttempt = async (req, res) =>
+  ok(res, await service.submitAttempt(actor(req), parseId(req.params.intentoId, 'intento')));
+
 module.exports = {
   listEnrollments, listModules, listTopics,
   listResults, listProgress, listRecentActivity, listMinutes,
-  listActivities, getQuestionnaire, startAttempt
+  listActivities, getQuestionnaire, startAttempt, saveSelection,
+  submitAttempt 
 };

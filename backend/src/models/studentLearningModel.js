@@ -39,6 +39,33 @@ const startAttempt = async (actor, inscripcionId, actividadId) => {
   }
 };
 
+const saveSelection = (actor, respuestaId, opciones) =>
+  q('SELECT public.guardar_opciones_respuesta($1,$2,$3::INTEGER[])', [respuestaId, actor, opciones]);
+
+// Entrega y califica en una sola transacción. Solo se califica después de que
+// entregar_intento verificó que el intento pertenece al estudiante autenticado.
+const submitAttempt = async (actor, intentoId) => {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const { rows: entregado } = await client.query(
+      'SELECT * FROM public.entregar_intento($1,$2)', [intentoId, actor]);
+    let intento = entregado[0];
+    if (intento.estado === 'ENTREGADO') {
+      const { rows: calificado } = await client.query(
+        'SELECT * FROM public.calificar_intento($1)', [intentoId]);
+      intento = calificado[0];
+    }
+    await client.query('COMMIT');
+    return intento;
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+};
 module.exports = { 
     listEnrollments, listPublishedModules, 
-    listPublishedTopics, listActivities, getQuestionnaire, startAttempt };
+    listPublishedTopics, listActivities, getQuestionnaire, startAttempt,
+    saveSelection, submitAttempt };

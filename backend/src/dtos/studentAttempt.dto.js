@@ -1,4 +1,9 @@
 const num = (v) => (v === null || v === undefined ? null : Number(v));
+const { z } = require('zod');
+
+const selectionBodyDto = z.object({
+  opciones: z.array(z.coerce.number().int().positive()).max(50)
+});
 
 const toActivityResponse = (a) => ({
   id: a.id,
@@ -33,4 +38,20 @@ const toQuestionnaireResponse = (rows) => ({
   }))
 });
 
-module.exports = { toActivityResponse, toQuestionnaireResponse };
+const toAttemptResultResponse = (i) => {
+  const obtenido = num(i.puntaje_obtenido);
+  const maximo = num(i.puntaje_maximo);
+  return {
+    intentoId: i.id,
+    actividadId: i.actividad_id,
+    estado: i.estado,
+    motivoEntrega: i.motivo_entrega,
+    entregadoEn: i.entregado_en,
+    calificadoEn: i.calificado_en,
+    puntajeObtenido: obtenido,
+    puntajeMaximo: maximo,
+    porcentaje: obtenido !== null && maximo ? Math.round((obtenido * 10000) / maximo) / 100 : null
+  };
+};
+
+module.exports = { toActivityResponse, toQuestionnaireResponse, selectionBodyDto, toAttemptResultResponse };

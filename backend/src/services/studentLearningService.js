@@ -1,7 +1,7 @@
 const model = require('../models/studentLearningModel');
 const { run } = require('../errors/helpers');
 const { toModuleResponse, toTopicResponse } = require('../dtos/content.dto');
-const { toActivityResponse, toQuestionnaireResponse } = require('../dtos/studentAttempt.dto');
+const { toActivityResponse, toQuestionnaireResponse, toAttemptResultResponse } = require('../dtos/studentAttempt.dto');
 const {toResultResponse, toRecentActivityResponse, toProgressResponse, toMinutesResponse
 } = require('../dtos/studentDashboard.dto');
 
@@ -43,9 +43,19 @@ const getQuestionnaire = (actor, intentoId) =>
 const startAttempt = (actor, inscripcionId, actividadId) =>
   run(async () => toQuestionnaireResponse(await model.startAttempt(actor, inscripcionId, actividadId)));
 
+const saveSelection = (actor, respuestaId, opciones) =>
+  run(async () => {
+    await model.saveSelection(actor, respuestaId, opciones);
+    return { respuestaId, opcionesSeleccionadas: opciones };
+  });
+
+const submitAttempt = (actor, intentoId) =>
+  run(async () => toAttemptResultResponse(await model.submitAttempt(actor, intentoId)));
+
 module.exports = {
   listEnrollments, listModules, listTopics,
   listResults, listRecentActivity, listProgress, listMinutes,
-  getQuestionnaire, listActivities, startAttempt
+  getQuestionnaire, listActivities, startAttempt, saveSelection,
+  submitAttempt
 
 };
