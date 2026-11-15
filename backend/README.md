@@ -269,7 +269,7 @@ python -m venv .venv
 .venv\Scripts\pip install -r adaptive-engine\requirements.txt
 ```
 
-También se puede indicar otro Python con la variable `PYTHON_EXECUTABLE`. El motor necesita al menos una interacción; si el estudiante no tiene intentos calificados en el tema, el backend responde `404` antes de llamarlo. Si Python no está disponible o falla, el endpoint responde `500`. Para ver una recomendación real hace falta un estudiante con intentos calificados (seed `datos_prueba_integracion_resultados.sql`, tema `SQL JOIN`, que da `reinforce_topic`).
+También se puede indicar otro Python con la variable `PYTHON_EXECUTABLE`. El motor necesita al menos una interacción; si el estudiante no tiene intentos calificados en el tema, el backend responde `404` antes de llamarlo. Si Python no está disponible o falla, el endpoint responde `502`. Para ver una recomendación real hace falta un estudiante con intentos calificados (seed `datos_prueba_integracion_resultados.sql`, tema `SQL JOIN`, que da `reinforce_topic`).
 
 ## Seguridad
 
@@ -312,7 +312,7 @@ Para ver cursos reales en el resumen, el usuario necesita una inscripción en la
 * **`409` al eliminar un módulo o tema**: no está en `BORRADOR` o tiene temas/actividades.
 * **`409` al iniciar un intento**: la actividad no está disponible, ya hay un intento abierto (entregarlo primero) o se alcanzó el límite de intentos.
 * **`404` en recomendación**: el estudiante no tiene intentos calificados en ese tema.
-* **`500` en recomendación con `spawn ... python.exe ENOENT`**: falta el entorno `.venv` en la raíz del repositorio (ver "Motor adaptativo").
+* **`502` en recomendación con `spawn ... python.exe ENOENT` en la consola del servidor**: falta el entorno `.venv` en la raíz del repositorio (ver "Motor adaptativo").
 * **Acentos dañados (`�`) en la recomendación**: faltan `PYTHONUTF8=1` y `PYTHONIOENCODING=utf-8` en el `.env`.
 * **`permission denied` (42501)**: faltan las migraciones 004 a 008 o el script de seguridad.
 * **`psql` no se reconoce**: agregar la carpeta `bin` de PostgreSQL al PATH de la ventana.

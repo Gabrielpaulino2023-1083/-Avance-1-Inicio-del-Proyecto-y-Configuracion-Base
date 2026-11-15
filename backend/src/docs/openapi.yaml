@@ -196,7 +196,7 @@ paths:
         Mismas reglas de acceso que el resumen.
         Arma una interacción por cada intento calificado del estudiante en el tema indicado (por nombre) y la envía al motor adaptativo (Python).
         **Se mantiene por compatibilidad.** Preferir `POST /api/mis-inscripciones/{inscripcionId}/temas/{temaId}/recomendacion`, que no mezcla temas homónimos.
-        Si el estudiante no tiene intentos calificados en ese tema, responde 404.
+        Si el estudiante no tiene intentos calificados en ese tema, responde 404. Si el motor de Python no está disponible o falla, responde 502.
       security:
         - bearerAuth: []
       parameters:
@@ -224,6 +224,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
 
   /api/cursos:
     post:
@@ -1130,7 +1132,7 @@ paths:
       summary: Recomendación del motor adaptativo por inscripción y tema
       description: |
         Arma una interacción por cada intento calificado del estudiante en ese tema y esa inscripción, y la envía al motor (Python).
-        No mezcla temas homónimos de otros cursos. `404` si aún no hay intentos calificados.
+        No mezcla temas homónimos de otros cursos. `404` si aún no hay intentos calificados; `502` si el motor de Python no está disponible o falla.
         `mastery` es el promedio de puntaje, `errors` el total de respuestas con puntaje 0 y `attempts` el promedio del número de intento.
       security:
         - bearerAuth: []
@@ -1154,6 +1156,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
 
 components:
   securitySchemes:
@@ -1308,6 +1312,15 @@ components:
           example:
             success: false
             message: Error interno del servidor
+    BadGateway:
+      description: El motor adaptativo (Python) no está disponible o falló
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: El motor de recomendación no está disponible
 
   schemas:
     HealthResponse:

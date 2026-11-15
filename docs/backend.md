@@ -126,7 +126,7 @@ Todas las respuestas incluyen `success`. Los errores traen `message`, y los de v
 }
 ```
 
-Códigos: `400` datos inválidos, `401` credenciales o token inválidos, `403` sin permiso, `404` recurso inexistente, `409` conflicto, `413` cuerpo demasiado grande, `429` demasiados intentos, `500` error interno.
+Códigos: `400` datos inválidos, `401` credenciales o token inválidos, `403` sin permiso, `404` recurso inexistente, `409` conflicto, `413` cuerpo demasiado grande, `429` demasiados intentos, `500` error interno, `502` fallo del motor adaptativo (Python).
 
 Las rutas protegidas requieren `Authorization: Bearer <token>`. El token dura 2 horas.
 
@@ -238,7 +238,7 @@ El motor está en `adaptive-engine/` (Python y Pandas, de Daniel). El backend lo
 - Ejecuta `adaptive-engine/main.py --stdin`.
 - Python se busca en `.venv` en la raíz del repositorio, o en la variable `PYTHON_EXECUTABLE`.
 - Salida usada: `student_id`, `topic`, `action`, `difficulty`, `recommendation`.
-- El motor exige al menos una interacción. Si Python no está disponible o falla, el endpoint responde error `500`; el detalle queda en la consola del servidor.
+- El motor exige al menos una interacción. Si Python no está disponible o falla, el endpoint responde `502` ("El motor de recomendación no está disponible"); el detalle queda en la consola del servidor con la etiqueta `[motor adaptativo]`. Toda llamada al motor pasa por `services/engineSafe.js`, que convierte cualquier fallo en ese `502`. Los errores propios del backend siguen siendo `500`.
 - Requisitos: crear el entorno con `python -m venv .venv` e instalar con `.venv\Scripts\pip install -r adaptive-engine\requirements.txt` (pandas y scikit-learn). Sin `.venv` el error es `spawn ... python.exe ENOENT`.
 - En Windows hay que definir `PYTHONUTF8=1` y `PYTHONIOENCODING=utf-8` en el `.env`: sin ellas, Python devuelve su salida en cp1252 y los acentos de la recomendación llegan dañados (`�`). El `spawn` hereda las variables del backend.
 
@@ -375,7 +375,7 @@ Aprendizaje del estudiante (estudiante demo, `estudiante.demo@example.com`, cont
 - La recomendación calcula `repetitions` como `attempts - 1` y envía `navigation_count = 0`, porque la base no registra navegación; esto debe confirmarse con el responsable del motor.
 - `horasEstudio` mide solo el tiempo entre inicio y entrega de los intentos, no el tiempo real de estudio.
 - `/api/students/:id` y `/progress` dejaron de ser simulados: calculan lo mismo que `/api/mis-*`, agregado por estudiante. Son más costosos (una consulta por inscripción), por lo que conviene que el frontend use `/api/mis-*` cuando necesite detalle.
-- Si Python no está disponible, la recomendación responde 500.
+- Si Python no está disponible, la recomendación responde 502. En `/api/students/:id/progress` el fallo no se propaga: `recomendacion` queda en `null` y el resto del progreso se entrega.
 - El motor es un sistema de reglas, no un modelo de aprendizaje automático.
 
 ## Integración prevista
