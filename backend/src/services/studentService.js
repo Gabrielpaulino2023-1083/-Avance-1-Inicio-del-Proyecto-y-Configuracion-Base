@@ -5,7 +5,7 @@ const studentModel = require('../models/studentModel');
 const learningModel = require('../models/studentLearningModel');
 const learningService = require('./studentLearningService');
 const { toStudentSummaryResponse, toProgressResponse } = require('../dtos/student.dto');
-const { runEngine } = require('./engineClient');
+const { runEngineSafe } = require('./engineSafe');
 const { toRecommendationResponse } = require('../dtos/recommendation.dto');
 
 const TIME_ZONE = 'America/Santo_Domingo';
@@ -207,7 +207,7 @@ const getRecommendation = async (id, topic) => {
   if (interactions.length === 0) {
     throw new AppError(404, 'El estudiante no tiene intentos calificados en ese tema');
   }
-  const result = await runEngine({ student_id: id, topic, interactions });
+  const result = await runEngineSafe({ student_id: id, topic, interactions });
 
   const n = interactions.length;
   const evidence = {

@@ -3,9 +3,10 @@ const { run } = require('../errors/helpers');
 const { toModuleResponse, toTopicResponse } = require('../dtos/content.dto');
 const { toActivityResponse, toQuestionnaireResponse, toAttemptResultResponse } = require('../dtos/studentAttempt.dto');
 const AppError = require('../errors/AppError');
-const { runEngine } = require('./engineClient');
+const { runEngineSafe } = require('./engineSafe');
 const { toEngineInteraction, toRecommendationResult } = require('../dtos/studentRecommendation.dto');
-const {toResultResponse, toRecentActivityResponse, toProgressResponse, toMinutesResponse
+const {
+  toResultResponse, toRecentActivityResponse, toProgressResponse, toMinutesResponse
 } = require('../dtos/studentDashboard.dto');
 
 const toEnrollmentResponse = (r) => ({
@@ -26,6 +27,7 @@ const listModules = (actor, cursoId) =>
 
 const listTopics = (actor, moduloId) =>
   run(async () => (await model.listPublishedTopics(actor, moduloId)).map(toTopicResponse));
+
 const listResults = (actor, inscripcionId) =>
   run(async () => (await model.listResults(actor, inscripcionId)).map(toResultResponse));
 
@@ -37,6 +39,7 @@ const listProgress = (actor, inscripcionId) =>
 
 const listMinutes = (actor, inscripcionId, desde, hasta) =>
   run(async () => (await model.listMinutes(actor, inscripcionId, desde, hasta)).map(toMinutesResponse));
+
 const listActivities = (actor, inscripcionId, temaId) =>
   run(async () => (await model.listActivities(actor, inscripcionId, temaId)).map(toActivityResponse));
 
@@ -62,7 +65,7 @@ const getRecommendation = async (actor, inscripcionId, temaId) => {
     throw new AppError(404, 'Aún no tienes intentos calificados en este tema');
   }
   const interactions = rows.map(toEngineInteraction);
-  const engine = await runEngine({ student_id: actor, topic: rows[0].tema, interactions });
+  const engine = await runEngineSafe({ student_id: actor, topic: rows[0].tema, interactions });
   return toRecommendationResult(engine, interactions, inscripcionId, temaId);
 };
 
@@ -71,5 +74,4 @@ module.exports = {
   listResults, listRecentActivity, listProgress, listMinutes,
   getQuestionnaire, listActivities, startAttempt, saveSelection,
   submitAttempt, getRecommendation
-
 };
