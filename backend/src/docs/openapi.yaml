@@ -15,7 +15,7 @@ tags:
   - name: Autenticación
     description: Registro, inicio de sesión y datos del usuario autenticado
   - name: Estudiantes
-    description: Resumen, progreso y recomendación del estudiante (parte de los datos aún es simulada)
+    description: Resumen, progreso y recomendación del estudiante (datos reales de la base de datos)
   - name: Cursos
     description: CRUD de cursos (solo administrador). Eliminar es una baja lógica (estado ARCHIVADO)
   - name: Contenido
@@ -119,11 +119,11 @@ paths:
       description: |
         Un estudiante solo puede consultar su propio id; un docente, solo estudiantes de sus secciones; un administrador, cualquiera.
 
-        **Datos reales** (listados en `datosReales`): nombre, apellido, email, rol, cursos activos, lista de cursos, actividades pendientes, nota promedio y horas de estudio.
+        Todos los datos salen de la base de datos (`simulado: false`; los campos están listados en `datosReales`).
 
-        **Datos simulados** (`simulado: true`): porcentaje completado, módulos finalizados y pendientes.
-
-        `notaPromedio` es `null` cuando el estudiante aún no tiene evaluaciones calificadas.
+        - `porcentajeCompletado`: promedio del progreso por tema (solo temas con actividades) de todas sus inscripciones activas. Es 0 si no hay temas con actividades.
+        - `modulosFinalizados` y `modulosPendientes`: un módulo está finalizado cuando todos sus temas están completados.
+        - `actividadesPendientes`, `notaPromedio` y `horasEstudio`: como antes. `notaPromedio` es `null` cuando aún no tiene evaluaciones calificadas.
       security:
         - bearerAuth: []
       parameters:
@@ -153,8 +153,18 @@ paths:
       summary: Progreso del estudiante
       description: |
         Mismas reglas de acceso que el resumen.
-        Por ahora todos los datos son simulados (`simulado: true`), con el formato final.
-        Más adelante vendrán de los intentos del estudiante y del motor adaptativo.
+        Todos los datos salen de la base y del motor adaptativo (`simulado: false`).
+
+        **Variaciones** (últimos 7 días, hoy incluido, contra los 7 anteriores, en America/Santo_Domingo):
+        - `actividadesSemana`: diferencia de intentos entregados.
+        - `horasSemana`: diferencia de horas transcurridas entre inicio y entrega.
+        - `notaPuntos`: diferencia del promedio de puntaje de los intentos calificados.
+        - `cursosMes`: inscripciones nuevas en los últimos 30 días.
+        - `porcentajeSemanal`: siempre `null`, porque la base no guarda el historial del progreso.
+
+        Las variaciones sin datos para comparar son `null` (no 0). El frontend debe mostrar un guion.
+
+        **Recomendación:** la calcula el motor sobre el tema más débil del estudiante (menor promedio con intentos calificados). Es `null` si no hay intentos calificados o si el motor no está disponible. `prioridad` se deriva de la acción: `reinforce_topic` → alta, `maintain_difficulty` → media, `increase_difficulty` → baja.
       security:
         - bearerAuth: []
       parameters:
@@ -1509,8 +1519,8 @@ components:
           example: true
         simulado:
           type: boolean
-          description: true mientras parte de los datos sea simulada
-          example: true
+          description: false, todos los datos salen de la base de datos
+          example: false
         datosReales:
           type: array
           description: Campos que ya salen de la base de datos
@@ -1522,6 +1532,14 @@ components:
     Recommendation:
       type: object
       properties:
+        inscripcionId:
+          type: integer
+          description: Solo en la recomendación de `/progress`
+          example: 7
+        temaId:
+          type: integer
+          description: Solo en la recomendación de `/progress`
+          example: 15
         tema:
           type: string
           example: SQL JOIN
@@ -1557,21 +1575,32 @@ components:
           properties:
             porcentajeSemanal:
               type: number
-              example: 5
+              nullable: true
+              description: Siempre null (la base no guarda el historial del progreso)
+              example: null
             cursosMes:
               type: integer
-              example: 1
+              description: Inscripciones nuevas en los últimos 30 días
+              example: 2
             actividadesSemana:
               type: integer
-              example: -2
+              nullable: true
+              description: Intentos entregados esta semana menos la semana anterior
+              example: 8
             notaPuntos:
               type: number
-              example: 3
+              nullable: true
+              description: Diferencia del promedio de puntaje entre esta semana y la anterior
+              example: 22
             horasSemana:
               type: number
-              example: 6
+              nullable: true
+              description: Horas de esta semana menos las de la semana anterior
+              example: 9.1
         recomendacion:
-          $ref: '#/components/schemas/Recommendation'
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Recommendation'
 
     StudentProgressResponse:
       type: object
@@ -1581,7 +1610,7 @@ components:
           example: true
         simulado:
           type: boolean
-          example: true
+          example: false
         progress:
           $ref: '#/components/schemas/StudentProgress'
 

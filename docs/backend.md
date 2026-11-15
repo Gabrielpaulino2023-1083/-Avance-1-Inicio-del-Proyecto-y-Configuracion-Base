@@ -10,7 +10,7 @@ Ubicación: `backend/`
 
 El backend tiene un servidor Express con autenticación conectada a PostgreSQL (registro, login con JWT, `/me` y control de acceso por roles), un CRUD de cursos para administradores, un CRUD de módulos y temas para administradores y docentes editores, y el aprendizaje del estudiante con datos reales: sus cursos, el contenido publicado, los intentos de actividades (iniciar, guardar, entregar y calificar en el servidor), resultados, progreso, actividad reciente, minutos por día y la recomendación del motor adaptativo (Python) por inscripción y tema. La API está documentada con OpenAPI y Swagger UI.
 
-Solo dos endpoints del Dashboard antiguo (`/api/students/:id` y `/progress`) conservan datos simulados (ver "Endpoints de estudiantes"); el frontend puede reemplazarlos con las rutas `/api/mis-*`.
+Los endpoints del Dashboard antiguo (`/api/students/:id` y `/progress`) también usan ya datos reales (`"simulado": false`); ver "Endpoints de estudiantes". Ya no queda ningún dato simulado en el backend.
 
 ## Tecnologías
 
@@ -146,9 +146,16 @@ Reglas de acceso: un estudiante solo puede consultar su propio `:id`; un adminis
   - `actividadesPendientes`: actividades publicadas y vigentes de sus secciones sin intento entregado o calificado.
   - `notaPromedio`: promedio de evaluaciones calificadas (vista `resultados_actividades`). Es `null` si aún no hay ninguna.
   - `horasEstudio`: suma del tiempo entre inicio y entrega de sus intentos. Solo mide el tiempo dentro de las actividades.
-- **Simulados** (`"simulado": true`): porcentaje completado, módulos finalizados y pendientes. Esperan que el grupo defina qué significa "completado".
+  - `porcentajeCompletado`: promedio del progreso por tema (solo temas con actividades) en todas sus inscripciones activas; 0 si no hay temas con actividades.
+  - `modulosFinalizados` y `modulosPendientes`: un módulo está finalizado cuando todos sus temas publicados están completados (tema completado = todas sus actividades con al menos un intento calificado).
+  - La respuesta lleva `"simulado": false`.
 
-**`GET /api/students/:id/progress`:** variaciones y recomendación. Todavía simulado (`"simulado": true`).
+**`GET /api/students/:id/progress`:** variaciones y recomendación, con datos reales (`"simulado": false`).
+
+- Variaciones: últimos 7 días (hoy incluido) contra los 7 anteriores, en America/Santo_Domingo. `actividadesSemana` es la diferencia de intentos entregados; `horasSemana`, la de horas entre inicio y entrega; `notaPuntos`, la del promedio de puntaje de los intentos calificados; `cursosMes`, las inscripciones nuevas de los últimos 30 días.
+- `porcentajeSemanal` es siempre `null`: la base solo guarda el progreso actual, no su historia. Para calcularlo habría que guardar capturas diarias.
+- Las variaciones sin datos para comparar son `null` (no 0); el frontend debe mostrar un guion. Para `notaPuntos`, `actividadesSemana` y `horasSemana` se consideran los últimos 100 eventos de actividad reciente por inscripción.
+- `recomendacion`: el motor la calcula sobre el tema más débil (menor promedio con intentos calificados) y devuelve `inscripcionId`, `temaId`, `tema`, `accion`, `dificultad`, `prioridad`, `descripcion` y `motivo`. `prioridad` no viene del motor: se deriva de la acción (`reinforce_topic` alta, `maintain_difficulty` media, `increase_difficulty` baja). Es `null` si no hay intentos calificados o si el motor falla (el error queda en la consola y el resto del progreso se entrega igual).
 
 **`POST /api/students/:id/recommendation`:** recibe `{ "topic": "nombre del tema" }`. Se mantiene por compatibilidad con el frontend actual; la ruta recomendada es la de inscripción y tema (ver "Aprendizaje del estudiante").
 
@@ -364,10 +371,10 @@ Aprendizaje del estudiante (estudiante demo, `estudiante.demo@example.com`, cont
 - Calificar (`calificar_intento`) solo se ejecuta dentro de la entrega, después de que `entregar_intento` comprobó que el intento es del estudiante del token.
 - Los minutos son tiempo transcurrido entre inicio y entrega (incluye pausas), no tiempo activo.
 - Cambiar el rol de un usuario o la política de roles múltiples (estudiante y docente a la vez) sigue pendiente de acuerdo del equipo: con varios roles el token usa el de mayor jerarquía, y las rutas `/api/mis-*` exigen el rol `ESTUDIANTE` en el token.
-- Quedan datos simulados solo en `/api/students/:id` (porcentaje, módulos) y en `/api/students/:id/progress`.
+- `porcentajeSemanal` de `/api/students/:id/progress` es `null` hasta que exista historial de progreso.
 - La recomendación calcula `repetitions` como `attempts - 1` y envía `navigation_count = 0`, porque la base no registra navegación; esto debe confirmarse con el responsable del motor.
 - `horasEstudio` mide solo el tiempo entre inicio y entrega de los intentos, no el tiempo real de estudio.
-- Los datos de `/progress`, el porcentaje completado y los módulos finalizados del endpoint antiguo siguen simulados (`simulado: true`). La base ya define "completado" por tema (todas sus actividades publicadas con al menos un intento calificado) en `/api/mis-inscripciones/:id/progreso`.
+- `/api/students/:id` y `/progress` dejaron de ser simulados: calculan lo mismo que `/api/mis-*`, agregado por estudiante. Son más costosos (una consulta por inscripción), por lo que conviene que el frontend use `/api/mis-*` cuando necesite detalle.
 - Si Python no está disponible, la recomendación responde 500.
 - El motor es un sistema de reglas, no un modelo de aprendizaje automático.
 
@@ -377,9 +384,9 @@ Frontend → Backend / API → Base de datos → Motor adaptativo → Recomendac
 
 ## Próximos pasos
 
-- Que el frontend use las rutas `/api/mis-*` en lugar de los datos simulados del Dashboard, y la recomendación por `inscripcionId` y `temaId` (después se retira la ruta por nombre).
+- Que el frontend use la recomendación por `inscripcionId` y `temaId` (después se retira la ruta por nombre) y muestre un guion cuando una variación llegue en `null`.
 - Endpoint de inscripción con la función `inscribir_estudiante` (falta una consulta de secciones abiertas para que el estudiante elija).
-- Reemplazar o retirar `/api/students/:id` y `/progress` cuando el frontend migre.
+- Guardar capturas diarias del progreso si se quiere calcular `porcentajeSemanal`.
 - Eliminar el valor por defecto `cursoId = 1` de `/api/modulos` cuando el frontend envíe siempre el curso.
 - Confirmar con Daniel `repetitions` y `navigation_count`.
 - Mantener `openapi.yaml` actualizado con cada endpoint nuevo.
