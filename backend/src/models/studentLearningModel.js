@@ -65,7 +65,11 @@ const submitAttempt = async (actor, intentoId) => {
     client.release();
   }
 };
+
+const listEngineInteractions = (actor, inscripcionId, temaId) =>
+  q('SELECT * FROM public.listar_interacciones_motor_estudiante($1,$2,$3)',
+    [actor, inscripcionId, temaId]);
 module.exports = { 
     listEnrollments, listPublishedModules, 
     listPublishedTopics, listActivities, getQuestionnaire, startAttempt,
-    saveSelection, submitAttempt };
+    saveSelection, submitAttempt, listEngineInteractions };

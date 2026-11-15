@@ -20,4 +20,5 @@ router.post('/mis-inscripciones/:inscripcionId/actividades/:actividadId/intentos
 router.get('/mis-intentos/:intentoId/cuestionario', student, c.getQuestionnaire);
 router.put('/mis-respuestas/:respuestaId/opciones', student, validate(selectionBodyDto), c.saveSelection);
 router.post('/mis-intentos/:intentoId/entrega', student, c.submitAttempt);
+router.post('/mis-inscripciones/:inscripcionId/temas/:temaId/recomendacion', student, c.getRecommendation);
 module.exports = router;

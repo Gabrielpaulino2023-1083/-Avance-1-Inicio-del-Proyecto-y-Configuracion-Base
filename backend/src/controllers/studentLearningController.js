@@ -57,9 +57,13 @@ const saveSelection = async (req, res) =>
 const submitAttempt = async (req, res) =>
   ok(res, await service.submitAttempt(actor(req), parseId(req.params.intentoId, 'intento')));
 
+const getRecommendation = async (req, res) =>
+  ok(res, await service.getRecommendation(
+    actor(req), inscripcion(req), parseId(req.params.temaId, 'tema')));
+
 module.exports = {
   listEnrollments, listModules, listTopics,
   listResults, listProgress, listRecentActivity, listMinutes,
   listActivities, getQuestionnaire, startAttempt, saveSelection,
-  submitAttempt 
+  submitAttempt, getRecommendation
 };
