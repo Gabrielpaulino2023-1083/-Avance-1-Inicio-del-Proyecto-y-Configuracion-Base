@@ -21,11 +21,20 @@ export default function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // "Gestión" solo aparece para docentes y administradores.
+    // Cada rol ve solo las secciones que usa.
   const links =
-    user && user.rol !== "ESTUDIANTE"
-      ? [...baseLinks, { to: "/gestion", label: "Gestión" }]
-      : baseLinks;
+    user?.rol === "ADMINISTRADOR"
+      ? [
+          { to: "/", label: "Inicio" },
+          { to: "/cursos", label: "Cursos" },
+          { to: "/gestion", label: "Contenido" },
+        ]
+      : user?.rol === "DOCENTE"
+        ? [
+            { to: "/", label: "Inicio" },
+            { to: "/gestion", label: "Contenido" },
+          ]
+        : baseLinks;
 
   function handleLogout() {
     logout();

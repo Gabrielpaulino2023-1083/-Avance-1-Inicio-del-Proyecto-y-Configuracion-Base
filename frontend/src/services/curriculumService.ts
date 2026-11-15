@@ -1,4 +1,4 @@
-import type { ContenidoInput, Modulo, Tema } from "../types/curriculum";
+import type { ContenidoInput, EstadoContenido, Modulo, Tema } from "../types/curriculum";
 import { request, USE_MOCK } from "./http";
 
 // Mientras el backend no tenga endpoints de módulos y temas, el CRUD
@@ -156,8 +156,7 @@ async function mockDeleteTema(id: number): Promise<void> {
 }
 
 // ---------- API real ----------
-// PROVISIONAL: estos endpoints todavía no existen en el backend.
-// Contrato propuesto (a acordar con Porfirio), respuestas { success, data }.
+// Rutas del backend (Porfirio). Las respuestas vienen como { success, data }.
 
 interface Wrapped<T> {
   success: boolean;
@@ -170,25 +169,48 @@ async function apiGet<T>(path: string, token: string | null): Promise<T> {
 
 async function apiSend<T>(
   path: string,
-  method: "POST" | "PUT",
+  method: "POST" | "PUT" | "PATCH",
   body: unknown,
   token: string | null
 ): Promise<T> {
   return (await request<Wrapped<T>>(path, { method, body, token })).data;
 }
 
-// ---------- Funciones públicas (las que usarán las pantallas) ----------
+// ---------- Funciones públicas (las que usan las pantallas) ----------
 
-export function listModulos(token: string | null): Promise<Modulo[]> {
-  return USE_MOCK ? mockListModulos() : apiGet<Modulo[]>("/modulos", token);
+export function listModulos(token: string | null, cursoId?: number): Promise<Modulo[]> {
+  if (USE_MOCK) return mockListModulos();
+  return apiGet<Modulo[]>(cursoId ? `/modulos?cursoId=${cursoId}` : "/modulos", token);
 }
 
-export function createModulo(token: string | null, input: ContenidoInput): Promise<Modulo> {
-  return USE_MOCK ? mockSaveModulo(input) : apiSend<Modulo>("/modulos", "POST", input, token);
+export function createModulo(
+  token: string | null,
+  input: ContenidoInput,
+  cursoId?: number
+): Promise<Modulo> {
+  if (USE_MOCK) return mockSaveModulo(input);
+  return apiSend<Modulo>("/modulos", "POST", cursoId ? { ...input, cursoId } : input, token);
 }
 
 export function updateModulo(token: string | null, id: number, input: ContenidoInput): Promise<Modulo> {
   return USE_MOCK ? mockSaveModulo(input, id) : apiSend<Modulo>(`/modulos/${id}`, "PUT", input, token);
+}
+
+// Cambia solo el estado (BORRADOR / PUBLICADO / ARCHIVADO).
+export async function setModuloEstado(
+  token: string | null,
+  id: number,
+  estado: EstadoContenido
+): Promise<Modulo> {
+  if (USE_MOCK) {
+    const actual = (await mockListModulos()).find((m) => m.id === id);
+    if (!actual) throw new Error("El módulo no existe.");
+    return mockSaveModulo(
+      { nombre: actual.nombre, descripcion: actual.descripcion, orden: actual.orden, estado },
+      id
+    );
+  }
+  return apiSend<Modulo>(`/modulos/${id}/estado`, "PATCH", { estado }, token);
 }
 
 export async function deleteModulo(token: string | null, id: number): Promise<void> {
@@ -210,6 +232,24 @@ export function updateTema(token: string | null, moduloId: number, id: number, i
   return USE_MOCK
     ? mockSaveTema(moduloId, input, id)
     : apiSend<Tema>(`/temas/${id}`, "PUT", input, token);
+}
+
+export async function setTemaEstado(
+  token: string | null,
+  moduloId: number,
+  id: number,
+  estado: EstadoContenido
+): Promise<Tema> {
+  if (USE_MOCK) {
+    const actual = (await mockListTemas(moduloId)).find((t) => t.id === id);
+    if (!actual) throw new Error("El tema no existe.");
+    return mockSaveTema(
+      moduloId,
+      { nombre: actual.nombre, descripcion: actual.descripcion, orden: actual.orden, estado },
+      id
+    );
+  }
+  return apiSend<Tema>(`/temas/${id}/estado`, "PATCH", { estado }, token);
 }
 
 export async function deleteTema(token: string | null, id: number): Promise<void> {

@@ -5,6 +5,7 @@ import { getContent, type ContentData } from "../../services/contentService";
 import "../../features/dashboard/dashboard.css";
 import "../../features/progress/progress.css";
 import "../../features/content/content.css";
+import { USE_MOCK } from "../../services/http";
 
 export default function ContentScreen() {
   const [content, setContent] = useState<ContentData | null>(null);
@@ -32,15 +33,15 @@ export default function ContentScreen() {
       <header className="page-head">
         <h1>Contenido y ejercicios</h1>
         <p>
-          Continúa donde lo dejaste. Contenido de ejemplo mientras se conecta
-          el backend.
+          {USE_MOCK
+            ? "Continúa donde lo dejaste. Contenido de ejemplo mientras se conecta el backend."
+            : "Continúa donde lo dejaste. El contenido es de ejemplo; la recomendación del motor usa datos reales del backend."}
         </p>
       </header>
 
       <div className="content-layout">
         <ModuleList courseName={content.courseName} modules={content.modules} />
-        <ExercisePanel exercise={content.exercise} />
-      </div>
+        <ExercisePanel exercise={content.exercise} modules={content.modules} />      </div>
     </div>
   );
 }
