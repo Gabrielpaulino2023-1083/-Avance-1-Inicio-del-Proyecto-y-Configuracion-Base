@@ -33,15 +33,17 @@ interface Props {
   recommendation: Recommendation;
   evidence: RecommendationEvidence;
   showAction?: boolean;
+  sample?: boolean;
 }
 
 export default function RecommendationCard({
   recommendation,
   evidence,
   showAction = true,
+  sample = false,
 }: Props) {
   const view = VIEW[recommendation.action];
-  const mastery = Math.round(evidence.mastery);
+  const mastery = Math.round(evidence.mastery * 10) / 10;
 
   return (
     <section className={`ai-card ai-card--${view.tone}`} aria-labelledby="ai-title">
@@ -64,6 +66,9 @@ export default function RecommendationCard({
             <Link to="/contenido" className="btn btn--primary">
               Ir al ejercicio
             </Link>
+          )}
+                    {sample && (
+            <span className="ai-card__chip">Datos de ejemplo</span>
           )}
           <span className="ai-card__chip">
             {DIFFICULTY_LABEL[recommendation.difficulty]}

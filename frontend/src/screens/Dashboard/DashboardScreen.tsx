@@ -33,9 +33,10 @@ function StudentDashboard() {
       <DashboardHero name={user?.nombre ?? "estudiante"} summary={summary} />
       <StatCards summary={summary} />
       <div className="dash__row">
-        <RecommendationCard
+                <RecommendationCard
           recommendation={summary.recommendation}
           evidence={summary.evidence}
+          sample
         />
         <ActivityTimeline items={summary.recentActivity} />
       </div>

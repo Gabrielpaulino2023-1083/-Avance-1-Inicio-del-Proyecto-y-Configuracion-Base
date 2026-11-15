@@ -54,13 +54,14 @@ export async function request<T>(
 
   const data = await response.json().catch(() => null);
 
-  if (!response.ok) {
+    if (!response.ok) {
     const error = (data ?? {}) as ErrorBody;
     const detail = error.details?.map((d) => d.mensaje).join(" ");
-    throw new ApiError(
-      detail || error.message || "Ocurrió un error inesperado.",
-      response.status
-    );
+    const fallback =
+      response.status === 429
+        ? "Demasiados intentos. Espera unos minutos e inténtalo de nuevo."
+        : "Ocurrió un error inesperado.";
+    throw new ApiError(detail || error.message || fallback, response.status);
   }
 
   return data as T;

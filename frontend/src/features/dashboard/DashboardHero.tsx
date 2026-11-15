@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { DashboardSummary } from "../../types";
 import ProgressRing from "./ProgressRing";
+import { USE_MOCK } from "../../services/http";
 
 interface Props {
   name: string;
@@ -75,7 +76,11 @@ export default function DashboardHero({ name, summary }: Props) {
             <span>respecto a la semana anterior</span>
           </li>
         </ul>
-        <p className="hero__note">Datos de ejemplo mientras se conecta el backend</p>
+                <p className="hero__note">
+          {USE_MOCK
+            ? "Datos de ejemplo (modo simulado)."
+            : "Cursos activos, actividades pendientes, nota promedio y horas vienen de la base de datos. El progreso, los módulos y el cambio semanal son datos de ejemplo hasta que el backend los calcule."}
+        </p>
       </div>
     </section>
   );

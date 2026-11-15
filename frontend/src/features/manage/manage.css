@@ -450,3 +450,36 @@
   font-size: 0.9rem;
   color: var(--accent-dark);
 }
+
+.mg-curso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.mg-curso label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+.mg-curso__form {
+  display: flex;
+  gap: 8px;
+}
+.mg-curso__campo {
+  min-width: 220px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font: inherit;
+}
+.mg-curso__hint {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+.mg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

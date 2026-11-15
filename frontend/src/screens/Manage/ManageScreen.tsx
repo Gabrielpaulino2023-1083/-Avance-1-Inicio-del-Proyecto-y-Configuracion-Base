@@ -9,11 +9,14 @@ import {
   deleteTema,
   listModulos,
   listTemas,
+  setModuloEstado,
+  setTemaEstado,
   updateModulo,
   updateTema,
 } from "../../services/curriculumService";
-import { ApiError } from "../../services/http";
-import {
+import { ApiError, USE_MOCK } from "../../services/http";
+import { listCursos } from "../../services/courseService";
+import type { Curso } from "../../types/course";import {
   ESTADOS,
   type ContenidoInput,
   type EstadoContenido,
@@ -60,6 +63,10 @@ export default function ManageScreen() {
   const [confirm, setConfirm] = useState<Confirm | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
+  const isAdmin = user?.rol === "ADMINISTRADOR";
+  const [cursos, setCursos] = useState<Curso[]>([]);
+  const [cursoId, setCursoId] = useState<number | null>(null);
+  const [cursoInput, setCursoInput] = useState("");
 
   function fail(error: unknown) {
     // Sesión vencida: se cierra y ProtectedRoute lleva al login.
@@ -74,9 +81,34 @@ export default function ManageScreen() {
     });
   }
 
+    // Administrador: carga los cursos del backend y elige el primero.
   useEffect(() => {
+    if (USE_MOCK || !isAdmin) return;
     let active = true;
-    listModulos(token)
+    listCursos(token)
+      .then((data) => {
+        if (!active) return;
+        setCursos(data);
+        setCursoId((actual) => actual ?? data[0]?.id ?? null);
+      })
+      .catch((error) => {
+        if (active) fail(error);
+      });
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line
+  }, [token]);
+
+  // Módulos del curso elegido (en modo real nunca se carga sin curso).
+  useEffect(() => {
+    if (!USE_MOCK && cursoId === null) {
+      setModulos([]);
+      return;
+    }
+    let active = true;
+    setModulos(null);
+    listModulos(token, cursoId ?? undefined)
       .then((data) => {
         if (active) setModulos(data);
       })
@@ -89,7 +121,7 @@ export default function ManageScreen() {
       active = false;
     };
     // eslint-disable-next-line
-  }, [token]);
+  }, [token, cursoId]);
 
   // El aviso se esconde solo.
   useEffect(() => {
@@ -103,8 +135,15 @@ export default function ManageScreen() {
     return <Navigate to="/" replace />;
   }
 
+  function changeCurso(id: number | null) {
+    setOpenId(null);
+    setTemas([]);
+    setFilter("TODOS");
+    setCursoId(id);
+  }
+
   async function refresh() {
-    setModulos(await listModulos(token));
+  setModulos(await listModulos(token, cursoId ?? undefined));
   }
 
   async function loadTemas(id: number) {
@@ -133,7 +172,7 @@ export default function ManageScreen() {
   async function saveModulo(values: ContenidoInput) {
     const editing = dialog?.kind === "modulo" ? dialog.item : null;
     if (editing) await updateModulo(token, editing.id, values);
-    else await createModulo(token, values);
+    else await createModulo(token, values, cursoId ?? undefined);
     await refresh();
     setDialog(null);
     setNotice({
@@ -154,14 +193,9 @@ export default function ManageScreen() {
 
   // ---------- Cambiar estado desde la lista ----------
 
-  async function changeModuloEstado(m: Modulo, estado: EstadoContenido) {
+    async function changeModuloEstado(m: Modulo, estado: EstadoContenido) {
     try {
-      await updateModulo(token, m.id, {
-        nombre: m.nombre,
-        descripcion: m.descripcion,
-        orden: m.orden,
-        estado,
-      });
+      await setModuloEstado(token, m.id, estado);
       await refresh();
       setNotice({ ok: true, text: `Módulo en estado ${label(estado)}.` });
     } catch (error) {
@@ -171,12 +205,7 @@ export default function ManageScreen() {
 
   async function changeTemaEstado(t: Tema, estado: EstadoContenido) {
     try {
-      await updateTema(token, t.moduloId, t.id, {
-        nombre: t.nombre,
-        descripcion: t.descripcion,
-        orden: t.orden,
-        estado,
-      });
+      await setTemaEstado(token, t.moduloId, t.id, estado);
       await loadTemas(t.moduloId);
       setNotice({ ok: true, text: `Tema en estado ${label(estado)}.` });
     } catch (error) {
@@ -228,12 +257,64 @@ export default function ManageScreen() {
 
   return (
     <div className="dash">
-      <header className="page-head">
+            <header className="page-head">
         <h1>Gestión de contenido</h1>
         <p>
-          Crea y organiza los módulos y temas del curso. Los cambios se guardan
-          como datos simulados mientras se conecta el backend.
+          {USE_MOCK
+            ? "Crea y organiza los módulos y temas del curso. Los cambios se guardan como datos simulados mientras se conecta el backend."
+            : "Crea y organiza los módulos y temas del curso elegido. Los cambios se guardan en la base de datos."}
         </p>
+        {!USE_MOCK && (
+          <div className="mg-curso">
+            <label htmlFor="mg-curso-campo">Curso</label>
+            {isAdmin ? (
+              <select
+                id="mg-curso-campo"
+                className="mg-curso__campo"
+                value={cursoId ?? ""}
+                onChange={(e) =>
+                  changeCurso(e.target.value ? Number(e.target.value) : null)
+                }
+              >
+                {cursos.length === 0 && <option value="">Sin cursos</option>}
+                {cursos.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.codigo} · {c.nombre}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <form
+                className="mg-curso__form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const n = Number(cursoInput);
+                  changeCurso(Number.isInteger(n) && n > 0 ? n : null);
+                }}
+              >
+                <input
+                  id="mg-curso-campo"
+                  className="mg-curso__campo"
+                  type="number"
+                  min={1}
+                  placeholder="ID del curso"
+                  value={cursoInput}
+                  onChange={(e) => setCursoInput(e.target.value)}
+                />
+                <button type="submit" className="mg-btn">
+                  Cargar
+                </button>
+              </form>
+            )}
+            {cursoId === null && (
+              <span className="mg-curso__hint">
+                {isAdmin
+                  ? "No hay cursos todavía. Créalos en la sección Cursos."
+                  : "Escribe el ID del curso que editas (provisional hasta que exista la ruta de mis cursos)."}
+              </span>
+            )}
+          </div>
+        )}
       </header>
 
       <ul className="mg-stats">
@@ -272,6 +353,7 @@ export default function ManageScreen() {
         <button
           type="button"
           className="mg-btn mg-btn--primary"
+                    disabled={!USE_MOCK && cursoId === null}
           onClick={() => setDialog({ kind: "modulo", item: null })}
         >
           + Nuevo módulo

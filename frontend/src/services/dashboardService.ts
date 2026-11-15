@@ -85,7 +85,7 @@ interface StudentSummaryApi {
     modulosFinalizados: number;
     modulosPendientes: number;
     actividadesPendientes: number;
-    notaPromedio: number;
+    notaPromedio: number | null;
     horasEstudio: number;
   };
 }

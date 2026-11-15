@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/authContext";
-import type { Exercise } from "../../services/contentService";
-import { ApiError } from "../../services/http";
+import type { CourseModule, Exercise } from "../../services/contentService";import { ApiError } from "../../services/http";
 import {
   getRecommendation,
   type RecommendationResult,
 } from "../../services/recommendationService";
 import RecommendationCard from "../dashboard/RecommendationCard";
+import ReinforcementList from "./ReinforcementList";
 
 function formatTime(total: number) {
   const m = Math.floor(total / 60);
@@ -14,7 +14,13 @@ function formatTime(total: number) {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
+export default function ExercisePanel({
+  exercise,
+  modules,
+}: {
+  exercise: Exercise;
+  modules: CourseModule[];
+}) {
   const { user, token, logout } = useAuth();
   const [selected, setSelected] = useState<number | null>(null);
   const [lastWrong, setLastWrong] = useState<number | null>(null);
@@ -26,6 +32,7 @@ export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
   const [result, setResult] = useState<RecommendationResult | null>(null);
   const [asking, setAsking] = useState(false);
   const [askError, setAskError] = useState<string | null>(null);
+    const [noData, setNoData] = useState(false);
 
   // El tiempo corre hasta que el estudiante acierta.
   useEffect(() => {
@@ -59,9 +66,10 @@ export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
 
   // Cierra el ciclo adaptativo: pide al motor una recomendación con lo
   // que el estudiante hizo en este ejercicio.
-  async function askEngine() {
+    async function askEngine() {
     setAsking(true);
     setAskError(null);
+    setNoData(false);
     try {
       setResult(
         await getRecommendation(token, user?.id ?? null, {
@@ -74,6 +82,10 @@ export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
         logout();
+        return;
+      }
+      if (error instanceof ApiError && error.status === 404) {
+        setNoData(true);
         return;
       }
       setAskError(
@@ -178,6 +190,13 @@ export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
                 <strong>Pista:</strong> {exercise.hint}
               </p>
             )}
+                        {noData && (
+              <p className="feedback__box feedback__box--hint">
+                <strong>Sin datos suficientes todavía.</strong> Aún no tienes
+                intentos calificados en este tema, así que el motor no puede
+                analizar tu desempeño.
+              </p>
+            )}
             {askError && (
               <p className="feedback__box feedback__box--bad">
                 <strong>No se pudo generar la recomendación.</strong> {askError}{" "}
@@ -210,12 +229,19 @@ export default function ExercisePanel({ exercise }: { exercise: Exercise }) {
         </aside>
       </section>
 
-      {result && (
-        <RecommendationCard
-          recommendation={result.recommendation}
-          evidence={result.evidence}
-          showAction={false}
-        />
+            {result && (
+        <>
+          <RecommendationCard
+            recommendation={result.recommendation}
+            evidence={result.evidence}
+            showAction={false}
+          />
+          <ReinforcementList
+            action={result.recommendation.action}
+            topic={exercise.topic}
+            modules={modules}
+          />
+        </>
       )}
     </div>
   );

@@ -53,9 +53,10 @@ function build(
   studentId: number,
   action: Recommendation["action"],
   difficulty: Recommendation["difficulty"],
-  text?: string
+    text?: string,
+  realEvidence?: RecommendationEvidence
 ): RecommendationResult {
-  const evidence = buildEvidence(r);
+    const evidence = realEvidence ?? buildEvidence(r);
   return {
     evidence,
     recommendation: {
@@ -95,6 +96,13 @@ interface RecommendationApi {
   accion?: string;
   dificultad?: string;
   recomendacion?: string;
+  mastery?: number;
+  errors?: number;
+  attempts?: number;
+}
+
+function isNum(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value);
 }
 
 async function apiRecommendation(
@@ -109,12 +117,29 @@ async function apiRecommendation(
   // Acepta la respuesta directa o envuelta en data / recommendation.
   const data = (body.data ?? body.recommendation ?? body) as RecommendationApi;
 
-  const action =
-    ACTIONS.find((a) => a === data.accion) ?? "maintain_difficulty";
-  const difficulty =
-    DIFFICULTIES.find((d) => d === data.dificultad) ?? "current";
+  const action = ACTIONS.find((a) => a === data.accion);
+  const difficulty = DIFFICULTIES.find((d) => d === data.dificultad);
 
-  return build(r, studentId, action, difficulty, data.recomendacion);
+  // Sin acción, dificultad, texto o evidencia válidos no mostramos nada
+  // inventado: se avisa que la respuesta no sirve.
+  if (
+    !action ||
+    !difficulty ||
+    typeof data.recomendacion !== "string" ||
+    !isNum(data.mastery) ||
+    !isNum(data.errors) ||
+    !isNum(data.attempts)
+  ) {
+    throw new Error(
+      "El servidor devolvió una respuesta incompleta o inválida."
+    );
+  }
+
+  return build(r, studentId, action, difficulty, data.recomendacion, {
+    mastery: data.mastery,
+    errors: data.errors,
+    attempts: data.attempts,
+  });
 }
 
 export function getRecommendation(
