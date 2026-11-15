@@ -19,7 +19,9 @@ tags:
   - name: Cursos
     description: CRUD de cursos (solo administrador). Eliminar es una baja lógica (estado ARCHIVADO)
   - name: Contenido
-    description: CRUD de módulos y temas (administrador o docente editor del curso)
+    description: Selector de cursos y CRUD de módulos y temas (administrador o docente editor del curso)
+  - name: Aprendizaje del estudiante
+    description: Cursos, contenido publicado, intentos, resultados, progreso y recomendación del estudiante autenticado. Todas las rutas son de autoservicio (rol ESTUDIANTE) y el estudiante sale siempre del token.
 
 paths:
   /api/health:
@@ -183,6 +185,7 @@ paths:
       description: |
         Mismas reglas de acceso que el resumen.
         Arma una interacción por cada intento calificado del estudiante en el tema indicado (por nombre) y la envía al motor adaptativo (Python).
+        **Se mantiene por compatibilidad.** Preferir `POST /api/mis-inscripciones/{inscripcionId}/temas/{temaId}/recomendacion`, que no mezcla temas homónimos.
         Si el estudiante no tiene intentos calificados en ese tema, responde 404.
       security:
         - bearerAuth: []
@@ -701,6 +704,447 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /api/cursos-administrables:
+    get:
+      tags: [Contenido]
+      operationId: listManageableCourses
+      summary: Cursos que el usuario puede gestionar
+      description: |
+        Administrador: todos los cursos. Docente: solo los cursos donde es editor activo.
+        `puedeEditarContenido` es falso en cursos archivados. Sirve como selector de curso
+        para la gestión de módulos y temas (enviar siempre el `cursoId` elegido).
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManageableCourseListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-cursos:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyEnrollments
+      summary: Inscripciones activas del estudiante
+      description: |
+        Solo rol `ESTUDIANTE`. De aquí sale el `inscripcionId` que usan el resto de rutas de aprendizaje.
+        Incluye solo inscripciones activas en cursos activos.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-cursos/{cursoId}/modulos:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyModules
+      summary: Módulos publicados de un curso
+      description: |
+        Solo módulos `PUBLICADO` de un curso donde el estudiante tiene inscripción activa. `totalTemas` cuenta solo temas publicados.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/CursoPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-modulos/{moduloId}/temas:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyTopics
+      summary: Temas publicados de un módulo
+      description: |
+        Una lista vacía es válida (módulo sin temas publicados). Módulo no publicado: 404.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ModuloPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/resultados:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyResults
+      summary: Resultados por actividad
+      description: |
+        Una fila por actividad visible, incluidas las pendientes (sin intentos).
+        Antes de calificar, los promedios y la fecha son `null` (nunca 0). Las prácticas no tienen nota académica.
+        Para la lista de evaluaciones, filtrar `finalidad = EVALUACION`.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/progreso:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyProgress
+      summary: Progreso por tema
+      description: |
+        Una actividad publicada cuenta como realizada si tiene al menos un intento calificado (sin nota mínima).
+        Un tema sin actividades devuelve `progresoPorcentaje: null` y `completado: false`.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/actividad-reciente:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyRecentActivity
+      summary: Actividad reciente
+      description: |
+        Un evento por intento entregado o calificado, del más reciente al más antiguo.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+        - name: limite
+          in: query
+          required: false
+          description: Cantidad de eventos (1 a 100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecentActivityListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/minutos:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyMinutes
+      summary: Minutos de intentos por día
+      description: |
+        Tiempo transcurrido entre inicio y entrega, agrupado por día local (America/Santo_Domingo).
+        Intervalo semiabierto: `desde` se incluye, `hasta` no. Máximo 366 días. Los días sin intentos no aparecen.
+        No es tiempo activo de estudio: incluye pausas.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+        - name: desde
+          in: query
+          required: true
+          description: Fecha inicial (AAAA-MM-DD)
+          schema:
+            type: string
+            format: date
+            example: "2026-11-02"
+        - name: hasta
+          in: query
+          required: true
+          description: Fecha final exclusiva (AAAA-MM-DD)
+          schema:
+            type: string
+            format: date
+            example: "2026-11-09"
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinutesListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/temas/{temaId}/actividades:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: listMyActivities
+      summary: Actividades publicadas de un tema
+      description: |
+        Solo de la sección de esa inscripción. `disponibleAhora` no garantiza que pueda iniciar:
+        el máximo de intentos y un intento abierto se validan al iniciar.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+        - $ref: '#/components/parameters/TemaPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/actividades/{actividadId}/intentos:
+    post:
+      tags: [Aprendizaje del estudiante]
+      operationId: startAttempt
+      summary: Inicia un intento y devuelve el cuestionario
+      description: |
+        Consume una oportunidad de intento. Inicia el intento y lee el cuestionario en una sola transacción.
+        El cuestionario **no incluye** respuestas correctas ni explicaciones.
+        `409` si la actividad no está disponible, ya hay un intento abierto o se alcanzó el límite.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+        - $ref: '#/components/parameters/ActividadPathId'
+      responses:
+        '201':
+          description: Intento iniciado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionnaireResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-intentos/{intentoId}/cuestionario:
+    get:
+      tags: [Aprendizaje del estudiante]
+      operationId: getQuestionnaire
+      summary: Retoma el cuestionario de un intento en curso
+      description: |
+        No crea intentos. Devuelve las selecciones ya guardadas. Intento ajeno: 403. Cerrado o vencido: 409.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntentoPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionnaireResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-respuestas/{respuestaId}/opciones:
+    put:
+      tags: [Aprendizaje del estudiante]
+      operationId: saveSelection
+      summary: Guarda la selección de una pregunta
+      description: |
+        Reemplaza toda la selección anterior de esa pregunta. Enviar solo ids de opciones; una lista vacía borra la selección.
+        En selección única se permite como máximo una opción.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RespuestaPathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectionBody'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-intentos/{intentoId}/entrega:
+    post:
+      tags: [Aprendizaje del estudiante]
+      operationId: submitAttempt
+      summary: Entrega el intento y lo califica
+      description: |
+        La calificación se hace siempre en el servidor, en la misma transacción que la entrega. No existe ruta pública de calificación.
+        Si el intento ya venció, `motivoEntrega` es `VENCIMIENTO`. Repetir la entrega devuelve el resultado ya calculado.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntentoPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttemptResultResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/mis-inscripciones/{inscripcionId}/temas/{temaId}/recomendacion:
+    post:
+      tags: [Aprendizaje del estudiante]
+      operationId: getRecommendationByContext
+      summary: Recomendación del motor adaptativo por inscripción y tema
+      description: |
+        Arma una interacción por cada intento calificado del estudiante en ese tema y esa inscripción, y la envía al motor (Python).
+        No mezcla temas homónimos de otros cursos. `404` si aún no hay intentos calificados.
+        `mastery` es el promedio de puntaje, `errors` el total de respuestas con puntaje 0 y `attempts` el promedio del número de intento.
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/InscripcionId'
+        - $ref: '#/components/parameters/TemaPathId'
+      responses:
+        '200':
+          description: Correcto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommendationContextResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -737,6 +1181,70 @@ components:
         type: integer
         minimum: 1
         example: 1
+
+    InscripcionId:
+      name: inscripcionId
+      in: path
+      required: true
+      description: Id de la inscripción del estudiante (sale de GET /api/mis-cursos)
+      schema:
+        type: integer
+        minimum: 1
+        example: 7
+    CursoPathId:
+      name: cursoId
+      in: path
+      required: true
+      description: Id del curso
+      schema:
+        type: integer
+        minimum: 1
+        example: 7
+    ModuloPathId:
+      name: moduloId
+      in: path
+      required: true
+      description: Id del módulo
+      schema:
+        type: integer
+        minimum: 1
+        example: 16
+    TemaPathId:
+      name: temaId
+      in: path
+      required: true
+      description: Id del tema
+      schema:
+        type: integer
+        minimum: 1
+        example: 15
+    ActividadPathId:
+      name: actividadId
+      in: path
+      required: true
+      description: Id de la actividad
+      schema:
+        type: integer
+        minimum: 1
+        example: 10
+    IntentoPathId:
+      name: intentoId
+      in: path
+      required: true
+      description: Id del intento
+      schema:
+        type: integer
+        minimum: 1
+        example: 16
+    RespuestaPathId:
+      name: respuestaId
+      in: path
+      required: true
+      description: Id de la respuesta (viene en el cuestionario como `respuestaId`)
+      schema:
+        type: integer
+        minimum: 1
+        example: 48
 
   responses:
     BadRequest:
@@ -1333,3 +1841,450 @@ components:
             id:
               type: integer
               example: 12
+
+    ManageableCourse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        codigo:
+          type: string
+          example: DEMO-006
+        nombre:
+          type: string
+          example: Curso de gestion docente
+        estado:
+          type: string
+          enum: [BORRADOR, ACTIVO, ARCHIVADO]
+        puedeEditarContenido:
+          type: boolean
+          example: true
+
+    ManageableCourseListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManageableCourse'
+
+    Enrollment:
+      type: object
+      properties:
+        inscripcionId:
+          type: integer
+          example: 7
+        cursoId:
+          type: integer
+          example: 7
+        codigo:
+          type: string
+          example: DEMO-SQL-007
+        curso:
+          type: string
+          example: "SQL: integracion y resultados"
+        edicionId:
+          type: integer
+          example: 6
+        seccionId:
+          type: integer
+          example: 9
+        seccion:
+          type: string
+          example: DEMO-SQL-SEC-1
+
+    EnrollmentListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+
+    ResultItem:
+      type: object
+      properties:
+        actividadId:
+          type: integer
+          example: 11
+        temaId:
+          type: integer
+          example: 13
+        moduloId:
+          type: integer
+          example: 16
+        titulo:
+          type: string
+        finalidad:
+          type: string
+          enum: [PRACTICA, EVALUACION]
+        intentosCalificados:
+          type: integer
+          example: 3
+        promedioPorcentaje:
+          type: number
+          nullable: true
+          description: null mientras no haya intentos calificados (nunca 0)
+          example: 91.67
+        notaAcademicaPorcentaje:
+          type: number
+          nullable: true
+          description: Solo evaluaciones. Las prácticas siempre devuelven null.
+          example: 91.67
+        ultimaCalificacionEn:
+          type: string
+          format: date-time
+          nullable: true
+
+    ResultListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultItem'
+
+    ProgressItem:
+      type: object
+      properties:
+        temaId:
+          type: integer
+          example: 15
+        moduloId:
+          type: integer
+          example: 16
+        actividadesPublicadas:
+          type: integer
+          example: 2
+        actividadesCalificadas:
+          type: integer
+          example: 1
+        progresoPorcentaje:
+          type: number
+          nullable: true
+          example: 50
+        completado:
+          type: boolean
+          example: false
+
+    ProgressListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgressItem'
+
+    RecentActivityItem:
+      type: object
+      properties:
+        intentoId:
+          type: integer
+        actividadId:
+          type: integer
+        temaId:
+          type: integer
+        titulo:
+          type: string
+        estado:
+          type: string
+          enum: [ENTREGADO, CALIFICADO]
+        ocurridoEn:
+          type: string
+          format: date-time
+        puntajePorcentaje:
+          type: number
+          nullable: true
+          example: 75
+
+    RecentActivityListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecentActivityItem'
+
+    MinutesItem:
+      type: object
+      properties:
+        dia:
+          type: string
+          format: date
+          example: "2026-11-03"
+        intentosEntregados:
+          type: integer
+          example: 1
+        minutosTranscurridos:
+          type: number
+          example: 11
+
+    MinutesListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MinutesItem'
+
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        seccionId:
+          type: integer
+        temaId:
+          type: integer
+        titulo:
+          type: string
+        finalidad:
+          type: string
+          enum: [PRACTICA, EVALUACION]
+        metodoCalificacion:
+          type: string
+          example: PROMEDIO
+        maxIntentos:
+          type: integer
+          nullable: true
+          description: null = sin límite
+        duracionMinutos:
+          type: integer
+          nullable: true
+        disponibleDesde:
+          type: string
+          format: date-time
+        disponibleHasta:
+          type: string
+          format: date-time
+          nullable: true
+        estado:
+          type: string
+          example: PUBLICADO
+        disponibleAhora:
+          type: boolean
+
+    ActivityListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
+
+    QuestionOption:
+      type: object
+      description: Opción de respuesta. Nunca incluye si es correcta.
+      properties:
+        id:
+          type: integer
+          example: 28
+        orden:
+          type: integer
+          example: 1
+        texto:
+          type: string
+          example: "4"
+
+    Question:
+      type: object
+      properties:
+        preguntaId:
+          type: integer
+          example: 13
+        respuestaId:
+          type: integer
+          description: Se usa en PUT /api/mis-respuestas/{respuestaId}/opciones
+          example: 48
+        orden:
+          type: integer
+        tipo:
+          type: string
+          enum: [SELECCION_UNICA, SELECCION_MULTIPLE]
+        enunciado:
+          type: string
+        puntajeMaximo:
+          type: number
+          example: 10
+        opciones:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionOption'
+        opcionesSeleccionadas:
+          type: array
+          description: Ids ya guardados por el estudiante (vacío al iniciar)
+          items:
+            type: integer
+
+    Questionnaire:
+      type: object
+      properties:
+        intentoId:
+          type: integer
+          example: 16
+        actividadId:
+          type: integer
+          example: 10
+        instrucciones:
+          type: string
+        venceEn:
+          type: string
+          format: date-time
+          nullable: true
+        preguntas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+
+    QuestionnaireResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Questionnaire'
+
+    SelectionBody:
+      type: object
+      required: [opciones]
+      properties:
+        opciones:
+          type: array
+          maxItems: 50
+          description: Lista completa de ids de opciones elegidas (reemplaza la anterior)
+          items:
+            type: integer
+            minimum: 1
+          example: [30, 31]
+
+    Selection:
+      type: object
+      properties:
+        respuestaId:
+          type: integer
+          example: 49
+        opcionesSeleccionadas:
+          type: array
+          items:
+            type: integer
+
+    SelectionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Selection'
+
+    AttemptResult:
+      type: object
+      properties:
+        intentoId:
+          type: integer
+          example: 16
+        actividadId:
+          type: integer
+          example: 10
+        estado:
+          type: string
+          enum: [ENTREGADO, CALIFICADO]
+          example: CALIFICADO
+        motivoEntrega:
+          type: string
+          enum: [MANUAL, VENCIMIENTO]
+        entregadoEn:
+          type: string
+          format: date-time
+        calificadoEn:
+          type: string
+          format: date-time
+          nullable: true
+        puntajeObtenido:
+          type: number
+          nullable: true
+          example: 20
+        puntajeMaximo:
+          type: number
+          example: 20
+        porcentaje:
+          type: number
+          nullable: true
+          example: 100
+
+    AttemptResultResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/AttemptResult'
+
+    RecommendationContext:
+      type: object
+      properties:
+        inscripcionId:
+          type: integer
+          example: 7
+        temaId:
+          type: integer
+          example: 15
+        tema:
+          type: string
+          example: SQL JOIN
+        accion:
+          type: string
+          enum: [reinforce_topic, maintain_difficulty, increase_difficulty]
+          example: reinforce_topic
+        dificultad:
+          type: string
+          enum: [reduced, current, increased]
+          example: reduced
+        recomendacion:
+          type: string
+        mastery:
+          type: number
+          description: Promedio de puntaje (0 a 100) de los intentos calificados del tema
+          example: 16.67
+        errors:
+          type: integer
+          description: Total de respuestas con puntaje 0
+          example: 10
+        attempts:
+          type: number
+          description: Promedio del número de intento
+          example: 2
+
+    RecommendationContextResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/RecommendationContext'
