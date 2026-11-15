@@ -36,8 +36,10 @@ const changeTopicStatus = async (req, res) =>
   ok(res, await service.changeTopicStatus(actor(req), parseId(req.params.id, 'tema'), req.body.estado));
 const deleteTopic = async (req, res) =>
   ok(res, await service.deleteTopic(actor(req), parseId(req.params.id, 'tema')));
+const listManageableCourses = async (req, res) =>
+  ok(res, await service.listManageableCourses(actor(req)));
 
 module.exports = {
   listModules, createModule, updateModule, changeModuleStatus, deleteModule,
-  listTopics, createTopic, updateTopic, changeTopicStatus, deleteTopic
+  listTopics, createTopic, updateTopic, changeTopicStatus, deleteTopic, listManageableCourses
 };

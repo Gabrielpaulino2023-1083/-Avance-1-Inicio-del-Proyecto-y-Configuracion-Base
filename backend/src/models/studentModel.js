@@ -3,7 +3,8 @@ const pool = require('../config/db');
 // Cursos en los que el estudiante tiene una inscripción ACTIVA
 const findActiveCourses = async (studentId) => {
   const { rows } = await pool.query(
-    `SELECT c.id AS "cursoId",
+     `SELECT i.id AS "inscripcionId",
+            c.id AS "cursoId",
             c.nombre,
             s.codigo AS seccion,
             i.estado,

@@ -9,6 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const studentLearningRoutes = require('./routes/studentLearningRoutes');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
@@ -31,6 +32,7 @@ app.get('/api/docs.json', (req, res) => res.json(openApiSpec));
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(openApiSpec));
 
 app.use('/api', contentRoutes);
+app.use('/api', studentLearningRoutes);
 
 // Siempre al final
 app.use(notFound);

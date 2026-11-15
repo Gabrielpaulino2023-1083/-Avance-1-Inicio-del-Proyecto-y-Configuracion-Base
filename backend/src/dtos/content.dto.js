@@ -35,4 +35,12 @@ const toTopicResponse = (t) => ({
   actualizadoEn: t.actualizado_en
 });
 
-module.exports = { contentBodyDto, contentStatusDto, toModuleResponse, toTopicResponse };
+const toManageableCourseResponse = (c) => ({
+  id: c.curso_id,
+  codigo: c.codigo,
+  nombre: c.nombre,
+  estado: c.estado,
+  puedeEditarContenido: c.puede_editar_contenido
+});
+
+module.exports = { contentBodyDto, contentStatusDto, toModuleResponse, toTopicResponse, toManageableCourseResponse };
