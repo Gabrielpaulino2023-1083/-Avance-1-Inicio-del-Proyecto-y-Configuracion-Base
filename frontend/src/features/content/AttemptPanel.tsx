@@ -189,7 +189,9 @@ export default function AttemptPanel({
             </button>
           )}
           <button type="button" className="action action--ghost" onClick={onExit}>
-            Volver a las actividades
+            {rec?.recommendation.action === "reinforce_topic"
+              ? "Practicar otra actividad de este tema"
+              : "Volver a las actividades"}
           </button>
         </div>
         {noData && (
@@ -205,11 +207,20 @@ export default function AttemptPanel({
           </p>
         )}
         {rec && (
-          <RecommendationCard
-            recommendation={rec.recommendation}
-            evidence={rec.evidence}
-            showAction={false}
-          />
+          <>
+            <RecommendationCard
+              recommendation={rec.recommendation}
+              evidence={rec.evidence}
+              showAction={false}
+            />
+            <p className="feedback__box feedback__box--hint">
+              {rec.recommendation.action === "reinforce_topic"
+                ? "Refuerzo: vuelve a las actividades de este tema y practica de nuevo. Cuando entregues otro intento, el motor recalcula tu recomendación."
+                : rec.recommendation.action === "increase_difficulty"
+                  ? "Para seguir avanzando: elige otro tema o una actividad más retadora."
+                  : "Sigue practicando este tema para mantener tu nivel."}
+            </p>
+          </>
         )}
       </section>
     );

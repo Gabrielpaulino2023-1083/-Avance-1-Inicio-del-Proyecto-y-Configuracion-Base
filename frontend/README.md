@@ -166,7 +166,7 @@ aparecen en el modo simulado, y cada pantalla lo indica.
 - **Dominio por tema:** `/progreso` mide actividades completadas, no dominio. La pantalla usa el promedio de las notas del tema (≥ 85 dominado, ≥ 60 en progreso, menor a 60 reforzar, los mismos umbrales del motor).
 - **Intento abierto:** no existe una ruta para listar el intento en curso. Si el navegador pierde el `intentoId` guardado, iniciar la actividad responde 409 hasta que el intento venza.
 - **Crear actividades y preguntas:** el backend no tiene rutas para eso; el docente no puede hacerlo desde la interfaz y el contenido de actividades se carga con seeds.
-- **Material de refuerzo:** las lecciones no existen en la base de datos; la lista de refuerzo solo aparece en el modo simulado.
+- **Material de refuerzo:** las lecciones no existen en la base de datos. En modo real, el refuerzo es practicar otra actividad del mismo tema y el motor recalcula con el nuevo intento; la lista de lecciones de refuerzo solo aparece en el modo simulado.
 - **Usuarios del seed inicial sin acceso:** tienen hashes ficticios; se usan las cuentas de desarrollo de arriba.
 
 ## Evidencia (capturas)
