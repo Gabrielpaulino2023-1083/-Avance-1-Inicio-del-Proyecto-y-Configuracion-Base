@@ -8,7 +8,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import {
-  BACKEND_DIR, config, requireFromBackend, configureBackendEnv, checkDatabase,
+  BACKEND_DIR, config, requireFromBackend, configureBackendEnv, checkDatabase, resetAuthRateLimit,
 } from "../config.mjs";
 
 configureBackendEnv();
@@ -24,6 +24,8 @@ let admin; // conexión administrativa para verificar y preparar datos
 const unique = () => `qa.${Date.now()}.${Math.random().toString(36).slice(2, 7)}@example.com`;
 
 async function api(method, route, { body, token, raw } = {}) {
+  // Login y registro tienen límite de 10 por IP: se reinicia para que las pruebas no reciban 429.
+  if (route.startsWith("/api/auth/login") || route.startsWith("/api/auth/register")) resetAuthRateLimit();
   const res = await fetch(`${baseUrl}${route}`, {
     method,
     headers: {
@@ -252,32 +254,69 @@ describe("CRUD de usuarios", { skip: BLOCKED }, () => {
     assert.equal(res.status, 403);
   });
 
-  test("CP-CRUD-08 listar y consultar estudiantes", async (t) => {
+  test("CP-CRUD-08 consultar estudiantes (resumen y progreso) respetando permisos", async (t) => {
     const { data } = await login(config.demoEmail, config.demoPassword);
+    const own = await api("GET", `/api/students/${data.user.id}`, { token: data.token });
+    if (blockIfMissing(t, own, "GET /api/students/:id")) return;
+    assert.equal(own.status, 200);
+    assert.equal(own.data.student.id, data.user.id);
+    assert.equal(own.data.simulado, false);
+    const progress = await api("GET", `/api/students/${data.user.id}/progress`, { token: data.token });
+    assert.equal(progress.status, 200);
+    assert.ok("variaciones" in progress.data.progress);
+
+    // Otro estudiante no puede ver este resumen.
+    const { user } = await registerUser();
+    const other = (await login(user.email, user.password)).data;
+    assert.equal((await api("GET", `/api/students/${data.user.id}`, { token: other.token })).status, 403);
+    // Listado general de estudiantes: no existe ruta (students:list sin uso).
     const list = await api("GET", "/api/students", { token: data.token });
-    const one = await api("GET", `/api/students/${data.user.id}`, { token: data.token });
-    if (blockIfMissing(t, one, "GET /api/students/:id") || blockIfMissing(t, list, "GET /api/students")) return;
-    assert.equal(list.status, 403, "un estudiante no tiene students:list");
-    assert.equal(one.status, 200);
+    assert.equal(list.status, 404, "GET /api/students no está implementado (se documenta en INC-09)");
   });
 
-  test("CP-CRUD-09 operaciones académicas por HTTP", async (t) => {
+  test("CP-CRUD-09 flujo académico por HTTP: inscripciones, actividades, intento, respuestas y entrega", async () => {
     const { data } = await login(config.demoEmail, config.demoPassword);
-    const candidates = [
-      ["POST", "/api/enrollments"],
-      ["POST", "/api/attempts"],
-      ["GET", "/api/results"],
-      ["GET", `/api/students/${data.user.id}/results`],
-    ];
-    const results = [];
-    for (const [method, route] of candidates) {
-      results.push(await api(method, route, { token: data.token, body: method === "POST" ? {} : undefined }));
+    const tk = data.token;
+    const cursos = await api("GET", "/api/mis-cursos", { token: tk });
+    assert.equal(cursos.status, 200);
+    const sql = cursos.data.data.find((c) => c.codigo === "DEMO-SQL-007");
+    assert.ok(sql, "el estudiante demo está inscrito en DEMO-SQL-007");
+
+    const modulos = await api("GET", `/api/mis-cursos/${sql.cursoId}/modulos`, { token: tk });
+    assert.equal(modulos.status, 200);
+    const temas = await api("GET", `/api/mis-modulos/${modulos.data.data[0].id}/temas`, { token: tk });
+    const join = temas.data.data.find((x) => x.nombre === "SQL JOIN");
+    const acts = await api("GET", `/api/mis-inscripciones/${sql.inscripcionId}/temas/${join.id}/actividades`, { token: tk });
+    assert.equal(acts.status, 200);
+    const evaluacion = acts.data.data.find((a) => a.finalidad === "EVALUACION");
+    assert.ok(evaluacion, "existe la evaluación de SQL JOIN");
+
+    // Iniciar intento → cuestionario sin respuestas correctas expuestas.
+    const start = await api("POST", `/api/mis-inscripciones/${sql.inscripcionId}/actividades/${evaluacion.id}/intentos`, { token: tk });
+    assert.equal(start.status, 201, JSON.stringify(start.data));
+    const cuestionario = start.data.data;
+    assert.ok(cuestionario.preguntas.length > 0);
+    assert.ok(!JSON.stringify(cuestionario).includes("es_correcta"), "no expone la respuesta correcta");
+
+    // Responder todas bien (las claves se leen de la BD con la cuenta administrativa).
+    for (const p of cuestionario.preguntas) {
+      const { rows } = await admin.query(
+        "SELECT id FROM opciones_respuestas WHERE pregunta_id = $1 AND es_correcta ORDER BY id", [p.preguntaId]);
+      const sel = await api("PUT", `/api/mis-respuestas/${p.respuestaId}/opciones`, {
+        token: tk, body: { opciones: rows.map((r) => r.id) },
+      });
+      assert.equal(sel.status, 200, JSON.stringify(sel.data));
     }
-    if (results.every((r) => r.status === 404)) {
-      t.skip("BLOQUEADO: no hay rutas HTTP para inscripción, intentos ni resultados. La lógica está probada a nivel SQL (CP-BD-01/02).");
-      return;
-    }
-    assert.ok(results.some((r) => r.status !== 404));
+    const entrega = await api("POST", `/api/mis-intentos/${cuestionario.intentoId}/entrega`, { token: tk });
+    assert.equal(entrega.status, 200, JSON.stringify(entrega.data));
+    assert.equal(entrega.data.data.porcentaje, 100);
+
+    // Persistido: el intento queda CALIFICADO en PostgreSQL y aparece en resultados.
+    const { rows } = await admin.query("SELECT estado FROM intentos WHERE id = $1", [cuestionario.intentoId]);
+    assert.equal(rows[0].estado, "CALIFICADO");
+    const resultados = await api("GET", `/api/mis-inscripciones/${sql.inscripcionId}/resultados`, { token: tk });
+    assert.equal(resultados.status, 200);
+    assert.ok(resultados.data.data.some((r) => r.actividadId === evaluacion.id || r.actividad_id === evaluacion.id || Number(r.promedioPorcentaje ?? r.promedio) === 100));
   });
 });
 
@@ -358,7 +397,10 @@ describe("Persistencia", { skip: BLOCKED }, () => {
        JOIN actividades a ON a.id = r.actividad_id
        JOIN inscripciones i ON i.id = r.inscripcion_id
        JOIN usuarios u ON u.id = i.estudiante_id
-       WHERE lower(u.email) = lower($1)
+       JOIN secciones s ON s.id = i.seccion_id
+       JOIN ediciones_curso e ON e.id = s.edicion_id
+       JOIN cursos c ON c.id = e.curso_id
+       WHERE lower(u.email) = lower($1) AND c.codigo = 'DEMO-003'
        ORDER BY a.finalidad`,
       [config.demoEmail]
     );
@@ -372,27 +414,30 @@ describe("Persistencia", { skip: BLOCKED }, () => {
 });
 
 describe("API general", { skip: BLOCKED }, () => {
+  test("CP-BE-10 cuerpo demasiado grande devuelve 413 con mensaje en español", async () => {
+    const res = await api("POST", "/api/auth/login", { body: { email: "a".repeat(200000), password: "x" } });
+    assert.equal(res.status, 413);
+    assert.equal(res.data.message, "El cuerpo de la petición es demasiado grande");
+  });
+
   test("CP-BE-09 health check y ruta inexistente", async () => {
     const health = await api("GET", "/api/health");
     assert.equal(health.status, 200);
     assert.equal(health.data.status, "ok");
+    // Sin token: una ruta que no existe debe responder 404, no pedir autenticación.
     const missing = await api("GET", "/api/no-existe");
-    assert.equal(missing.status, 404);
+    assert.equal(missing.status, 404, `respondió ${missing.status}: ${missing.data?.message}`);
     assert.equal(missing.data.message, "Ruta no encontrada");
   });
 
-  test("CP-MOT-11 backend llama al motor: POST /api/adaptive/analyze", async (t) => {
+  test("CP-MOT-11 backend llama al motor: POST /api/students/:id/recommendation", async (t) => {
     const { data } = await login(config.demoEmail, config.demoPassword);
-    const res = await api("POST", "/api/adaptive/analyze", {
-      token: data.token,
-      body: {
-        student_id: data.user.id,
-        topic: "SQL JOIN",
-        interactions: [{ study_minutes: 20, errors: 6, attempts: 3, repetitions: 1, navigation_count: 5, score_percentage: 45 }],
-      },
+    const res = await api("POST", `/api/students/${data.user.id}/recommendation`, {
+      token: data.token, body: { topic: "SQL JOIN" },
     });
-    if (blockIfMissing(t, res, "POST /api/adaptive/analyze (integración backend → motor Python)")) return;
-    assert.equal(res.status, 200);
-    assert.equal(res.data.recommendation.action, "reinforce_topic");
+    if (blockIfMissing(t, res, "POST /api/students/:id/recommendation (integración backend → motor Python)")) return;
+    assert.equal(res.status, 200, JSON.stringify(res.data));
+    assert.equal(res.data.recommendation.accion, "reinforce_topic");
+    assert.equal(res.data.recommendation.dificultad, "reduced");
   });
 });

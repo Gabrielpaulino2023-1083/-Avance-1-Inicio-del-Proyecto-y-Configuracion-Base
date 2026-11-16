@@ -44,6 +44,10 @@ export const config = {
   jwtSecret: env.JWT_SECRET || "qa-secreto-local-no-usar-en-produccion",
   demoEmail: env.DEMO_EMAIL || "estudiante.demo@example.com",
   demoPassword: env.DEMO_PASSWORD || "DemoEquipo-2026!",
+  adminDemoEmail: env.ADMIN_EMAIL || "administrador.demo@example.com",
+  adminDemoPassword: env.ADMIN_PASSWORD || "AdminDemo-2026!",
+  teacherEmail: env.TEACHER_EMAIL || "docente.demo@example.com",
+  teacherPassword: env.TEACHER_PASSWORD || "DocenteDemo-2026!",
   python: env.PYTHON || (process.platform === "win32" ? "python" : "python3"),
   browserChannel: env.E2E_BROWSER_CHANNEL ?? "chrome",
 };
@@ -61,6 +65,20 @@ export function configureBackendEnv() {
   process.env.DB_USER = config.appUser;
   process.env.DB_PASSWORD = config.appPassword;
   process.env.JWT_SECRET = config.jwtSecret;
+  // El backend ejecuta el motor con PYTHON_EXECUTABLE (backend/src/services/engineClient.js).
+  if (!process.env.PYTHON_EXECUTABLE) process.env.PYTHON_EXECUTABLE = config.python;
+  process.env.PYTHONUTF8 = "1";
+  process.env.PYTHONIOENCODING = "utf-8";
+}
+
+// El backend limita login y registro a 10 intentos por IP cada 15 minutos.
+// Las pruebas hacen muchos más, así que reinician el contador entre peticiones.
+// Solo funciona cuando el backend corre en el mismo proceso que la prueba.
+export function resetAuthRateLimit() {
+  const { authLimiter } = requireFromBackend(path.join(BACKEND_DIR, "src/middlewares/rateLimiters.js"));
+  for (const key of ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::/56"]) {
+    try { authLimiter.resetKey(key); } catch { /* clave inexistente */ }
+  }
 }
 
 // Comprueba si la base de QA responde. Devuelve null si todo va bien

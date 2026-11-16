@@ -78,7 +78,7 @@ describe("Motor por línea de comandos", { skip: BLOCKED }, () => {
   }
 
   test("CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida", () => {
-    const input = studentJson().replace('"study_minutes": 20', '"study_minutes": Infinity');
+    const input = studentJson().replace('"study_minutes":20', '"study_minutes":Infinity');
     assert.ok(input.includes("Infinity"));
     const r = runEngine(["--stdin"], input);
     if (r.code === 0) {

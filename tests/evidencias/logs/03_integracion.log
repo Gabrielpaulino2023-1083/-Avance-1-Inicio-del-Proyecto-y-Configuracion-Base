@@ -1,79 +1,128 @@
+▶ Pruebas SQL existentes del repositorio
+  ✔ CP-BD-01 regresión de la migración 003 (68.6311ms)
+  ✔ CP-BD-02 pruebas de la migración 004 (inscripción) (38.567349ms)
+  ✔ CP-BD-03 restricciones de integridad: 5 rechazos esperados (32.77945ms)
+  ✔ CP-BD-04 orden de módulos y temas: 4 rechazos esperados (30.697844ms)
+  ✔ CP-BD-06 CRUD de cursos (005) (38.861577ms)
+  ✔ CP-BD-07 CRUD de módulos y temas (006) (56.64464ms)
+  ✔ CP-BD-08 lectura de contenido del estudiante (007) (83.531088ms)
+  ✔ CP-BD-09 consultas de integración y motor (008) (46.362341ms)
+  ✔ CP-BD-10 seed DEMO-SQL-007 (38.702898ms)
+  ✔ CP-BD-05 permisos del rol plataforma_backend (30.167334ms)
+✔ Pruebas SQL existentes del repositorio (466.21997ms)
+◇ injected env (0) from .env
+▶ CRUD de cursos (administrador)
+  ✔ CP-CUR-01 crear curso y guardarlo en PostgreSQL (26.765854ms)
+  ✔ CP-CUR-02 listar, filtrar y consultar cursos (10.222451ms)
+  ✔ CP-CUR-03 actualizar curso y persistir el cambio (4.528539ms)
+  ✔ CP-CUR-04 archivar curso (baja lógica) y bloquear cambios posteriores (20.227414ms)
+  ✔ CP-CUR-05 código de curso duplicado (8.618036ms)
+  ✔ CP-CUR-06 datos inválidos e ids inexistentes (18.2994ms)
+✔ CRUD de cursos (administrador) (227.089428ms)
+▶ CRUD de módulos y temas (docente del curso DEMO-006)
+  ✔ CP-MT-01 crear módulo (BORRADOR por defecto) y guardarlo (10.83723ms)
+  ✔ CP-MT-02 listar y actualizar módulo (7.202629ms)
+  ✔ CP-MT-03 orden de módulo duplicado en el mismo curso (2.850061ms)
+  ✔ CP-MT-04 crear, listar, actualizar y publicar tema (23.972551ms)
+  ✔ CP-MT-05 cambiar estado del módulo (12.847541ms)
+  ✔ CP-MT-06 reglas de eliminación de temas y módulos (21.799117ms)
+  ✔ CP-MT-07 datos inválidos e ids inexistentes en módulos y temas (30.627449ms)
+  ✔ CP-MT-08 el estudiante solo ve módulos y temas publicados (108.789392ms)
+✔ CRUD de módulos y temas (docente del curso DEMO-006) (297.770225ms)
+◇ injected env (0) from .env
+▶ Tres escenarios adaptativos por la API
+  ✔ CP-ADP-01 escenario SQL JOIN → reinforce_topic (530.967647ms)
+  ✔ CP-ADP-02 escenario SQL WHERE → maintain_difficulty (474.224836ms)
+  ✔ CP-ADP-03 escenario SQL SELECT → increase_difficulty (475.904827ms)
+  ✔ CP-ADP-04 la evidencia de la recomendación coincide con PostgreSQL (671.705991ms)
+  ✔ CP-ADP-05 el Dashboard (progreso) recomienda reforzar el tema más débil (269.771386ms)
+  ✔ CP-ADP-06 un intento nuevo cambia los datos que analiza el motor (502.196257ms)
+✔ Tres escenarios adaptativos por la API (3078.363309ms)
+▶ Casos límite del motor por la API
+  ✔ CP-ADP-07 estudiante sin intentos (237.79299ms)
+  ✔ CP-ADP-08 datos inválidos en las rutas del motor (166.129788ms)
+  ✔ CP-ADP-09 errores del motor: Python ausente o motor que falla → 502 (355.79264ms)
+✔ Casos límite del motor por la API (760.189274ms)
+◇ injected env (0) from .env
+▶ Autenticación, roles y permisos
+  ✔ CP-ROL-01 cada cuenta demo inicia sesión con su rol (285.598423ms)
+  ✔ CP-ROL-02 matriz de permisos por rol en las rutas protegidas (40.893737ms)
+  ✔ CP-ROL-03 acceso a datos de un estudiante según el rol (178.265312ms)
+  ✔ CP-ROL-04 el docente solo edita el contenido de sus cursos (12.204127ms)
+  ✔ CP-ROL-05 usuario con varios roles recibe el de mayor jerarquía (223.277577ms)
+  ✔ CP-SEG-01 límite de 10 intentos de login por IP cada 15 minutos (24.546643ms)
+  ✔ CP-SEG-02 las respuestas no exponen datos sensibles (86.873003ms)
+✔ Autenticación, roles y permisos (853.071403ms)
 ◇ injected env (0) from .env
 ▶ Login
-  ✔ CP-LOG-01 login con credenciales válidas (215.544768ms)
-  ✔ CP-LOG-02 login sin distinguir mayúsculas y con espacios (96.516274ms)
-  ✔ CP-LOG-03 login con contraseña incorrecta (96.316632ms)
-  ✔ CP-LOG-04 login con correo no registrado (mismo mensaje) (4.881102ms)
-  ✔ CP-LOG-05 login con campos vacíos o ausentes (7.929884ms)
-  ✖ CP-LOG-06 login con JSON mal formado (4.184463ms)
-  ✔ CP-LOG-07 login con tipos de datos incorrectos (9.498212ms)
-  ✔ CP-LOG-08 usuario con hash ficticio del seed → 401 controlado (5.012544ms)
-  ✔ CP-LOG-09 cuenta desactivada no puede entrar ni usar su token (204.769004ms)
-  ✔ CP-LOG-10 /api/auth/me con token válido (96.184305ms)
-  ✔ CP-LOG-11 /me sin token, alterado, con otro secreto o vencido (109.31504ms)
-  ✔ CP-LOG-12 intento de inyección SQL en el login (101.621152ms)
-✖ Login (955.425272ms)
+  ✔ CP-LOG-01 login con credenciales válidas (130.53345ms)
+  ✔ CP-LOG-02 login sin distinguir mayúsculas y con espacios (72.130579ms)
+  ✔ CP-LOG-03 login con contraseña incorrecta (70.491537ms)
+  ✔ CP-LOG-04 login con correo no registrado (mismo mensaje) (3.574881ms)
+  ✔ CP-LOG-05 login con campos vacíos o ausentes (6.21139ms)
+  ✖ CP-LOG-06 login con JSON mal formado (3.350748ms)
+  ✔ CP-LOG-07 login con tipos de datos incorrectos (8.017869ms)
+  ✔ CP-LOG-08 usuario con hash ficticio del seed → 401 controlado (3.068471ms)
+  ✔ CP-LOG-09 cuenta desactivada no puede entrar ni usar su token (149.621085ms)
+  ✔ CP-LOG-10 /api/auth/me con token válido (79.618589ms)
+  ✔ CP-LOG-11 /me sin token, alterado, con otro secreto o vencido (74.175316ms)
+  ✔ CP-LOG-12 intento de inyección SQL en el login (84.108847ms)
+✖ Login (686.737981ms)
 ▶ CRUD de usuarios
-  ✔ CP-CRUD-01 crear (registro) con datos válidos (101.350143ms)
-  ✔ CP-CRUD-02 crear con correo duplicado (otra capitalización) (110.233453ms)
-  ✔ CP-CRUD-03 crear con datos inválidos (8.316384ms)
-  ✔ CP-CRUD-04 el registro ignora un rol enviado por el cliente (187.023497ms)
-  ✔ CP-CRUD-05 leer el usuario recién creado (192.972264ms)
-  ﹣ CP-CRUD-06 actualizar usuario / cambiar rol (95.711067ms) # BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404).
-  ﹣ CP-CRUD-07 eliminar / desactivar usuario (98.160429ms) # BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404).
-  ﹣ CP-CRUD-08 listar y consultar estudiantes (96.084736ms) # BLOQUEADO: GET /api/students/:id no está implementado en el backend (404).
-  ﹣ CP-CRUD-09 operaciones académicas por HTTP (96.533223ms) # BLOQUEADO: no hay rutas HTTP para inscripción, intentos ni resultados. La lógica está probada a nivel SQL (CP-BD-01/02).
-✔ CRUD de usuarios (987.011742ms)
+  ✔ CP-CRUD-01 crear (registro) con datos válidos (92.097054ms)
+  ✔ CP-CRUD-02 crear con correo duplicado (otra capitalización) (91.581355ms)
+  ✔ CP-CRUD-03 crear con datos inválidos (8.434942ms)
+  ✔ CP-CRUD-04 el registro ignora un rol enviado por el cliente (184.594715ms)
+  ✔ CP-CRUD-05 leer el usuario recién creado (153.043938ms)
+  ﹣ CP-CRUD-06 actualizar usuario / cambiar rol (71.830201ms) # BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404).
+  ﹣ CP-CRUD-07 eliminar / desactivar usuario (70.134845ms) # BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404).
+  ✔ CP-CRUD-08 consultar estudiantes (resumen y progreso) respetando permisos (499.301015ms)
+  ✔ CP-CRUD-09 flujo académico por HTTP: inscripciones, actividades, intento, respuestas y entrega (118.020464ms)
+✔ CRUD de usuarios (1289.682059ms)
 ▶ Persistencia
-  ✔ CP-PER-01 el registro se guarda en PostgreSQL de forma segura (96.444614ms)
-  ✔ CP-PER-02 los datos sobreviven a un reinicio del backend (432.354588ms)
-  ✔ CP-PER-03 un registro rechazado no deja datos a medias (9.003327ms)
-  ✔ CP-PER-04 resultados persistidos del seed de integración (2.836313ms)
-✔ Persistencia (540.937904ms)
+  ✔ CP-PER-01 el registro se guarda en PostgreSQL de forma segura (76.199175ms)
+  ✔ CP-PER-02 los datos sobreviven a un reinicio del backend (358.832056ms)
+  ✔ CP-PER-03 un registro rechazado no deja datos a medias (11.955033ms)
+  ✔ CP-PER-04 resultados persistidos del seed de integración (1.780293ms)
+✔ Persistencia (449.041972ms)
 ▶ API general
-  ✔ CP-BE-09 health check y ruta inexistente (3.046317ms)
-  ﹣ CP-MOT-11 backend llama al motor: POST /api/adaptive/analyze (94.476536ms) # BLOQUEADO: POST /api/adaptive/analyze (integración backend → motor Python) no está implementado en el backend (404).
-✔ API general (97.820741ms)
-▶ Pruebas SQL existentes del repositorio
-  ✔ CP-BD-01 regresión de la migración 003 (97.286073ms)
-  ✔ CP-BD-02 pruebas de la migración 004 (inscripción) (61.091601ms)
-  ✔ CP-BD-03 restricciones de integridad: 5 rechazos esperados (58.269138ms)
-  ✔ CP-BD-04 orden de módulos y temas: 4 rechazos esperados (61.363109ms)
-  ✔ CP-BD-05 permisos del rol plataforma_backend (58.446126ms)
-✔ Pruebas SQL existentes del repositorio (337.527056ms)
+  ✖ CP-BE-10 cuerpo demasiado grande devuelve 413 con mensaje en español (5.201272ms)
+  ✖ CP-BE-09 health check y ruta inexistente (2.739051ms)
+  ✔ CP-MOT-11 backend llama al motor: POST /api/students/:id/recommendation (354.353208ms)
+✖ API general (362.507789ms)
 ▶ Motor por línea de comandos
-  ✔ CP-MOT-09 --stdin escenario bajo devuelve JSON legible por Node (282.270744ms)
-  ✔ CP-MOT-09 --stdin escenario medio devuelve JSON legible por Node (301.846088ms)
-  ✔ CP-MOT-09 --stdin escenario alto devuelve JSON legible por Node (310.573532ms)
-  ✔ CP-MOT-10 main.py en modo local se ejecuta sin errores críticos (295.538083ms)
-  ✔ CP-VAL-12 CLI con JSON mal formado (314.503419ms)
-  ✔ CP-VAL-13 CLI con interacciones vacías (319.59339ms)
-  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (314.171175ms)
-  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (305.40802ms)
-  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (279.622388ms)
-  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (319.998876ms)
-  ✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (7.291352ms)
-✖ Motor por línea de comandos (3053.432824ms)
-ℹ tests 43
-ℹ suites 6
-ℹ pass 32
-ℹ fail 6
+  ✔ CP-MOT-09 --stdin escenario bajo devuelve JSON legible por Node (213.683255ms)
+  ✔ CP-MOT-09 --stdin escenario medio devuelve JSON legible por Node (217.412228ms)
+  ✔ CP-MOT-09 --stdin escenario alto devuelve JSON legible por Node (204.359641ms)
+  ✔ CP-MOT-10 main.py en modo local se ejecuta sin errores críticos (223.735244ms)
+  ✔ CP-VAL-12 CLI con JSON mal formado (210.237054ms)
+  ✔ CP-VAL-13 CLI con interacciones vacías (231.540652ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (229.589014ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (233.423692ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (229.196193ms)
+  ✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (242.269606ms)
+  ✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (218.755215ms)
+✖ Motor por línea de comandos (2455.523426ms)
+ℹ tests 79
+ℹ suites 11
+ℹ pass 69
+ℹ fail 8
 ℹ cancelled 0
-ℹ skipped 5
+ℹ skipped 2
 ℹ todo 0
-ℹ duration_ms 6740.530045
+ℹ duration_ms 12241.949596
 
 ✖ failing tests:
 
-test at integration/backend_api.test.mjs:116:3
-✖ CP-LOG-06 login con JSON mal formado (4.184463ms)
+test at integration/backend_api.test.mjs:118:3
+✖ CP-LOG-06 login con JSON mal formado (3.350748ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
   + actual - expected
   
   + 'Unexpected end of JSON input'
   - 'JSON inválido'
   
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/backend_api.test.mjs:119:12)
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/backend_api.test.mjs:121:12)
       at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
       at async Test.run (node:internal/test_runner/test:1054:7)
       at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
@@ -85,17 +134,57 @@ test at integration/backend_api.test.mjs:116:3
     diff: 'simple'
   }
 
+test at integration/backend_api.test.mjs:417:3
+✖ CP-BE-10 cuerpo demasiado grande devuelve 413 con mensaje en español (5.201272ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'request entity too large'
+  - 'El cuerpo de la petición es demasiado grande'
+  
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/backend_api.test.mjs:420:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1442:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'request entity too large',
+    expected: 'El cuerpo de la petición es demasiado grande',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at integration/backend_api.test.mjs:423:3
+✖ CP-BE-09 health check y ruta inexistente (2.739051ms)
+  AssertionError [ERR_ASSERTION]: respondió 401: Token requerido
+  
+  401 !== 404
+  
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/backend_api.test.mjs:429:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 401,
+    expected: 404,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
 test at integration/motor_cli.test.mjs:75:5
-✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (314.171175ms)
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: [] (229.589014ms)
   AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
   Traceback (most recent call last):
-    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
       [31mmain[0m[1;31m()[0m
       [31m~~~~[0m[1;31m^^[0m
-    File [35m"/home/claude/proj/-Avance-1-Inicio
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m20[
   Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
-      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
       at Test.runInAsyncScope (node:async_hooks:214:14)
       at Test.run (node:internal/test_runner/test:1047:25)
       at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -106,11 +195,11 @@ test at integration/motor_cli.test.mjs:75:5
     code: 'ERR_ASSERTION',
     actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
         at JSON.parse (<anonymous>)
-        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:45
         at getActual (node:assert:609:5)
         at Function.doesNotThrow (node:assert:777:32)
-        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
         at Test.runInAsyncScope (node:async_hooks:214:14)
         at Test.run (node:internal/test_runner/test:1047:25)
         at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -121,16 +210,16 @@ test at integration/motor_cli.test.mjs:75:5
   }
 
 test at integration/motor_cli.test.mjs:75:5
-✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (305.40802ms)
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: "texto" (233.423692ms)
   AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
   Traceback (most recent call last):
-    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
       [31mmain[0m[1;31m()[0m
       [31m~~~~[0m[1;31m^^[0m
-    File [35m"/home/claude/proj/-Avance-1-Inicio
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m20[
   Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
-      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
       at Test.runInAsyncScope (node:async_hooks:214:14)
       at Test.run (node:internal/test_runner/test:1047:25)
       at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -141,11 +230,11 @@ test at integration/motor_cli.test.mjs:75:5
     code: 'ERR_ASSERTION',
     actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
         at JSON.parse (<anonymous>)
-        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:45
         at getActual (node:assert:609:5)
         at Function.doesNotThrow (node:assert:777:32)
-        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
         at Test.runInAsyncScope (node:async_hooks:214:14)
         at Test.run (node:internal/test_runner/test:1047:25)
         at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -156,16 +245,16 @@ test at integration/motor_cli.test.mjs:75:5
   }
 
 test at integration/motor_cli.test.mjs:75:5
-✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (279.622388ms)
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: 5 (229.196193ms)
   AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
   Traceback (most recent call last):
-    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
       [31mmain[0m[1;31m()[0m
       [31m~~~~[0m[1;31m^^[0m
-    File [35m"/home/claude/proj/-Avance-1-Inicio
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m20[
   Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
-      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
       at Test.runInAsyncScope (node:async_hooks:214:14)
       at Test.run (node:internal/test_runner/test:1047:25)
       at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -176,11 +265,11 @@ test at integration/motor_cli.test.mjs:75:5
     code: 'ERR_ASSERTION',
     actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
         at JSON.parse (<anonymous>)
-        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:45
         at getActual (node:assert:609:5)
         at Function.doesNotThrow (node:assert:777:32)
-        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
         at Test.runInAsyncScope (node:async_hooks:214:14)
         at Test.run (node:internal/test_runner/test:1047:25)
         at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -191,16 +280,16 @@ test at integration/motor_cli.test.mjs:75:5
   }
 
 test at integration/motor_cli.test.mjs:75:5
-✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (319.998876ms)
+✖ CP-VAL-14 CLI con raíz JSON que no es objeto: null (242.269606ms)
   AssertionError [ERR_ASSERTION]: Got unwanted exception: stderr no es JSON:
   Traceback (most recent call last):
-    File [35m"/home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m47[0m, in [35m<module>[0m
       [31mmain[0m[1;31m()[0m
       [31m~~~~[0m[1;31m^^[0m
-    File [35m"/home/claude/proj/-Avance-1-Inicio
+    File [35m"/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py"[0m, line [35m20[
   Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON"
-      at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+      at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
       at Test.runInAsyncScope (node:async_hooks:214:14)
       at Test.run (node:internal/test_runner/test:1047:25)
       at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -211,11 +300,11 @@ test at integration/motor_cli.test.mjs:75:5
     code: 'ERR_ASSERTION',
     actual: SyntaxError: Unexpected token 'T', "Traceback "... is not valid JSON
         at JSON.parse (<anonymous>)
-        at file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:45
+        at file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:45
         at getActual (node:assert:609:5)
         at Function.doesNotThrow (node:assert:777:32)
-        at assertJsonError (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:36:10)
-        at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:76:7)
+        at assertJsonError (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:36:10)
+        at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:76:7)
         at Test.runInAsyncScope (node:async_hooks:214:14)
         at Test.run (node:internal/test_runner/test:1047:25)
         at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -226,22 +315,31 @@ test at integration/motor_cli.test.mjs:75:5
   }
 
 test at integration/motor_cli.test.mjs:80:3
-✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (7.291352ms)
-  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
-  
-    assert.ok(input.includes("Infinity"))
-  
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/integration/motor_cli.test.mjs:82:12)
+✖ CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida (218.755215ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception: Node no puede leer la salida:
+  {"profile": {"student_id": 1, "topic": "SQL JOIN", "average_score": 75.0, "total_errors": 2, "average_attempts": 2.0, "total_repetitions": 1, "average_study_minutes": Infinity, "total_interactions": 1
+  Actual message: "Unexpected token 'I', ..."minutes": Infinity, "... is not valid JSON"
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:85:14)
       at Test.runInAsyncScope (node:async_hooks:214:14)
       at Test.run (node:internal/test_runner/test:1047:25)
       at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
       at Test.postRun (node:internal/test_runner/test:1173:19)
       at Test.run (node:internal/test_runner/test:1101:12)
       at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
-    generatedMessage: true,
+    generatedMessage: false,
     code: 'ERR_ASSERTION',
-    actual: false,
-    expected: true,
-    operator: '==',
+    actual: SyntaxError: Unexpected token 'I', ..."minutes": Infinity, "... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:85:38
+        at getActual (node:assert:609:5)
+        at Function.doesNotThrow (node:assert:777:32)
+        at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/integration/motor_cli.test.mjs:85:14)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1047:25)
+        at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
+        at Test.postRun (node:internal/test_runner/test:1173:19)
+        at Test.run (node:internal/test_runner/test:1101:12),
+    expected: undefined,
+    operator: 'doesNotThrow',
     diff: 'simple'
   }

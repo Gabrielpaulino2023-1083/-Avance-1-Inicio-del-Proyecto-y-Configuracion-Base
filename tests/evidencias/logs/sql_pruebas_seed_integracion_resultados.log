@@ -1,0 +1,21 @@
+BEGIN
+SET
+SET
+SET
+         set_config          
+-----------------------------
+ estudiante.demo@example.com
+(1 row)
+
+DO
+SET
+DO
+ROLLBACK
+
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:98: NOTICE:  OK SEED: estudiante existente con rol activo e inscripcion identificada.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:98: NOTICE:  OK SEED: temas y actividades publicadas.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:98: NOTICE:  OK SEED: nueve intentos historicos calificados.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:98: NOTICE:  OK SEED: puntajes, respuestas y fechas historicas coherentes en dos semanas.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:98: NOTICE:  OK SEED: promedios historicos SELECT 91.67, WHERE 66.67, JOIN 16.67.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:125: NOTICE:  OK SEED: lectura de 007 comprobada como plataforma_backend.
+psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_seed_integracion_resultados.sql:125: NOTICE:  PRUEBAS SEED INTEGRACION COMPLETADAS.

@@ -1,5 +1,7 @@
-// Consolida en la matriz las pruebas SQL que ya existían en database/test/.
+// Consolida en la matriz las pruebas SQL del equipo (database/test/).
 // Se ejecutan con psql sobre la base de QA, como cuenta administrativa.
+// El prefijo 01_ hace que corra ANTES que las pruebas de API: 008 y el seed
+// esperan los datos iniciales, sin los intentos que agregan otras pruebas.
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -33,7 +35,7 @@ function runSql(file, { stopOnError = true } = {}) {
 
 // Errores "reales" (descarta los avisos de transacción abortada que siguen al primero).
 const realErrors = (output) =>
-  output.split("\n").filter((l) => /ERROR:/.test(l) && !/current transaction is aborted|transacción actual está abortada/.test(l));
+  output.split("\n").filter((l) => /ERROR:/.test(l) && !/current transaction is aborted|abortada/i.test(l));
 
 describe("Pruebas SQL existentes del repositorio", { skip: BLOCKED }, () => {
   test("CP-BD-01 regresión de la migración 003", () => {
@@ -61,6 +63,21 @@ describe("Pruebas SQL existentes del repositorio", { skip: BLOCKED }, () => {
     const errors = realErrors(output);
     assert.equal(errors.length, 4, errors.join("\n"));
   });
+
+  for (const [id, archivo, marca, titulo] of [
+    ["CP-BD-06", "pruebas_migracion_005.sql", /PRUEBAS 005 COMPLETADAS/, "CRUD de cursos (005)"],
+    ["CP-BD-07", "pruebas_migracion_006.sql", /PRUEBAS 006 COMPLETADAS/, "CRUD de módulos y temas (006)"],
+    ["CP-BD-08", "pruebas_migracion_007.sql", /PRUEBAS 007 COMPLETADAS/, "lectura de contenido del estudiante (007)"],
+    ["CP-BD-09", "pruebas_migracion_008.sql", /PRUEBAS 008 COMPLETADAS/, "consultas de integración y motor (008)"],
+    ["CP-BD-10", "pruebas_seed_integracion_resultados.sql", /PRUEBAS SEED INTEGRACION COMPLETADAS/, "seed DEMO-SQL-007"],
+  ]) {
+    test(`${id} ${titulo}`, () => {
+      const { code, output } = runSql(archivo);
+      assert.equal(code, 0, output.slice(-800));
+      assert.match(output, marca);
+      assert.match(output, /ROLLBACK/);
+    });
+  }
 
   test("CP-BD-05 permisos del rol plataforma_backend", () => {
     const { code, output } = runSql("pruebas_permisos.sql");

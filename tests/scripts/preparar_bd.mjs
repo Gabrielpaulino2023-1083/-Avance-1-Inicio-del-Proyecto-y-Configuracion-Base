@@ -1,6 +1,6 @@
 // Crea desde cero la base de QA usando SOLO los archivos del repositorio,
 // en el orden que indica database/README.md (sección 4):
-//   001 → 002 → 003 → security/001 → 004 → seeds → seed de integración.
+//   001 → 002 → 003 → security/001 → 004 → 005 → 006 → 007 → 008 → seeds.
 //
 // Uso:  npm run preparar-bd
 // Requiere psql en el PATH y la cuenta administrativa de tests/.env.test.
@@ -61,6 +61,10 @@ try {
     "migrations/003_actividades_intentos_respuestas.sql",
     "security/001_roles_permisos.sql",
     "migrations/004_inscripcion_estudiantes.sql",
+    "migrations/005_crud_cursos.sql",
+    "migrations/006_crud_modulos_temas.sql",
+    "migrations/007_lectura_contenido_estudiantes.sql",
+    "migrations/008_consultas_integracion.sql",
     "seeds/datos_prueba.sql",
     "seeds/datos_prueba_modulos_temas.sql",
   ];
@@ -69,12 +73,20 @@ try {
     psql(["-f", path.join(DATABASE_DIR, file)], { label: file });
   }
 
-  // El seed de integración pide el hash con \prompt; se lo enviamos por la entrada estándar.
-  step("Cargando seed de integración (cuenta demo con hash bcrypt real)");
-  const hash = bcrypt.hashSync(config.demoPassword, 10);
-  psql(["-f", path.join(DATABASE_DIR, "seeds/datos_prueba_actividades_intentos.sql")], {
-    input: `${hash}\n`,
-    label: "seeds/datos_prueba_actividades_intentos.sql",
+  // Los seeds de cuentas demo piden el hash bcrypt con \prompt: se lo enviamos por la entrada estándar.
+  const seedsConHash = [
+    ["seeds/datos_prueba_actividades_intentos.sql", config.demoPassword, "estudiante demo"],
+    ["seeds/datos_prueba_administrador.sql", config.adminDemoPassword, "administrador demo"],
+    ["seeds/datos_prueba_docente.sql", config.teacherPassword, "docente demo"],
+  ];
+  for (const [file, password, quien] of seedsConHash) {
+    step(`Aplicando database/${file} (${quien} con hash bcrypt real)`);
+    psql(["-f", path.join(DATABASE_DIR, file)], { input: `${bcrypt.hashSync(password, 10)}\n`, label: file });
+  }
+
+  step("Aplicando database/seeds/datos_prueba_integracion_resultados.sql (curso DEMO-SQL-007)");
+  psql(["-f", path.join(DATABASE_DIR, "seeds/datos_prueba_integracion_resultados.sql")], {
+    label: "seeds/datos_prueba_integracion_resultados.sql",
   });
 
   if (config.appUser !== config.adminUser) {
@@ -93,7 +105,7 @@ try {
     { label: "conteo de objetos" }
   ).trim();
   console.log(`\nBase de QA lista: ${counts}.`);
-  console.log(`Cuenta demo: ${config.demoEmail}`);
+  console.log(`Cuentas demo: ${config.demoEmail}, ${config.adminDemoEmail}, ${config.teacherEmail}`);
 } catch (error) {
   console.error(`\nERROR: ${error.message}`);
   process.exitCode = 1;

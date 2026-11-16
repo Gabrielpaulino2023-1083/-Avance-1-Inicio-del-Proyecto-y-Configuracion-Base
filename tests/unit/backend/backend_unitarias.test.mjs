@@ -222,8 +222,10 @@ test("CP-BE-08 OpenAPI documenta exactamente las rutas implementadas", () => {
     const routerPath = path.join(BACKEND_DIR, "src/routes", `${file}.js`);
     if (!fs.existsSync(routerPath)) continue;
     const routerSrc = fs.readFileSync(routerPath, "utf8");
-    for (const [, method, sub] of routerSrc.matchAll(/router\.(get|post|put|patch|delete)\('([^']+)'/g)) {
-      implemented.add(`${method.toUpperCase()} ${prefix}${sub === "/" ? "" : sub}`);
+    // \s* admite rutas declaradas en varias líneas; :id se escribe {id} en OpenAPI.
+    for (const [, method, sub] of routerSrc.matchAll(/router\.(get|post|put|patch|delete)\(\s*'([^']+)'/g)) {
+      const full = `${prefix}${sub === "/" ? "" : sub}`.replace(/:(\w+)/g, "{$1}");
+      implemented.add(`${method.toUpperCase()} ${full}`);
     }
   }
   assert.deepEqual([...documented].sort(), [...implemented].sort());

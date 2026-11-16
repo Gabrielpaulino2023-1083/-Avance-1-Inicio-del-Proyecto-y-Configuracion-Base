@@ -1,39 +1,93 @@
-▶ Frontend E2E
-  ✖ CP-UI-01 login real desde el navegador contra el backend (sin puente CORS) (7871.526764ms)
-  ✔ CP-UI-02 login válido en la pantalla (1955.343203ms)
-  ✔ CP-UI-03 login inválido en la pantalla (3010.69088ms)
-  ✔ CP-UI-04 validación de campos vacíos e inválidos en el formulario (2482.129937ms)
-  ✔ CP-UI-05 rutas protegidas sin sesión redirigen a /login (1848.527254ms)
-  ✔ CP-UI-06 registro desde la pantalla y login con la cuenta nueva (2501.148945ms)
-  ✔ CP-UI-07 navegación entre pantallas sin recarga (5189.143755ms)
-  ✔ CP-UI-08 la sesión se conserva al recargar y se borra al cerrar sesión (2891.324503ms)
-  ﹣ CP-UI-09 Dashboard con datos reales del backend (1836.05067ms) # BLOQUEADO: el Dashboard llama a /api/students/4 y /api/students/4/progress, que no existen en el backend (404). Pantalla: "Ruta no encontrada".
-  ✔ CP-UI-10 ejercicio interactivo de Contenido (3740.288292ms)
-  ﹣ CP-UI-11 envío de métricas del ejercicio al backend (4652.068028ms) # BLOQUEADO: el ejercicio no envía tiempo/intentos/errores; no existe endpoint para registrar interacciones (pendiente declarado en frontend/README.md).
-✖ Frontend E2E (38516.956143ms)
-ℹ tests 11
-ℹ suites 1
-ℹ pass 8
-ℹ fail 1
+◇ injected env (0) from .env
+▶ Frontend E2E — autenticación y navegación
+  ✔ CP-UI-01 login real desde el navegador contra el backend (CORS) (32211.800332ms)
+  ✔ CP-UI-02 login válido en la pantalla (2220.67002ms)
+  ✔ CP-UI-03 login inválido en la pantalla (2197.415652ms)
+  ✔ CP-UI-04 validación de campos vacíos e inválidos en el formulario (2701.429507ms)
+  ✔ CP-UI-05 rutas protegidas sin sesión redirigen a /login (3121.9838ms)
+  ✔ CP-UI-06 registro desde la pantalla y login con la cuenta nueva (3481.604623ms)
+  ✔ CP-UI-07 navegación entre pantallas sin recarga (2105.997518ms)
+  ✔ CP-UI-08 la sesión se conserva al recargar y se borra al cerrar sesión (3133.137432ms)
+  ✔ CP-UI-18 el menú muestra solo las secciones de cada rol (6246.126555ms)
+✔ Frontend E2E — autenticación y navegación (57998.307728ms)
+▶ Frontend E2E — motor adaptativo y datos reales
+  ✖ CP-UI-09 Dashboard con datos reales del backend (33092.512533ms)
+  ✔ CP-UI-10 ejercicio interactivo de Contenido (4004.106692ms)
+  ✔ CP-UI-12 recorrido visual completo del estudiante con recomendación real (7318.661421ms)
+  ✖ CP-UI-13 estudiante sin intentos ve un aviso, no un error (5318.437214ms)
+  ✔ CP-UI-14 error del motor: la pantalla informa sin romperse (3470.860933ms)
+  ﹣ CP-UI-11 envío de métricas del ejercicio al backend (3074.328789ms) # BLOQUEADO: el ejercicio solo envía el tema ({"topic":"SQL JOIN"}); el tiempo, los intentos y los errores del ejercicio no se guardan. La recomendación usa los intentos de la base (pendiente declarado en frontend/README.md).
+✖ Frontend E2E — motor adaptativo y datos reales (56280.591194ms)
+▶ Frontend E2E — administración de cursos y contenido
+  ✔ CP-UI-16 el administrador crea un curso desde la pantalla (3953.567044ms)
+  ✔ CP-UI-17 el docente crea un módulo de su curso desde la pantalla (4139.01546ms)
+✔ Frontend E2E — administración de cursos y contenido (8092.834779ms)
+▶ Frontend E2E — pendientes de integración y robustez
+  ﹣ CP-UI-19 el docente elige su curso de una lista (cursos administrables) (2212.587538ms) # BLOQUEADO: el docente debe escribir el ID numérico del curso. El backend ya ofrece GET /api/cursos-administrables, pero la pantalla todavía no lo usa (pendiente declarado en database/README.md).
+  ✖ CP-UI-20 el Dashboard sigue funcionando cuando el motor falla (4104.134007ms)
+✖ Frontend E2E — pendientes de integración y robustez (6317.159692ms)
+▶ Frontend E2E — desconexión del backend
+  ✔ CP-UI-15 el frontend avisa cuando el backend se desconecta (5409.730592ms)
+✔ Frontend E2E — desconexión del backend (5409.922487ms)
+ℹ tests 20
+ℹ suites 5
+ℹ pass 15
+ℹ fail 3
 ℹ cancelled 0
 ℹ skipped 2
 ℹ todo 0
-ℹ duration_ms 39173.218838
+ℹ duration_ms 134687.072534
 
 ✖ failing tests:
 
-test at functional/e2e_frontend.test.mjs:138:3
-✖ CP-UI-01 login real desde el navegador contra el backend (sin puente CORS) (7871.526764ms)
-  AssertionError [ERR_ASSERTION]: El navegador no pudo iniciar sesión contra el backend real. Mensaje en pantalla: "No se pudo conectar con el servidor. Verifica que el backend esté encendido.". Causa: el backend no envía cabeceras CORS (Access-Control-Allow-Origin).
-      at TestContext.<anonymous> (file:///home/claude/proj/-Avance-1-Inicio-del-Proyecto-y-Configuracion-Base-main/tests/functional/e2e_frontend.test.mjs:145:12)
+test at functional/e2e_frontend.test.mjs:264:3
+✖ CP-UI-09 Dashboard con datos reales del backend (33092.512533ms)
+  AssertionError [ERR_ASSERTION]: no debe mostrar datos simulados
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/functional/e2e_frontend.test.mjs:275:12)
       at async Test.run (node:internal/test_runner/test:1054:7)
       at async Promise.all (index 0)
       at async Suite.run (node:internal/test_runner/test:1442:7)
-      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+      at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
     generatedMessage: false,
     code: 'ERR_ASSERTION',
-    actual: false,
-    expected: true,
-    operator: '==',
+    actual: 'ANÁLISIS DEL MOTOR ADAPTATIVO\nDetectamos dificultades en SQL JOIN\n\nSe recomienda reforzar el tema SQL JOIN con explicaciones y ejercicios guiados.\n\nIr al ejercicio\nDatos de ejemplo\nDificultad reducida\nPrioridad alta\nDominio del tema\n50%\nErrores acumulados\n10\nIntentos promedio\n1.8',
+    expected: /Datos de ejemplo/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at functional/e2e_frontend.test.mjs:336:3
+✖ CP-UI-13 estudiante sin intentos ve un aviso, no un error (5318.437214ms)
+  AssertionError [ERR_ASSERTION]: el Dashboard no muestra error para un estudiante nuevo
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/functional/e2e_frontend.test.mjs:355:12)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at functional/e2e_frontend.test.mjs:468:3
+✖ CP-UI-20 el Dashboard sigue funcionando cuando el motor falla (4104.134007ms)
+  AssertionError [ERR_ASSERTION]: El Dashboard muestra un error en lugar de los datos: "Cannot read properties of null (reading 'tema')"
+  + actual - expected
+  
+  + "Cannot read properties of null (reading 'tema')"
+  - null
+  
+      at TestContext.<anonymous> (file:///home/claude/v2/proyecto-grupo4/tests/functional/e2e_frontend.test.mjs:479:14)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: "Cannot read properties of null (reading 'tema')",
+    expected: null,
+    operator: 'strictEqual',
     diff: 'simple'
   }
