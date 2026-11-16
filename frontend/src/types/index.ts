@@ -47,7 +47,7 @@ export interface DashboardSummary {
   modulesPending: number;
   activeCourses: number;
   pendingActivities: number;
-  averageScore: number;
+  averageScore: number | null;
   studyHours: number;
   trends: StatTrends;
   recommendation: Recommendation;

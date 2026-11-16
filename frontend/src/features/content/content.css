@@ -328,3 +328,46 @@
     padding: 1.4rem;
   }
 }
+
+/* Columna del ejercicio: ejercicio y, debajo, la recomendación del motor. */
+.exercise-col {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.reinforce {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+.reinforce__title {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+.reinforce__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.reinforce__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.reinforce__item small {
+  opacity: 0.7;
+}
+.reinforce__note {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.65;
+}

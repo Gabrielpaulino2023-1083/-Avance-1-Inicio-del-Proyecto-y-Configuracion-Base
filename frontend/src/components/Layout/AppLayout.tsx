@@ -3,7 +3,7 @@ import { useAuth } from "../../context/authContext";
 import { CapIcon, LogoutIcon } from "../../features/auth/icons";
 import "./nav.css";
 
-const links = [
+const baseLinks = [
   { to: "/", label: "Dashboard" },
   { to: "/contenido", label: "Contenido" },
   { to: "/resultados", label: "Resultados" },
@@ -19,7 +19,22 @@ const ROLE_LABEL = {
 export default function AppLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-    const location = useLocation();
+  const location = useLocation();
+
+    // Cada rol ve solo las secciones que usa.
+  const links =
+    user?.rol === "ADMINISTRADOR"
+      ? [
+          { to: "/", label: "Inicio" },
+          { to: "/cursos", label: "Cursos" },
+          { to: "/gestion", label: "Contenido" },
+        ]
+      : user?.rol === "DOCENTE"
+        ? [
+            { to: "/", label: "Inicio" },
+            { to: "/gestion", label: "Contenido" },
+          ]
+        : baseLinks;
 
   function handleLogout() {
     logout();
@@ -88,7 +103,7 @@ export default function AppLayout() {
         </div>
       </header>
 
-        <main className="app-content">
+      <main className="app-content">
         <div key={location.pathname} className="page">
           <Outlet />
         </div>

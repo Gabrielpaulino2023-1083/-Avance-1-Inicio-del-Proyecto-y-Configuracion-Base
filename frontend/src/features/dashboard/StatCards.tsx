@@ -5,7 +5,7 @@ import { useCountUp } from "./useCountUp";
 interface StatDef {
   key: string;
   label: string;
-  value: number;
+  value: number | null;
   suffix: string;
   delta: number;
   deltaText: string;
@@ -14,9 +14,10 @@ interface StatDef {
 }
 
 function StatCard({ stat }: { stat: StatDef }) {
-  const shown = useCountUp(stat.value, 800);
+  const hasValue = stat.value !== null;
+  const shown = useCountUp(stat.value ?? 0, 800);
   const isGood = stat.positiveIsGood ? stat.delta >= 0 : stat.delta <= 0;
-  const sign = stat.delta > 0 ? "+" : stat.delta < 0 ? "−" : "";
+  const sign = stat.delta > 0 ? "+" : stat.delta < 0 ? "\u2212" : "";
 
   return (
     <article className="stat">
@@ -25,17 +26,27 @@ function StatCard({ stat }: { stat: StatDef }) {
       </span>
       <div>
         <p className="stat__value">
-          {Math.round(shown)}
-          {stat.suffix}
+          {hasValue ? (
+            <>
+              {Math.round(shown)}
+              {stat.suffix}
+            </>
+          ) : (
+            "\u2014"
+          )}
         </p>
         <p className="stat__label">{stat.label}</p>
       </div>
-      <span
-        className={`stat__delta ${isGood ? "stat__delta--good" : "stat__delta--bad"}`}
-      >
-        {sign}
-        {Math.abs(stat.delta)} {stat.deltaText}
-      </span>
+      {hasValue ? (
+        <span
+          className={`stat__delta ${isGood ? "stat__delta--good" : "stat__delta--bad"}`}
+        >
+          {sign}
+          {Math.abs(stat.delta)} {stat.deltaText}
+        </span>
+      ) : (
+        <span className="stat__delta">{"A\u00fan sin evaluaciones"}</span>
+      )}
     </article>
   );
 }

@@ -20,6 +20,10 @@ const errorHandler = (err, req, res, next) => {
   }
   console.error(err);
   res.status(500).json({ success: false, message: 'Error interno del servidor' });
+
+    if (err.type === 'entity.too.large') {
+    return res.status(413).json({ success: false, message: 'El cuerpo de la petición es demasiado grande' });
+  }
 };
 
 module.exports = { notFound, errorHandler };

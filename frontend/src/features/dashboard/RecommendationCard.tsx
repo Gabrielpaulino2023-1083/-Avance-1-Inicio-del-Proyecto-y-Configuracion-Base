@@ -32,11 +32,18 @@ const DIFFICULTY_LABEL: Record<Recommendation["difficulty"], string> = {
 interface Props {
   recommendation: Recommendation;
   evidence: RecommendationEvidence;
+  showAction?: boolean;
+  sample?: boolean;
 }
 
-export default function RecommendationCard({ recommendation, evidence }: Props) {
+export default function RecommendationCard({
+  recommendation,
+  evidence,
+  showAction = true,
+  sample = false,
+}: Props) {
   const view = VIEW[recommendation.action];
-  const mastery = Math.round(evidence.mastery);
+  const mastery = Math.round(evidence.mastery * 10) / 10;
 
   return (
     <section className={`ai-card ai-card--${view.tone}`} aria-labelledby="ai-title">
@@ -55,9 +62,14 @@ export default function RecommendationCard({ recommendation, evidence }: Props) 
         <p className="ai-card__text">{recommendation.recommendation}</p>
 
         <div className="ai-card__foot">
-          <Link to="/contenido" className="btn btn--primary">
-            Ir al ejercicio
-          </Link>
+          {showAction && (
+            <Link to="/contenido" className="btn btn--primary">
+              Ir al ejercicio
+            </Link>
+          )}
+                    {sample && (
+            <span className="ai-card__chip">Datos de ejemplo</span>
+          )}
           <span className="ai-card__chip">
             {DIFFICULTY_LABEL[recommendation.difficulty]}
           </span>
