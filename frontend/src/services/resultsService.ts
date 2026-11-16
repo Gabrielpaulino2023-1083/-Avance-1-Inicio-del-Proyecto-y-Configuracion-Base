@@ -1,5 +1,11 @@
-// Historial de evaluaciones. DATOS DE EJEMPLO: el backend todavía no tiene
-// tabla de evaluaciones. Cuando exista, solo se cambia este archivo.
+// Historial de evaluaciones. En modo real viene de /mis-inscripciones/:id/resultados;
+// en modo simulado se usan datos de ejemplo.
+import { USE_MOCK } from "./http";
+import {
+  listEnrollments,
+  listResults,
+  loadTopicNames,
+} from "./learningService";
 
 export interface Evaluation {
   id: number;
@@ -8,7 +14,8 @@ export interface Evaluation {
   date: string; // AAAA-MM-DD
   score: number; // 0 a 100
   attempts: number;
-  errors: number;
+  // La API no guarda los errores por evaluación: null se muestra como guion.
+  errors: number | null;
 }
 
 // Nota mínima para considerar un tema dominado.
@@ -27,9 +34,50 @@ function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function getEvaluations(): Promise<Evaluation[]> {
-  await wait(500);
-  return MOCK_EVALUATIONS;
+// Fecha local AAAA-MM-DD de un instante.
+function localDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-CA");
+}
+
+async function apiEvaluations(token: string): Promise<Evaluation[]> {
+  const enrollments = await listEnrollments(token);
+  const perEnrollment = await Promise.all(
+    enrollments.map(async (e) => {
+      const [results, names] = await Promise.all([
+        listResults(token, e.inscripcionId),
+        loadTopicNames(token, e.cursoId),
+      ]);
+      return results.flatMap((r): Evaluation[] => {
+        const score = r.notaAcademicaPorcentaje ?? r.promedioPorcentaje;
+        // Sin nota o sin fecha de calificación no hay evaluación que mostrar.
+        if (score === null || !r.ultimaCalificacionEn) return [];
+        return [
+          {
+            id: r.actividadId,
+            title: r.titulo,
+            topic: names.get(r.temaId) ?? `Tema ${r.temaId}`,
+            date: localDate(r.ultimaCalificacionEn),
+            score: Math.round(score),
+            attempts: r.intentosCalificados ?? 0,
+            errors: null,
+          },
+        ];
+      });
+    })
+  );
+  return perEnrollment
+    .flat()
+    .sort((a, b) => a.date.localeCompare(b.date) || a.id - b.id);
+}
+
+export async function getEvaluations(
+  token: string | null
+): Promise<Evaluation[]> {
+  if (USE_MOCK || !token) {
+    await wait(500);
+    return MOCK_EVALUATIONS;
+  }
+  return apiEvaluations(token);
 }
 
 export function formatShortDate(date: string): string {

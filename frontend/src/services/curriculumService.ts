@@ -256,3 +256,26 @@ export async function deleteTema(token: string | null, id: number): Promise<void
   if (USE_MOCK) return mockDeleteTema(id);
   await request<unknown>(`/temas/${id}`, { method: "DELETE", token });
 }
+
+
+// ---------- Cursos que el usuario puede gestionar ----------
+
+// GET /api/cursos-administrables: el administrador ve todos; el docente,
+// solo aquellos donde es editor.
+export interface ManageableCourse {
+  id: number;
+  codigo: string;
+  nombre: string;
+  estado: string;
+  puedeEditarContenido: boolean;
+}
+
+export async function listManageableCourses(
+  token: string | null
+): Promise<ManageableCourse[]> {
+  const res = await request<{ success: boolean; data: ManageableCourse[] }>(
+    "/cursos-administrables",
+    { token }
+  );
+  return res.data;
+}
