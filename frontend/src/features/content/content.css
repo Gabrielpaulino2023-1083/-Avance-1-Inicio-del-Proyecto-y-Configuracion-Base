@@ -371,3 +371,57 @@
   font-size: 0.8rem;
   opacity: 0.65;
 }
+
+/* Contenido real (RealCourse) */
+.rc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rc-topic {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.rc-topic:hover,
+.rc-topic[aria-current="true"] {
+  background: rgba(37, 99, 235, 0.1);
+}
+.rc-select {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+  border-radius: 8px;
+}
+.rc-act {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+}
+.rc-act:first-child {
+  border-top: 0;
+}
+.rc-act small {
+  display: block;
+  opacity: 0.7;
+}
+.rc-question {
+  border: 0;
+  margin: 1.2rem 0 0;
+  padding: 0;
+}
+.rc-question legend {
+  padding: 0;
+  margin-bottom: 0.6rem;
+}

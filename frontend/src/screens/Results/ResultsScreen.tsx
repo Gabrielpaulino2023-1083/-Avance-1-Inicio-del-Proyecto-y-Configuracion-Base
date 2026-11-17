@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 import ResultStats from "../../features/results/ResultStats";
 import ScoreTrend from "../../features/results/ScoreTrend";
 import ResultsTable from "../../features/results/ResultsTable";
+import { ApiError, USE_MOCK } from "../../services/http";
 import {
   PASSING_SCORE,
   getEvaluations,
@@ -13,17 +15,52 @@ import "../../features/progress/progress.css";
 import "../../features/results/results.css";
 
 export default function ResultsScreen() {
+  const { token, logout } = useAuth();
   const [evaluations, setEvaluations] = useState<Evaluation[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
-    getEvaluations().then((data) => {
-      if (active) setEvaluations(data);
-    });
+    getEvaluations(token)
+      .then((data) => {
+        if (active) setEvaluations(data);
+      })
+      .catch((err: unknown) => {
+        if (!active) return;
+        if (err instanceof ApiError && err.status === 401) {
+          logout();
+          return;
+        }
+        setError(
+          err instanceof Error
+            ? err.message
+            : "No se pudieron cargar tus resultados."
+        );
+      });
     return () => {
       active = false;
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  const header = (
+    <header className="page-head">
+      <h1>Tus resultados</h1>
+      <p>
+        {USE_MOCK
+          ? "Revisa cómo te ha ido en cada evaluación. Datos de ejemplo (modo simulado)."
+          : "Notas de tus actividades calificadas, calculadas por el servidor. Los errores por evaluación no se guardan, por eso aparece un guion."}
+      </p>
+    </header>
+  );
+
+  if (error) {
+    return (
+      <p className="dash-state dash-state--error" role="alert">
+        {error}
+      </p>
+    );
+  }
 
   if (!evaluations) {
     return (
@@ -33,17 +70,23 @@ export default function ResultsScreen() {
     );
   }
 
+  if (evaluations.length === 0) {
+    return (
+      <div className="dash">
+        {header}
+        <p className="dash-state">
+          Aún no tienes evaluaciones calificadas. Completa una actividad en{" "}
+          <Link to="/contenido">Contenido</Link> y aquí verás tu nota.
+        </p>
+      </div>
+    );
+  }
+
   const lowest = evaluations.reduce((min, e) => (e.score < min.score ? e : min));
 
   return (
     <div className="dash">
-      <header className="page-head">
-        <h1>Tus resultados</h1>
-        <p>
-          Revisa cómo te ha ido en cada evaluación. Datos de ejemplo mientras
-          se conecta el backend.
-        </p>
-      </header>
+      {header}
 
       <ResultStats evaluations={evaluations} />
 

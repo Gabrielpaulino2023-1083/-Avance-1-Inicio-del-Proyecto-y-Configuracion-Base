@@ -1,5 +1,9 @@
-import type { ActivityItem, DashboardSummary } from "../types";
-import { request, USE_MOCK } from "./http";
+import type { ActivityItem, DashboardSummary, Recommendation } from "../types";import { request, USE_MOCK } from "./http";
+import {
+  listEnrollments,
+  listRecentAttempts,
+  type RecentAttempt,
+} from "./learningService";
 
 // ---------- Datos simulados (modo sin backend) ----------
 
@@ -62,6 +66,7 @@ const MOCK_SUMMARY: DashboardSummary = {
       "Se recomienda reforzar el tema SQL JOIN con explicaciones y ejercicios guiados. Conviene ofrecer material complementario con una explicación diferente.",
   },
   evidence: { mastery: 53.3, errors: 9, attempts: 3 },
+  recommendationRef: null,
   recentActivity: MOCK_ACTIVITY,
 };
 
@@ -91,33 +96,38 @@ interface StudentSummaryApi {
 }
 
 // GET /api/students/:id/progress
+// Las variaciones sin datos para comparar y la recomendación pueden ser null.
 interface StudentProgressApi {
   progress: {
     variaciones: {
-      porcentajeSemanal: number;
-      cursosMes: number;
-      actividadesSemana: number;
-      notaPuntos: number;
-      horasSemana: number;
+      porcentajeSemanal: number | null;
+      cursosMes: number | null;
+      actividadesSemana: number | null;
+      notaPuntos: number | null;
+      horasSemana: number | null;
     };
     recomendacion: {
+      inscripcionId: number;
+      temaId: number;
       tema: string;
-      accion: DashboardSummary["recommendation"]["action"];
-      dificultad: DashboardSummary["recommendation"]["difficulty"];
+      accion: Recommendation["action"];
+      dificultad: Recommendation["difficulty"];
+      prioridad: "alta" | "media" | "baja" | null;
       descripcion: string;
       motivo: {
         puntuacionPromedio: number;
         erroresAcumulados: number;
         intentosPromedio: number;
       };
-    };
+    } | null;
   };
 }
 
 // Traduce los campos en español del backend al formato que usan las pantallas.
 function toDashboardSummary(
   summary: StudentSummaryApi["student"],
-  progress: StudentProgressApi["progress"]
+  progress: StudentProgressApi["progress"],
+  recentActivity: ActivityItem[]
 ): DashboardSummary {
   const { variaciones: v, recomendacion: r } = progress;
 
@@ -132,36 +142,85 @@ function toDashboardSummary(
     studyHours: summary.horasEstudio,
     trends: {
       activeCourses: v.cursosMes,
-      pendingActivities: v.actividadesSemana,
+      // La API calcula la variación de intentos entregados, no de pendientes:
+      // se omite para no mostrar un dato que significa otra cosa.
+      pendingActivities: null,
       averageScore: v.notaPuntos,
       studyHours: v.horasSemana,
     },
-    recommendation: {
-      student_id: summary.id,
-      topic: r.tema,
-      action: r.accion,
-      difficulty: r.dificultad,
-      reason: `Puntuación promedio: ${r.motivo.puntuacionPromedio}%; errores acumulados: ${r.motivo.erroresAcumulados}; intentos promedio: ${r.motivo.intentosPromedio}.`,
-      recommendation: r.descripcion,
-    },
-    evidence: {
-      mastery: r.motivo.puntuacionPromedio,
-      errors: r.motivo.erroresAcumulados,
-      attempts: r.motivo.intentosPromedio,
-    },
-    recentActivity: MOCK_ACTIVITY,
+    recommendation: r
+      ? {
+          student_id: summary.id,
+          topic: r.tema,
+          action: r.accion,
+          difficulty: r.dificultad,
+          reason: `Puntuación promedio: ${r.motivo.puntuacionPromedio}%; errores acumulados: ${r.motivo.erroresAcumulados}; intentos promedio: ${r.motivo.intentosPromedio}.`,
+          recommendation: r.descripcion,
+        }
+      : null,
+    evidence: r
+      ? {
+          mastery: r.motivo.puntuacionPromedio,
+          errors: r.motivo.erroresAcumulados,
+          attempts: r.motivo.intentosPromedio,
+        }
+      : null,
+    recommendationRef: r
+      ? { inscripcionId: r.inscripcionId, temaId: r.temaId }
+      : null,
+    recentActivity,
   };
+}
+// Texto relativo: Hoy, Ayer, Hace N días o la fecha corta.
+function relativeDay(iso: string): string {
+  const day = (d: Date) =>
+    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const diff = Math.round((day(new Date()) - day(new Date(iso))) / 86400000);
+  if (diff <= 0) return "Hoy";
+  if (diff === 1) return "Ayer";
+  if (diff < 7) return `Hace ${diff} días`;
+  return new Date(iso).toLocaleDateString("es-DO", {
+    day: "numeric",
+    month: "short",
+  });
+}
+
+function toActivityItem(a: RecentAttempt): ActivityItem {
+  const score =
+    a.puntajePorcentaje === null ? "" : `: ${a.puntajePorcentaje}%`;
+  return {
+    id: a.intentoId,
+    kind: "evaluation",
+    title:
+      a.estado === "CALIFICADO" ? "Evaluación calificada" : "Evaluación entregada",
+    detail: `${a.titulo}${score}`,
+    when: relativeDay(a.ocurridoEn),
+  };
+}
+
+// Últimos intentos de todas las inscripciones del estudiante, del más nuevo al más viejo.
+async function apiRecentActivity(token: string): Promise<ActivityItem[]> {
+  const enrollments = await listEnrollments(token);
+  const lists = await Promise.all(
+    enrollments.map((e) => listRecentAttempts(token, e.inscripcionId, 5))
+  );
+  return lists
+    .flat()
+    .sort((a, b) => Date.parse(b.ocurridoEn) - Date.parse(a.ocurridoEn))
+    .slice(0, 5)
+    .map(toActivityItem);
 }
 
 async function apiSummary(
   token: string,
   studentId: number
 ): Promise<DashboardSummary> {
-  const [summary, progress] = await Promise.all([
+  const [summary, progress, activity] = await Promise.all([
     request<StudentSummaryApi>(`/students/${studentId}`, { token }),
     request<StudentProgressApi>(`/students/${studentId}/progress`, { token }),
+    apiRecentActivity(token),
   ]);
-  return toDashboardSummary(summary.student, progress.progress);
+  return toDashboardSummary(summary.student, progress.progress, activity);
 }
 
 export function getDashboardSummary(

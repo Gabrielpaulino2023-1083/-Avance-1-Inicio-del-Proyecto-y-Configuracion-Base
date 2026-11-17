@@ -49,7 +49,7 @@ export default function ResultsTable({
                     <strong>{e.score}%</strong>
                   </td>
                   <td className="num">{e.attempts}</td>
-                  <td className="num">{e.errors}</td>
+                  <td className="num">{e.errors ?? "\u2014"}</td>
                   <td>
                     <span
                       className={`topic__chip ${
