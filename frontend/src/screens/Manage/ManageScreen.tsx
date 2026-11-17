@@ -15,8 +15,11 @@ import {
   updateTema,
 } from "../../services/curriculumService";
 import { ApiError, USE_MOCK } from "../../services/http";
-import { listCursos } from "../../services/courseService";
-import type { Curso } from "../../types/course";import {
+import {
+  listManageableCourses,
+  type ManageableCourse,
+} from "../../services/curriculumService";
+import {
   ESTADOS,
   type ContenidoInput,
   type EstadoContenido,
@@ -64,10 +67,12 @@ export default function ManageScreen() {
   const [deleting, setDeleting] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
   const isAdmin = user?.rol === "ADMINISTRADOR";
-  const [cursos, setCursos] = useState<Curso[]>([]);
+  const [cursos, setCursos] = useState<ManageableCourse[]>([]);
   const [cursoId, setCursoId] = useState<number | null>(null);
-  const [cursoInput, setCursoInput] = useState("");
-
+    // Un docente puede ver un curso sin ser editor: en ese caso es solo lectura.
+  const canEdit =
+    USE_MOCK ||
+    (cursos.find((c) => c.id === cursoId)?.puedeEditarContenido ?? false);
   function fail(error: unknown) {
     // Sesión vencida: se cierra y ProtectedRoute lleva al login.
     if (error instanceof ApiError && error.status === 401) {
@@ -81,15 +86,22 @@ export default function ManageScreen() {
     });
   }
 
-    // Administrador: carga los cursos del backend y elige el primero.
+     // Carga los cursos que el usuario puede gestionar y elige el primero
+  // donde puede editar.
   useEffect(() => {
-    if (USE_MOCK || !isAdmin) return;
+    if (USE_MOCK) return;
     let active = true;
-    listCursos(token)
+    listManageableCourses(token)
       .then((data) => {
         if (!active) return;
         setCursos(data);
-        setCursoId((actual) => actual ?? data[0]?.id ?? null);
+        setCursoId(
+          (actual) =>
+            actual ??
+            data.find((c) => c.puedeEditarContenido)?.id ??
+            data[0]?.id ??
+            null
+        );
       })
       .catch((error) => {
         if (active) fail(error);
@@ -267,50 +279,31 @@ export default function ManageScreen() {
         {!USE_MOCK && (
           <div className="mg-curso">
             <label htmlFor="mg-curso-campo">Curso</label>
-            {isAdmin ? (
-              <select
-                id="mg-curso-campo"
-                className="mg-curso__campo"
-                value={cursoId ?? ""}
-                onChange={(e) =>
-                  changeCurso(e.target.value ? Number(e.target.value) : null)
-                }
-              >
-                {cursos.length === 0 && <option value="">Sin cursos</option>}
-                {cursos.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.codigo} · {c.nombre}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <form
-                className="mg-curso__form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const n = Number(cursoInput);
-                  changeCurso(Number.isInteger(n) && n > 0 ? n : null);
-                }}
-              >
-                <input
-                  id="mg-curso-campo"
-                  className="mg-curso__campo"
-                  type="number"
-                  min={1}
-                  placeholder="ID del curso"
-                  value={cursoInput}
-                  onChange={(e) => setCursoInput(e.target.value)}
-                />
-                <button type="submit" className="mg-btn">
-                  Cargar
-                </button>
-              </form>
-            )}
+                 <select
+              id="mg-curso-campo"
+              className="mg-curso__campo"
+              value={cursoId ?? ""}
+              onChange={(e) =>
+                changeCurso(e.target.value ? Number(e.target.value) : null)
+              }
+            >
+              {cursos.length === 0 && <option value="">Sin cursos</option>}
+              {cursos.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.codigo} · {c.nombre}
+                </option>
+              ))}
+            </select>
             {cursoId === null && (
               <span className="mg-curso__hint">
                 {isAdmin
                   ? "No hay cursos todavía. Créalos en la sección Cursos."
-                  : "Escribe el ID del curso que editas (provisional hasta que exista la ruta de mis cursos)."}
+                  : "Aún no tienes cursos asignados como editor."}
+              </span>
+            )}
+            {cursoId !== null && !canEdit && (
+              <span className="mg-curso__hint">
+                Solo lectura: no eres editor de este curso.
               </span>
             )}
           </div>
@@ -353,8 +346,7 @@ export default function ManageScreen() {
         <button
           type="button"
           className="mg-btn mg-btn--primary"
-                    disabled={!USE_MOCK && cursoId === null}
-          onClick={() => setDialog({ kind: "modulo", item: null })}
+                    disabled={!canEdit || (!USE_MOCK && cursoId === null)}          onClick={() => setDialog({ kind: "modulo", item: null })}
         >
           + Nuevo módulo
         </button>

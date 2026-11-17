@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import ModuleList from "../../features/content/ModuleList";
 import ExercisePanel from "../../features/content/ExercisePanel";
+import RealCourse from "../../features/content/RealCourse";
 import { getContent, type ContentData } from "../../services/contentService";
 import "../../features/dashboard/dashboard.css";
 import "../../features/progress/progress.css";
 import "../../features/content/content.css";
 import { USE_MOCK } from "../../services/http";
 
-export default function ContentScreen() {
+function MockContentScreen() {
   const [content, setContent] = useState<ContentData | null>(null);
 
   useEffect(() => {
@@ -44,4 +45,25 @@ export default function ContentScreen() {
         <ExercisePanel exercise={content.exercise} modules={content.modules} />      </div>
     </div>
   );
+}
+
+// Con la API real se navega el contenido publicado; en modo simulado se
+// mantiene la pantalla de ejemplo.
+function RealContentScreen() {
+  return (
+    <div className="dash">
+      <header className="page-head">
+        <h1>Contenido y ejercicios</h1>
+        <p>
+          Elige un tema para ver sus actividades. El contenido viene de la
+          base de datos.
+        </p>
+      </header>
+      <RealCourse />
+    </div>
+  );
+}
+
+export default function ContentScreen() {
+  return USE_MOCK ? <MockContentScreen /> : <RealContentScreen />;
 }

@@ -1,14 +1,14 @@
 import type { WeeklyHour } from "../../services/progressService";
 
 export default function WeeklyHoursChart({ data }: { data: WeeklyHour[] }) {
-  const max = Math.max(...data.map((d) => d.hours));
+  const max = Math.max(0.1, ...data.map((d) => d.hours));
   const total = data.reduce((sum, d) => sum + d.hours, 0);
 
   return (
     <section className="panel" aria-labelledby="hours-title">
       <div className="panel__head">
         <h2 id="hours-title" className="panel__title">
-          Horas de estudio esta semana
+            Horas de estudio · últimos 7 días
         </h2>
         <span className="panel__badge">{total} h en total</span>
       </div>

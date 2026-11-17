@@ -7,17 +7,19 @@ interface StatDef {
   label: string;
   value: number | null;
   suffix: string;
-  delta: number;
+  delta: number | null;
   deltaText: string;
   positiveIsGood: boolean;
   icon: ReactNode;
 }
-
 function StatCard({ stat }: { stat: StatDef }) {
   const hasValue = stat.value !== null;
   const shown = useCountUp(stat.value ?? 0, 800);
-  const isGood = stat.positiveIsGood ? stat.delta >= 0 : stat.delta <= 0;
-  const sign = stat.delta > 0 ? "+" : stat.delta < 0 ? "\u2212" : "";
+  const delta = stat.delta;
+  const isGood =
+    delta === null ? true : stat.positiveIsGood ? delta >= 0 : delta <= 0;
+  const sign =
+    delta === null ? "" : delta > 0 ? "+" : delta < 0 ? "\u2212" : "";
 
   return (
     <article className="stat">
@@ -37,20 +39,21 @@ function StatCard({ stat }: { stat: StatDef }) {
         </p>
         <p className="stat__label">{stat.label}</p>
       </div>
-      {hasValue ? (
+      {!hasValue ? (
+        <span className="stat__delta">{"A\u00fan sin evaluaciones"}</span>
+      ) : delta === null ? (
+        <span className="stat__delta">{"\u2014 sin datos para comparar"}</span>
+      ) : (
         <span
           className={`stat__delta ${isGood ? "stat__delta--good" : "stat__delta--bad"}`}
         >
           {sign}
-          {Math.abs(stat.delta)} {stat.deltaText}
+          {Math.abs(delta)} {stat.deltaText}
         </span>
-      ) : (
-        <span className="stat__delta">{"A\u00fan sin evaluaciones"}</span>
       )}
     </article>
   );
 }
-
 export default function StatCards({ summary }: { summary: DashboardSummary }) {
   const { trends } = summary;
 

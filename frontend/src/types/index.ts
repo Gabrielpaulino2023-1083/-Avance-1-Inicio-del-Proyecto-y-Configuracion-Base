@@ -42,7 +42,7 @@ export interface ActivityItem {
 
 export interface DashboardSummary {
   progressPercent: number;
-  weeklyChange: number;
+  weeklyChange: number | null;
   modulesCompleted: number;
   modulesPending: number;
   activeCourses: number;
@@ -50,15 +50,20 @@ export interface DashboardSummary {
   averageScore: number | null;
   studyHours: number;
   trends: StatTrends;
-  recommendation: Recommendation;
-    evidence: RecommendationEvidence;
+  // null cuando el estudiante aún no tiene intentos calificados.
+  recommendation: Recommendation | null;
+  evidence: RecommendationEvidence | null;
+  // Para pedir la recomendación detallada (paso 3).
+  recommendationRef: { inscripcionId: number; temaId: number } | null;
   recentActivity: ActivityItem[];
 }
+
+// null = no hay datos para comparar: la pantalla muestra un guion.
 export interface StatTrends {
-  activeCourses: number;
-  pendingActivities: number;
-  averageScore: number;
-  studyHours: number;
+  activeCourses: number | null;
+  pendingActivities: number | null;
+  averageScore: number | null;
+  studyHours: number | null;
 }
 
 // Datos que explican por qué el motor hace su recomendación.

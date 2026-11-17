@@ -15,7 +15,13 @@ export default function TopicMastery({ topics }: { topics: TopicProgress[] }) {
         </h2>
       </div>
 
-      <ul className="topics">
+      {topics.length === 0 && (
+        <p className="topic__percent">
+          Aún no tienes notas por tema. Completa una actividad para ver tu
+          dominio.
+        </p>
+      )}
+      <ul className="topics">        
         {topics.map((t) => (
           <li key={t.id} className="topic">
             <div className="topic__row">

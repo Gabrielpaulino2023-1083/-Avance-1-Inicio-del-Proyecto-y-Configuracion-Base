@@ -70,8 +70,9 @@ export default function DashboardHero({ name, summary }: Props) {
           </li>
           <li className="fact fact--up">
             <strong>
-              {change > 0 ? "+" : ""}
-              {change}%
+              {change === null
+                ? "\u2014"
+                : `${change > 0 ? "+" : ""}${change}%`}
             </strong>
             <span>respecto a la semana anterior</span>
           </li>
@@ -79,7 +80,7 @@ export default function DashboardHero({ name, summary }: Props) {
                 <p className="hero__note">
           {USE_MOCK
             ? "Datos de ejemplo (modo simulado)."
-            : "Cursos activos, actividades pendientes, nota promedio y horas vienen de la base de datos. El progreso, los módulos y el cambio semanal son datos de ejemplo hasta que el backend los calcule."}
+            : "Datos reales de tu cuenta. El cambio semanal del progreso no se guarda en la base de datos, por eso aparece un guion."}
         </p>
       </div>
     </section>

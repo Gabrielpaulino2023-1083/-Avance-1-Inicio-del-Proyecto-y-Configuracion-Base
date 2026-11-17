@@ -33,20 +33,29 @@ export default function ActivityTimeline({ items }: { items: ActivityItem[] }) {
         Actividad reciente
       </h2>
 
-      <ol className="timeline__list">
-        {items.map((item) => (
-          <li key={item.id} className={`timeline__item timeline__item--${item.kind}`}>
-            <span className="timeline__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">{ICONS[item.kind]}</svg>
-            </span>
-            <div className="timeline__body">
-              <p className="timeline__name">{item.title}</p>
-              <p className="timeline__detail">{item.detail}</p>
-            </div>
-            <span className="timeline__when">{item.when}</span>
-          </li>
-        ))}
-      </ol>
+            {items.length === 0 ? (
+        <p className="timeline__detail">
+          Aún no has entregado ninguna actividad.
+        </p>
+      ) : (
+        <ol className="timeline__list">
+          {items.map((item) => (
+            <li
+              key={item.id}
+              className={`timeline__item timeline__item--${item.kind}`}
+            >
+              <span className="timeline__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">{ICONS[item.kind]}</svg>
+              </span>
+              <div className="timeline__body">
+                <p className="timeline__name">{item.title}</p>
+                <p className="timeline__detail">{item.detail}</p>
+              </div>
+              <span className="timeline__when">{item.when}</span>
+            </li>
+          ))}
+        </ol>
+      )}
     </section>
   );
 }

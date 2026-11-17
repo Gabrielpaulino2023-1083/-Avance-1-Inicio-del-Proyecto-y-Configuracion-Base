@@ -189,6 +189,7 @@
   }
 
   .topbar__nav {
+    min-width: 0;
     order: 3;
     flex-basis: 100%;
     margin: 0;
@@ -201,6 +202,10 @@
 }
 
 @media (max-width: 520px) {
+    .topbar__nav a {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.85rem;
+  }
   .topbar__who {
     display: none;
   }
