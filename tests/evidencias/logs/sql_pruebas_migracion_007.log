@@ -1,0 +1,529 @@
+BEGIN
+SET
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+INSERT 0 0
+DO
+GRANT
+SET
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+INSERT 0 1
+INSERT 0 1
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ guardar_opciones_respuesta 
+----------------------------
+ 
+(1 row)
+
+ ok007 
+-------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+RESET
+UPDATE 2
+SET
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 2
+SELECT 1
+UPDATE 1
+SET
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+                                                           entregar_intento                                                           
+--------------------------------------------------------------------------------------------------------------------------------------
+ (17,14,7,1,ENTREGADO,"2026-11-17 23:49:52.949977+00","2026-11-19 23:49:52.911756+00","2026-11-17 23:49:52.984841+00",MANUAL,,,20.00)
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+                                                                            calificar_intento                                                                             
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ (17,14,7,1,CALIFICADO,"2026-11-17 23:49:52.949977+00","2026-11-19 23:49:52.911756+00","2026-11-17 23:49:52.984841+00",MANUAL,"2026-11-17 23:49:52.98641+00",10.00,20.00)
+(1 row)
+
+ error007 
+----------
+ 
+(1 row)
+
+RESET
+DO
+ROLLBACK
+
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:114: NOTICE:  OK 007: pruebas ejecutadas como backend
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:116: NOTICE:  OK 007: EXECUTE listar_modulos_publicados_estudiante(integer,integer)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:118: NOTICE:  OK 007: EXECUTE listar_temas_publicados_estudiante(integer,integer)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:120: NOTICE:  OK 007: EXECUTE listar_actividades_publicadas_estudiante(integer,integer,integer)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:122: NOTICE:  OK 007: EXECUTE obtener_cuestionario_estudiante(integer,integer)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:124: NOTICE:  OK 007: helper privado
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:126: NOTICE:  OK 007: sin lectura directa de es_correcta
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:128: NOTICE:  OK 007: sin nuevas escrituras directas
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:130: NOTICE:  OK 007: propietario, snapshot y search_path
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:132: NOTICE:  OK 007: sin EXECUTE a PUBLIC
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:134: NOTICE:  OK 007: solo modulos publicados sin duplicar por dos inscripciones
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:136: NOTICE:  OK 007: contador excluye borradores y archivados
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:138: NOTICE:  OK 007: modulo publicado sin temas
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:140: NOTICE:  OK 007: solo temas publicados
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:142: NOTICE:  OK 007: lista vacia valida
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:144: NOTICE:  OK 007: rechazo sin_inscripcion (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:146: NOTICE:  OK 007: rechazo admin (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:148: NOTICE:  OK 007: rechazo docente (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:150: NOTICE:  OK 007: curso ajeno (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:152: NOTICE:  OK 007: 006 sigue siendo administrativa (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:154: NOTICE:  OK 007: padre no publicado modulo_borrador (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:156: NOTICE:  OK 007: padre no publicado modulo_archivado (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:158: NOTICE:  OK 007: tema oculto tema_borrador (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:160: NOTICE:  OK 007: tema oculto tema_archivado (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:162: NOTICE:  OK 007: tema oculto tema_padre_oculto (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:164: NOTICE:  OK 007: actividades limitadas a la seccion de inscripcion
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:166: NOTICE:  OK 007: ventana actual
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:168: NOTICE:  OK 007: metadatos visibles, ventana no disponible futura
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:170: NOTICE:  OK 007: metadatos visibles, ventana no disponible cerrada
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:172: NOTICE:  OK 007: tema sin actividades
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:174: NOTICE:  OK 007: aislamiento entre ediciones del mismo estudiante
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:176: NOTICE:  OK 007: inscripcion de otro estudiante (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:178: NOTICE:  OK 007: parametro invalido (esperado 22023, recibido 22023)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:180: NOTICE:  OK 007: parametro invalido (esperado 22023, recibido 22023)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:182: NOTICE:  OK 007: parametro invalido (esperado 22023, recibido 22023)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:184: NOTICE:  OK 007: parametro invalido (esperado 22023, recibido 22023)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:186: NOTICE:  OK 007: modulo inexistente (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:188: NOTICE:  OK 007: intento inexistente (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:194: NOTICE:  OK 007: cuestionario y respuestas reales de iniciar_intento
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:196: NOTICE:  OK 007: opciones unica
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:198: NOTICE:  OK 007: opciones multiple
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:200: NOTICE:  OK 007: selecciones inicialmente vacias
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:202: NOTICE:  OK 007: lista cerrada de campos del cuestionario
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:204: NOTICE:  OK 007: opciones sin claves de correccion
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:206: NOTICE:  OK 007: no filtra explicaciones
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:208: NOTICE:  OK 007: intento ajeno (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:212: NOTICE:  OK 007: recupera seleccion guardada propia
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:218: NOTICE:  OK 007: cuenta inactiva invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:220: NOTICE:  OK 007: cuenta inactiva invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:222: NOTICE:  OK 007: cuenta inactiva invalida listado de modulos (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:224: NOTICE:  OK 007: cuenta inactiva invalida listado de temas (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:234: NOTICE:  OK 007: rol inactivo invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:236: NOTICE:  OK 007: rol inactivo invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:238: NOTICE:  OK 007: rol inactivo invalida listado de modulos (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:240: NOTICE:  OK 007: rol inactivo invalida listado de temas (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:250: NOTICE:  OK 007: curso archivado invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:252: NOTICE:  OK 007: curso archivado invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:254: NOTICE:  OK 007: curso archivado invalida listado de modulos (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:256: NOTICE:  OK 007: curso archivado invalida listado de temas (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:266: NOTICE:  OK 007: seccion cancelada invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:268: NOTICE:  OK 007: seccion cancelada invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:278: NOTICE:  OK 007: edicion cancelada invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:280: NOTICE:  OK 007: edicion cancelada invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:290: NOTICE:  OK 007: inscripcion retirada invalida cuestionario (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:292: NOTICE:  OK 007: inscripcion retirada invalida listado de actividades (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:302: NOTICE:  OK 007: modulo archivado invalida cuestionario (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:312: NOTICE:  OK 007: tema archivado invalida cuestionario (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:322: NOTICE:  OK 007: actividad archivada invalida cuestionario (esperado P0002, recibido P0002)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:332: NOTICE:  OK 007: sin ninguna inscripcion activa (esperado 42501, recibido 42501)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:341: NOTICE:  OK 007: intento vencido (esperado 55000, recibido 55000)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:349: NOTICE:  OK 007: intento entregado (esperado 55000, recibido 55000)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:353: NOTICE:  OK 007: intento calificado (esperado 55000, recibido 55000)
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_007.sql:356: NOTICE:  PRUEBAS 007 COMPLETADAS: todos los casos incluidos pasaron.

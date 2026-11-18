@@ -1,0 +1,6 @@
+ puede_insertar_intentos | puede_modificar_respuestas | puede_eliminar_selecciones | puede_iniciar_mediante_funcion 
+-------------------------+----------------------------+----------------------------+--------------------------------
+ f                       | f                          | f                          | t
+(1 row)
+
+

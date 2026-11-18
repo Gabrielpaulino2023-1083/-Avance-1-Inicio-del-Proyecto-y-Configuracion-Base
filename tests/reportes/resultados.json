@@ -1,0 +1,4894 @@
+{
+  "generado": "2026-11-17T23:52:57.046Z",
+  "resumen": {
+    "total": 130,
+    "APROBADO": 118,
+    "FALLIDO": 10,
+    "BLOQUEADO": 2
+  },
+  "porModulo": {
+    "Backend / API": {
+      "APROBADO": 51,
+      "FALLIDO": 4,
+      "BLOQUEADO": 2,
+      "total": 57
+    },
+    "Base de datos": {
+      "APROBADO": 11,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 11
+    },
+    "Motor adaptativo": {
+      "APROBADO": 34,
+      "FALLIDO": 6,
+      "BLOQUEADO": 0,
+      "total": 40
+    },
+    "Frontend": {
+      "APROBADO": 22,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 22
+    }
+  },
+  "porRequisito": {
+    "RF-01": {
+      "APROBADO": 16,
+      "FALLIDO": 1,
+      "BLOQUEADO": 0,
+      "total": 17,
+      "casos": [
+        "CP-LOG-01",
+        "CP-LOG-02",
+        "CP-LOG-03",
+        "CP-LOG-04",
+        "CP-LOG-05",
+        "CP-LOG-06",
+        "CP-LOG-07",
+        "CP-LOG-08",
+        "CP-LOG-09",
+        "CP-LOG-10",
+        "CP-LOG-11",
+        "CP-LOG-12",
+        "CP-UI-01",
+        "CP-UI-02",
+        "CP-UI-03",
+        "CP-UI-06",
+        "CP-UI-08"
+      ]
+    },
+    "RF-02": {
+      "APROBADO": 9,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 9,
+      "casos": [
+        "CP-ROL-01",
+        "CP-ROL-02",
+        "CP-ROL-03",
+        "CP-ROL-04",
+        "CP-ROL-05",
+        "CP-CRUD-04",
+        "CP-BE-06",
+        "CP-UI-05",
+        "CP-UI-18"
+      ]
+    },
+    "RNF-01": {
+      "APROBADO": 4,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 4,
+      "casos": [
+        "CP-SEG-01",
+        "CP-SEG-02",
+        "CP-BE-03",
+        "CP-BE-05"
+      ]
+    },
+    "RF-03": {
+      "APROBADO": 3,
+      "FALLIDO": 0,
+      "BLOQUEADO": 2,
+      "total": 5,
+      "casos": [
+        "CP-CRUD-01",
+        "CP-CRUD-02",
+        "CP-CRUD-05",
+        "CP-CRUD-06",
+        "CP-CRUD-07"
+      ]
+    },
+    "RNF-02": {
+      "APROBADO": 19,
+      "FALLIDO": 9,
+      "BLOQUEADO": 0,
+      "total": 28,
+      "casos": [
+        "CP-CRUD-03",
+        "CP-VAL-01",
+        "CP-VAL-02",
+        "CP-VAL-03",
+        "CP-VAL-04",
+        "CP-VAL-05",
+        "CP-VAL-06",
+        "CP-VAL-07",
+        "CP-VAL-08",
+        "CP-VAL-09",
+        "CP-VAL-10",
+        "CP-VAL-11",
+        "CP-VAL-12",
+        "CP-VAL-13",
+        "CP-VAL-14",
+        "CP-VAL-15",
+        "CP-BE-01",
+        "CP-BE-02",
+        "CP-BE-04",
+        "CP-BE-07",
+        "CP-BE-09",
+        "CP-BE-10",
+        "CP-FE-01",
+        "CP-FE-02",
+        "CP-FE-03",
+        "CP-UI-04",
+        "CP-UI-14",
+        "CP-UI-15"
+      ]
+    },
+    "RF-08": {
+      "APROBADO": 4,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 4,
+      "casos": [
+        "CP-CRUD-08",
+        "CP-UI-09",
+        "CP-UI-13",
+        "CP-UI-20"
+      ]
+    },
+    "RF-06": {
+      "APROBADO": 1,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 1,
+      "casos": [
+        "CP-CRUD-09"
+      ]
+    },
+    "RF-04": {
+      "APROBADO": 7,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 7,
+      "casos": [
+        "CP-CUR-01",
+        "CP-CUR-02",
+        "CP-CUR-03",
+        "CP-CUR-04",
+        "CP-CUR-05",
+        "CP-CUR-06",
+        "CP-UI-16"
+      ]
+    },
+    "RF-05": {
+      "APROBADO": 10,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 10,
+      "casos": [
+        "CP-MT-01",
+        "CP-MT-02",
+        "CP-MT-03",
+        "CP-MT-04",
+        "CP-MT-05",
+        "CP-MT-06",
+        "CP-MT-07",
+        "CP-MT-08",
+        "CP-UI-17",
+        "CP-UI-19"
+      ]
+    },
+    "RF-09": {
+      "APROBADO": 4,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 4,
+      "casos": [
+        "CP-PER-01",
+        "CP-PER-02",
+        "CP-PER-03",
+        "CP-PER-04"
+      ]
+    },
+    "RNF-04": {
+      "APROBADO": 10,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 10,
+      "casos": [
+        "CP-BD-01",
+        "CP-BD-02",
+        "CP-BD-03",
+        "CP-BD-04",
+        "CP-BD-05",
+        "CP-BD-06",
+        "CP-BD-07",
+        "CP-BD-08",
+        "CP-BD-09",
+        "CP-BD-10"
+      ]
+    },
+    "RF-07": {
+      "APROBADO": 29,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 29,
+      "casos": [
+        "CP-MOTD-01",
+        "CP-MOTD-02",
+        "CP-MOTD-03",
+        "CP-MOTD-04",
+        "CP-MOTD-05",
+        "CP-MOTD-06",
+        "CP-MOT-01",
+        "CP-MOT-02",
+        "CP-MOT-03",
+        "CP-MOT-04",
+        "CP-MOT-05",
+        "CP-MOT-06",
+        "CP-MOT-07",
+        "CP-MOT-08",
+        "CP-MOT-09",
+        "CP-MOT-10",
+        "CP-MOT-11",
+        "CP-ADP-01",
+        "CP-ADP-02",
+        "CP-ADP-03",
+        "CP-ADP-04",
+        "CP-ADP-05",
+        "CP-ADP-06",
+        "CP-ADP-07",
+        "CP-ADP-08",
+        "CP-ADP-09",
+        "CP-UI-10",
+        "CP-UI-11",
+        "CP-UI-12"
+      ]
+    },
+    "RNF-05": {
+      "APROBADO": 1,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 1,
+      "casos": [
+        "CP-BE-08"
+      ]
+    },
+    "RNF-03": {
+      "APROBADO": 1,
+      "FALLIDO": 0,
+      "BLOQUEADO": 0,
+      "total": 1,
+      "casos": [
+        "CP-UI-07"
+      ]
+    }
+  },
+  "totalPruebasAutomatizadas": 202,
+  "casos": [
+    {
+      "id": "CP-LOG-01",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Login con credenciales válidas",
+      "pasos": "POST /api/auth/login con la cuenta demo del seed de integración.",
+      "datos": "estudiante.demo@example.com / DemoEquipo-2026!",
+      "esperado": "200, success=true, token JWT válido (id y rol), usuario con rol ESTUDIANTE y sin passwordHash.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-01 login con credenciales válidas",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-02",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Login sin distinguir mayúsculas y con espacios en el correo",
+      "pasos": "POST /api/auth/login con el correo en mayúsculas y con espacios alrededor.",
+      "datos": "'  ESTUDIANTE.DEMO@EXAMPLE.COM  '",
+      "esperado": "200: el correo se normaliza (trim + lower).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-02 login sin distinguir mayúsculas y con espacios",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-03",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Login con contraseña incorrecta",
+      "pasos": "POST /api/auth/login con un correo existente y contraseña errónea.",
+      "datos": "estudiante.demo@example.com / ClaveIncorrecta1",
+      "esperado": "401 'Credenciales inválidas', sin token.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-03 login con contraseña incorrecta",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-04",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Login con correo no registrado",
+      "pasos": "POST /api/auth/login con un correo inexistente.",
+      "datos": "no.existe@example.com",
+      "esperado": "401 con el MISMO mensaje que contraseña incorrecta (no revela si el correo existe).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-04 login con correo no registrado (mismo mensaje)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-05",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Login con campos vacíos o ausentes",
+      "pasos": "POST /api/auth/login con email y password vacíos, y con cuerpo {}.",
+      "datos": "{email:'', password:''} y {}",
+      "esperado": "400 'Datos inválidos' con details por campo.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-05 login con campos vacíos o ausentes",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-06",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Login con JSON mal formado",
+      "pasos": "POST /api/auth/login con un cuerpo que no es JSON válido.",
+      "datos": "{\"email\": ",
+      "esperado": "400 'JSON inválido' (no 500).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "FALLIDO",
+      "motivo": "1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+      "incidencias": [
+        "INC-02"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-06 login con JSON mal formado",
+          "status": "fail",
+          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-07",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Login con tipos de datos incorrectos",
+      "pasos": "POST /api/auth/login con password numérico, email como objeto y cuerpo como arreglo.",
+      "datos": "{password: 12345678}, {email:{}}, []",
+      "esperado": "400 en todos los casos (no 500).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-07 login con tipos de datos incorrectos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-08",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Login de usuario con hash ficticio del seed",
+      "pasos": "POST /api/auth/login con estudiante@example.com (password_hash = HASH_FICTICIO_NO_USAR).",
+      "datos": "estudiante@example.com / estudiante123",
+      "esperado": "401 controlado (no 500).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-08 usuario con hash ficticio del seed → 401 controlado",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-09",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Login de cuenta desactivada",
+      "pasos": "Registrar un usuario, desactivarlo en BD (activo=false) e intentar login; probar también /me con su token previo.",
+      "datos": "Usuario QA temporal",
+      "esperado": "Login 401; /me con token emitido antes de desactivar → 401.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-09 cuenta desactivada no puede entrar ni usar su token",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-10",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Consultar /api/auth/me con token válido",
+      "pasos": "Login y luego GET /api/auth/me con Authorization: Bearer <token>.",
+      "datos": "Token de la cuenta demo",
+      "esperado": "200 con los datos del usuario autenticado (sin passwordHash).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-10 /api/auth/me con token válido",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-11",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Acceso a /me sin token, con token alterado o vencido",
+      "pasos": "GET /api/auth/me sin cabecera, con esquema distinto de Bearer, con firma alterada, con otro secreto y con token expirado.",
+      "datos": "Tokens generados en la prueba",
+      "esperado": "401 en todos los casos.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-11 /me sin token, alterado, con otro secreto o vencido",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-LOG-12",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Login",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Intento de inyección SQL en el login",
+      "pasos": "POST /api/auth/login con cargas típicas de inyección en email y password.",
+      "datos": "' OR '1'='1' -- , admin@example.com'--",
+      "esperado": "401 (las consultas son parametrizadas); nunca 200 ni 500.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-LOG-12 intento de inyección SQL en el login",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ROL-01",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Roles y permisos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Cada cuenta demo inicia sesión con su rol",
+      "pasos": "Login y /me con estudiante, docente y administrador demo.",
+      "datos": "Cuentas demo de los seeds",
+      "esperado": "Rol ESTUDIANTE, DOCENTE y ADMINISTRADOR respectivamente.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ROL-01 cada cuenta demo inicia sesión con su rol",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ROL-02",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Roles y permisos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Matriz de permisos por rol en rutas protegidas",
+      "pasos": "Llamar /cursos, /cursos-administrables, /modulos y /mis-cursos con cada rol y sin token.",
+      "datos": "Tabla de rutas × roles",
+      "esperado": "Estudiante: solo /mis-cursos. Docente: contenido y cursos administrables. Administrador: cursos y contenido. Sin token: 401.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ROL-02 matriz de permisos por rol en las rutas protegidas",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ROL-03",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Roles y permisos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Acceso a los datos de un estudiante según el rol",
+      "pasos": "GET /api/students/:id con el propio estudiante, otro estudiante, un docente ajeno y el administrador.",
+      "datos": "Cuenta demo y estudiante QA",
+      "esperado": "200 propio, 403 otro estudiante, 403 docente sin relación, 200 administrador, 404 si el id no es estudiante.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ROL-03 acceso a datos de un estudiante según el rol",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ROL-04",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Roles y permisos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "El docente solo edita el contenido de sus cursos",
+      "pasos": "Docente demo crea un módulo en CALC-PRUEBA (no es editor).",
+      "datos": "docente.demo@example.com",
+      "esperado": "Solo ve DEMO-006 como administrable; 403 y nada guardado en la base.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ROL-04 el docente solo edita el contenido de sus cursos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ROL-05",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Roles y permisos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Usuario con varios roles recibe el de mayor jerarquía",
+      "pasos": "Asignar DOCENTE a un estudiante QA e iniciar sesión.",
+      "datos": "Estudiante QA + rol DOCENTE",
+      "esperado": "El token y la respuesta tienen rol DOCENTE (ADMINISTRADOR > DOCENTE > ESTUDIANTE).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ROL-05 usuario con varios roles recibe el de mayor jerarquía",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-SEG-01",
+      "requisito": "RNF-01",
+      "modulo": "Backend / API",
+      "area": "Seguridad",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Límite de intentos de login",
+      "pasos": "11 intentos de login fallidos seguidos desde la misma IP.",
+      "datos": "Credenciales incorrectas",
+      "esperado": "Los 10 primeros 401; el 11.º 429 'Demasiados intentos'.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-SEG-01 límite de 10 intentos de login por IP cada 15 minutos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-SEG-02",
+      "requisito": "RNF-01",
+      "modulo": "Backend / API",
+      "area": "Seguridad",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Las respuestas no exponen datos sensibles",
+      "pasos": "Revisar el resumen del estudiante y una respuesta de error.",
+      "datos": "Cuenta demo",
+      "esperado": "Sin contraseñas, hashes, SQL ni trazas internas.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-SEG-02 las respuestas no exponen datos sensibles",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-01",
+      "requisito": "RF-03",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear (registro) con datos válidos",
+      "pasos": "POST /api/auth/register con nombre, apellido, email y password válidos.",
+      "datos": "Usuario QA con correo único",
+      "esperado": "201, usuario con id, rol ESTUDIANTE y sin passwordHash.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-01 crear (registro) con datos válidos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-02",
+      "requisito": "RF-03",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear con correo duplicado (otra capitalización)",
+      "pasos": "Registrar dos veces el mismo correo; la segunda en mayúsculas.",
+      "datos": "qa.xxx@example.com y QA.XXX@EXAMPLE.COM",
+      "esperado": "409 'Ya existe un usuario con ese email'.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-02 crear con correo duplicado (otra capitalización)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-03",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear con datos inválidos",
+      "pasos": "Registrar con email mal formado, contraseña de 7 y de 73 caracteres, nombre vacío y apellido de 51 caracteres.",
+      "datos": "Varias combinaciones",
+      "esperado": "400 'Datos inválidos' con el campo señalado en details.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-03 crear con datos inválidos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-04",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Registro no permite escalar privilegios",
+      "pasos": "Registrar enviando rol: 'ADMINISTRADOR' en el cuerpo.",
+      "datos": "{..., rol:'ADMINISTRADOR'}",
+      "esperado": "201 con rol ESTUDIANTE; el campo rol se ignora.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-04 el registro ignora un rol enviado por el cliente",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-05",
+      "requisito": "RF-03",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Leer el usuario recién creado",
+      "pasos": "Registrar, iniciar sesión y consultar GET /api/auth/me.",
+      "datos": "Usuario QA",
+      "esperado": "200 con los mismos nombre, apellido y email registrados.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-05 leer el usuario recién creado",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-06",
+      "requisito": "RF-03",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Actualizar usuario / cambiar rol",
+      "pasos": "PATCH /api/users/:id/role (existe changeRoleDto y el permiso users:change-role, pero no la ruta).",
+      "datos": "{rol:'DOCENTE'} con token de administrador",
+      "esperado": "Endpoint disponible. Si devuelve 404 → BLOQUEADO (no implementado).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "BLOQUEADO",
+      "motivo": "BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404).",
+      "incidencias": [
+        "INC-09"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-06 actualizar usuario / cambiar rol",
+          "status": "skip",
+          "mensaje": "BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404).",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-07",
+      "requisito": "RF-03",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Baja",
+      "titulo": "Eliminar / desactivar usuario",
+      "pasos": "DELETE /api/users/:id.",
+      "datos": "Usuario QA",
+      "esperado": "Endpoint disponible. Si devuelve 404 → BLOQUEADO (no implementado).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "BLOQUEADO",
+      "motivo": "BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404).",
+      "incidencias": [
+        "INC-09"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-07 eliminar / desactivar usuario",
+          "status": "skip",
+          "mensaje": "BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404).",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-08",
+      "requisito": "RF-08",
+      "modulo": "Backend / API",
+      "area": "CRUD usuarios",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Consultar resumen y progreso de un estudiante",
+      "pasos": "GET /api/students/:id y /progress con el token del propio estudiante; luego con el token de otro estudiante; y GET /api/students.",
+      "datos": "Cuenta demo y un estudiante QA",
+      "esperado": "200 para el propio estudiante con simulado=false; 403 para otro estudiante; el listado general aún no existe (404, ver INC-09).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-08"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-08 consultar estudiantes (resumen y progreso) respetando permisos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CRUD-09",
+      "requisito": "RF-06",
+      "modulo": "Backend / API",
+      "area": "CRUD académico",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Flujo académico por HTTP: inscripciones, actividades, intento, respuestas y entrega",
+      "pasos": "GET /mis-cursos, /modulos, /temas y /actividades; POST intento; PUT opciones correctas; POST entrega; GET resultados.",
+      "datos": "Cuenta demo, curso DEMO-SQL-007, evaluación de SQL JOIN",
+      "esperado": "201 al iniciar (sin exponer respuestas correctas), 100 % al entregar, intento CALIFICADO en PostgreSQL y visible en resultados.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-10"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CRUD-09 flujo académico por HTTP: inscripciones, actividades, intento, respuestas y entrega",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-01",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear curso y guardarlo en PostgreSQL",
+      "pasos": "POST /api/cursos como administrador y consultar la tabla cursos.",
+      "datos": "Código QA-xxxx",
+      "esperado": "201; fila en cursos con creado_por = administrador.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-01 crear curso y guardarlo en PostgreSQL",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-02",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Listar, filtrar y consultar cursos",
+      "pasos": "GET /api/cursos, con filtro de estado y por id.",
+      "datos": "Curso QA",
+      "esperado": "El curso aparece; el filtro respeta el estado; GET por id 200.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-02 listar, filtrar y consultar cursos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-03",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Actualizar curso y persistir el cambio",
+      "pasos": "PUT /api/cursos/:id y consultar la tabla.",
+      "datos": "Nombre y descripción nuevos",
+      "esperado": "200 y los nuevos valores guardados.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-03 actualizar curso y persistir el cambio",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-04",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Archivar curso (baja lógica) y bloquear cambios posteriores",
+      "pasos": "PATCH estado ARCHIVADO; luego intentar reactivar y editar.",
+      "datos": "Curso QA",
+      "esperado": "200 al archivar y el registro se conserva; reactivar y editar → 409 (regla documentada).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-04 archivar curso (baja lógica) y bloquear cambios posteriores",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-05",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Código de curso duplicado",
+      "pasos": "Crear un curso con un código existente.",
+      "datos": "Código QA-xxxx",
+      "esperado": "409 y no se crea un segundo registro.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-05 código de curso duplicado",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-CUR-06",
+      "requisito": "RF-04",
+      "modulo": "Backend / API",
+      "area": "CRUD cursos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Datos inválidos e ids inexistentes en cursos",
+      "pasos": "Código vacío, nombre de 151, descripción en blanco, estado inválido, id 'abc', id inexistente, paginación y filtro inválidos.",
+      "datos": "Tabla de casos",
+      "esperado": "400 en datos inválidos, 404 en id inexistente.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-CUR-06 datos inválidos e ids inexistentes",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-01",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear módulo (BORRADOR por defecto) y guardarlo",
+      "pasos": "POST /api/modulos como docente en DEMO-006.",
+      "datos": "Módulo QA",
+      "esperado": "201, estado BORRADOR, fila en modulos con el docente como autor.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-01 crear módulo (BORRADOR por defecto) y guardarlo",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-02",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Listar y actualizar módulo",
+      "pasos": "GET /api/modulos?cursoId y PUT /api/modulos/:id sin estado.",
+      "datos": "Módulo QA",
+      "esperado": "Aparece en la lista; el cambio se guarda y conserva el estado.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-02 listar y actualizar módulo",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-03",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Orden de módulo duplicado",
+      "pasos": "Crear otro módulo con el mismo orden en el mismo curso.",
+      "datos": "Orden repetido",
+      "esperado": "409.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-03 orden de módulo duplicado en el mismo curso",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-04",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Crear, listar, actualizar y publicar tema",
+      "pasos": "POST, GET, PUT y PATCH estado de un tema.",
+      "datos": "Tema QA",
+      "esperado": "Cambios guardados en la tabla temas; estado PUBLICADO.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-04 crear, listar, actualizar y publicar tema",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-05",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Cambiar estado del módulo",
+      "pasos": "PATCH estado PUBLICADO, ARCHIVADO y BORRADOR.",
+      "datos": "Módulo QA",
+      "esperado": "200 y cada estado guardado.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-05 cambiar estado del módulo",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-06",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Reglas de eliminación de temas y módulos",
+      "pasos": "Eliminar un módulo con temas; pasar el tema a BORRADOR y eliminarlo; eliminar el módulo.",
+      "datos": "Módulo y tema QA",
+      "esperado": "409 con temas dependientes; luego 200 y ambos desaparecen de la base.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-06 reglas de eliminación de temas y módulos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-07",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Datos inválidos e ids inexistentes en módulos y temas",
+      "pasos": "Nombre vacío, orden 0 o texto, estado inválido, descripción de 1001, ids inválidos o inexistentes.",
+      "datos": "Tabla de casos",
+      "esperado": "400 en datos inválidos, 404 en ids inexistentes.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-07 datos inválidos e ids inexistentes en módulos y temas",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MT-08",
+      "requisito": "RF-05",
+      "modulo": "Backend / API",
+      "area": "CRUD módulos y temas",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "El estudiante solo ve contenido publicado",
+      "pasos": "El administrador crea un módulo BORRADOR en DEMO-SQL-007 y luego lo publica.",
+      "datos": "Módulo QA",
+      "esperado": "Oculto para el estudiante en BORRADOR; visible al publicarlo.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MT-08 el estudiante solo ve módulos y temas publicados",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-PER-01",
+      "requisito": "RF-09",
+      "modulo": "Backend / API",
+      "area": "Persistencia",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "El registro se guarda en PostgreSQL de forma segura",
+      "pasos": "Registrar por la API y consultar directamente usuarios y usuario_roles.",
+      "datos": "Usuario QA",
+      "esperado": "1 fila en usuarios con hash bcrypt (no la contraseña en texto plano) y 1 rol ESTUDIANTE activo.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-PER-01 el registro se guarda en PostgreSQL de forma segura",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-PER-02",
+      "requisito": "RF-09",
+      "modulo": "Backend / API",
+      "area": "Persistencia",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Los datos sobreviven a un reinicio del backend",
+      "pasos": "Registrar un usuario, cerrar la conexión, iniciar un proceso NUEVO con backend/src/server.js e iniciar sesión.",
+      "datos": "Usuario QA",
+      "esperado": "El servidor nuevo arranca (checkRoles OK) y el login devuelve 200.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-PER-02 los datos sobreviven a un reinicio del backend",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-PER-03",
+      "requisito": "RF-09",
+      "modulo": "Backend / API",
+      "area": "Persistencia",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Un registro rechazado no deja datos a medias",
+      "pasos": "Contar filas, provocar un duplicado y datos inválidos, volver a contar.",
+      "datos": "Correo existente",
+      "esperado": "El número de usuarios y de usuario_roles no cambia.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-PER-03 un registro rechazado no deja datos a medias",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-PER-04",
+      "requisito": "RF-09",
+      "modulo": "Base de datos",
+      "area": "Persistencia",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Resultados persistidos del seed de integración",
+      "pasos": "Consultar resultados_actividades para la cuenta demo con el rol del backend.",
+      "datos": "Curso DEMO-003",
+      "esperado": "Práctica: promedio 50, nota académica NULL. Evaluación: promedio 100, nota 100.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-PER-04 resultados persistidos del seed de integración",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-01",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL existentes",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Regresión de la migración 003 (actividades, intentos, resultados, permisos)",
+      "pasos": "psql -f database/test/pruebas_migracion_003.sql sobre la base de QA.",
+      "datos": "Seeds iniciales",
+      "esperado": "Termina con 'PRUEBAS 003 COMPLETADAS' y ROLLBACK.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-01 regresión de la migración 003",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-02",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL existentes",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Pruebas de la migración 004 (inscripción)",
+      "pasos": "psql -f database/test/pruebas_migracion_004.sql.",
+      "datos": "Datos propios del script",
+      "esperado": "Avisos OK 1–7 y 'PRUEBAS 004 COMPLETADAS'.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-02 pruebas de la migración 004 (inscripción)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-03",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL existentes",
+      "tipo": "SQL",
+      "prioridad": "Media",
+      "titulo": "Restricciones de integridad (5 rechazos esperados)",
+      "pasos": "psql -f database/test/pruebas_restricciones.sql (cada bloque debe fallar).",
+      "datos": "Seeds iniciales",
+      "esperado": "Exactamente 5 errores de restricción, uno por bloque.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-03 restricciones de integridad: 5 rechazos esperados",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-04",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL existentes",
+      "tipo": "SQL",
+      "prioridad": "Media",
+      "titulo": "Orden de módulos y temas (4 rechazos esperados)",
+      "pasos": "psql -f database/test/pruebas_temas_modulos.sql.",
+      "datos": "Seeds de módulos y temas",
+      "esperado": "Exactamente 4 errores, uno por bloque.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-04 orden de módulos y temas: 4 rechazos esperados",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-05",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL existentes",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Permisos del rol plataforma_backend",
+      "pasos": "psql -f database/test/pruebas_permisos.sql.",
+      "datos": "—",
+      "esperado": "Sin INSERT en intentos, sin UPDATE en respuestas, sin DELETE en selecciones; con EXECUTE en iniciar_intento.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-05 permisos del rol plataforma_backend",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-06",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Pruebas de la migración 005 (CRUD de cursos)",
+      "pasos": "psql -f database/test/pruebas_migracion_005.sql",
+      "datos": "Fixtures propios",
+      "esperado": "'PRUEBAS 005 COMPLETADAS' y ROLLBACK.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-06 CRUD de cursos (005)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-07",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Pruebas de la migración 006 (módulos y temas)",
+      "pasos": "psql -f database/test/pruebas_migracion_006.sql",
+      "datos": "Fixtures propios",
+      "esperado": "'PRUEBAS 006 COMPLETADAS' y ROLLBACK.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-07 CRUD de módulos y temas (006)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-08",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Pruebas de la migración 007 (lectura del estudiante)",
+      "pasos": "psql -f database/test/pruebas_migracion_007.sql",
+      "datos": "Fixtures propios",
+      "esperado": "'PRUEBAS 007 COMPLETADAS' y ROLLBACK.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-08 lectura de contenido del estudiante (007)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-09",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Alta",
+      "titulo": "Pruebas de la migración 008 (integración y motor)",
+      "pasos": "psql -f database/test/pruebas_migracion_008.sql",
+      "datos": "Seeds DEMO-SQL-007 y DEMO-006",
+      "esperado": "'PRUEBAS 008 COMPLETADAS' y ROLLBACK.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-09 consultas de integración y motor (008)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-10",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Media",
+      "titulo": "Pruebas del seed de integración DEMO-SQL-007",
+      "pasos": "psql -f database/test/pruebas_seed_integracion_resultados.sql",
+      "datos": "Seed recién cargado",
+      "esperado": "Seis 'OK SEED' y 'PRUEBAS SEED INTEGRACION COMPLETADAS'.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-10 seed DEMO-SQL-007",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-01",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Prueba de Daniel: rendimiento bajo",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_low_performance",
+      "datos": "score 45, 6 errores",
+      "esperado": "reinforce_topic / reduced.",
+      "prueba_externa": "test_low_performance",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_low_performance",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-02",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Prueba de Daniel: rendimiento medio",
+      "pasos": "test_engine.py::test_medium_performance",
+      "datos": "score 75, 2 errores",
+      "esperado": "maintain_difficulty.",
+      "prueba_externa": "test_medium_performance",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_medium_performance",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-03",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Prueba de Daniel: rendimiento alto",
+      "pasos": "test_engine.py::test_high_performance",
+      "datos": "score 95, 0 errores, 1 intento",
+      "esperado": "increase_difficulty.",
+      "prueba_externa": "test_high_performance",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_high_performance",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-04",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Prueba de Daniel: interacciones vacías",
+      "pasos": "test_engine.py::test_empty_interactions",
+      "datos": "interactions = []",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_empty_interactions",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_empty_interactions",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-05",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: puntuación inválida",
+      "pasos": "test_engine.py::test_invalid_score",
+      "datos": "score 150",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_invalid_score",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_invalid_score",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-06",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: campo obligatorio faltante",
+      "pasos": "test_engine.py::test_missing_required_field",
+      "datos": "sin navigation_count",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_missing_required_field",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_missing_required_field",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-01",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Escenario 1 — Rendimiento bajo",
+      "pasos": "process_student con puntuación 45 y 6 errores.",
+      "datos": "score=45, errors=6, attempts=2",
+      "esperado": "action=reinforce_topic, difficulty=reduced, mensaje con el tema.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_01_rendimiento_bajo_refuerza_el_tema",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-02",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Escenario 2 — Rendimiento medio",
+      "pasos": "process_student con puntuación 75 y 2 errores.",
+      "datos": "score=75, errors=2, attempts=2",
+      "esperado": "action=maintain_difficulty, difficulty=current.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_02_rendimiento_medio_mantiene_dificultad",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-03",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Escenario 3 — Rendimiento alto",
+      "pasos": "process_student con puntuación 95, 0 errores y 1 intento.",
+      "datos": "score=95, errors=0, attempts=1",
+      "esperado": "action=increase_difficulty, difficulty=increased.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_03_rendimiento_alto_aumenta_dificultad",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-04",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Valores límite de las reglas (60 %, 85 %, 2 y 5 errores, 2 intentos)",
+      "pasos": "Evaluar combinaciones justo en y alrededor de cada umbral.",
+      "datos": "Tabla parametrizada",
+      "esperado": "Cada combinación cae en la regla que indica INTEGRATION.md (orden: refuerzo → aumento → mantener).",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "9 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[59.99-0-1-reinforce_topic]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[60-0-1-maintain_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[90-5-1-reinforce_topic]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[90-4-1-maintain_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[84.99-0-1-maintain_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[85-2-2-increase_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[85-3-2-maintain_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[85-2-3-maintain_difficulty]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_04_valores_limite_de_las_reglas[50-0-1-reinforce_topic]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-05",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Material complementario con 5 o más repeticiones",
+      "pasos": "Refuerzo con 5 repeticiones y mantener con 5 repeticiones.",
+      "datos": "repetitions=5",
+      "esperado": "Solo el refuerzo añade 'material complementario'.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_05_material_complementario_solo_en_refuerzo",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-06",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Datos de ejemplo data/estudiante_prueba.json",
+      "pasos": "Procesar el archivo de ejemplo del repositorio.",
+      "datos": "3 interacciones de SQL JOIN",
+      "esperado": "Promedio 53.33, 9 errores, 3 intentos promedio → reinforce_topic.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_06_archivo_de_ejemplo_del_repositorio",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-07",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Cálculo correcto del perfil con varias interacciones",
+      "pasos": "Comparar el perfil con cálculos manuales.",
+      "datos": "3 interacciones con valores conocidos",
+      "esperado": "Promedios, sumas y total de interacciones correctos.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_07_calculo_del_perfil_con_varias_interacciones",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-08",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Contrato",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "La salida respeta el contrato usado por el frontend",
+      "pasos": "Verificar claves y valores permitidos de profile y recommendation.",
+      "datos": "Escenario medio",
+      "esperado": "Mismas claves que INTEGRATION.md y que el tipo Recommendation de frontend/src/types.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "2 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_MOT_08_salida_respeta_el_contrato_del_frontend",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_MOT_08_no_modifica_los_datos_de_entrada",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-09",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Integración Node ↔ Python",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "main.py --stdin devuelve JSON que Node puede leer",
+      "pasos": "Desde Node, ejecutar python main.py --stdin enviando JSON y hacer JSON.parse de la salida.",
+      "datos": "Los 3 escenarios",
+      "esperado": "Código de salida 0 y JSON válido con la acción esperada.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "3 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MOT-09 --stdin escenario bajo devuelve JSON legible por Node",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        },
+        {
+          "prueba": "CP-MOT-09 --stdin escenario medio devuelve JSON legible por Node",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        },
+        {
+          "prueba": "CP-MOT-09 --stdin escenario alto devuelve JSON legible por Node",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-10",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Integración Node ↔ Python",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "main.py en modo local (sin --stdin) se ejecuta sin errores críticos",
+      "pasos": "python main.py desde adaptive-engine.",
+      "datos": "data/estudiante_prueba.json",
+      "esperado": "Código 0, imprime PERFIL y RECOMENDACIÓN.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MOT-10 main.py en modo local se ejecuta sin errores críticos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOT-11",
+      "requisito": "RF-07",
+      "modulo": "Backend / API",
+      "area": "Integración Node ↔ Python",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Backend llama al motor: POST /api/students/:id/recommendation",
+      "pasos": "POST /api/students/:id/recommendation con {topic:'SQL JOIN'} y el token del estudiante demo.",
+      "datos": "SQL JOIN (promedio 16.67)",
+      "esperado": "200 con accion=reinforce_topic y dificultad=reduced calculadas por Python.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-11"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-MOT-11 backend llama al motor: POST /api/students/:id/recommendation",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-01",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Escenario bajo por la API: SQL JOIN",
+      "pasos": "POST /api/mis-inscripciones/:id/temas/:temaId/recomendacion y POST /api/students/:id/recommendation.",
+      "datos": "SQL JOIN (0, 25, 25 → 16.67)",
+      "esperado": "reinforce_topic / reduced en ambas rutas.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-11"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-01 escenario SQL JOIN → reinforce_topic",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-02",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Escenario medio por la API: SQL WHERE",
+      "pasos": "Igual que CP-ADP-01 con SQL WHERE.",
+      "datos": "SQL WHERE (50, 75, 75 → 66.67)",
+      "esperado": "maintain_difficulty / current.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-11"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-02 escenario SQL WHERE → maintain_difficulty",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-03",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Escenario alto por la API: SQL SELECT",
+      "pasos": "Igual que CP-ADP-01 con SQL SELECT.",
+      "datos": "SQL SELECT (75, 100, 100 → 91.67)",
+      "esperado": "increase_difficulty / increased.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-11"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-03 escenario SQL SELECT → increase_difficulty",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-04",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "La evidencia de la recomendación coincide con PostgreSQL",
+      "pasos": "Comparar mastery con el promedio de los intentos calificados en la base.",
+      "datos": "Los tres temas",
+      "esperado": "mastery igual al promedio real; errores enteros ≥ 0.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-04 la evidencia de la recomendación coincide con PostgreSQL",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-05",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "El progreso recomienda reforzar el tema más débil",
+      "pasos": "GET /api/students/:id/progress.",
+      "datos": "Cuenta demo",
+      "esperado": "Recomendación SQL JOIN, reinforce_topic, prioridad alta.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-05 el Dashboard (progreso) recomienda reforzar el tema más débil",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-06",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Escenarios por API",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "Un intento nuevo cambia los datos que analiza el motor",
+      "pasos": "Hacer un intento al 100 % en la evaluación de SQL JOIN y volver a pedir la recomendación.",
+      "datos": "Evaluación de SQL JOIN",
+      "esperado": "El promedio (mastery) sube y coincide con la base.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-06 un intento nuevo cambia los datos que analiza el motor",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-07",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Casos límite",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Estudiante sin intentos",
+      "pasos": "Estudiante nuevo pide recomendación, resumen y progreso; el demo pide recomendación de un tema publicado sin intentos.",
+      "datos": "Estudiante QA y tema QA",
+      "esperado": "404 con mensaje claro; resumen y progreso 200 con recomendación null (sin errores 500).",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-07 estudiante sin intentos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-08",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Casos límite",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Datos inválidos en las rutas del motor",
+      "pasos": "Tema vacío o largo, ids inválidos, inscripción ajena y sin token.",
+      "datos": "Tabla de casos",
+      "esperado": "400, 403 o 401 según el caso; nunca 500.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-08 datos inválidos en las rutas del motor",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-ADP-09",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Casos límite",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "Errores del motor: Python ausente o motor que falla",
+      "pasos": "Configurar PYTHON_EXECUTABLE inválido y luego un ejecutable que no es Python.",
+      "datos": "PYTHON_EXECUTABLE",
+      "esperado": "502 'El motor de recomendación no está disponible' sin detalles internos; el progreso sigue respondiendo 200; se recupera al volver Python.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-ADP-09 errores del motor: Python ausente o motor que falla → 502",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-01",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Interacciones vacías",
+      "pasos": "process_student con interactions = [].",
+      "datos": "[]",
+      "esperado": "ValueError 'al menos una interacción'.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_01_interacciones_vacias",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-02",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Interacciones ausentes o null",
+      "pasos": "Sin la clave interactions y con interactions = None.",
+      "datos": "{} / None",
+      "esperado": "ValueError.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "2 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_02_interacciones_ausentes_o_null[ausente]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_02_interacciones_ausentes_o_null[null]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-03",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Campo obligatorio faltante (cada uno de los 6)",
+      "pasos": "Eliminar uno a uno los campos obligatorios.",
+      "datos": "study_minutes … score_percentage",
+      "esperado": "ValueError que nombra el campo faltante.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "6 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[study_minutes]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[errors]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[attempts]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[repetitions]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[navigation_count]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_03_campo_obligatorio_faltante[score_percentage]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-04",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Valores no numéricos o nulos",
+      "pasos": "Enviar 'abc', '', None y listas en campos numéricos.",
+      "datos": "score_percentage='abc', errors=None…",
+      "esperado": "ValueError 'Los datos deben ser numéricos y válidos.'",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "5 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_04_valores_no_numericos_o_nulos[score_percentage-abc]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_04_valores_no_numericos_o_nulos[score_percentage-]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_04_valores_no_numericos_o_nulos[errors-None]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_04_valores_no_numericos_o_nulos[attempts-valor3]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_04_valores_no_numericos_o_nulos[study_minutes-veinte]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-05",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Valores fuera de rango",
+      "pasos": "score 150 y -1, minutos/errores/repeticiones/navegación negativos, attempts 0.",
+      "datos": "Tabla parametrizada",
+      "esperado": "ValueError 'fuera de los rangos permitidos'.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "7 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[score_percentage-150]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[score_percentage--1]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[study_minutes--5]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[errors--1]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[attempts-0]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[repetitions--2]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_05_valores_fuera_de_rango[navigation_count--3]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-06",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Baja",
+      "titulo": "Números enviados como texto ('90')",
+      "pasos": "Enviar valores numéricos como cadenas.",
+      "datos": "score_percentage='90'",
+      "esperado": "Se convierten y se procesan (comportamiento documentado por pd.to_numeric).",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_06_numeros_como_texto_se_convierten",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-07",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Falta student_id o topic",
+      "pasos": "process_student sin student_id y sin topic.",
+      "datos": "{topic, interactions} / {student_id, interactions}",
+      "esperado": "ValueError con mensaje claro que nombre el campo (igual que los demás campos obligatorios).",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "2 de 2 verificaciones fallaron. KeyError: 'student_id'",
+      "incidencias": [
+        "INC-05"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_07_falta_student_id_o_topic[student_id]",
+          "status": "fail",
+          "mensaje": "KeyError: 'student_id'",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_07_falta_student_id_o_topic[topic]",
+          "status": "fail",
+          "mensaje": "KeyError: 'topic'",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-08",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "interactions con tipo incorrecto",
+      "pasos": "interactions como texto, objeto y lista de números.",
+      "datos": "'abc', {a:1}, [1,2]",
+      "esperado": "ValueError controlado (no otra excepción).",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "3 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_08_interactions_con_tipo_incorrecto[abc]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_08_interactions_con_tipo_incorrecto[valor1]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_08_interactions_con_tipo_incorrecto[valor2]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-09",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Valores infinitos (Infinity) o NaN",
+      "pasos": "Enviar float('inf') y float('nan') en campos numéricos.",
+      "datos": "study_minutes=inf, score=nan",
+      "esperado": "ValueError: no son datos válidos.",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "2 de 3 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "incidencias": [
+        "INC-04"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_09_infinito_o_nan_se_rechazan[study_minutes-inf]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_09_infinito_o_nan_se_rechazan[score_percentage-nan]",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_09_infinito_o_nan_se_rechazan[navigation_count-inf]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-10",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Baja",
+      "titulo": "Valores booleanos en campos numéricos",
+      "pasos": "Enviar true/false en score_percentage y errors.",
+      "datos": "score_percentage=True",
+      "esperado": "ValueError (true no es una puntuación).",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "2 de 2 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "incidencias": [
+        "INC-06"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_10_booleanos_se_rechazan[score_percentage]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_10_booleanos_se_rechazan[errors]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-11",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Unitaria",
+      "prioridad": "Baja",
+      "titulo": "Conteos con decimales (errores, intentos, repeticiones, navegación)",
+      "pasos": "Enviar errors=2.7.",
+      "datos": "errors=2.7",
+      "esperado": "ValueError: los conteos deben ser enteros (hoy se truncan en silencio).",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "4 de 4 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "incidencias": [
+        "INC-07"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02_unitarias_motor.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[errors]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[attempts]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[repetitions]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        },
+        {
+          "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[navigation_count]",
+          "status": "fail",
+          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "archivo": "unit_motor.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-12",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "CLI: JSON mal formado",
+      "pasos": "Enviar texto no JSON a main.py --stdin.",
+      "datos": "{ esto no es json",
+      "esperado": "Código 1 y {\"error\": ...} en stderr.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-VAL-12 CLI con JSON mal formado",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-13",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Integración",
+      "prioridad": "Alta",
+      "titulo": "CLI: interacciones vacías",
+      "pasos": "Enviar un estudiante con interactions=[] a main.py --stdin.",
+      "datos": "interactions: []",
+      "esperado": "Código 1 y {\"error\": ...} en stderr.",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-VAL-13 CLI con interacciones vacías",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-14",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "CLI: JSON válido cuya raíz no es un objeto",
+      "pasos": "Enviar [], \"texto\", 5 y null a main.py --stdin.",
+      "datos": "[] / \"x\" / 5 / null",
+      "esperado": "Código 1 y {\"error\": ...} en stderr (sin traceback de Python).",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "4 de 4 verificaciones fallaron. main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+      "incidencias": [
+        "INC-03"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: []",
+          "status": "fail",
+          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "archivo": "integration.xml"
+        },
+        {
+          "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: \"texto\"",
+          "status": "fail",
+          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "archivo": "integration.xml"
+        },
+        {
+          "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: 5",
+          "status": "fail",
+          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "archivo": "integration.xml"
+        },
+        {
+          "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: null",
+          "status": "fail",
+          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-VAL-15",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Datos vacíos e incorrectos",
+      "tipo": "Integración",
+      "prioridad": "Media",
+      "titulo": "CLI: Infinity en la entrada no rompe el JSON de salida",
+      "pasos": "Enviar study_minutes: Infinity (Python lo acepta al leer).",
+      "datos": "study_minutes: Infinity",
+      "esperado": "Rechazo con código 1, o salida que JSON.parse de Node pueda leer.",
+      "responsable": "Daniel Beltre",
+      "estado": "FALLIDO",
+      "motivo": "1 de 1 verificaciones fallaron. Got unwanted exception: Node no puede leer la salida:{\"profile\": {\"student_id\": 1, \"topic\": \"SQL JOIN\", \"average_score\": 75.0, \"total_errors\": 2, \"average_attempts\": 2.0, \"total_repetitions\": 1, \"average_study_minutes\": Infinity, \"total_interactions\": 1Actual message: \"Unexpected token 'I', ...\"minutes\": Infinity, \"... is not valid JSON\"",
+      "incidencias": [
+        "INC-04"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida",
+          "status": "fail",
+          "mensaje": "Got unwanted exception: Node no puede leer la salida:{\"profile\": {\"student_id\": 1, \"topic\": \"SQL JOIN\", \"average_score\": 75.0, \"total_errors\": 2, \"average_attempts\": 2.0, \"total_repetitions\": 1, \"average_study_minutes\": Infinity, \"total_interactions\": 1Actual message: \"Unexpected token 'I', ...\"minutes\": Infinity, \"... is not valid JSON\"",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-01",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "registerDto acepta y rechaza según las reglas",
+      "pasos": "safeParse con datos válidos e inválidos.",
+      "datos": "Tabla de casos",
+      "esperado": "Válidos aceptados (con trim); inválidos rechazados con mensaje.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "8 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-01 acepta datos válidos y aplica trim",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza email mal formado",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza contraseña de 7 caracteres",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza contraseña de 73 caracteres",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza nombre vacío",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza apellido de 51 caracteres",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 rechaza nombre numérico",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-01 acepta los límites exactos (8 y 72 caracteres, 50 en nombre)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-02",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "loginDto exige email y password",
+      "pasos": "safeParse con campos vacíos, ausentes y con tipos erróneos.",
+      "datos": "—",
+      "esperado": "Rechazo en todos los casos inválidos.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "5 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-02 rechaza campos vacíos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-02 rechaza campos ausentes",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-02 rechaza campos email solo con espacios",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-02 rechaza campos password numérico",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-02 acepta credenciales con formato correcto",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-03",
+      "requisito": "RNF-01",
+      "modulo": "Backend / API",
+      "area": "Seguridad",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "toUserResponse nunca expone campos internos",
+      "pasos": "Pasar un objeto con passwordHash y activo.",
+      "datos": "—",
+      "esperado": "Solo id, nombre, apellido, email y rol.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-03 toUserResponse nunca expone campos internos",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-04",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Middleware validate",
+      "pasos": "Ejecutar con cuerpo válido e inválido.",
+      "datos": "—",
+      "esperado": "Inválido → AppError 400 con details {campo, mensaje}; válido → req.body limpio y next().",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "2 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-04 cuerpo inválido → AppError 400 con details {campo, mensaje}",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-04 cuerpo válido → next() y req.body limpio",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-05",
+      "requisito": "RNF-01",
+      "modulo": "Backend / API",
+      "area": "Seguridad",
+      "tipo": "Unitaria",
+      "prioridad": "Alta",
+      "titulo": "Middleware verifyToken",
+      "pasos": "Sin cabecera, esquema Basic, token inválido, expirado y válido.",
+      "datos": "—",
+      "esperado": "401 en los inválidos; con el válido, req.user = {id, rol}.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "7 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-05 rechaza sin cabecera con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 rechaza esquema Basic con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 rechaza Bearer sin token con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 rechaza token basura con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 rechaza firmado con otro secreto con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 rechaza expirado con 401",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-05 token válido → req.user con id y rol",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-06",
+      "requisito": "RF-02",
+      "modulo": "Backend / API",
+      "area": "Seguridad",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "requireRole y requirePermission",
+      "pasos": "Probar cada rol contra cada permiso de config/permissions.js.",
+      "datos": "—",
+      "esperado": "403 si el rol no está autorizado; error si el permiso no existe.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "3 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-06 requireRole permite el rol indicado y bloquea los demás",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-06 cada permiso respeta config/permissions.js para los 3 roles",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-06 un permiso no definido produce un error de programación",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-07",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Errores",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "errorHandler traduce cada tipo de error",
+      "pasos": "AppError, JSON inválido, código 23505 y error inesperado.",
+      "datos": "—",
+      "esperado": "status propio, 400, 409 y 500 sin filtrar detalles internos.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "FALLIDO",
+      "motivo": "1 de 5 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+      "incidencias": [
+        "INC-02"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-07 AppError conserva su status, mensaje y details",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-07 JSON inválido → 400 'JSON inválido'",
+          "status": "fail",
+          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-07 violación de unicidad de PostgreSQL (23505) → 409",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-07 error inesperado → 500 sin filtrar el detalle interno",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-BE-07 notFound → 404 JSON",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-08",
+      "requisito": "RNF-05",
+      "modulo": "Backend / API",
+      "area": "Documentación",
+      "tipo": "Unitaria",
+      "prioridad": "Baja",
+      "titulo": "OpenAPI coincide con las rutas implementadas",
+      "pasos": "Comparar paths de openapi.yaml con los routers de Express.",
+      "datos": "—",
+      "esperado": "Mismos endpoints y enum de roles igual a config/roles.js.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-08 OpenAPI documenta exactamente las rutas implementadas",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-09",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Errores",
+      "tipo": "Integración",
+      "prioridad": "Baja",
+      "titulo": "Health check y ruta inexistente",
+      "pasos": "GET /api/health y GET /api/no-existe.",
+      "datos": "—",
+      "esperado": "200 {status:'ok'}; una ruta que no existe responde 404 JSON 'Ruta no encontrada' (también sin token).",
+      "responsable": "Porfirio Ramírez",
+      "estado": "FALLIDO",
+      "motivo": "1 de 1 verificaciones fallaron. respondió 401: Token requerido401 !== 404",
+      "incidencias": [
+        "INC-14"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-09 health check y ruta inexistente",
+          "status": "fail",
+          "mensaje": "respondió 401: Token requerido401 !== 404",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BE-10",
+      "requisito": "RNF-02",
+      "modulo": "Backend / API",
+      "area": "Errores",
+      "tipo": "Integración",
+      "prioridad": "Baja",
+      "titulo": "Cuerpo demasiado grande (413)",
+      "pasos": "POST /api/auth/login con un cuerpo de más de 100 KB.",
+      "datos": "email de 200.000 caracteres",
+      "esperado": "413 con el mensaje en español 'El cuerpo de la petición es demasiado grande'.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "FALLIDO",
+      "motivo": "1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'request entity too large'- 'El cuerpo de la petición es demasiado grande'",
+      "incidencias": [
+        "INC-13"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BE-10 cuerpo demasiado grande devuelve 413 con mensaje en español",
+          "status": "fail",
+          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'request entity too large'- 'El cuerpo de la petición es demasiado grande'",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-FE-01",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "loginSchema",
+      "pasos": "safeParse con correo vacío, mal formado, contraseña vacía y datos válidos.",
+      "datos": "—",
+      "esperado": "Mensajes 'Ingresa tu correo.', 'Ingresa un correo válido.', 'Ingresa tu contraseña.'",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "4 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-FE-01 correo vacío → 'Ingresa tu correo.'",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-01 correo mal formado → 'Ingresa un correo válido.'",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-01 contraseña vacía → 'Ingresa tu contraseña.'",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-01 datos válidos se aceptan",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-FE-02",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "registerSchema",
+      "pasos": "Contraseñas distintas, cortas, largas y nombres de más de 50 caracteres.",
+      "datos": "—",
+      "esperado": "Rechazo con el mensaje y el campo correctos.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "7 verificaciones aprobadas.",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-FE-02 contraseñas distintas → 'Las contraseñas no coinciden.' en confirmPassword",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 contraseña corta → 'La contraseña debe tener al menos 8 caracteres.' en password",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 contraseña de 73 → 'Máximo 72 caracteres.' en password",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 nombre de 51 → 'Máximo 50 caracteres.' en nombre",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 apellido vacío → 'Ingresa tu apellido.' en apellido",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 confirmación vacía → 'Confirma tu contraseña.' en confirmPassword",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        },
+        {
+          "prueba": "CP-FE-02 datos válidos se aceptan",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-FE-03",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Validación",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Reglas del registro iguales en frontend y backend",
+      "pasos": "Pasar los mismos datos a registerSchema (frontend) y registerDto (backend).",
+      "datos": "Tabla de casos frontera",
+      "esperado": "Ambos aceptan o ambos rechazan cada caso.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/01_unitarias_node.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-FE-03 frontend y backend aceptan/rechazan los mismos registros",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "unit_node.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-01",
+      "requisito": "RF-01",
+      "modulo": "Backend / API",
+      "area": "Integración Frontend ↔ Backend",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Login real desde el navegador contra el backend (CORS) — re-prueba de INC-01",
+      "pasos": "Frontend con VITE_USE_MOCK=false en otro origen y backend real con CORS_ORIGIN; iniciar sesión con la cuenta demo.",
+      "datos": "estudiante.demo@example.com / DemoEquipo-2026!",
+      "esperado": "Redirige al Dashboard sin errores de CORS.",
+      "responsable": "Porfirio Ramírez",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-01"
+      ],
+      "capturas": [
+        "CP-UI-01_login_real_con_cors.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-01_login_real_con_cors.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-01 login real desde el navegador contra el backend (CORS)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-02",
+      "requisito": "RF-01",
+      "modulo": "Frontend",
+      "area": "Login (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Login válido en la pantalla",
+      "pasos": "Escribir credenciales válidas y pulsar 'Iniciar sesión'.",
+      "datos": "Cuenta demo",
+      "esperado": "Redirige a '/', muestra el nombre del usuario y su rol en la barra.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-02_login_valido_dashboard.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-02_login_valido_dashboard.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-02 login válido en la pantalla",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-03",
+      "requisito": "RF-01",
+      "modulo": "Frontend",
+      "area": "Login (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Login inválido en la pantalla",
+      "pasos": "Escribir contraseña incorrecta y enviar.",
+      "datos": "Cuenta demo / ClaveIncorrecta1",
+      "esperado": "Permanece en /login y muestra 'Credenciales inválidas'.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-03_login_invalido.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-03_login_invalido.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-03 login inválido en la pantalla",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-04",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Login (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "Validación de campos vacíos e inválidos en el formulario",
+      "pasos": "Enviar el formulario vacío y luego con un correo mal formado.",
+      "datos": "'' y 'correo-invalido'",
+      "esperado": "Mensajes de validación junto a cada campo; no se llama al backend.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-04a_login_campos_vacios.png",
+        "CP-UI-04b_login_correo_invalido.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-04a_login_campos_vacios.png",
+        "evidencias/capturas/CP-UI-04b_login_correo_invalido.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-04 validación de campos vacíos e inválidos en el formulario",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-05",
+      "requisito": "RF-02",
+      "modulo": "Frontend",
+      "area": "Navegación",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Rutas protegidas sin sesión",
+      "pasos": "Abrir /, /contenido, /resultados, /progreso, /cursos y /gestion sin sesión.",
+      "datos": "—",
+      "esperado": "Redirección a /login en todos los casos.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-05_ruta_protegida_redirige.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-05_ruta_protegida_redirige.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-05 rutas protegidas sin sesión redirigen a /login",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-06",
+      "requisito": "RF-01",
+      "modulo": "Frontend",
+      "area": "CRUD usuarios (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Registro desde la pantalla y login con la cuenta nueva",
+      "pasos": "Completar /registro, enviar, iniciar sesión con la cuenta creada.",
+      "datos": "Usuario QA único",
+      "esperado": "Cuenta creada (201) e inicio de sesión exitoso.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-06a_registro_formulario.png",
+        "CP-UI-06b_registro_exitoso.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-06a_registro_formulario.png",
+        "evidencias/capturas/CP-UI-06b_registro_exitoso.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-06 registro desde la pantalla y login con la cuenta nueva",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-07",
+      "requisito": "RNF-03",
+      "modulo": "Frontend",
+      "area": "Navegación",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "Navegación entre pantallas sin recarga",
+      "pasos": "Con sesión, pulsar Contenido, Resultados, Progreso y Dashboard en la barra.",
+      "datos": "—",
+      "esperado": "Cambia la URL y el contenido sin recargar la página (SPA).",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-07 navegación entre pantallas sin recarga",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-08",
+      "requisito": "RF-01",
+      "modulo": "Frontend",
+      "area": "Persistencia (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "La sesión se conserva al recargar y se borra al cerrar sesión",
+      "pasos": "Iniciar sesión, recargar (F5), luego pulsar 'Cerrar sesión' e intentar volver a '/'.",
+      "datos": "Cuenta demo",
+      "esperado": "Tras recargar sigue dentro; tras cerrar sesión vuelve a /login y no puede regresar.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-08_sesion_cerrada.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-08_sesion_cerrada.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-08 la sesión se conserva al recargar y se borra al cerrar sesión",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-09",
+      "requisito": "RF-08",
+      "modulo": "Frontend",
+      "area": "Integración Frontend ↔ Backend",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Dashboard con datos reales del backend",
+      "pasos": "Con VITE_USE_MOCK=false, iniciar sesión como estudiante demo y revisar el Dashboard.",
+      "datos": "Cuenta demo",
+      "esperado": "Muestra el resumen y la tarjeta del motor con datos reales (SQL JOIN), sin etiquetas ni actividad de ejemplo.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-16"
+      ],
+      "capturas": [
+        "CP-UI-09_dashboard_datos_reales.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-09_dashboard_datos_reales.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-09 Dashboard con datos reales del backend",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-10",
+      "requisito": "RF-07",
+      "modulo": "Frontend",
+      "area": "Motor adaptativo (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "Cuestionario real de Contenido: responder y entregar",
+      "pasos": "Contenido → curso 'SQL: integracion y resultados' → tema SQL JOIN → Iniciar 'SQL JOIN - practica' → responder todo bien → Entregar intento.",
+      "datos": "Cuenta demo, actividad 'SQL JOIN - practica'",
+      "esperado": "Resultado 100 % en pantalla y el intento queda CALIFICADO en PostgreSQL.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-10a_actividades_del_tema.png",
+        "CP-UI-10b_cuestionario_respondido.png",
+        "CP-UI-10c_resultado_del_intento.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-10a_actividades_del_tema.png",
+        "evidencias/capturas/CP-UI-10b_cuestionario_respondido.png",
+        "evidencias/capturas/CP-UI-10c_resultado_del_intento.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-10 cuestionario real de Contenido: responder y entregar",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-11",
+      "requisito": "RF-07",
+      "modulo": "Frontend",
+      "area": "Motor adaptativo (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "Las respuestas del estudiante se envían y guardan en el backend",
+      "pasos": "Responder un cuestionario real y revisar las peticiones y la base de datos.",
+      "datos": "—",
+      "esperado": "Un PUT /mis-respuestas/:id/opciones por pregunta, POST /mis-intentos/:id/entrega y las selecciones guardadas en respuesta_opciones. Si no se envían → BLOQUEADO.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-12"
+      ],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-11 las respuestas del estudiante se envían y guardan en el backend",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-12",
+      "requisito": "RF-07",
+      "modulo": "Frontend",
+      "area": "Recorrido completo",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Recorrido visual completo del estudiante con recomendación real",
+      "pasos": "Login → Dashboard → Contenido → curso SQL → tema SQL JOIN → Iniciar práctica → responder → Entregar → Ver recomendación del motor → Resultados → Progreso → Cerrar sesión.",
+      "datos": "Cuenta demo",
+      "esperado": "Cada pantalla carga con datos reales; tras entregar, el motor real responde reinforce_topic y la tarjeta muestra 'Detectamos dificultades en SQL JOIN'.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-12a_login.png",
+        "CP-UI-12b_dashboard_recomendacion.png",
+        "CP-UI-12c_cuestionario.png",
+        "CP-UI-12d_recomendacion_del_motor.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-12a_login.png",
+        "evidencias/capturas/CP-UI-12b_dashboard_recomendacion.png",
+        "evidencias/capturas/CP-UI-12c_cuestionario.png",
+        "evidencias/capturas/CP-UI-12d_recomendacion_del_motor.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-12 recorrido visual completo del estudiante con recomendación real",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-13",
+      "requisito": "RF-08",
+      "modulo": "Frontend",
+      "area": "Motor adaptativo (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Estudiante sin intentos ni cursos ve avisos, no errores",
+      "pasos": "Registrar un estudiante nuevo, abrir el Dashboard y luego Contenido.",
+      "datos": "Estudiante QA",
+      "esperado": "Dashboard sin error; Contenido muestra 'Aún no estás inscrito en ningún curso activo'.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-15"
+      ],
+      "capturas": [
+        "CP-UI-13a_dashboard_sin_datos.png",
+        "CP-UI-13b_contenido_sin_cursos.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-13a_dashboard_sin_datos.png",
+        "evidencias/capturas/CP-UI-13b_contenido_sin_cursos.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-13 estudiante sin intentos ni cursos ve avisos, no errores",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-14",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Motor adaptativo (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Error del motor visto desde la pantalla",
+      "pasos": "Entregar un intento real y pedir la recomendación con Python no disponible.",
+      "datos": "PYTHON_EXECUTABLE inválido",
+      "esperado": "Mensaje 'No se pudo generar la recomendación. El motor de recomendación no está disponible'.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-14_error_del_motor.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-14_error_del_motor.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-14 error del motor: la pantalla informa sin romperse",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-15",
+      "requisito": "RNF-02",
+      "modulo": "Frontend",
+      "area": "Robustez",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "Desconexión del backend",
+      "pasos": "Con sesión y un cuestionario respondido, apagar el backend; intentar entregar, abrir el Dashboard e iniciar sesión.",
+      "datos": "Backend detenido",
+      "esperado": "'No se pudo conectar con el servidor…' al entregar, en el Dashboard y en el Login, sin quedarse colgado.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-15a_backend_desconectado_contenido.png",
+        "CP-UI-15b_backend_desconectado_dashboard.png",
+        "CP-UI-15c_backend_desconectado_login.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-15a_backend_desconectado_contenido.png",
+        "evidencias/capturas/CP-UI-15b_backend_desconectado_dashboard.png",
+        "evidencias/capturas/CP-UI-15c_backend_desconectado_login.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-15 el frontend avisa cuando el backend se desconecta",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-16",
+      "requisito": "RF-04",
+      "modulo": "Frontend",
+      "area": "CRUD cursos (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "El administrador crea un curso desde la pantalla",
+      "pasos": "/cursos → + Nuevo curso → guardar.",
+      "datos": "Curso UI-xxxx",
+      "esperado": "Aparece en la lista y queda guardado en PostgreSQL.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-16a_nuevo_curso_formulario.png",
+        "CP-UI-16b_curso_creado.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-16a_nuevo_curso_formulario.png",
+        "evidencias/capturas/CP-UI-16b_curso_creado.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-16 el administrador crea un curso desde la pantalla",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-17",
+      "requisito": "RF-05",
+      "modulo": "Frontend",
+      "area": "CRUD módulos y temas (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "El docente crea un módulo desde la pantalla",
+      "pasos": "/gestion → elegir DEMO-006 en el selector de curso → + Nuevo módulo → guardar.",
+      "datos": "Módulo UI-xxxx",
+      "esperado": "Aparece en la lista y queda guardado en DEMO-006.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-17a_nuevo_modulo_formulario.png",
+        "CP-UI-17b_modulo_creado.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-17a_nuevo_modulo_formulario.png",
+        "evidencias/capturas/CP-UI-17b_modulo_creado.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-17 el docente crea un módulo de su curso desde la pantalla",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-18",
+      "requisito": "RF-02",
+      "modulo": "Frontend",
+      "area": "Roles (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "El menú muestra solo las secciones de cada rol",
+      "pasos": "Iniciar sesión con cada cuenta demo y leer el menú.",
+      "datos": "3 cuentas demo",
+      "esperado": "Estudiante: Dashboard/Contenido/Resultados/Progreso. Docente: Inicio/Contenido. Administrador: Inicio/Cursos/Contenido.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [
+        "CP-UI-18_inicio_administrador.png",
+        "CP-UI-18_inicio_docente.png",
+        "CP-UI-18_inicio_estudiante.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-18_inicio_administrador.png",
+        "evidencias/capturas/CP-UI-18_inicio_docente.png",
+        "evidencias/capturas/CP-UI-18_inicio_estudiante.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-18 el menú muestra solo las secciones de cada rol",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-19",
+      "requisito": "RF-05",
+      "modulo": "Frontend",
+      "area": "CRUD módulos y temas (UI)",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Media",
+      "titulo": "El docente elige su curso de una lista",
+      "pasos": "Abrir /gestion como docente.",
+      "datos": "docente.demo@example.com",
+      "esperado": "Selector con sus cursos (GET /api/cursos-administrables), sin escribir IDs. Si pide escribir el ID → BLOQUEADO.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-17"
+      ],
+      "capturas": [
+        "CP-UI-19_docente_selector_curso.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-19_docente_selector_curso.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-19 el docente elige su curso de una lista (cursos administrables)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-UI-20",
+      "requisito": "RF-08",
+      "modulo": "Frontend",
+      "area": "Robustez",
+      "tipo": "Funcional (E2E)",
+      "prioridad": "Alta",
+      "titulo": "El Dashboard sigue funcionando cuando el motor falla",
+      "pasos": "Con Python no disponible, iniciar sesión como estudiante demo.",
+      "datos": "PYTHON_EXECUTABLE inválido",
+      "esperado": "El Dashboard muestra los datos sin la tarjeta del motor, sin mensaje de error técnico.",
+      "responsable": "Yuleidy De Los Santos",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [
+        "INC-15"
+      ],
+      "capturas": [
+        "CP-UI-20_dashboard_motor_caido.png"
+      ],
+      "evidencia": [
+        "evidencias/capturas/CP-UI-20_dashboard_motor_caido.png",
+        "evidencias/logs/04_e2e.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-UI-20 el Dashboard sigue funcionando cuando el motor falla",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "e2e.xml"
+        }
+      ]
+    }
+  ],
+  "incidencias": [
+    {
+      "id": "INC-01",
+      "titulo": "El backend no tiene CORS: el login real desde el navegador falla",
+      "tipo": "Defecto",
+      "severidad": "Alta",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez",
+      "casos": [
+        "CP-UI-01"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026 (avance 3). Corregida en main: backend/src/app.js usa cors con CORS_ORIGIN. Re-prueba del 16/11/2026: CP-UI-01 aprobado (login real desde el navegador).",
+      "descripcion": "El frontend (http://localhost:5173) y el backend (http://localhost:3000) están en orígenes distintos. El navegador hace una petición previa (preflight OPTIONS) y el backend no responde con Access-Control-Allow-Origin, así que el navegador bloquea el login. frontend/README.md afirma que 'el backend permite ese origen mediante CORS_ORIGIN', pero esa variable y el middleware cors no existen en backend/.",
+      "pasos": "1) npm start en backend. 2) En frontend/.env.local poner VITE_USE_MOCK=false. 3) npm run dev. 4) Iniciar sesión con la cuenta demo.",
+      "esperado": "Entra al Dashboard.",
+      "obtenido": "'No se pudo conectar con el servidor. Verifica que el backend esté encendido.' Consola: 'blocked by CORS policy: No Access-Control-Allow-Origin header'.",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-01_login_real_con_cors.png"
+      ],
+      "sugerencia": "En backend: npm install cors; en app.js, antes de las rutas: app.use(require('cors')({ origin: (process.env.CORS_ORIGIN || 'http://localhost:5173').split(',') })); y añadir CORS_ORIGIN=http://localhost:5173 a .env.example. Alternativa solo para desarrollo: proxy '/api' en frontend/vite.config.ts.",
+      "verificacion": "CP-UI-01: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-02",
+      "titulo": "JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido'",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez",
+      "casos": [
+        "CP-LOG-06",
+        "CP-BE-07"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "En middlewares/errorHandler.js la primera condición es 'if (err.status)'. El error que produce express.json() ya trae status 400, así que entra por ahí y nunca llega a la rama 'entity.parse.failed'. Resultado: el cliente recibe el mensaje interno del parser.",
+      "pasos": "POST /api/auth/login con el cuerpo '{\"email\": ' y Content-Type application/json.",
+      "esperado": "400 { success:false, message:'JSON inválido' }",
+      "obtenido": "400 { success:false, message:'Unexpected end of JSON input' }",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-log-06"
+      ],
+      "sugerencia": "Mover la comprobación de err.type === 'entity.parse.failed' ANTES de 'if (err.status)', o usar 'if (err instanceof AppError)' en la primera rama.",
+      "verificacion": "CP-LOG-06: FALLIDO, CP-BE-07: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-03",
+      "titulo": "Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error",
+      "tipo": "Defecto",
+      "severidad": "Media",
+      "modulo": "Motor adaptativo",
+      "responsable": "Daniel Beltre",
+      "casos": [
+        "CP-VAL-14"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "analyzer.py llama student_data.get(...) sin comprobar que sea un diccionario. Con [], \"texto\", 5 o null se lanza AttributeError, que main.py no captura (solo captura ValueError, KeyError, TypeError y JSONDecodeError). Se rompe el contrato de INTEGRATION.md (errores como JSON por stderr), y el backend no podrá interpretar el error.",
+      "pasos": "echo [] | python main.py --stdin",
+      "esperado": "Código 1 y {\"error\": \"...\"} en stderr.",
+      "obtenido": "Traceback de Python: AttributeError: 'list' object has no attribute 'get'.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-val-14"
+      ],
+      "sugerencia": "Al inicio de analyze_behavior: if not isinstance(student_data, dict): raise ValueError('Los datos del estudiante deben ser un objeto JSON.')",
+      "verificacion": "CP-VAL-14: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-04",
+      "titulo": "Motor: acepta Infinity y devuelve un JSON que Node no puede leer",
+      "tipo": "Defecto",
+      "severidad": "Media",
+      "modulo": "Motor adaptativo",
+      "responsable": "Daniel Beltre",
+      "casos": [
+        "CP-VAL-09",
+        "CP-VAL-15"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "json.load de Python acepta Infinity/NaN. NaN se rechaza, pero Infinity pasa la validación (inf ≥ 0) y la salida contiene 'average_study_minutes: Infinity', que no es JSON estándar: JSON.parse en Node falla.",
+      "pasos": "Enviar study_minutes: Infinity por --stdin.",
+      "esperado": "Rechazo con código 1 y mensaje de datos inválidos.",
+      "obtenido": "Código 0 y salida con 'Infinity'.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-val-15"
+      ],
+      "sugerencia": "En analyzer.py añadir: if not np.isfinite(df[required_columns]).all().all(): raise ValueError(...). En main.py usar json.dumps(..., allow_nan=False).",
+      "verificacion": "CP-VAL-09: FALLIDO, CP-VAL-15: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-05",
+      "titulo": "Motor: falta de student_id o topic produce KeyError sin mensaje claro",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Motor adaptativo",
+      "responsable": "Daniel Beltre",
+      "casos": [
+        "CP-VAL-07"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "Los seis campos de interacción se validan con un mensaje claro, pero student_id y topic se leen con student_data['...']. Sin ellos se lanza KeyError y la CLI responde {\"error\": \"'topic'\"}.",
+      "pasos": "process_student({'student_id': 1, 'interactions': [...]})",
+      "esperado": "ValueError 'Faltan campos obligatorios: topic'.",
+      "obtenido": "KeyError('topic').",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-val-07"
+      ],
+      "sugerencia": "Validar student_id y topic al inicio junto con interactions.",
+      "verificacion": "CP-VAL-07: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-06",
+      "titulo": "Motor: acepta true/false como números (true = 1 %)",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Motor adaptativo",
+      "responsable": "Daniel Beltre",
+      "casos": [
+        "CP-VAL-10"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "pd.to_numeric convierte booleanos en 1/0. score_percentage=true se interpreta como 1 % y genera una recomendación de refuerzo con datos que no son una puntuación.",
+      "pasos": "Interacción con score_percentage: true.",
+      "esperado": "ValueError de datos inválidos.",
+      "obtenido": "Se procesa con promedio 1.0 y acción reinforce_topic.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-val-10"
+      ],
+      "sugerencia": "Rechazar columnas con valores bool antes de to_numeric (p. ej. df[c].map(type).eq(bool).any()).",
+      "verificacion": "CP-VAL-10: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-07",
+      "titulo": "Motor: los conteos con decimales se truncan en silencio",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Motor adaptativo",
+      "responsable": "Daniel Beltre",
+      "casos": [
+        "CP-VAL-11"
+      ],
+      "estado": "Abierta",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "errors, attempts, repetitions y navigation_count son conteos, pero se aceptan decimales. total_errors usa int(), así que 2.7 se convierte en 2 sin avisar y puede cambiar la regla aplicada.",
+      "pasos": "Interacción con errors: 2.7.",
+      "esperado": "ValueError: los conteos deben ser enteros.",
+      "obtenido": "total_errors = 2.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-val-11"
+      ],
+      "sugerencia": "Comprobar (df[conteos] % 1 == 0).all().all() o acordar con el equipo que se redondea.",
+      "verificacion": "CP-VAL-11: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-08",
+      "titulo": "Dashboard y Progreso en modo real usan endpoints que no existen",
+      "tipo": "Integración pendiente",
+      "severidad": "Alta",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez (endpoints) y Yuleidy De Los Santos (pantalla)",
+      "casos": [
+        "CP-CRUD-08"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Corregida en main (PR #16): GET /api/students/:id y /progress con datos reales. Re-prueba del 16/11/2026: CP-CRUD-08 aprobado. Los defectos que quedan en la pantalla se registran en INC-15 e INC-16.",
+      "descripcion": "frontend/src/services/dashboardService.ts llama GET /api/students/:id y GET /api/students/:id/progress. El backend solo tiene /api/health y /api/auth/*. En modo real, Dashboard y Progreso muestran solo 'Ruta no encontrada' (mensaje técnico para el estudiante).",
+      "pasos": "Modo real (VITE_USE_MOCK=false), iniciar sesión y abrir el Dashboard.",
+      "esperado": "Resumen del estudiante con datos de la base.",
+      "obtenido": "404 y el texto 'Ruta no encontrada' en pantalla.",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-09_dashboard_datos_reales.png",
+        "evidencias/capturas/CP-UI-07c_progreso.png"
+      ],
+      "sugerencia": "Implementar ambos endpoints con el contrato que espera el frontend (campos en español). Mientras tanto, el frontend podría mostrar un mensaje amigable o volver a los datos simulados ante un 404.",
+      "verificacion": "CP-CRUD-08: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-09",
+      "titulo": "No hay endpoints para listar, actualizar, cambiar el rol ni eliminar usuarios",
+      "tipo": "Integración pendiente",
+      "severidad": "Media",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez",
+      "casos": [
+        "CP-CRUD-06",
+        "CP-CRUD-07"
+      ],
+      "estado": "Pendiente de desarrollo",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "Existen dtos/user.dto.js (changeRoleDto) y el permiso users:change-role, pero ninguna ruta los usa. El CRUD de usuarios disponible es solo Crear (registro) y Leer (/me).",
+      "pasos": "PATCH /api/users/:id/role y DELETE /api/users/:id",
+      "esperado": "Endpoints protegidos por permiso.",
+      "obtenido": "404 Ruta no encontrada.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-crud-06"
+      ],
+      "sugerencia": "Crear userRoutes con requirePermission('users:change-role') y validate(changeRoleDto).",
+      "verificacion": "CP-CRUD-06: BLOQUEADO, CP-CRUD-07: BLOQUEADO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-10",
+      "titulo": "Las operaciones académicas de la base de datos no están expuestas por HTTP",
+      "tipo": "Integración pendiente",
+      "severidad": "Media",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez y Jeison Rosario",
+      "casos": [
+        "CP-CRUD-09"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Corregida en main: rutas /api/mis-cursos, /mis-inscripciones, /mis-intentos y /mis-respuestas. Re-prueba del 16/11/2026: CP-CRUD-09 aprobado (intento real calificado al 100 % y guardado en PostgreSQL).",
+      "descripcion": "inscribir_estudiante, iniciar_intento, guardar_opciones_respuesta, entregar_intento, calificar_intento y la vista resultados_actividades funcionan en SQL (CP-BD-01/02 aprobados), pero no hay rutas de Express que las usen.",
+      "pasos": "Buscar rutas de inscripción, intentos y resultados.",
+      "esperado": "Rutas que llamen a las funciones con el estudiante tomado del token.",
+      "obtenido": "404.",
+      "evidencia": [
+        "evidencias/logs/sql_pruebas_migracion_003.log"
+      ],
+      "sugerencia": "Seguir database/docs/CONTRATO_INTEGRACION_BD.md (consultas parametrizadas $1, $2…).",
+      "verificacion": "CP-CRUD-09: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-11",
+      "titulo": "El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze)",
+      "tipo": "Integración pendiente",
+      "severidad": "Alta",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez y Daniel Beltre",
+      "casos": [
+        "CP-MOT-11",
+        "CP-ADP-01",
+        "CP-ADP-02",
+        "CP-ADP-03"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Corregida en main: engineClient.js ejecuta python main.py --stdin; rutas POST /api/students/:id/recommendation y /mis-inscripciones/:id/temas/:temaId/recomendacion. Re-prueba del 16/11/2026: CP-MOT-11 y CP-ADP-01 a 09 aprobados.",
+      "descripcion": "INTEGRATION.md propone el endpoint y el mecanismo (Node ejecuta python main.py --stdin). La parte Python ya funciona (CP-MOT-09 aprobado), falta la ruta en Express.",
+      "pasos": "POST /api/adaptive/analyze con token.",
+      "esperado": "200 con profile y recommendation.",
+      "obtenido": "404.",
+      "evidencia": [
+        "reportes/REPORTE_DE_PRUEBAS.md#cp-mot-11"
+      ],
+      "sugerencia": "Implementar con child_process.spawn, timeout y manejo del código de salida. Corregir antes INC-03 e INC-04 para que los errores lleguen siempre como JSON.",
+      "verificacion": "CP-MOT-11: APROBADO, CP-ADP-01: APROBADO, CP-ADP-02: APROBADO, CP-ADP-03: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-12",
+      "titulo": "Los ejercicios no envían tiempo, intentos ni errores al backend",
+      "tipo": "Integración pendiente",
+      "severidad": "Media",
+      "modulo": "Frontend",
+      "responsable": "Yuleidy De Los Santos y Porfirio Ramírez",
+      "casos": [
+        "CP-UI-11"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: la pantalla ahora pide la recomendación al motor real, pero solo envía el tema; tiempo, intentos y errores del ejercicio no se guardan. Corregida en main (PR #17): Contenido usa cuestionarios reales; cada respuesta se guarda con PUT /mis-respuestas y el intento se entrega al backend. Re-prueba del 17/11/2026: CP-UI-11 aprobado.",
+      "descripcion": "ExercisePanel mide tiempo, intentos y errores, pero solo los muestra. No hay endpoint para registrarlos, así que el motor no recibe datos reales del estudiante. Está declarado como pendiente en frontend/README.md.",
+      "pasos": "Responder el ejercicio de /contenido en modo real y observar la red.",
+      "esperado": "Una petición con las métricas.",
+      "obtenido": "POST /api/students/:id/recommendation con el cuerpo {\"topic\":\"SQL JOIN\"} únicamente.",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-10b_cuestionario_respondido.png",
+        "evidencias/capturas/CP-UI-12d_recomendacion_del_motor.png"
+      ],
+      "sugerencia": "Definir el endpoint (o reutilizar intentos/respuestas de la BD, como indica el contrato) y llamarlo al comprobar la respuesta.",
+      "verificacion": "CP-UI-11: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-13",
+      "titulo": "Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez",
+      "casos": [
+        "CP-BE-10"
+      ],
+      "estado": "Abierta",
+      "historial": "Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "En errorHandler.js el bloque de 'entity.too.large' quedó después de res.status(500) y de un return implícito, así que nunca se alcanza. Además el error de body-parser trae status 413 y entra antes por 'if (err.status)', devolviendo el mensaje interno en inglés.",
+      "pasos": "POST /api/auth/login con un cuerpo JSON de más de 100 KB.",
+      "esperado": "413 'El cuerpo de la petición es demasiado grande'.",
+      "obtenido": "413 'request entity too large'.",
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "sugerencia": "Mover las comprobaciones de err.type ('entity.parse.failed', 'entity.too.large') al inicio del errorHandler, antes de 'if (err.status)'. Corrige también INC-02.",
+      "verificacion": "CP-BE-10: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-14",
+      "titulo": "Rutas inexistentes bajo /api responden 401 en lugar de 404",
+      "tipo": "Defecto",
+      "severidad": "Baja",
+      "modulo": "Backend / API",
+      "responsable": "Porfirio Ramírez",
+      "casos": [
+        "CP-BE-09"
+      ],
+      "estado": "Abierta",
+      "historial": "Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "descripcion": "app.use('/api', contentRoutes) monta un router con router.use(verifyToken) para TODO /api. Cualquier ruta que no exista, sin token, responde 401 'Token requerido' en vez de 404, lo que confunde al depurar el frontend.",
+      "pasos": "GET /api/no-existe sin cabecera Authorization.",
+      "esperado": "404 'Ruta no encontrada'.",
+      "obtenido": "401.",
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "sugerencia": "Aplicar verifyToken en cada ruta de contentRoutes (o montar el router en prefijos concretos como /api/modulos y /api/temas) en vez de router.use(verifyToken) sobre /api.",
+      "verificacion": "CP-BE-09: FALLIDO",
+      "todosAprobados": false
+    },
+    {
+      "id": "INC-15",
+      "titulo": "El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído)",
+      "tipo": "Defecto",
+      "severidad": "Alta",
+      "modulo": "Frontend",
+      "responsable": "Yuleidy De Los Santos",
+      "casos": [
+        "CP-UI-13",
+        "CP-UI-20"
+      ],
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026. Afecta a todo estudiante nuevo. Corregida en main (PR #17). Re-prueba del 17/11/2026: CP-UI-13 y CP-UI-20 aprobados (estudiante nuevo y motor caído sin error en el Dashboard).",
+      "descripcion": "GET /api/students/:id/progress devuelve recomendacion: null cuando el estudiante no tiene intentos calificados o cuando el motor falla (comportamiento correcto del backend). dashboardService.ts lee r.tema sin comprobar null, y toda la pantalla queda reemplazada por un error técnico.",
+      "pasos": "1) Registrar un estudiante nuevo e iniciar sesión (modo real). 2) O bien, con el estudiante demo, detener Python o configurar mal PYTHON_EXECUTABLE.",
+      "esperado": "El Dashboard muestra los datos disponibles y omite (o explica) la tarjeta del motor.",
+      "obtenido": "Pantalla con 'Cannot read properties of null (reading 'tema')'.",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-13a_dashboard_sin_datos.png",
+        "evidencias/capturas/CP-UI-20_dashboard_motor_caido.png"
+      ],
+      "sugerencia": "En toDashboardSummary: si progress.recomendacion es null, devolver recommendation/evidence = null y que DashboardScreen no muestre la tarjeta (o muestre 'Aún no hay datos para recomendar').",
+      "verificacion": "CP-UI-13: APROBADO, CP-UI-20: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-16",
+      "titulo": "El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada",
+      "tipo": "Defecto",
+      "severidad": "Media",
+      "modulo": "Frontend",
+      "responsable": "Yuleidy De Los Santos",
+      "casos": [
+        "CP-UI-09"
+      ],
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026. Corregida en main (PR #17): el Dashboard indica 'Datos reales de tu cuenta' y la actividad reciente viene del backend. Re-prueba del 17/11/2026: CP-UI-09 aprobado.",
+      "descripcion": "DashboardScreen pasa sample=true a RecommendationCard siempre, por eso la tarjeta muestra el chip 'Datos de ejemplo' aunque los valores (16.7 %, 10 errores) vienen del motor real. 'Actividad reciente' usa MOCK_ACTIVITY aunque existe GET /api/mis-inscripciones/:id/actividad-reciente, y el texto del anillo dice que el progreso son 'datos de ejemplo'.",
+      "pasos": "Modo real, iniciar sesión como estudiante demo y revisar el Dashboard.",
+      "esperado": "Sin etiquetas de ejemplo cuando los datos son reales; actividad reciente tomada del backend.",
+      "obtenido": "Chip 'Datos de ejemplo' en la tarjeta del motor y actividad reciente ficticia ('SQL JOIN: 55 % de aciertos').",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-09_dashboard_datos_reales.png"
+      ],
+      "sugerencia": "Pasar sample solo en modo simulado (USE_MOCK) y conectar 'Actividad reciente' a /actividad-reciente.",
+      "verificacion": "CP-UI-09: APROBADO",
+      "todosAprobados": true
+    },
+    {
+      "id": "INC-17",
+      "titulo": "El docente debe escribir el ID numérico del curso para gestionar contenido",
+      "tipo": "Integración pendiente",
+      "severidad": "Media",
+      "modulo": "Frontend",
+      "responsable": "Yuleidy De Los Santos",
+      "casos": [
+        "CP-UI-19"
+      ],
+      "estado": "Verificada",
+      "historial": "Registrada el 16/11/2026. El CRUD del docente sí funciona escribiendo el ID (CP-UI-17 aprobado). Corregida en main (PR #17): selector de cursos administrables para el docente. Re-prueba del 17/11/2026: CP-UI-19 y CP-UI-17 aprobados.",
+      "descripcion": "En /gestion el administrador elige el curso de una lista, pero el docente tiene un campo 'ID del curso' y un botón 'Cargar'. El backend ya ofrece GET /api/cursos-administrables con los cursos del docente (DEMO-006). El README de database lo declara pendiente.",
+      "pasos": "Iniciar sesión como docente.demo@example.com y abrir Contenido.",
+      "esperado": "Selector con los cursos que el docente puede editar.",
+      "obtenido": "Campo numérico; hay que saber el ID interno (3).",
+      "evidencia": [
+        "evidencias/capturas/CP-UI-19_docente_selector_curso.png",
+        "evidencias/capturas/CP-UI-17b_modulo_creado.png"
+      ],
+      "sugerencia": "Usar el mismo <select> del administrador, cargado con GET /api/cursos-administrables, también para el docente.",
+      "verificacion": "CP-UI-19: APROBADO",
+      "todosAprobados": true
+    }
+  ]
+}

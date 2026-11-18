@@ -1,0 +1,377 @@
+### DROP DATABASE
+DROP DATABASE
+
+
+### CREATE DATABASE
+CREATE DATABASE
+
+
+### migrations/001_estructura_academica_inicial.sql
+BEGIN
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COMMIT
+
+
+### migrations/002_modulos_temas.sql
+BEGIN
+CREATE TABLE
+CREATE TABLE
+COMMIT
+
+
+### migrations/003_actividades_intentos_respuestas.sql
+BEGIN
+SET
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE VIEW
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+COMMIT
+
+
+### security/001_roles_permisos.sql
+BEGIN
+DO
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+REVOKE
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+ALTER FUNCTION
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+COMMIT
+
+
+### migrations/004_inscripcion_estudiantes.sql
+BEGIN
+SET
+CREATE FUNCTION
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+
+
+### migrations/005_crud_cursos.sql
+BEGIN
+SET
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+REVOKE
+ALTER FUNCTION
+REVOKE
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+
+
+### migrations/006_crud_modulos_temas.sql
+BEGIN
+SET
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+REVOKE
+ALTER FUNCTION
+REVOKE
+ALTER FUNCTION
+REVOKE
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+
+
+### migrations/007_lectura_contenido_estudiantes.sql
+BEGIN
+SET
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+ALTER FUNCTION
+REVOKE
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+
+
+### migrations/008_consultas_integracion.sql
+BEGIN
+SET
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+ALTER FUNCTION
+REVOKE
+DO
+COMMIT
+
+
+### seeds/datos_prueba.sql
+BEGIN
+INSERT 0 3
+INSERT 0 3
+INSERT 0 3
+INSERT 0 1
+INSERT 0 1
+INSERT 0 2
+INSERT 0 4
+INSERT 0 4
+INSERT 0 1
+COMMIT
+
+
+### seeds/datos_prueba_modulos_temas.sql
+BEGIN
+INSERT 0 2
+INSERT 0 4
+COMMIT
+
+
+### seeds/datos_prueba_actividades_intentos.sql
+Hash bcrypt del estudiante demo: BEGIN
+SET
+CREATE TABLE
+INSERT 0 1
+DO
+COMMIT
+            email            |             titulo              | finalidad  | intentos_calificados | promedio_porcentaje | nota_academica_porcentaje 
+-----------------------------+---------------------------------+------------+----------------------+---------------------+---------------------------
+ estudiante.demo@example.com | DEMO-003: práctica con promedio | PRACTICA   |                    2 |               50.00 |                          
+ estudiante.demo@example.com | DEMO-003: evaluación calificada | EVALUACION |                    1 |              100.00 |                    100.00
+ estudiante.demo@example.com | DEMO-003: práctica disponible   | PRACTICA   |                    0 |                     |                          
+(3 rows)
+
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
+
+
+### seeds/datos_prueba_administrador.sql
+Hash bcrypt del administrador demo: BEGIN
+SET
+CREATE TABLE
+INSERT 0 1
+DO
+COMMIT
+ id |             email              | activo |      rol      
+----+--------------------------------+--------+---------------
+  5 | administrador.demo@example.com | t      | ADMINISTRADOR
+(1 row)
+
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_administrador.sql:42: NOTICE:  Administrador demo creado. ID: 5.
+
+
+### seeds/datos_prueba_docente.sql
+Hash bcrypt del docente demo: BEGIN
+SET
+CREATE TABLE
+INSERT 0 1
+DO
+COMMIT
+ docente_id |          email           |   rol   | curso_id |  curso   
+------------+--------------------------+---------+----------+----------
+          6 | docente.demo@example.com | DOCENTE |        3 | DEMO-006
+(1 row)
+
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_docente.sql:41: NOTICE:  Docente demo 6, curso 3, modulo 4 creados.
+
+
+### seeds/datos_prueba_integracion_resultados.sql
+BEGIN
+SET
+SET
+CREATE TABLE
+INSERT 0 1
+CREATE TABLE
+INSERT 0 12
+DO
+            email            | inscripcion_id | tema_id |    tema    | actividad_id | finalidad  | intentos_calificados | promedio_porcentaje | nota_academica_porcentaje 
+-----------------------------+----------------+---------+------------+--------------+------------+----------------------+---------------------+---------------------------
+ estudiante.demo@example.com |              3 |       7 | SQL SELECT |            4 | EVALUACION |                    3 |               91.67 |                     91.67
+ estudiante.demo@example.com |              3 |       8 | SQL WHERE  |            5 | EVALUACION |                    3 |               66.67 |                     66.67
+ estudiante.demo@example.com |              3 |       9 | SQL JOIN   |            6 | PRACTICA   |                    3 |               16.67 |                          
+ estudiante.demo@example.com |              3 |       9 | SQL JOIN   |            7 | EVALUACION |                    0 |                     |                          
+(4 rows)
+
+ semana_local | intentos_calificados | minutos_transcurridos_simulados 
+--------------+----------------------+---------------------------------
+ 2026-11-09   |                    3 |                           36.00
+ 2026-11-16   |                    6 |                           72.00
+(2 rows)
+
+COMMIT
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_integracion_resultados.sql:231: NOTICE:  Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-16 00:00:00-04 (America/Santo_Domingo).
+
+
+### ALTER ROLE (password oculto)
+ALTER ROLE
+
+
+### conteo de objetos
+17 tablas, 1 vista(s), 6 usuarios

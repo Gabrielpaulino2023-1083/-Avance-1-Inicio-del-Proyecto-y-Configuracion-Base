@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /home/claude/v3/proyecto-grupo4/adaptive-engine
+plugins: platformdirs-4.13.5, anyio-4.15.1
+collecting ... collected 6 items
+
+tests/test_engine.py::TestAdaptiveEngine::test_empty_interactions PASSED [ 16%]
+tests/test_engine.py::TestAdaptiveEngine::test_high_performance PASSED   [ 33%]
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_score PASSED      [ 50%]
+tests/test_engine.py::TestAdaptiveEngine::test_low_performance PASSED    [ 66%]
+tests/test_engine.py::TestAdaptiveEngine::test_medium_performance PASSED [ 83%]
+tests/test_engine.py::TestAdaptiveEngine::test_missing_required_field PASSED [100%]
+
+- generated xml file: /home/claude/v3/proyecto-grupo4/tests/reportes/junit/motor_daniel.xml -
+============================== 6 passed in 0.22s ===============================
