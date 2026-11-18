@@ -1,6 +1,6 @@
 # Reporte de pruebas — Motor de Aprendizaje Adaptativo — Grupo 4
 
-**Fecha de ejecución:** 16 de noviembre de 2026 a las 4:15 p. m. · **Duración:** 150 s · **Casos:** 130 · **Verificaciones automatizadas:** 202
+**Fecha de ejecución:** 17 de noviembre de 2026 a las 7:52 p. m. · **Duración:** 188 s · **Casos:** 130 · **Verificaciones automatizadas:** 202
 
 > Archivo generado automáticamente con `npm test` (carpeta `tests/`). No editarlo a mano.
 
@@ -8,9 +8,9 @@
 
 | Estado | Casos | % |
 |---|---:|---:|
-| ✅ APROBADO | 113 | 87 % |
-| ❌ FALLIDO | 13 | 10 % |
-| ⛔ BLOQUEADO | 4 | 3 % |
+| ✅ APROBADO | 118 | 91 % |
+| ❌ FALLIDO | 10 | 8 % |
+| ⛔ BLOQUEADO | 2 | 2 % |
 | **Total** | **130** | 100 % |
 
 **Criterio:** un caso es BLOQUEADO cuando no puede ejecutarse por falta de integración (endpoint o pantalla pendiente). No se cuenta como fallo.
@@ -23,10 +23,10 @@
 | RF-02 | Roles y permisos (estudiante, docente, administrador) | 9 | 0 | 0 | CP-ROL-01, CP-ROL-02, CP-ROL-03, CP-ROL-04, CP-ROL-05, CP-CRUD-04, CP-BE-06, CP-UI-05, CP-UI-18 |
 | RF-03 | Gestión de usuarios | 3 | 0 | 2 | CP-CRUD-01, CP-CRUD-02, CP-CRUD-05, CP-CRUD-06, CP-CRUD-07 |
 | RF-04 | CRUD de cursos (administrador) | 7 | 0 | 0 | CP-CUR-01, CP-CUR-02, CP-CUR-03, CP-CUR-04, CP-CUR-05, CP-CUR-06, CP-UI-16 |
-| RF-05 | CRUD de módulos y temas (docente/administrador) | 9 | 0 | 1 | CP-MT-01, CP-MT-02, CP-MT-03, CP-MT-04, CP-MT-05, CP-MT-06, CP-MT-07, CP-MT-08, CP-UI-17, CP-UI-19 |
+| RF-05 | CRUD de módulos y temas (docente/administrador) | 10 | 0 | 0 | CP-MT-01, CP-MT-02, CP-MT-03, CP-MT-04, CP-MT-05, CP-MT-06, CP-MT-07, CP-MT-08, CP-UI-17, CP-UI-19 |
 | RF-06 | Actividades, intentos y resultados del estudiante | 1 | 0 | 0 | CP-CRUD-09 |
-| RF-07 | Motor adaptativo: recomendaciones según desempeño | 28 | 0 | 1 | CP-MOTD-01, CP-MOTD-02, CP-MOTD-03, CP-MOTD-04, CP-MOTD-05, CP-MOTD-06, CP-MOT-01, CP-MOT-02, CP-MOT-03, CP-MOT-04, CP-MOT-05, CP-MOT-06, CP-MOT-07, CP-MOT-08, CP-MOT-09, CP-MOT-10, CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03, CP-ADP-04, CP-ADP-05, CP-ADP-06, CP-ADP-07, CP-ADP-08, CP-ADP-09, CP-UI-10, CP-UI-11, CP-UI-12 |
-| RF-08 | Dashboard y progreso del estudiante | 1 | 3 | 0 | CP-CRUD-08, CP-UI-09, CP-UI-13, CP-UI-20 |
+| RF-07 | Motor adaptativo: recomendaciones según desempeño | 29 | 0 | 0 | CP-MOTD-01, CP-MOTD-02, CP-MOTD-03, CP-MOTD-04, CP-MOTD-05, CP-MOTD-06, CP-MOT-01, CP-MOT-02, CP-MOT-03, CP-MOT-04, CP-MOT-05, CP-MOT-06, CP-MOT-07, CP-MOT-08, CP-MOT-09, CP-MOT-10, CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03, CP-ADP-04, CP-ADP-05, CP-ADP-06, CP-ADP-07, CP-ADP-08, CP-ADP-09, CP-UI-10, CP-UI-11, CP-UI-12 |
+| RF-08 | Dashboard y progreso del estudiante | 4 | 0 | 0 | CP-CRUD-08, CP-UI-09, CP-UI-13, CP-UI-20 |
 | RF-09 | Persistencia de datos en PostgreSQL | 4 | 0 | 0 | CP-PER-01, CP-PER-02, CP-PER-03, CP-PER-04 |
 | RNF-01 | Seguridad (tokens, contraseñas, límites, datos sensibles) | 4 | 0 | 0 | CP-SEG-01, CP-SEG-02, CP-BE-03, CP-BE-05 |
 | RNF-02 | Validación de datos y manejo de errores | 19 | 9 | 0 | CP-CRUD-03, CP-VAL-01, CP-VAL-02, CP-VAL-03, CP-VAL-04, CP-VAL-05, CP-VAL-06, CP-VAL-07, CP-VAL-08, CP-VAL-09, CP-VAL-10, CP-VAL-11, CP-VAL-12, CP-VAL-13, CP-VAL-14, CP-VAL-15, CP-BE-01, CP-BE-02, CP-BE-04, CP-BE-07, CP-BE-09, CP-BE-10, CP-FE-01, CP-FE-02, CP-FE-03, CP-UI-04, CP-UI-14, CP-UI-15 |
@@ -41,7 +41,7 @@
 | Backend / API | Porfirio Ramírez | 51 | 4 | 2 | 57 |
 | Base de datos | Jeison Rosario | 11 | 0 | 0 | 11 |
 | Motor adaptativo | Daniel Beltre | 34 | 6 | 0 | 40 |
-| Frontend | Yuleidy De Los Santos | 17 | 3 | 2 | 22 |
+| Frontend | Yuleidy De Los Santos | 22 | 0 | 0 | 22 |
 
 ## Re-pruebas de incidencias corregidas
 
@@ -51,6 +51,10 @@
 | INC-08 | Dashboard y Progreso en modo real usan endpoints que no existen | Verificada | CP-CRUD-08: APROBADO |
 | INC-10 | Las operaciones académicas de la base de datos no están expuestas por HTTP | Verificada | CP-CRUD-09: APROBADO |
 | INC-11 | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Verificada | CP-MOT-11: APROBADO, CP-ADP-01: APROBADO, CP-ADP-02: APROBADO, CP-ADP-03: APROBADO |
+| INC-12 | Los ejercicios no envían tiempo, intentos ni errores al backend | Verificada | CP-UI-11: APROBADO |
+| INC-15 | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Verificada | CP-UI-13: APROBADO, CP-UI-20: APROBADO |
+| INC-16 | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Verificada | CP-UI-09: APROBADO |
+| INC-17 | El docente debe escribir el ID numérico del curso para gestionar contenido | Verificada | CP-UI-19: APROBADO |
 
 ## Casos fallidos
 
@@ -66,9 +70,6 @@
 | [CP-BE-07](#cp-be-07) | RNF-02 | errorHandler traduce cada tipo de error | INC-02 | Porfirio Ramírez | 400 { success:false, message:'Unexpected end of JSON input' } (ver INC-02) |
 | [CP-BE-09](#cp-be-09) | RNF-02 | Health check y ruta inexistente | INC-14 | Porfirio Ramírez | 401. (ver INC-14) |
 | [CP-BE-10](#cp-be-10) | RNF-02 | Cuerpo demasiado grande (413) | INC-13 | Porfirio Ramírez | 413 'request entity too large'. (ver INC-13) |
-| [CP-UI-09](#cp-ui-09) | RF-08 | Dashboard con datos reales del backend | INC-16 | Yuleidy De Los Santos | Chip 'Datos de ejemplo' en la tarjeta del motor y actividad reciente ficticia ('SQL JOIN: 55 % de aciertos'). (ver INC-16) |
-| [CP-UI-13](#cp-ui-13) | RF-08 | Estudiante sin intentos | INC-15 | Yuleidy De Los Santos | Pantalla con 'Cannot read properties of null (reading 'tema')'. (ver INC-15) |
-| [CP-UI-20](#cp-ui-20) | RF-08 | El Dashboard sigue funcionando cuando el motor falla | INC-15 | Yuleidy De Los Santos | Pantalla con 'Cannot read properties of null (reading 'tema')'. (ver INC-15) |
 
 ## Casos bloqueados
 
@@ -76,8 +77,6 @@
 |---|---|---|---|
 | [CP-CRUD-06](#cp-crud-06) | Actualizar usuario / cambiar rol | BLOQUEADO: PATCH /api/users/:id/role no está implementado en el backend (404). | INC-09 |
 | [CP-CRUD-07](#cp-crud-07) | Eliminar / desactivar usuario | BLOQUEADO: DELETE /api/users/:id no está implementado en el backend (404). | INC-09 |
-| [CP-UI-11](#cp-ui-11) | Envío de métricas del ejercicio al backend/motor | BLOQUEADO: el ejercicio solo envía el tema ({"topic":"SQL JOIN"}); el tiempo, los intentos y los errores del ejercicio no se guardan. La recomendación usa los intentos de la base (pendiente declarado en frontend/README.md). | INC-12 |
-| [CP-UI-19](#cp-ui-19) | El docente elige su curso de una lista | BLOQUEADO: el docente debe escribir el ID numérico del curso. El backend ya ofrece GET /api/cursos-administrables, pero la pantalla todavía no lo usa (pendiente declarado en database/README.md). | INC-17 |
 
 ## Incidencias
 
@@ -96,12 +95,12 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 | INC-09 | No hay endpoints para listar, actualizar, cambiar el rol ni eliminar usuarios | Integración pendiente | Media | Porfirio Ramírez | Pendiente de desarrollo |
 | INC-10 | Las operaciones académicas de la base de datos no están expuestas por HTTP | Integración pendiente | Media | Porfirio Ramírez y Jeison Rosario | Verificada |
 | INC-11 | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Integración pendiente | Alta | Porfirio Ramírez y Daniel Beltre | Verificada |
-| INC-12 | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Pendiente de desarrollo |
+| INC-12 | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Verificada |
 | INC-13 | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Abierta |
 | INC-14 | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Abierta |
-| INC-15 | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Abierta |
-| INC-16 | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Abierta |
-| INC-17 | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Pendiente de desarrollo |
+| INC-15 | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Verificada |
+| INC-16 | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Verificada |
+| INC-17 | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Verificada |
 
 ## Detalle de todos los casos
 
@@ -1429,7 +1428,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Datos:** [] / "x" / 5 / null
 - **Resultado esperado:** Código 1 y {"error": ...} en stderr (sin traceback de Python).
 - **Resultado real:** Traceback de Python: AttributeError: 'list' object has no attribute 'get'. (ver INC-03)
-- **Detalle técnico:** 4 de 4 verificaciones fallaron. main() ~~~~^^ File "/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py", line 20[Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON""> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File "/home/claude/v2/proyecto-grupo4/adaptive-engine/main.py", line 47, in <module> main() ~~~~^^ File "/home/claude/v2/proyecto-gr
+- **Detalle técnico:** 4 de 4 verificaciones fallaron. main() ~~~~^^ File "/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py", line 20[Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON""> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File "/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py", line 47, in <module> main() ~~~~^^ File "/home/claude/v3/proyecto-gr
 - **Incidencias:** INC-03
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 - **Verificaciones (4):**
@@ -1784,7 +1783,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-UI-09
 
-**❌ FALLIDO** — Dashboard con datos reales del backend
+**✅ APROBADO** — Dashboard con datos reales del backend
 
 - **Requisito:** RF-08 — Dashboard y progreso del estudiante
 - **Módulo / área:** Frontend · Integración Frontend ↔ Backend · Funcional (E2E) · prioridad Alta
@@ -1792,35 +1791,34 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Con VITE_USE_MOCK=false, iniciar sesión como estudiante demo y revisar el Dashboard.
 - **Datos:** Cuenta demo
 - **Resultado esperado:** Muestra el resumen y la tarjeta del motor con datos reales (SQL JOIN), sin etiquetas ni actividad de ejemplo.
-- **Resultado real:** Chip 'Datos de ejemplo' en la tarjeta del motor y actividad reciente ficticia ('SQL JOIN: 55 % de aciertos'). (ver INC-16)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. no debe mostrar datos simulados
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-16
 - **Evidencia:** [CP-UI-09_dashboard_datos_reales.png](../evidencias/capturas/CP-UI-09_dashboard_datos_reales.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
 ### CP-UI-10
 
-**✅ APROBADO** — Ejercicio interactivo de Contenido
+**✅ APROBADO** — Cuestionario real de Contenido: responder y entregar
 
 - **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
 - **Módulo / área:** Frontend · Motor adaptativo (UI) · Funcional (E2E) · prioridad Media
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Responder mal y luego bien el ejercicio de /contenido en modo simulado.
-- **Datos:** Ejercicio de SQL JOIN
-- **Resultado esperado:** Muestra error/pista y luego acierto; cuenta intentos.
+- **Pasos:** Contenido → curso 'SQL: integracion y resultados' → tema SQL JOIN → Iniciar 'SQL JOIN - practica' → responder todo bien → Entregar intento.
+- **Datos:** Cuenta demo, actividad 'SQL JOIN - practica'
+- **Resultado esperado:** Resultado 100 % en pantalla y el intento queda CALIFICADO en PostgreSQL.
 - **Resultado real:** Coincide con el esperado.
-- **Evidencia:** [CP-UI-10a_ejercicio_error_y_pista.png](../evidencias/capturas/CP-UI-10a_ejercicio_error_y_pista.png) · [CP-UI-10b_ejercicio_correcto.png](../evidencias/capturas/CP-UI-10b_ejercicio_correcto.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
+- **Evidencia:** [CP-UI-10a_actividades_del_tema.png](../evidencias/capturas/CP-UI-10a_actividades_del_tema.png) · [CP-UI-10b_cuestionario_respondido.png](../evidencias/capturas/CP-UI-10b_cuestionario_respondido.png) · [CP-UI-10c_resultado_del_intento.png](../evidencias/capturas/CP-UI-10c_resultado_del_intento.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
 ### CP-UI-11
 
-**⛔ BLOQUEADO** — Envío de métricas del ejercicio al backend/motor
+**✅ APROBADO** — Las respuestas del estudiante se envían y guardan en el backend
 
 - **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
 - **Módulo / área:** Frontend · Motor adaptativo (UI) · Funcional (E2E) · prioridad Media
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Resolver el ejercicio de /contenido, pedir la recomendación y revisar lo que se envía al backend.
+- **Pasos:** Responder un cuestionario real y revisar las peticiones y la base de datos.
 - **Datos:** —
-- **Resultado esperado:** Se envían tiempo, intentos y errores del ejercicio. Si solo se envía el tema → BLOQUEADO (pendiente declarado).
-- **Resultado real:** BLOQUEADO: el ejercicio solo envía el tema ({"topic":"SQL JOIN"}); el tiempo, los intentos y los errores del ejercicio no se guardan. La recomendación usa los intentos de la base (pendiente declarado en frontend/README.md).
+- **Resultado esperado:** Un PUT /mis-respuestas/:id/opciones por pregunta, POST /mis-intentos/:id/entrega y las selecciones guardadas en respuesta_opciones. Si no se envían → BLOQUEADO.
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-12
 - **Evidencia:** [04_e2e.log](../evidencias/logs/04_e2e.log)
 
@@ -1831,26 +1829,25 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
 - **Módulo / área:** Frontend · Recorrido completo · Funcional (E2E) · prioridad Alta
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Login → Dashboard → Contenido (resolver ejercicio) → Ver recomendación del motor → Resultados → Progreso → Cerrar sesión.
+- **Pasos:** Login → Dashboard → Contenido → curso SQL → tema SQL JOIN → Iniciar práctica → responder → Entregar → Ver recomendación del motor → Resultados → Progreso → Cerrar sesión.
 - **Datos:** Cuenta demo
-- **Resultado esperado:** Cada pantalla carga; la tarjeta muestra 'Detectamos dificultades en SQL JOIN' calculada por el motor real.
+- **Resultado esperado:** Cada pantalla carga con datos reales; tras entregar, el motor real responde reinforce_topic y la tarjeta muestra 'Detectamos dificultades en SQL JOIN'.
 - **Resultado real:** Coincide con el esperado.
-- **Evidencia:** [CP-UI-12a_login.png](../evidencias/capturas/CP-UI-12a_login.png) · [CP-UI-12b_dashboard_recomendacion.png](../evidencias/capturas/CP-UI-12b_dashboard_recomendacion.png) · [CP-UI-12c_recomendacion_del_motor.png](../evidencias/capturas/CP-UI-12c_recomendacion_del_motor.png) · [CP-UI-12d_resultados.png](../evidencias/capturas/CP-UI-12d_resultados.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
+- **Evidencia:** [CP-UI-12a_login.png](../evidencias/capturas/CP-UI-12a_login.png) · [CP-UI-12b_dashboard_recomendacion.png](../evidencias/capturas/CP-UI-12b_dashboard_recomendacion.png) · [CP-UI-12c_cuestionario.png](../evidencias/capturas/CP-UI-12c_cuestionario.png) · [CP-UI-12d_recomendacion_del_motor.png](../evidencias/capturas/CP-UI-12d_recomendacion_del_motor.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
 ### CP-UI-13
 
-**❌ FALLIDO** — Estudiante sin intentos
+**✅ APROBADO** — Estudiante sin intentos ni cursos ve avisos, no errores
 
 - **Requisito:** RF-08 — Dashboard y progreso del estudiante
 - **Módulo / área:** Frontend · Motor adaptativo (UI) · Funcional (E2E) · prioridad Alta
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Registrar un estudiante nuevo, abrir el Dashboard y pedir una recomendación en Contenido.
+- **Pasos:** Registrar un estudiante nuevo, abrir el Dashboard y luego Contenido.
 - **Datos:** Estudiante QA
-- **Resultado esperado:** Dashboard sin error; aviso 'Sin datos suficientes todavía'.
-- **Resultado real:** Pantalla con 'Cannot read properties of null (reading 'tema')'. (ver INC-15)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. el Dashboard no muestra error para un estudiante nuevo1 !== 0
+- **Resultado esperado:** Dashboard sin error; Contenido muestra 'Aún no estás inscrito en ningún curso activo'.
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-15
-- **Evidencia:** [CP-UI-13a_dashboard_sin_datos.png](../evidencias/capturas/CP-UI-13a_dashboard_sin_datos.png) · [CP-UI-13b_sin_intentos_aviso.png](../evidencias/capturas/CP-UI-13b_sin_intentos_aviso.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
+- **Evidencia:** [CP-UI-13a_dashboard_sin_datos.png](../evidencias/capturas/CP-UI-13a_dashboard_sin_datos.png) · [CP-UI-13b_contenido_sin_cursos.png](../evidencias/capturas/CP-UI-13b_contenido_sin_cursos.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
 ### CP-UI-14
 
@@ -1859,7 +1856,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Frontend · Motor adaptativo (UI) · Funcional (E2E) · prioridad Alta
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Con Python no disponible, pedir la recomendación en Contenido.
+- **Pasos:** Entregar un intento real y pedir la recomendación con Python no disponible.
 - **Datos:** PYTHON_EXECUTABLE inválido
 - **Resultado esperado:** Mensaje 'No se pudo generar la recomendación. El motor de recomendación no está disponible'.
 - **Resultado real:** Coincide con el esperado.
@@ -1872,9 +1869,9 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Frontend · Robustez · Funcional (E2E) · prioridad Alta
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** Con sesión iniciada, apagar el backend y usar Contenido, Dashboard y Login.
+- **Pasos:** Con sesión y un cuestionario respondido, apagar el backend; intentar entregar, abrir el Dashboard e iniciar sesión.
 - **Datos:** Backend detenido
-- **Resultado esperado:** 'No se pudo conectar con el servidor…' en las tres pantallas, sin quedarse colgado.
+- **Resultado esperado:** 'No se pudo conectar con el servidor…' al entregar, en el Dashboard y en el Login, sin quedarse colgado.
 - **Resultado real:** Coincide con el esperado.
 - **Evidencia:** [CP-UI-15a_backend_desconectado_contenido.png](../evidencias/capturas/CP-UI-15a_backend_desconectado_contenido.png) · [CP-UI-15b_backend_desconectado_dashboard.png](../evidencias/capturas/CP-UI-15b_backend_desconectado_dashboard.png) · [CP-UI-15c_backend_desconectado_login.png](../evidencias/capturas/CP-UI-15c_backend_desconectado_login.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
@@ -1898,7 +1895,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Requisito:** RF-05 — CRUD de módulos y temas (docente/administrador)
 - **Módulo / área:** Frontend · CRUD módulos y temas (UI) · Funcional (E2E) · prioridad Alta
 - **Responsable:** Yuleidy De Los Santos
-- **Pasos:** /gestion → cargar curso DEMO-006 → + Nuevo módulo → guardar.
+- **Pasos:** /gestion → elegir DEMO-006 en el selector de curso → + Nuevo módulo → guardar.
 - **Datos:** Módulo UI-xxxx
 - **Resultado esperado:** Aparece en la lista y queda guardado en DEMO-006.
 - **Resultado real:** Coincide con el esperado.
@@ -1919,21 +1916,21 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-UI-19
 
-**⛔ BLOQUEADO** — El docente elige su curso de una lista
+**✅ APROBADO** — El docente elige su curso de una lista
 
 - **Requisito:** RF-05 — CRUD de módulos y temas (docente/administrador)
 - **Módulo / área:** Frontend · CRUD módulos y temas (UI) · Funcional (E2E) · prioridad Media
 - **Responsable:** Yuleidy De Los Santos
 - **Pasos:** Abrir /gestion como docente.
 - **Datos:** docente.demo@example.com
-- **Resultado esperado:** Selector con sus cursos (GET /api/cursos-administrables). Si pide escribir el ID → BLOQUEADO.
-- **Resultado real:** BLOQUEADO: el docente debe escribir el ID numérico del curso. El backend ya ofrece GET /api/cursos-administrables, pero la pantalla todavía no lo usa (pendiente declarado en database/README.md).
+- **Resultado esperado:** Selector con sus cursos (GET /api/cursos-administrables), sin escribir IDs. Si pide escribir el ID → BLOQUEADO.
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-17
 - **Evidencia:** [CP-UI-19_docente_selector_curso.png](../evidencias/capturas/CP-UI-19_docente_selector_curso.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)
 
 ### CP-UI-20
 
-**❌ FALLIDO** — El Dashboard sigue funcionando cuando el motor falla
+**✅ APROBADO** — El Dashboard sigue funcionando cuando el motor falla
 
 - **Requisito:** RF-08 — Dashboard y progreso del estudiante
 - **Módulo / área:** Frontend · Robustez · Funcional (E2E) · prioridad Alta
@@ -1941,7 +1938,6 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Con Python no disponible, iniciar sesión como estudiante demo.
 - **Datos:** PYTHON_EXECUTABLE inválido
 - **Resultado esperado:** El Dashboard muestra los datos sin la tarjeta del motor, sin mensaje de error técnico.
-- **Resultado real:** Pantalla con 'Cannot read properties of null (reading 'tema')'. (ver INC-15)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. El Dashboard muestra un error en lugar de los datos: "Cannot read properties of null (reading 'tema')"+ actual - expected+ "Cannot read properties of null (reading 'tema')"- null
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-15
 - **Evidencia:** [CP-UI-20_dashboard_motor_caido.png](../evidencias/capturas/CP-UI-20_dashboard_motor_caido.png) · [04_e2e.log](../evidencias/logs/04_e2e.log)

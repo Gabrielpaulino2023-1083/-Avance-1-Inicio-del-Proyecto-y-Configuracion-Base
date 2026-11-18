@@ -7,11 +7,11 @@ ROLLBACK
 BEGIN
 ROLLBACK
 
-psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:13: ERROR:  duplicate key value violates unique constraint "uq_modulos_curso_orden"
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:13: ERROR:  duplicate key value violates unique constraint "uq_modulos_curso_orden"
 DETAIL:  Key (curso_id, orden)=(1, 1) already exists.
-psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:31: ERROR:  duplicate key value violates unique constraint "uq_temas_modulo_orden"
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:31: ERROR:  duplicate key value violates unique constraint "uq_temas_modulo_orden"
 DETAIL:  Key (modulo_id, orden)=(1, 1) already exists.
-psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:44: ERROR:  new row for relation "modulos" violates check constraint "modulos_orden_check"
-DETAIL:  Failing row contains (1, 1, Límites, Introducción al estudio de límites., 0, PUBLICADO, 1, 2026-11-16 20:12:33.66571+00, 2026-11-16 20:12:33.66571+00).
-psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:61: ERROR:  new row for relation "temas" violates check constraint "temas_orden_check"
-DETAIL:  Failing row contains (2, 1, Concepto de límite, Definición e interpretación de límites., -1, PUBLICADO, 1, 2026-11-16 20:12:33.66571+00, 2026-11-16 20:12:33.66571+00).
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:44: ERROR:  new row for relation "modulos" violates check constraint "modulos_orden_check"
+DETAIL:  Failing row contains (1, 1, Límites, Introducción al estudio de límites., 0, PUBLICADO, 1, 2026-11-17 23:49:49.726934+00, 2026-11-17 23:49:49.726934+00).
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_temas_modulos.sql:61: ERROR:  new row for relation "temas" violates check constraint "temas_orden_check"
+DETAIL:  Failing row contains (2, 1, Concepto de límite, Definición e interpretación de límites., -1, PUBLICADO, 1, 2026-11-17 23:49:49.726934+00, 2026-11-17 23:49:49.726934+00).

@@ -1,6 +1,6 @@
 # Listado de incidencias — Motor de Aprendizaje Adaptativo — Grupo 4
 
-Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/incidencias.json`. Para cambiar el estado de una incidencia, editar ese JSON y volver a ejecutar `npm test`: la columna "Última verificación" se actualiza sola con el resultado de la re-prueba.
+Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/incidencias.json`. Para cambiar el estado de una incidencia, editar ese JSON y volver a ejecutar `npm test`: la columna "Última verificación" se actualiza sola con el resultado de la re-prueba.
 
 | ID | Título | Tipo | Severidad | Responsable | Estado | Casos |
 |---|---|---|---|---|---|---|
@@ -15,12 +15,12 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | [INC-09](#inc-09) | No hay endpoints para listar, actualizar, cambiar el rol ni eliminar usuarios | Integración pendiente | Media | Porfirio Ramírez | Pendiente de desarrollo | CP-CRUD-06, CP-CRUD-07 |
 | [INC-10](#inc-10) | Las operaciones académicas de la base de datos no están expuestas por HTTP | Integración pendiente | Media | Porfirio Ramírez y Jeison Rosario | Verificada | CP-CRUD-09 |
 | [INC-11](#inc-11) | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Integración pendiente | Alta | Porfirio Ramírez y Daniel Beltre | Verificada | CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03 |
-| [INC-12](#inc-12) | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Pendiente de desarrollo | CP-UI-11 |
+| [INC-12](#inc-12) | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Verificada | CP-UI-11 |
 | [INC-13](#inc-13) | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Abierta | CP-BE-10 |
 | [INC-14](#inc-14) | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Abierta | CP-BE-09 |
-| [INC-15](#inc-15) | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Abierta | CP-UI-13, CP-UI-20 |
-| [INC-16](#inc-16) | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Abierta | CP-UI-09 |
-| [INC-17](#inc-17) | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Pendiente de desarrollo | CP-UI-19 |
+| [INC-15](#inc-15) | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Verificada | CP-UI-13, CP-UI-20 |
+| [INC-16](#inc-16) | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Verificada | CP-UI-09 |
+| [INC-17](#inc-17) | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Verificada | CP-UI-19 |
 
 **Tipos:** *Defecto* = el código hace algo distinto de lo esperado. *Integración pendiente* = falta una pieza; sus casos quedan BLOQUEADOS, no fallidos.
 
@@ -68,7 +68,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-LOG-06, CP-BE-07 |
 | Última verificación | CP-LOG-06: FALLIDO, CP-BE-07: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** En middlewares/errorHandler.js la primera condición es 'if (err.status)'. El error que produce express.json() ya trae status 400, así que entra por ahí y nunca llega a la rama 'entity.parse.failed'. Resultado: el cliente recibe el mensaje interno del parser.
 
@@ -96,7 +96,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-VAL-14 |
 | Última verificación | CP-VAL-14: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** analyzer.py llama student_data.get(...) sin comprobar que sea un diccionario. Con [], "texto", 5 o null se lanza AttributeError, que main.py no captura (solo captura ValueError, KeyError, TypeError y JSONDecodeError). Se rompe el contrato de INTEGRATION.md (errores como JSON por stderr), y el backend no podrá interpretar el error.
 
@@ -124,7 +124,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-VAL-09, CP-VAL-15 |
 | Última verificación | CP-VAL-09: FALLIDO, CP-VAL-15: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** json.load de Python acepta Infinity/NaN. NaN se rechaza, pero Infinity pasa la validación (inf ≥ 0) y la salida contiene 'average_study_minutes: Infinity', que no es JSON estándar: JSON.parse en Node falla.
 
@@ -152,7 +152,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-VAL-07 |
 | Última verificación | CP-VAL-07: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** Los seis campos de interacción se validan con un mensaje claro, pero student_id y topic se leen con student_data['...']. Sin ellos se lanza KeyError y la CLI responde {"error": "'topic'"}.
 
@@ -180,7 +180,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-VAL-10 |
 | Última verificación | CP-VAL-10: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** pd.to_numeric convierte booleanos en 1/0. score_percentage=true se interpreta como 1 % y genera una recomendación de refuerzo con datos que no son una puntuación.
 
@@ -208,7 +208,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-VAL-11 |
 | Última verificación | CP-VAL-11: FALLIDO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** errors, attempts, repetitions y navigation_count son conteos, pero se aceptan decimales. total_errors usa int(), así que 2.7 se convierte en 2 sin avisar y puede cambiar la regla aplicada.
 
@@ -264,7 +264,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-CRUD-06, CP-CRUD-07 |
 | Última verificación | CP-CRUD-06: BLOQUEADO, CP-CRUD-07: BLOQUEADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students.
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** Existen dtos/user.dto.js (changeRoleDto) y el permiso users:change-role, pero ninguna ruta los usa. El CRUD de usuarios disponible es solo Crear (registro) y Leer (/me).
 
@@ -344,11 +344,11 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Severidad | Media |
 | Módulo | Frontend |
 | Responsable | Yuleidy De Los Santos y Porfirio Ramírez |
-| Estado de resolución | **Pendiente de desarrollo** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-UI-11 |
-| Última verificación | CP-UI-11: BLOQUEADO |
+| Última verificación | CP-UI-11: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: la pantalla ahora pide la recomendación al motor real, pero solo envía el tema; tiempo, intentos y errores del ejercicio no se guardan.
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: la pantalla ahora pide la recomendación al motor real, pero solo envía el tema; tiempo, intentos y errores del ejercicio no se guardan. Corregida en main (PR #17): Contenido usa cuestionarios reales; cada respuesta se guarda con PUT /mis-respuestas y el intento se entrega al backend. Re-prueba del 17/11/2026: CP-UI-11 aprobado.
 
 **Descripción.** ExercisePanel mide tiempo, intentos y errores, pero solo los muestra. No hay endpoint para registrarlos, así que el motor no recibe datos reales del estudiante. Está declarado como pendiente en frontend/README.md.
 
@@ -358,7 +358,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 
 **Resultado obtenido.** POST /api/students/:id/recommendation con el cuerpo {"topic":"SQL JOIN"} únicamente.
 
-**Evidencia.** [evidencias/capturas/CP-UI-12c_recomendacion_del_motor.png](evidencias/capturas/CP-UI-12c_recomendacion_del_motor.png)
+**Evidencia.** [evidencias/capturas/CP-UI-10b_cuestionario_respondido.png](evidencias/capturas/CP-UI-10b_cuestionario_respondido.png) · [evidencias/capturas/CP-UI-12d_recomendacion_del_motor.png](evidencias/capturas/CP-UI-12d_recomendacion_del_motor.png)
 
 **Corrección sugerida.** Definir el endpoint (o reutilizar intentos/respuestas de la BD, como indica el contrato) y llamarlo al comprobar la respuesta.
 
@@ -376,7 +376,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-BE-10 |
 | Última verificación | CP-BE-10: FALLIDO |
 
-**Historial.** Detectada el 16/11/2026 al probar los cambios del avance 4.
+**Historial.** Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** En errorHandler.js el bloque de 'entity.too.large' quedó después de res.status(500) y de un return implícito, así que nunca se alcanza. Además el error de body-parser trae status 413 y entra antes por 'if (err.status)', devolviendo el mensaje interno en inglés.
 
@@ -404,7 +404,7 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-BE-09 |
 | Última verificación | CP-BE-09: FALLIDO |
 
-**Historial.** Detectada el 16/11/2026.
+**Historial.** Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
 
 **Descripción.** app.use('/api', contentRoutes) monta un router con router.use(verifyToken) para TODO /api. Cualquier ruta que no exista, sin token, responde 401 'Token requerido' en vez de 404, lo que confunde al depurar el frontend.
 
@@ -428,11 +428,11 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Severidad | Alta |
 | Módulo | Frontend |
 | Responsable | Yuleidy De Los Santos |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-UI-13, CP-UI-20 |
-| Última verificación | CP-UI-13: FALLIDO, CP-UI-20: FALLIDO |
+| Última verificación | CP-UI-13: APROBADO, CP-UI-20: APROBADO |
 
-**Historial.** Detectada el 16/11/2026. Afecta a todo estudiante nuevo.
+**Historial.** Detectada el 16/11/2026. Afecta a todo estudiante nuevo. Corregida en main (PR #17). Re-prueba del 17/11/2026: CP-UI-13 y CP-UI-20 aprobados (estudiante nuevo y motor caído sin error en el Dashboard).
 
 **Descripción.** GET /api/students/:id/progress devuelve recomendacion: null cuando el estudiante no tiene intentos calificados o cuando el motor falla (comportamiento correcto del backend). dashboardService.ts lee r.tema sin comprobar null, y toda la pantalla queda reemplazada por un error técnico.
 
@@ -456,11 +456,11 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Severidad | Media |
 | Módulo | Frontend |
 | Responsable | Yuleidy De Los Santos |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-UI-09 |
-| Última verificación | CP-UI-09: FALLIDO |
+| Última verificación | CP-UI-09: APROBADO |
 
-**Historial.** Detectada el 16/11/2026.
+**Historial.** Detectada el 16/11/2026. Corregida en main (PR #17): el Dashboard indica 'Datos reales de tu cuenta' y la actividad reciente viene del backend. Re-prueba del 17/11/2026: CP-UI-09 aprobado.
 
 **Descripción.** DashboardScreen pasa sample=true a RecommendationCard siempre, por eso la tarjeta muestra el chip 'Datos de ejemplo' aunque los valores (16.7 %, 10 errores) vienen del motor real. 'Actividad reciente' usa MOCK_ACTIVITY aunque existe GET /api/mis-inscripciones/:id/actividad-reciente, y el texto del anillo dice que el progreso son 'datos de ejemplo'.
 
@@ -484,11 +484,11 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 | Severidad | Media |
 | Módulo | Frontend |
 | Responsable | Yuleidy De Los Santos |
-| Estado de resolución | **Pendiente de desarrollo** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-UI-19 |
-| Última verificación | CP-UI-19: BLOQUEADO |
+| Última verificación | CP-UI-19: APROBADO |
 
-**Historial.** Registrada el 16/11/2026. El CRUD del docente sí funciona escribiendo el ID (CP-UI-17 aprobado).
+**Historial.** Registrada el 16/11/2026. El CRUD del docente sí funciona escribiendo el ID (CP-UI-17 aprobado). Corregida en main (PR #17): selector de cursos administrables para el docente. Re-prueba del 17/11/2026: CP-UI-19 y CP-UI-17 aprobados.
 
 **Descripción.** En /gestion el administrador elige el curso de una lista, pero el docente tiene un campo 'ID del curso' y un botón 'Cargar'. El backend ya ofrece GET /api/cursos-administrables con los cursos del docente (DEMO-006). El README de database lo declara pendiente.
 
@@ -498,6 +498,6 @@ Generado el 16 de noviembre de 2026 a las 4:15 p. m. a partir de `tests/matriz/i
 
 **Resultado obtenido.** Campo numérico; hay que saber el ID interno (3).
 
-**Evidencia.** [evidencias/capturas/CP-UI-19_docente_selector_curso.png](evidencias/capturas/CP-UI-19_docente_selector_curso.png)
+**Evidencia.** [evidencias/capturas/CP-UI-19_docente_selector_curso.png](evidencias/capturas/CP-UI-19_docente_selector_curso.png) · [evidencias/capturas/CP-UI-17b_modulo_creado.png](evidencias/capturas/CP-UI-17b_modulo_creado.png)
 
 **Corrección sugerida.** Usar el mismo <select> del administrador, cargado con GET /api/cursos-administrables, también para el docente.

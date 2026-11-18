@@ -5,4 +5,4 @@ SET
 DO
 ROLLBACK
 
-psql:/home/claude/v2/proyecto-grupo4/database/test/pruebas_migracion_008.sql:63: NOTICE:  PRUEBAS 008 COMPLETADAS: selector, contexto, tablero, motor y permisos.
+psql:/home/claude/v3/proyecto-grupo4/database/test/pruebas_migracion_008.sql:63: NOTICE:  PRUEBAS 008 COMPLETADAS: selector, contexto, tablero, motor y permisos.

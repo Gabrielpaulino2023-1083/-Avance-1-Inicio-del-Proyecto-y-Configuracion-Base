@@ -5,6 +5,9 @@
 //   npm test -- --sin-e2e         → omite el navegador (más rápido)
 //
 // Cada suite escribe un archivo JUnit en reportes/junit/ y su salida en evidencias/logs/.
+//
+// Antes de tocar nada, comprueba los requisitos (Node, psql, Python). Si falta
+// alguno, se detiene SIN borrar las capturas ni el reporte anteriores.
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -12,6 +15,51 @@ import { TESTS_DIR, ENGINE_DIR, LOGS_DIR, REPORTS_DIR, SCREENSHOTS_DIR, config, 
 import { generarReporte } from "./generar_reporte.mjs";
 
 const args = new Set(process.argv.slice(2));
+
+// ------------------------------------------------------------ requisitos
+const funciona = (cmd, cmdArgs) => spawnSync(cmd, cmdArgs, { encoding: "utf8" }).status === 0;
+const problemas = [];
+
+const [mayor, menor] = process.versions.node.split(".").map(Number);
+if (mayor < 22 || (mayor === 22 && menor < 18)) {
+  problemas.push(`Node.js ${process.versions.node} es muy antiguo: se necesita 22.18 o superior.\n    Instala la versión LTS desde https://nodejs.org, cierra VS Code y vuelve a abrirlo.`);
+}
+
+if (!funciona("psql", ["--version"])) {
+  // En Windows, PostgreSQL se instala en C:\Program Files\PostgreSQL\<versión>\bin aunque no esté en el PATH.
+  const base = "C:\\Program Files\\PostgreSQL";
+  const bin = process.platform === "win32" && fs.existsSync(base)
+    ? fs.readdirSync(base).sort((a, b) => Number(b) - Number(a)).map((v) => path.join(base, v, "bin"))
+        .find((d) => fs.existsSync(path.join(d, "psql.exe")))
+    : null;
+  if (bin) {
+    process.env.PATH = `${bin}${path.delimiter}${process.env.PATH}`;
+    console.log(`(psql no estaba en el PATH; se usa ${bin})`);
+  } else {
+    problemas.push("No se encontró psql (PostgreSQL).\n    Instálalo desde https://www.postgresql.org/download/windows o agrega su carpeta bin al PATH.");
+  }
+}
+
+// Python con pandas y pytest: prueba el de .env.test y luego python, py y python3.
+const candidatos = [...new Set([process.env.PYTHON, "python", "py", "python3"].filter(Boolean))];
+const python = candidatos.find((c) => funciona(c, ["-c", "import pandas, pytest"]));
+if (python) {
+  process.env.PYTHON = python; // lo heredan las pruebas y el backend (PYTHON_EXECUTABLE)
+  config.python = python;
+} else {
+  const alguno = candidatos.find((c) => funciona(c, ["--version"]));
+  problemas.push(alguno
+    ? `Python (${alguno}) no tiene pandas o pytest.\n    Ejecuta: ${alguno} -m pip install -r tests/requirements.txt`
+    : "No se encontró Python.\n    Instálalo desde https://www.python.org marcando \"Add python.exe to PATH\", reinicia VS Code y ejecuta: python -m pip install -r tests/requirements.txt");
+}
+
+if (problemas.length) {
+  console.error("\nNo se ejecutaron las pruebas porque faltan requisitos:\n");
+  for (const p of problemas) console.error(`  ✗ ${p}\n`);
+  console.error("No se modificó ningún reporte ni captura. Corrige lo anterior y vuelve a ejecutar: npm test");
+  process.exit(1);
+}
+
 const JUNIT_DIR = ensureDir(path.join(REPORTS_DIR, "junit"));
 ensureDir(LOGS_DIR);
 
@@ -38,11 +86,25 @@ function run(title, command, commandArgs, logName, cwd = TESTS_DIR) {
   return r.status;
 }
 
-const nodeSuite = (pattern, junit, extra = []) => [
+// Lista los archivos *.test.mjs de una carpeta (en orden), sin depender de patrones glob.
+function archivosDePrueba(carpeta) {
+  const out = [];
+  const recorrer = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) recorrer(full);
+      else if (e.name.endsWith(".test.mjs")) out.push(path.relative(TESTS_DIR, full));
+    }
+  };
+  recorrer(path.join(TESTS_DIR, carpeta));
+  return out;
+}
+
+const nodeSuite = (carpeta, junit, extra = []) => [
   "--test", ...extra,
   "--test-reporter=spec", "--test-reporter-destination=stdout",
   "--test-reporter=junit", `--test-reporter-destination=${path.join(JUNIT_DIR, junit)}`,
-  pattern,
+  ...archivosDePrueba(carpeta),
 ];
 
 const inicio = new Date();
@@ -51,7 +113,7 @@ if (!args.has("--sin-preparar-bd")) {
   run("Preparando la base de datos de QA", process.execPath, ["scripts/preparar_bd.mjs"], "00_preparar_bd");
 }
 
-run("Pruebas unitarias — backend y frontend", process.execPath, nodeSuite("unit/**/*.test.mjs", "unit_node.xml"), "01_unitarias_node");
+run("Pruebas unitarias — backend y frontend", process.execPath, nodeSuite("unit", "unit_node.xml"), "01_unitarias_node");
 
 run(
   "Pruebas unitarias — motor adaptativo (pytest)",
@@ -72,12 +134,12 @@ run(
 run(
   "Pruebas de integración — API, motor CLI y SQL",
   process.execPath,
-  nodeSuite("integration/**/*.test.mjs", "integration.xml", ["--test-concurrency=1"]),
+  nodeSuite("integration", "integration.xml", ["--test-concurrency=1"]),
   "03_integracion"
 );
 
 if (!args.has("--sin-e2e")) {
-  run("Pruebas funcionales E2E — navegador", process.execPath, nodeSuite("functional/**/*.test.mjs", "e2e.xml"), "04_e2e");
+  run("Pruebas funcionales E2E — navegador", process.execPath, nodeSuite("functional", "e2e.xml"), "04_e2e");
 }
 
 const resumen = generarReporte({ inicio, fin: new Date(), omitidas: args.has("--sin-e2e") ? ["Funcional (E2E)"] : [] });

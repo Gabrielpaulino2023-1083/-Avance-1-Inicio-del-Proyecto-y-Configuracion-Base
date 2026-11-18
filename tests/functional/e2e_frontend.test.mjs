@@ -84,13 +84,49 @@ async function loginAs(page, email = config.demoEmail, password = config.demoPas
 
 const nav = (page, label) => page.locator(".topbar__nav").getByRole("link", { name: label, exact: true });
 
-// Resuelve el ejercicio de Contenido: una respuesta incorrecta y luego la correcta.
-async function resolverEjercicio(page) {
-  await page.getByRole("radio", { name: "LEFT JOIN" }).click();
-  await page.getByRole("button", { name: "Comprobar respuesta" }).click();
-  await page.getByRole("radio", { name: "INNER JOIN" }).click();
-  await page.getByRole("button", { name: "Comprobar respuesta" }).click();
-  await page.locator(".feedback__box--ok").waitFor();
+// ---- Flujo real de Contenido (VITE_USE_MOCK=false): curso → tema → actividad → intento.
+const CURSO_SQL = "SQL: integracion y resultados"; // DEMO-SQL-007 (seed de Jeison)
+
+// Abre Contenido, elige el curso SQL y el tema indicado.
+async function abrirTema(page, tema = "SQL JOIN") {
+  await nav(page, "Contenido").click();
+  await page.waitForURL(`${WEB_URL}/contenido`);
+  await page.locator(".modules__head").waitFor({ timeout: 10000 }); // espera a que carguen los cursos
+  const selector = page.locator('select[aria-label="Curso"]');
+  if (await selector.count()) await selector.selectOption({ label: CURSO_SQL });
+  await page.locator("button.rc-topic", { hasText: tema }).click();
+  await page.locator(".rc-act").first().waitFor({ timeout: 10000 });
+}
+
+// Inicia la actividad y responde. modo: "correcto" | "incorrecto".
+// Las claves se leen de PostgreSQL con la cuenta administrativa (la pantalla no las expone).
+async function responderActividad(page, actividad = "SQL JOIN - practica", modo = "correcto") {
+  const inicio = page.waitForResponse((r) => /\/actividades\/\d+\/intentos$/.test(r.url()) && r.request().method() === "POST");
+  await page.locator(".rc-act", { hasText: actividad }).getByRole("button", { name: "Iniciar" }).click();
+  const res = await inicio;
+  const cuestionario = (await res.json()).data;
+  await page.locator(".rc-question").first().waitFor();
+  for (const [i, pregunta] of cuestionario.preguntas.entries()) {
+    const { rows } = await admin.query(
+      "SELECT id, es_correcta FROM opciones_respuestas WHERE pregunta_id = $1 ORDER BY id", [pregunta.preguntaId]);
+    const elegidas = modo === "correcto"
+      ? rows.filter((r) => r.es_correcta).map((r) => r.id)
+      : [rows.find((r) => !r.es_correcta).id];
+    for (const id of elegidas) {
+      const texto = pregunta.opciones.find((o) => o.id === id).texto;
+      const guardado = page.waitForResponse((r) => r.url().includes(`/mis-respuestas/${pregunta.respuestaId}/opciones`));
+      await page.locator(".rc-question").nth(i).locator("button.choice", { hasText: texto }).click();
+      await guardado;
+    }
+  }
+  return cuestionario;
+}
+
+async function entregar(page) {
+  await page.getByRole("button", { name: "Entregar intento" }).click();
+  const resultado = page.locator(".feedback__box--ok").first();
+  await resultado.waitFor({ timeout: 10000 });
+  return resultado.innerText();
 }
 
 before(async () => {
@@ -269,71 +305,87 @@ describe("Frontend E2E — motor adaptativo y datos reales", { skip: BLOCKED }, 
     const error = await page.locator(".dash-state--error").textContent().catch(() => null);
     await shot(page, "CP-UI-09_dashboard_datos_reales");
     const text = ok ? await card.innerText() : "";
+    const pagina = await page.locator("main, body").first().innerText();
     await page.context().close();
     assert.ok(ok, `El Dashboard no mostró la tarjeta de recomendación. Error: ${error}`);
     assert.match(text, /SQL JOIN/);
-    assert.doesNotMatch(text, /Datos de ejemplo/, "no debe mostrar datos simulados");
+    assert.doesNotMatch(pagina, /Datos de ejemplo|datos de ejemplo/, "no debe mostrar etiquetas de datos simulados");
   });
 
-  test("CP-UI-10 ejercicio interactivo de Contenido", async () => {
+  test("CP-UI-10 cuestionario real de Contenido: responder y entregar", async () => {
     const page = await newPage();
     await loginAs(page);
-    await nav(page, "Contenido").click();
-    const metric = (name) => page.locator(".metrics__list div", { hasText: name }).locator("dd");
-    for (const wrong of ["LEFT JOIN", "CROSS JOIN"]) {
-      await page.getByRole("radio", { name: wrong }).click();
-      await page.getByRole("button", { name: "Comprobar respuesta" }).click();
-    }
-    await page.locator(".feedback__box--hint").waitFor();
-    await shot(page, "CP-UI-10a_ejercicio_error_y_pista");
-    assert.equal(await metric("Errores").innerText(), "2");
-    await page.getByRole("radio", { name: "INNER JOIN" }).click();
-    await page.getByRole("button", { name: "Comprobar respuesta" }).click();
-    await page.locator(".feedback__box--ok").waitFor();
-    await shot(page, "CP-UI-10b_ejercicio_correcto");
-    assert.equal(await metric("Intentos").innerText(), "3");
+    await abrirTema(page, "SQL JOIN");
+    await shot(page, "CP-UI-10a_actividades_del_tema");
+    const cuestionario = await responderActividad(page, "SQL JOIN - practica", "correcto");
+    await shot(page, "CP-UI-10b_cuestionario_respondido");
+    const resultado = await entregar(page);
+    await shot(page, "CP-UI-10c_resultado_del_intento");
     await page.context().close();
+    assert.match(resultado, /100%/);
+    const { rows } = await admin.query("SELECT estado FROM intentos WHERE id = $1", [cuestionario.intentoId]);
+    assert.equal(rows[0].estado, "CALIFICADO", "el intento quedó calificado en PostgreSQL");
+  });
+
+  test("CP-UI-11 las respuestas del estudiante se envían y guardan en el backend", async (t) => {
+    const page = await newPage();
+    await loginAs(page);
+    const enviados = [];
+    page.on("request", (r) => { if (r.url().startsWith(API_URL) && r.method() !== "GET") enviados.push(`${r.method()} ${r.url().replace(API_URL, "")}`); });
+    await abrirTema(page, "SQL JOIN");
+    const cuestionario = await responderActividad(page, "SQL JOIN - practica", "incorrecto");
+    await entregar(page);
+    await page.context().close();
+    const guardadas = enviados.filter((e) => e.startsWith("PUT /mis-respuestas/"));
+    if (guardadas.length === 0) {
+      t.skip("BLOQUEADO: la pantalla no envía las respuestas del estudiante al backend.");
+      return;
+    }
+    assert.equal(guardadas.length, cuestionario.preguntas.length, "una petición por respuesta");
+    assert.ok(enviados.includes(`POST /mis-intentos/${cuestionario.intentoId}/entrega`), "se entrega el intento");
+    const { rows } = await admin.query(
+      `SELECT COUNT(*)::int n FROM respuestas r JOIN respuesta_opciones ro ON ro.respuesta_id = r.id
+       WHERE r.intento_id = $1`, [cuestionario.intentoId]);
+    assert.ok(rows[0].n >= cuestionario.preguntas.length, "las respuestas quedaron en PostgreSQL");
   });
 
   test("CP-UI-12 recorrido visual completo del estudiante con recomendación real", async () => {
     const page = await newPage();
-    const pasos = [];
     await page.goto(`${WEB_URL}/login`);
     await shot(page, "CP-UI-12a_login");
     await loginAs(page);
     await page.locator(".ai-card").waitFor({ timeout: 15000 });
     await shot(page, "CP-UI-12b_dashboard_recomendacion");
-    pasos.push("dashboard");
 
-    await nav(page, "Contenido").click();
-    await resolverEjercicio(page);
-    const respuesta = page.waitForResponse((r) => r.url().includes("/recommendation") && r.request().method() === "POST");
+    await abrirTema(page, "SQL JOIN");
+    await responderActividad(page, "SQL JOIN - practica", "incorrecto");
+    await shot(page, "CP-UI-12c_cuestionario");
+    await entregar(page);
+    const respuesta = page.waitForResponse((r) => r.url().includes("/recomendacion") && r.request().method() === "POST");
     await page.getByRole("button", { name: "Ver recomendación del motor" }).click();
     const res = await respuesta;
     const body = await res.json();
     const card = page.locator(".exercise-col .ai-card");
     await card.waitFor({ timeout: 15000 });
     const cardText = await card.innerText();
-    await shot(page, "CP-UI-12c_recomendacion_del_motor");
-    pasos.push("recomendación");
+    await shot(page, "CP-UI-12d_recomendacion_del_motor");
 
     await nav(page, "Resultados").click();
     await page.waitForURL(`${WEB_URL}/resultados`);
-    await shot(page, "CP-UI-12d_resultados");
+    await shot(page, "CP-UI-12e_resultados");
     await nav(page, "Progreso").click();
     await page.waitForURL(`${WEB_URL}/progreso`);
-    await shot(page, "CP-UI-12e_progreso");
+    await shot(page, "CP-UI-12f_progreso");
     await page.getByRole("button", { name: "Cerrar sesión" }).click();
     await page.waitForURL(`${WEB_URL}/login`);
     await page.context().close();
 
     assert.equal(res.status(), 200);
-    assert.equal(body.recommendation.accion, "reinforce_topic", "el motor real recomienda reforzar SQL JOIN");
+    assert.equal(body.data.accion, "reinforce_topic", "el motor real recomienda reforzar SQL JOIN");
     assert.match(cardText, /Detectamos dificultades en SQL JOIN/);
-    assert.deepEqual(pasos, ["dashboard", "recomendación"]);
   });
 
-  test("CP-UI-13 estudiante sin intentos ve un aviso, no un error", async () => {
+  test("CP-UI-13 estudiante sin intentos ni cursos ve avisos, no errores", async () => {
     const page = await newPage();
     const email = `qa.sin.intentos.${Date.now()}@example.com`;
     resetAuthRateLimit();
@@ -346,21 +398,22 @@ describe("Frontend E2E — motor adaptativo y datos reales", { skip: BLOCKED }, 
     const dashError = await page.locator(".dash-state--error").count();
     await shot(page, "CP-UI-13a_dashboard_sin_datos");
     await nav(page, "Contenido").click();
-    await resolverEjercicio(page);
-    await page.getByRole("button", { name: "Ver recomendación del motor" }).click();
-    const aviso = page.locator(".feedback__box--hint", { hasText: "Sin datos suficientes" });
+    const aviso = page.locator(".dash-state", { hasText: "Aún no estás inscrito" });
     const visto = await aviso.waitFor({ timeout: 10000 }).then(() => true, () => false);
-    await shot(page, "CP-UI-13b_sin_intentos_aviso");
+    await shot(page, "CP-UI-13b_contenido_sin_cursos");
+    const contError = await page.locator(".dash-state--error").count();
     await page.context().close();
     assert.equal(dashError, 0, "el Dashboard no muestra error para un estudiante nuevo");
-    assert.ok(visto, "muestra 'Sin datos suficientes todavía'");
+    assert.ok(visto, "Contenido avisa que no hay cursos inscritos");
+    assert.equal(contError, 0);
   });
 
   test("CP-UI-14 error del motor: la pantalla informa sin romperse", async () => {
     const page = await newPage();
     await loginAs(page);
-    await nav(page, "Contenido").click();
-    await resolverEjercicio(page);
+    await abrirTema(page, "SQL JOIN");
+    await responderActividad(page, "SQL JOIN - practica", "correcto");
+    await entregar(page);
     const original = process.env.PYTHON_EXECUTABLE;
     const consola = console.error;
     console.error = () => {};
@@ -377,24 +430,6 @@ describe("Frontend E2E — motor adaptativo y datos reales", { skip: BLOCKED }, 
       console.error = consola;
       await page.context().close();
     }
-  });
-
-  test("CP-UI-11 envío de métricas del ejercicio al backend", async (t) => {
-    const page = await newPage();
-    await loginAs(page);
-    await nav(page, "Contenido").click();
-    const enviados = [];
-    page.on("request", (r) => { if (r.url().startsWith(API_URL) && r.method() !== "GET") enviados.push(r.postData() ?? ""); });
-    await resolverEjercicio(page);
-    await page.getByRole("button", { name: "Ver recomendación del motor" }).click();
-    await page.locator(".exercise-col .ai-card").waitFor({ timeout: 15000 });
-    await page.context().close();
-    const conMetricas = enviados.some((b) => /attempts|errors|seconds|intentos|errores/.test(b));
-    if (!conMetricas) {
-      t.skip(`BLOQUEADO: el ejercicio solo envía el tema (${enviados.join(" ") || "nada"}); el tiempo, los intentos y los errores del ejercicio no se guardan. La recomendación usa los intentos de la base (pendiente declarado en frontend/README.md).`);
-      return;
-    }
-    assert.ok(conMetricas);
   });
 });
 
@@ -423,10 +458,16 @@ describe("Frontend E2E — administración de cursos y contenido", { skip: BLOCK
     await loginAs(page, config.teacherEmail, config.teacherPassword);
     await nav(page, "Contenido").click();
     await page.waitForURL(`${WEB_URL}/gestion`);
-    // La pantalla del docente pide escribir el ID numérico del curso (ver CP-UI-19).
+    // El docente elige su curso en la lista (o se escribe el ID si la pantalla aún lo pide).
     const cursoId = (await admin.query("SELECT id FROM cursos WHERE codigo = 'DEMO-006'")).rows[0].id;
-    await page.locator("#mg-curso-campo").fill(String(cursoId));
-    await page.getByRole("button", { name: "Cargar" }).click();
+    const campo = page.locator("#mg-curso-campo");
+    await campo.waitFor();
+    if ((await campo.evaluate((el) => el.tagName)) === "SELECT") {
+      await campo.selectOption(String(cursoId));
+    } else {
+      await campo.fill(String(cursoId));
+      await page.getByRole("button", { name: "Cargar" }).click();
+    }
     const boton = page.getByRole("button", { name: "+ Nuevo módulo" });
     await page.waitForFunction(() => {
       const b = [...document.querySelectorAll("button")].find((x) => x.textContent.includes("Nuevo módulo"));
@@ -489,14 +530,16 @@ describe("Frontend E2E — desconexión del backend", { skip: BLOCKED }, () => {
   // Va al final: apaga el backend.
   test("CP-UI-15 el frontend avisa cuando el backend se desconecta", async () => {
     const page = await newPage();
+    page.on("dialog", (d) => d.accept());
     await loginAs(page);
-    await nav(page, "Contenido").click();
-    await resolverEjercicio(page);
+    await abrirTema(page, "SQL JOIN");
+    await responderActividad(page, "SQL JOIN - practica", "correcto");
 
     backend.closeAllConnections?.();
     await new Promise((r) => backend.close(r));
 
-    await page.getByRole("button", { name: "Ver recomendación del motor" }).click();
+    // Intentar entregar el intento con el backend apagado.
+    await page.getByRole("button", { name: "Entregar intento" }).click();
     const aviso = page.locator(".feedback__box--bad", { hasText: "No se pudo conectar con el servidor" });
     const enContenido = await aviso.waitFor({ timeout: 10000 }).then(() => true, () => false);
     await shot(page, "CP-UI-15a_backend_desconectado_contenido");

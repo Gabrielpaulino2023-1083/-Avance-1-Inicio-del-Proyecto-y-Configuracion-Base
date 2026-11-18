@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
-rootdir: /home/claude/v2/proyecto-grupo4/tests
+rootdir: /home/claude/v3/proyecto-grupo4/tests
 plugins: platformdirs-4.13.5, anyio-4.15.1
 collecting ... collected 53 items
 
@@ -349,7 +349,7 @@ campo = 'navigation_count'
 E       Failed: DID NOT RAISE ValueError
 
 unit/motor/test_motor_adaptativo.py:271: Failed
-- generated xml file: /home/claude/v2/proyecto-grupo4/tests/reportes/junit/unit_motor.xml -
+- generated xml file: /home/claude/v3/proyecto-grupo4/tests/reportes/junit/unit_motor.xml -
 =========================== short test summary info ============================
 FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_07_falta_student_id_o_topic[student_id]
 FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_07_falta_student_id_o_topic[topic]
@@ -361,4 +361,4 @@ FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_11_conteos_con_decimales
 FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_11_conteos_con_decimales_se_rechazan[attempts]
 FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_11_conteos_con_decimales_se_rechazan[repetitions]
 FAILED unit/motor/test_motor_adaptativo.py::test_CP_VAL_11_conteos_con_decimales_se_rechazan[navigation_count]
-======================== 10 failed, 43 passed in 0.38s =========================
+======================== 10 failed, 43 passed in 0.46s =========================

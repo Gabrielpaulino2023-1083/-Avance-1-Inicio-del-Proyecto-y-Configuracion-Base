@@ -6,7 +6,7 @@ Matriz de casos de prueba, pruebas automatizadas, evidencias e incidencias de to
 
 | Casos | Aprobados | Fallidos |  Bloqueados |
 |---:|---:|---:|---:|
-| 130 | 113 | 13 | 4 |
+| 130 | 118 | 10 | 2 |
 
 - **Fallido:** se ejecutó y encontró un defecto.
 - **Bloqueado:** todavía no se puede probar porque falta una integración (por ejemplo, un endpoint que no existe). No cuenta como fallo.

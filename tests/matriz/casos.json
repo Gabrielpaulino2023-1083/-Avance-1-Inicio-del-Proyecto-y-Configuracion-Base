@@ -1,6 +1,6 @@
 {
   "proyecto": "Motor de Aprendizaje Adaptativo — Grupo 4",
-  "version_matriz": "2.0",
+  "version_matriz": "2.1",
   "responsables": {
     "Frontend": "Yuleidy De Los Santos",
     "Backend / API": "Porfirio Ramírez",
@@ -1455,10 +1455,10 @@
       "area": "Motor adaptativo (UI)",
       "tipo": "Funcional (E2E)",
       "prioridad": "Media",
-      "titulo": "Ejercicio interactivo de Contenido",
-      "pasos": "Responder mal y luego bien el ejercicio de /contenido en modo simulado.",
-      "datos": "Ejercicio de SQL JOIN",
-      "esperado": "Muestra error/pista y luego acierto; cuenta intentos."
+      "titulo": "Cuestionario real de Contenido: responder y entregar",
+      "pasos": "Contenido → curso 'SQL: integracion y resultados' → tema SQL JOIN → Iniciar 'SQL JOIN - practica' → responder todo bien → Entregar intento.",
+      "datos": "Cuenta demo, actividad 'SQL JOIN - practica'",
+      "esperado": "Resultado 100 % en pantalla y el intento queda CALIFICADO en PostgreSQL."
     },
     {
       "id": "CP-UI-11",
@@ -1467,10 +1467,10 @@
       "area": "Motor adaptativo (UI)",
       "tipo": "Funcional (E2E)",
       "prioridad": "Media",
-      "titulo": "Envío de métricas del ejercicio al backend/motor",
-      "pasos": "Resolver el ejercicio de /contenido, pedir la recomendación y revisar lo que se envía al backend.",
+      "titulo": "Las respuestas del estudiante se envían y guardan en el backend",
+      "pasos": "Responder un cuestionario real y revisar las peticiones y la base de datos.",
       "datos": "—",
-      "esperado": "Se envían tiempo, intentos y errores del ejercicio. Si solo se envía el tema → BLOQUEADO (pendiente declarado)."
+      "esperado": "Un PUT /mis-respuestas/:id/opciones por pregunta, POST /mis-intentos/:id/entrega y las selecciones guardadas en respuesta_opciones. Si no se envían → BLOQUEADO."
     },
     {
       "id": "CP-UI-12",
@@ -1480,9 +1480,9 @@
       "tipo": "Funcional (E2E)",
       "prioridad": "Alta",
       "titulo": "Recorrido visual completo del estudiante con recomendación real",
-      "pasos": "Login → Dashboard → Contenido (resolver ejercicio) → Ver recomendación del motor → Resultados → Progreso → Cerrar sesión.",
+      "pasos": "Login → Dashboard → Contenido → curso SQL → tema SQL JOIN → Iniciar práctica → responder → Entregar → Ver recomendación del motor → Resultados → Progreso → Cerrar sesión.",
       "datos": "Cuenta demo",
-      "esperado": "Cada pantalla carga; la tarjeta muestra 'Detectamos dificultades en SQL JOIN' calculada por el motor real."
+      "esperado": "Cada pantalla carga con datos reales; tras entregar, el motor real responde reinforce_topic y la tarjeta muestra 'Detectamos dificultades en SQL JOIN'."
     },
     {
       "id": "CP-UI-13",
@@ -1491,10 +1491,10 @@
       "area": "Motor adaptativo (UI)",
       "tipo": "Funcional (E2E)",
       "prioridad": "Alta",
-      "titulo": "Estudiante sin intentos",
-      "pasos": "Registrar un estudiante nuevo, abrir el Dashboard y pedir una recomendación en Contenido.",
+      "titulo": "Estudiante sin intentos ni cursos ve avisos, no errores",
+      "pasos": "Registrar un estudiante nuevo, abrir el Dashboard y luego Contenido.",
       "datos": "Estudiante QA",
-      "esperado": "Dashboard sin error; aviso 'Sin datos suficientes todavía'."
+      "esperado": "Dashboard sin error; Contenido muestra 'Aún no estás inscrito en ningún curso activo'."
     },
     {
       "id": "CP-UI-14",
@@ -1504,7 +1504,7 @@
       "tipo": "Funcional (E2E)",
       "prioridad": "Alta",
       "titulo": "Error del motor visto desde la pantalla",
-      "pasos": "Con Python no disponible, pedir la recomendación en Contenido.",
+      "pasos": "Entregar un intento real y pedir la recomendación con Python no disponible.",
       "datos": "PYTHON_EXECUTABLE inválido",
       "esperado": "Mensaje 'No se pudo generar la recomendación. El motor de recomendación no está disponible'."
     },
@@ -1516,9 +1516,9 @@
       "tipo": "Funcional (E2E)",
       "prioridad": "Alta",
       "titulo": "Desconexión del backend",
-      "pasos": "Con sesión iniciada, apagar el backend y usar Contenido, Dashboard y Login.",
+      "pasos": "Con sesión y un cuestionario respondido, apagar el backend; intentar entregar, abrir el Dashboard e iniciar sesión.",
       "datos": "Backend detenido",
-      "esperado": "'No se pudo conectar con el servidor…' en las tres pantallas, sin quedarse colgado."
+      "esperado": "'No se pudo conectar con el servidor…' al entregar, en el Dashboard y en el Login, sin quedarse colgado."
     },
     {
       "id": "CP-UI-16",
@@ -1540,7 +1540,7 @@
       "tipo": "Funcional (E2E)",
       "prioridad": "Alta",
       "titulo": "El docente crea un módulo desde la pantalla",
-      "pasos": "/gestion → cargar curso DEMO-006 → + Nuevo módulo → guardar.",
+      "pasos": "/gestion → elegir DEMO-006 en el selector de curso → + Nuevo módulo → guardar.",
       "datos": "Módulo UI-xxxx",
       "esperado": "Aparece en la lista y queda guardado en DEMO-006."
     },
@@ -1566,7 +1566,7 @@
       "titulo": "El docente elige su curso de una lista",
       "pasos": "Abrir /gestion como docente.",
       "datos": "docente.demo@example.com",
-      "esperado": "Selector con sus cursos (GET /api/cursos-administrables). Si pide escribir el ID → BLOQUEADO."
+      "esperado": "Selector con sus cursos (GET /api/cursos-administrables), sin escribir IDs. Si pide escribir el ID → BLOQUEADO."
     },
     {
       "id": "CP-UI-20",

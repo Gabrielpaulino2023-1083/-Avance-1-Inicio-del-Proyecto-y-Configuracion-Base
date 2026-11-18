@@ -309,7 +309,7 @@ COMMIT
  estudiante.demo@example.com | DEMO-003: práctica disponible   | PRACTICA   |                    0 |                     |                          
 (3 rows)
 
-psql:/home/claude/v2/proyecto-grupo4/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
 
 
 ### seeds/datos_prueba_administrador.sql
@@ -324,7 +324,7 @@ COMMIT
   5 | administrador.demo@example.com | t      | ADMINISTRADOR
 (1 row)
 
-psql:/home/claude/v2/proyecto-grupo4/database/seeds/datos_prueba_administrador.sql:42: NOTICE:  Administrador demo creado. ID: 5.
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_administrador.sql:42: NOTICE:  Administrador demo creado. ID: 5.
 
 
 ### seeds/datos_prueba_docente.sql
@@ -339,7 +339,7 @@ COMMIT
           6 | docente.demo@example.com | DOCENTE |        3 | DEMO-006
 (1 row)
 
-psql:/home/claude/v2/proyecto-grupo4/database/seeds/datos_prueba_docente.sql:41: NOTICE:  Docente demo 6, curso 3, modulo 4 creados.
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_docente.sql:41: NOTICE:  Docente demo 6, curso 3, modulo 4 creados.
 
 
 ### seeds/datos_prueba_integracion_resultados.sql
@@ -366,7 +366,7 @@ DO
 (2 rows)
 
 COMMIT
-psql:/home/claude/v2/proyecto-grupo4/database/seeds/datos_prueba_integracion_resultados.sql:231: NOTICE:  Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-16 00:00:00-04 (America/Santo_Domingo).
+psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_integracion_resultados.sql:231: NOTICE:  Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-16 00:00:00-04 (America/Santo_Domingo).
 
 
 ### ALTER ROLE (password oculto)
