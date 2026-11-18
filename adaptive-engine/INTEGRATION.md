@@ -1,352 +1,255 @@
-\# Integración del Motor de Aprendizaje Adaptativo
 
+# Integración del Motor de Aprendizaje Adaptativo
 
+## 1. Descripción
 
-\## 1. Descripción
+El Motor de Aprendizaje Adaptativo es un módulo desarrollado en Python que analiza las interacciones académicas de los estudiantes y genera recomendaciones personalizadas.
 
+Actualmente funciona mediante reglas determinísticas y permite intercambiar información en formato JSON.
 
+El módulo funciona de manera independiente. Su integración definitiva con Node.js y PostgreSQL está pendiente.
 
-El Motor de Aprendizaje Adaptativo es un módulo desarrollado en Python que analiza el comportamiento académico de los estudiantes y genera recomendaciones personalizadas.
+## 2. Tecnologías
 
+- Python 3
+- Pandas
+- JSON
+- Unittest
+- Scikit-learn (instalado, sin modelos entrenados actualmente)
 
+## 3. Componentes principales
 
-Actualmente funciona mediante reglas de adaptación y está preparado para recibir información JSON desde otros programas.
+- `main.py`: punto de entrada; admite un archivo de prueba o JSON por entrada estándar.
+- `engine.py`: coordina el análisis y las recomendaciones.
+- `analysis/analyzer.py`: valida las interacciones y calcula métricas.
+- `rules/adaptation_rules.py`: determina la acción adaptativa.
+- `data/estudiante_prueba.json`: datos de ejemplo.
+- `tests/test_engine.py`: pruebas automatizadas.
 
+## 4. Contrato de entrada JSON
 
+El motor espera un objeto con:
 
-\## 2. Tecnologías
+- `student_id`: identificador del estudiante.
+- `topic`: tema evaluado.
+- `interactions`: lista con una o más interacciones.
 
+Cada interacción debe contener:
 
-
-\- Python 3
-
-\- Pandas
-
-\- Scikit-learn (instalado, pendiente de implementación de modelos)
-
-\- JSON para el intercambio de información
-
-
-
-\## 3. Archivos principales
-
-
-
-\- `main.py`: punto de entrada del motor.
-
-\- `engine.py`: coordina el análisis y la generación de recomendaciones.
-
-\- `analysis/analyzer.py`: analiza el comportamiento y calcula las métricas.
-
-\- `rules/adaptation\_rules.py`: aplica las reglas de adaptación.
-
-\- `data/estudiante\_prueba.json`: contiene datos de prueba.
-
-\- `requirements.txt`: dependencias del proyecto.
-
-
-
-\## 4. Datos de entrada
-
-
-
-El motor recibe un objeto JSON con el identificador del estudiante, el tema y sus interacciones.
-
-
+| Campo | Descripción | Restricción |
+|---|---|---|
+| `study_minutes` | Minutos de estudio | Número >= 0 |
+| `errors` | Errores registrados | Número >= 0 |
+| `attempts` | Intentos realizados | Número >= 1 |
+| `repetitions` | Repeticiones del contenido | Número >= 0 |
+| `navigation_count` | Navegaciones registradas | Número >= 0 |
+| `score_percentage` | Calificación porcentual | Entre 0 y 100 |
 
 Ejemplo:
 
-
-
 ```json
-
 {
-
-&#x20; "student\_id": 1,
-
-&#x20; "topic": "SQL JOIN",
-
-&#x20; "interactions": \[
-
-&#x20;   {
-
-&#x20;     "study\_minutes": 18,
-
-&#x20;     "errors": 4,
-
-&#x20;     "attempts": 3,
-
-&#x20;     "repetitions": 2,
-
-&#x20;     "navigation\_count": 8,
-
-&#x20;     "score\_percentage": 45
-
-&#x20;   }
-
-&#x20; ]
-
+  "student_id": 1,
+  "topic": "SQL JOIN",
+  "interactions": [
+    {
+      "study_minutes": 18,
+      "errors": 4,
+      "attempts": 3,
+      "repetitions": 2,
+      "navigation_count": 8,
+      "score_percentage": 45
+    }
+  ]
 }
-
 ```
 
+## 5. Procesamiento
 
+1. Recibir el JSON.
+2. Validar la existencia de interacciones y sus campos obligatorios.
+3. Convertir los campos de las interacciones a valores numéricos.
+4. Comprobar los rangos permitidos.
+5. Calcular las métricas del estudiante.
+6. Aplicar las reglas de adaptación.
+7. Devolver el perfil y la recomendación.
 
-\## 5. Procesamiento
+### Métricas calculadas
 
+- `average_score`: promedio de calificaciones.
+- `total_errors`: suma de errores.
+- `average_attempts`: promedio de intentos.
+- `total_repetitions`: suma de repeticiones.
+- `average_study_minutes`: promedio de minutos de estudio.
+- `total_interactions`: cantidad de interacciones.
 
+## 6. Reglas de adaptación
 
-El motor realiza las siguientes operaciones:
+Las reglas se evalúan en este orden:
 
+### Reforzar contenido
 
+Acción: `reinforce_topic`
 
-1\. Recibe los datos del estudiante.
+Dificultad: `reduced`
 
-2\. Valida los campos y sus valores.
+Se aplica cuando:
 
-3\. Calcula las métricas de comportamiento.
+- El promedio de calificaciones es inferior a 60 %, o
+- Los errores acumulados son cinco o más.
 
-4\. Evalúa las reglas de adaptación.
+Cuando existen cinco o más repeticiones y corresponde reforzar, se agrega una recomendación de material complementario.
 
-5\. Genera una recomendación personalizada.
+### Aumentar dificultad
 
-6\. Devuelve el resultado en formato JSON.
+Acción: `increase_difficulty`
 
+Dificultad: `increased`
 
+Se aplica cuando se cumplen todas estas condiciones:
 
-\## 6. Reglas de adaptación
+- Calificación promedio >= 85 %.
+- Errores acumulados <= 2.
+- Promedio de intentos <= 2.
 
+### Mantener dificultad
 
+Acción: `maintain_difficulty`
 
-\*\*Reforzar contenido (`reinforce\_topic`):\*\*
-
-
-
-Se aplica cuando la calificación promedio es inferior a 60 % o los errores acumulados son cinco o más.
-
-
-
-\*\*Aumentar dificultad (`increase\_difficulty`):\*\*
-
-
-
-Se aplica cuando la calificación promedio es igual o superior a 85 %, los errores acumulados son dos o menos y el promedio de intentos es dos o menos.
-
-
-
-\*\*Mantener dificultad (`maintain\_difficulty`):\*\*
-
-
+Dificultad: `current`
 
 Se aplica cuando no se cumplen las condiciones anteriores.
 
+## 7. Contrato de salida JSON
 
+Cuando el procesamiento es exitoso, el motor devuelve:
 
-Las reglas se evalúan en ese orden.
+- `profile`: estadísticas del comportamiento académico.
+- `recommendation`: decisión adaptativa, dificultad, justificación y recomendación.
 
-
-
-\## 7. Datos de salida
-
-
-
-El motor devuelve un objeto JSON con dos propiedades principales:
-
-
-
-\- `profile`: estadísticas calculadas del estudiante.
-
-\- `recommendation`: acción adaptativa, dificultad, justificación y recomendación.
-
-
-
-Ejemplo:
-
-
+Ejemplo para los datos de entrada anteriores:
 
 ```json
-
 {
-
-&#x20; "profile": {
-
-&#x20;   "student\_id": 1,
-
-&#x20;   "topic": "SQL JOIN",
-
-&#x20;   "average\_score": 45.0,
-
-&#x20;   "total\_errors": 4,
-
-&#x20;   "average\_attempts": 3.0,
-
-&#x20;   "total\_repetitions": 2,
-
-&#x20;   "average\_study\_minutes": 18.0,
-
-&#x20;   "total\_interactions": 1
-
-&#x20; },
-
-&#x20; "recommendation": {
-
-&#x20;   "student\_id": 1,
-
-&#x20;   "topic": "SQL JOIN",
-
-&#x20;   "action": "reinforce\_topic",
-
-&#x20;   "difficulty": "reduced",
-
-&#x20;   "reason": "Puntuación promedio: 45.0%; errores acumulados: 4; intentos promedio: 3.0.",
-
-&#x20;   "recommendation": "Se recomienda reforzar el tema SQL JOIN con explicaciones y ejercicios guiados."
-
-&#x20; }
-
+  "profile": {
+    "student_id": 1,
+    "topic": "SQL JOIN",
+    "average_score": 45.0,
+    "total_errors": 4,
+    "average_attempts": 3.0,
+    "total_repetitions": 2,
+    "average_study_minutes": 18.0,
+    "total_interactions": 1
+  },
+  "recommendation": {
+    "student_id": 1,
+    "topic": "SQL JOIN",
+    "action": "reinforce_topic",
+    "difficulty": "reduced",
+    "reason": "Puntuación promedio: 45.0%; errores acumulados: 4; intentos promedio: 3.0.",
+    "recommendation": "Se recomienda reforzar el tema SQL JOIN con explicaciones y ejercicios guiados."
+  }
 }
-
 ```
 
+## 8. Ejecución
 
+Todos los comandos siguientes se ejecutan desde `adaptive-engine`.
 
-\## 8. Ejecución del motor
-
-
-
-Desde la carpeta `adaptive-engine`:
-
-
-
-\*\*Prueba local:\*\*
-
-
+### Prueba local
 
 ```powershell
-
 python main.py
-
 ```
 
+Utiliza `data/estudiante_prueba.json` y muestra el perfil y la recomendación.
 
-
-\*\*Procesamiento de JSON mediante entrada estándar:\*\*
-
-
+### Entrada estándar JSON
 
 ```powershell
-
-Get-Content .\\data\\estudiante\_prueba.json -Raw | python main.py --stdin
-
+Get-Content .\data\estudiante_prueba.json -Raw | python main.py --stdin
 ```
 
+Con `--stdin`, el motor:
 
+1. Lee un objeto JSON desde la entrada estándar.
+2. Procesa las interacciones.
+3. Escribe un único objeto JSON en la salida estándar (`stdout`).
 
-El segundo comando permite enviar datos JSON al motor sin modificar el archivo de prueba.
+## 9. Integración propuesta con Node.js
 
+Flujo previsto:
 
+1. El frontend registra las actividades del estudiante.
+2. Node.js obtiene los datos necesarios desde PostgreSQL.
+3. El backend transforma esos datos al contrato JSON del motor.
+4. Node.js inicia el proceso Python.
+5. Envía el JSON mediante la entrada estándar (`stdin`).
+6. Python analiza las interacciones y genera una recomendación.
+7. Python devuelve el resultado mediante `stdout`.
+8. Node.js interpreta la respuesta y la pone a disposición del frontend.
 
-\## 9. Integración prevista con Node.js
+Se propone evaluar un endpoint como:
 
+`POST /api/adaptive/analyze`
 
+**Importante:** este endpoint es una propuesta y todavía debe acordarse con el responsable del backend.
 
-El backend será responsable de recibir los datos del estudiante y enviarlos al motor Python.
+La integración deberá contemplar el manejo de errores, los tiempos de espera y la finalización del proceso Python.
 
+## 10. Manejo de errores
 
+El motor valida las interacciones y sus valores numéricos.
 
-Flujo propuesto:
+Entre los errores detectados se encuentran:
 
+- Lista de interacciones vacía.
+- Campos obligatorios faltantes en las interacciones.
+- Valores no numéricos.
+- Valores fuera de los rangos permitidos.
 
+En modo `--stdin`, cuando ocurre un error controlado:
 
-1\. Node.js recibe los datos de comportamiento.
+- Se escribe un objeto JSON con la propiedad `error` en `stderr`.
+- El proceso termina con código de salida `1`.
 
-2\. El backend ejecuta el proceso Python.
+El manejo de otros errores no controlados deberá fortalecerse en futuras mejoras.
 
-3\. Envía el JSON por la entrada estándar.
+## 11. Pruebas automatizadas
 
-4\. Python procesa la información.
+El módulo cuenta con seis pruebas implementadas mediante `unittest`:
 
-5\. Python devuelve un JSON por la salida estándar.
+1. Rendimiento bajo: refuerzo de contenido.
+2. Rendimiento medio: mantenimiento de dificultad.
+3. Rendimiento alto: aumento de dificultad.
+4. Interacciones vacías: se detecta el error.
+5. Calificación fuera del rango: se detecta el error.
+6. Campo obligatorio faltante: se detecta el error.
 
-6\. Node.js interpreta la respuesta y la entrega al frontend.
+Ejecutar desde `adaptive-engine`:
 
+```powershell
+python -m unittest discover -s tests -v
+```
 
+## 12. Estado actual y pendientes
 
-Para la integración se propone un endpoint `POST /api/adaptive/analyze`, cuya implementación deberá acordarse con el responsable del backend.
+### Implementado
 
+- Análisis de interacciones con Pandas.
+- Cálculo de métricas académicas.
+- Validación básica de datos.
+- Tres decisiones adaptativas.
+- Recomendaciones personalizadas.
+- Entrada y salida JSON.
+- Seis pruebas automatizadas.
 
+### Pendiente
 
-La ejecución desde Node.js deberá controlar errores, tiempos de espera y finalización del proceso.
+- Adaptar los datos reales de actividades e intentos de PostgreSQL.
+- Integrar el módulo con el backend Node.js.
+- Ampliar validaciones y pruebas.
+- Ejecutar pruebas de integración entre componentes.
+- Evaluar modelos de aprendizaje automático cuando existan datos apropiados.
 
-
-
-\## 10. Manejo de errores
-
-
-
-El motor valida:
-
-
-
-\- Existencia de interacciones.
-
-\- Presencia de campos obligatorios.
-
-\- Valores numéricos válidos.
-
-\- Rangos permitidos.
-
-
-
-Los errores se devuelven en formato JSON por la salida de errores (`stderr`) y el proceso termina con código distinto de cero.
-
-
-
-\## 11. Pruebas realizadas
-
-
-
-Se realizaron seis pruebas manuales exitosas:
-
-
-
-1\. Rendimiento bajo: refuerzo de contenido.
-
-2\. Rendimiento medio: mantenimiento de dificultad.
-
-3\. Rendimiento alto: aumento de dificultad.
-
-4\. Estudiante sin interacciones: error detectado.
-
-5\. Calificación fuera del rango permitido: error detectado.
-
-6\. Campo obligatorio faltante: error detectado.
-
-
-
-\## 12. Estado actual
-
-
-
-El motor funciona de manera independiente y procesa datos JSON.
-
-
-
-Pendiente:
-
-
-
-\- Pruebas automatizadas.
-
-\- Integración real con Node.js.
-
-\- Conexión con datos procedentes de PostgreSQL mediante el backend.
-
-\- Implementación futura de modelos de aprendizaje automático.
-
-
-
-El motor actual utiliza reglas determinísticas; todavía no se ha entrenado un modelo de machine learning.
-
-
-
+El módulo actual utiliza reglas determinísticas y no debe describirse como un modelo de machine learning entrenado.
