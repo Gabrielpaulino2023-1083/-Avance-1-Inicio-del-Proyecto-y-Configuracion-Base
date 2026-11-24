@@ -274,6 +274,23 @@ DO
 COMMIT
 
 
+### migrations/009_dificultad_candidatas.sql
+BEGIN
+SET
+ALTER TABLE
+ALTER TABLE
+COMMENT
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+GRANT
+ALTER FUNCTION
+REVOKE
+GRANT
+REVOKE
+COMMIT
+
+
 ### seeds/datos_prueba.sql
 BEGIN
 INSERT 0 3
@@ -309,7 +326,7 @@ COMMIT
  estudiante.demo@example.com | DEMO-003: práctica disponible   | PRACTICA   |                    0 |                     |                          
 (3 rows)
 
-psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
+psql:/home/claude/v4/proyecto-grupo4/database/seeds/datos_prueba_actividades_intentos.sql:148: NOTICE:  Seed creado: estudiante 4, inscripción 2, curso 2.
 
 
 ### seeds/datos_prueba_administrador.sql
@@ -324,7 +341,7 @@ COMMIT
   5 | administrador.demo@example.com | t      | ADMINISTRADOR
 (1 row)
 
-psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_administrador.sql:42: NOTICE:  Administrador demo creado. ID: 5.
+psql:/home/claude/v4/proyecto-grupo4/database/seeds/datos_prueba_administrador.sql:42: NOTICE:  Administrador demo creado. ID: 5.
 
 
 ### seeds/datos_prueba_docente.sql
@@ -339,7 +356,7 @@ COMMIT
           6 | docente.demo@example.com | DOCENTE |        3 | DEMO-006
 (1 row)
 
-psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_docente.sql:41: NOTICE:  Docente demo 6, curso 3, modulo 4 creados.
+psql:/home/claude/v4/proyecto-grupo4/database/seeds/datos_prueba_docente.sql:41: NOTICE:  Docente demo 6, curso 3, modulo 4 creados.
 
 
 ### seeds/datos_prueba_integracion_resultados.sql
@@ -361,12 +378,32 @@ DO
 
  semana_local | intentos_calificados | minutos_transcurridos_simulados 
 --------------+----------------------+---------------------------------
- 2026-11-09   |                    3 |                           36.00
- 2026-11-16   |                    6 |                           72.00
+ 2026-11-16   |                    3 |                           36.00
+ 2026-11-23   |                    6 |                           72.00
 (2 rows)
 
 COMMIT
-psql:/home/claude/v3/proyecto-grupo4/database/seeds/datos_prueba_integracion_resultados.sql:231: NOTICE:  Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-16 00:00:00-04 (America/Santo_Domingo).
+psql:/home/claude/v4/proyecto-grupo4/database/seeds/datos_prueba_integracion_resultados.sql:231: NOTICE:  Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-23 00:00:00-04 (America/Santo_Domingo).
+
+
+### seeds/datos_prueba_dificultad_009.sql
+BEGIN
+SET
+CREATE TABLE
+INSERT 0 1
+CREATE TABLE
+INSERT 0 8
+DO
+            email            | inscripcion_id | tema_id | actividad_id |                        titulo                         | dificultad | intentos_calificados | promedio_porcentaje 
+-----------------------------+----------------+---------+--------------+-------------------------------------------------------+------------+----------------------+---------------------
+ estudiante.demo@example.com |              4 |      10 |            8 | DEMO-009: Referencia: relacionar pedidos y clientes   | MEDIA      |                    1 |                0.00
+ estudiante.demo@example.com |              4 |      10 |            9 | DEMO-009: Basico: significado de las uniones          | BAJA       |                    0 |                    
+ estudiante.demo@example.com |              4 |      10 |           10 | DEMO-009: Intermedio: calcular filas de una union     | MEDIA      |                    0 |                    
+ estudiante.demo@example.com |              4 |      10 |           11 | DEMO-009: Avanzado: agregacion y filtros de LEFT JOIN | ALTA       |                    0 |                    
+(4 rows)
+
+COMMIT
+psql:/home/claude/v4/proyecto-grupo4/database/seeds/datos_prueba_dificultad_009.sql:98: NOTICE:  Demo creada: curso 5, inscripcion 4, tema 10. Referencia MEDIA calificada en 0/20; tres candidatas nuevas.
 
 
 ### ALTER ROLE (password oculto)

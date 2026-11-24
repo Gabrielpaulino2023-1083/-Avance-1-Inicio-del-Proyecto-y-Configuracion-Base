@@ -1,23 +1,23 @@
 # Listado de incidencias — Motor de Aprendizaje Adaptativo — Grupo 4
 
-Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/incidencias.json`. Para cambiar el estado de una incidencia, editar ese JSON y volver a ejecutar `npm test`: la columna "Última verificación" se actualiza sola con el resultado de la re-prueba.
+Generado el 24 de noviembre de 2026 a las 1:23 p. m. a partir de `tests/matriz/incidencias.json`. Para cambiar el estado de una incidencia, editar ese JSON y volver a ejecutar `npm test`: la columna "Última verificación" se actualiza sola con el resultado de la re-prueba.
 
 | ID | Título | Tipo | Severidad | Responsable | Estado | Casos |
 |---|---|---|---|---|---|---|
 | [INC-01](#inc-01) | El backend no tiene CORS: el login real desde el navegador falla | Defecto | Alta | Porfirio Ramírez | Verificada | CP-UI-01 |
-| [INC-02](#inc-02) | JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido' | Defecto | Baja | Porfirio Ramírez | Abierta | CP-LOG-06, CP-BE-07 |
-| [INC-03](#inc-03) | Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error | Defecto | Media | Daniel Beltre | Abierta | CP-VAL-14 |
-| [INC-04](#inc-04) | Motor: acepta Infinity y devuelve un JSON que Node no puede leer | Defecto | Media | Daniel Beltre | Abierta | CP-VAL-09, CP-VAL-15 |
-| [INC-05](#inc-05) | Motor: falta de student_id o topic produce KeyError sin mensaje claro | Defecto | Baja | Daniel Beltre | Abierta | CP-VAL-07 |
-| [INC-06](#inc-06) | Motor: acepta true/false como números (true = 1 %) | Defecto | Baja | Daniel Beltre | Abierta | CP-VAL-10 |
-| [INC-07](#inc-07) | Motor: los conteos con decimales se truncan en silencio | Defecto | Baja | Daniel Beltre | Abierta | CP-VAL-11 |
+| [INC-02](#inc-02) | JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido' | Defecto | Baja | Porfirio Ramírez | Verificada | CP-LOG-06, CP-BE-07 |
+| [INC-03](#inc-03) | Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error | Defecto | Media | Daniel Beltre | Verificada | CP-VAL-14 |
+| [INC-04](#inc-04) | Motor: acepta Infinity y devuelve un JSON que Node no puede leer | Defecto | Media | Daniel Beltre | Verificada | CP-VAL-09, CP-VAL-15 |
+| [INC-05](#inc-05) | Motor: falta de student_id o topic produce KeyError sin mensaje claro | Defecto | Baja | Daniel Beltre | Verificada | CP-VAL-07 |
+| [INC-06](#inc-06) | Motor: acepta true/false como números (true = 1 %) | Defecto | Baja | Daniel Beltre | Verificada | CP-VAL-10 |
+| [INC-07](#inc-07) | Motor: los conteos con decimales se truncan en silencio | Defecto | Baja | Daniel Beltre | Verificada | CP-VAL-11 |
 | [INC-08](#inc-08) | Dashboard y Progreso en modo real usan endpoints que no existen | Integración pendiente | Alta | Porfirio Ramírez (endpoints) y Yuleidy De Los Santos (pantalla) | Verificada | CP-CRUD-08 |
 | [INC-09](#inc-09) | No hay endpoints para listar, actualizar, cambiar el rol ni eliminar usuarios | Integración pendiente | Media | Porfirio Ramírez | Pendiente de desarrollo | CP-CRUD-06, CP-CRUD-07 |
 | [INC-10](#inc-10) | Las operaciones académicas de la base de datos no están expuestas por HTTP | Integración pendiente | Media | Porfirio Ramírez y Jeison Rosario | Verificada | CP-CRUD-09 |
 | [INC-11](#inc-11) | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Integración pendiente | Alta | Porfirio Ramírez y Daniel Beltre | Verificada | CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03 |
 | [INC-12](#inc-12) | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Verificada | CP-UI-11 |
-| [INC-13](#inc-13) | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Abierta | CP-BE-10 |
-| [INC-14](#inc-14) | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Abierta | CP-BE-09 |
+| [INC-13](#inc-13) | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Verificada | CP-BE-10 |
+| [INC-14](#inc-14) | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Verificada | CP-BE-09 |
 | [INC-15](#inc-15) | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Verificada | CP-UI-13, CP-UI-20 |
 | [INC-16](#inc-16) | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Verificada | CP-UI-09 |
 | [INC-17](#inc-17) | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Verificada | CP-UI-19 |
@@ -64,11 +64,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Backend / API |
 | Responsable | Porfirio Ramírez |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-LOG-06, CP-BE-07 |
-| Última verificación | CP-LOG-06: FALLIDO, CP-BE-07: FALLIDO |
+| Última verificación | CP-LOG-06: APROBADO, CP-BE-07: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): errorHandler revisa err.type antes de err.status. Re-prueba del 24/11/2026: CP-LOG-06 y CP-BE-07 aprobados.
 
 **Descripción.** En middlewares/errorHandler.js la primera condición es 'if (err.status)'. El error que produce express.json() ya trae status 400, así que entra por ahí y nunca llega a la rama 'entity.parse.failed'. Resultado: el cliente recibe el mensaje interno del parser.
 
@@ -92,11 +92,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Media |
 | Módulo | Motor adaptativo |
 | Responsable | Daniel Beltre |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-VAL-14 |
-| Última verificación | CP-VAL-14: FALLIDO |
+| Última verificación | CP-VAL-14: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se valida que la raíz sea un objeto. Re-prueba del 24/11/2026: CP-VAL-14 aprobado; Daniel añadió test_invalid_json_root y test_cli_invalid_json_root.
 
 **Descripción.** analyzer.py llama student_data.get(...) sin comprobar que sea un diccionario. Con [], "texto", 5 o null se lanza AttributeError, que main.py no captura (solo captura ValueError, KeyError, TypeError y JSONDecodeError). Se rompe el contrato de INTEGRATION.md (errores como JSON por stderr), y el backend no podrá interpretar el error.
 
@@ -120,11 +120,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Media |
 | Módulo | Motor adaptativo |
 | Responsable | Daniel Beltre |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-VAL-09, CP-VAL-15 |
-| Última verificación | CP-VAL-09: FALLIDO, CP-VAL-15: FALLIDO |
+| Última verificación | CP-VAL-09: APROBADO, CP-VAL-15: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan Infinity y NaN y la salida usa allow_nan=False. Re-prueba del 24/11/2026: CP-VAL-09 y CP-VAL-15 aprobados.
 
 **Descripción.** json.load de Python acepta Infinity/NaN. NaN se rechaza, pero Infinity pasa la validación (inf ≥ 0) y la salida contiene 'average_study_minutes: Infinity', que no es JSON estándar: JSON.parse en Node falla.
 
@@ -148,11 +148,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Motor adaptativo |
 | Responsable | Daniel Beltre |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-VAL-07 |
-| Última verificación | CP-VAL-07: FALLIDO |
+| Última verificación | CP-VAL-07: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): ValueError claro para student_id y topic. Re-prueba del 24/11/2026: CP-VAL-07 aprobado.
 
 **Descripción.** Los seis campos de interacción se validan con un mensaje claro, pero student_id y topic se leen con student_data['...']. Sin ellos se lanza KeyError y la CLI responde {"error": "'topic'"}.
 
@@ -176,11 +176,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Motor adaptativo |
 | Responsable | Daniel Beltre |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-VAL-10 |
-| Última verificación | CP-VAL-10: FALLIDO |
+| Última verificación | CP-VAL-10: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan booleanos. Re-prueba del 24/11/2026: CP-VAL-10 aprobado.
 
 **Descripción.** pd.to_numeric convierte booleanos en 1/0. score_percentage=true se interpreta como 1 % y genera una recomendación de refuerzo con datos que no son una puntuación.
 
@@ -204,11 +204,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Motor adaptativo |
 | Responsable | Daniel Beltre |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-VAL-11 |
-| Última verificación | CP-VAL-11: FALLIDO |
+| Última verificación | CP-VAL-11: APROBADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): los conteos deben ser enteros. Re-prueba del 24/11/2026: CP-VAL-11 aprobado.
 
 **Descripción.** errors, attempts, repetitions y navigation_count son conteos, pero se aceptan decimales. total_errors usa int(), así que 2.7 se convierte en 2 sin avisar y puede cambiar la regla aplicada.
 
@@ -264,7 +264,7 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Casos asociados | CP-CRUD-06, CP-CRUD-07 |
 | Última verificación | CP-CRUD-06: BLOQUEADO, CP-CRUD-07: BLOQUEADO |
 
-**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Re-prueba del 24/11/2026: sigue pendiente.
 
 **Descripción.** Existen dtos/user.dto.js (changeRoleDto) y el permiso users:change-role, pero ninguna ruta los usa. El CRUD de usuarios disponible es solo Crear (registro) y Leer (/me).
 
@@ -372,11 +372,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Backend / API |
 | Responsable | Porfirio Ramírez |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-BE-10 |
-| Última verificación | CP-BE-10: FALLIDO |
+| Última verificación | CP-BE-10: APROBADO |
 
-**Historial.** Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio). Re-prueba del 24/11/2026: CP-BE-10 aprobado (413 en español).
 
 **Descripción.** En errorHandler.js el bloque de 'entity.too.large' quedó después de res.status(500) y de un return implícito, así que nunca se alcanza. Además el error de body-parser trae status 413 y entra antes por 'if (err.status)', devolviendo el mensaje interno en inglés.
 
@@ -400,11 +400,11 @@ Generado el 17 de noviembre de 2026 a las 7:52 p. m. a partir de `tests/matriz/i
 | Severidad | Baja |
 | Módulo | Backend / API |
 | Responsable | Porfirio Ramírez |
-| Estado de resolución | **Abierta** |
+| Estado de resolución | **Verificada** |
 | Casos asociados | CP-BE-09 |
-| Última verificación | CP-BE-09: FALLIDO |
+| Última verificación | CP-BE-09: APROBADO |
 
-**Historial.** Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).
+**Historial.** Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): contentRoutes ya no exige token a rutas inexistentes. Re-prueba del 24/11/2026: CP-BE-09 aprobado (404).
 
 **Descripción.** app.use('/api', contentRoutes) monta un router con router.use(verifyToken) para TODO /api. Cualquier ruta que no exista, sin token, responde 401 'Token requerido' en vez de 404, lo que confunde al depurar el frontend.
 

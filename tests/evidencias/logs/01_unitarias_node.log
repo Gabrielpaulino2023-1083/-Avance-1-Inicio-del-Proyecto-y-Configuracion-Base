@@ -1,96 +1,69 @@
 ◇ injected env (0) from .env
 ▶ CP-BE-01 registerDto acepta y rechaza según las reglas
-  ✔ CP-BE-01 acepta datos válidos y aplica trim (2.227134ms)
-  ✔ CP-BE-01 rechaza email mal formado (0.608292ms)
-  ✔ CP-BE-01 rechaza contraseña de 7 caracteres (0.208847ms)
-  ✔ CP-BE-01 rechaza contraseña de 73 caracteres (0.229556ms)
-  ✔ CP-BE-01 rechaza nombre vacío (0.151332ms)
-  ✔ CP-BE-01 rechaza apellido de 51 caracteres (0.102118ms)
-  ✔ CP-BE-01 rechaza nombre numérico (1.797676ms)
-  ✔ CP-BE-01 acepta los límites exactos (8 y 72 caracteres, 50 en nombre) (0.474613ms)
-✔ CP-BE-01 registerDto acepta y rechaza según las reglas (6.740451ms)
+  ✔ CP-BE-01 acepta datos válidos y aplica trim (1.917263ms)
+  ✔ CP-BE-01 rechaza email mal formado (0.505817ms)
+  ✔ CP-BE-01 rechaza contraseña de 7 caracteres (0.159325ms)
+  ✔ CP-BE-01 rechaza contraseña de 73 caracteres (0.191359ms)
+  ✔ CP-BE-01 rechaza nombre vacío (0.12395ms)
+  ✔ CP-BE-01 rechaza apellido de 51 caracteres (0.089208ms)
+  ✔ CP-BE-01 rechaza nombre numérico (0.231104ms)
+  ✔ CP-BE-01 acepta los límites exactos (8 y 72 caracteres, 50 en nombre) (0.238445ms)
+✔ CP-BE-01 registerDto acepta y rechaza según las reglas (4.183572ms)
 ▶ CP-BE-02 loginDto exige email y password
-  ✔ CP-BE-02 rechaza campos vacíos (0.71564ms)
-  ✔ CP-BE-02 rechaza campos ausentes (0.284721ms)
-  ✔ CP-BE-02 rechaza campos email solo con espacios (0.094186ms)
-  ✔ CP-BE-02 rechaza campos password numérico (0.059735ms)
-  ✔ CP-BE-02 acepta credenciales con formato correcto (0.141105ms)
-✔ CP-BE-02 loginDto exige email y password (1.521594ms)
-✔ CP-BE-03 toUserResponse nunca expone campos internos (1.449648ms)
+  ✔ CP-BE-02 rechaza campos vacíos (1.97026ms)
+  ✔ CP-BE-02 rechaza campos ausentes (0.196564ms)
+  ✔ CP-BE-02 rechaza campos email solo con espacios (0.05776ms)
+  ✔ CP-BE-02 rechaza campos password numérico (0.034058ms)
+  ✔ CP-BE-02 acepta credenciales con formato correcto (0.114586ms)
+✔ CP-BE-02 loginDto exige email y password (2.512448ms)
+✔ CP-BE-03 toUserResponse nunca expone campos internos (0.837688ms)
 ▶ CP-BE-04 middleware validate
-  ✔ CP-BE-04 cuerpo inválido → AppError 400 con details {campo, mensaje} (0.485496ms)
-  ✔ CP-BE-04 cuerpo válido → next() y req.body limpio (0.139715ms)
-✔ CP-BE-04 middleware validate (0.724163ms)
+  ✔ CP-BE-04 cuerpo inválido → AppError 400 con details {campo, mensaje} (0.279365ms)
+  ✔ CP-BE-04 cuerpo válido → next() y req.body limpio (0.075574ms)
+✔ CP-BE-04 middleware validate (0.448733ms)
 ▶ CP-BE-05 middleware verifyToken
-  ✔ CP-BE-05 rechaza sin cabecera con 401 (0.19104ms)
-  ✔ CP-BE-05 rechaza esquema Basic con 401 (0.063956ms)
-  ✔ CP-BE-05 rechaza Bearer sin token con 401 (0.068109ms)
-  ✔ CP-BE-05 rechaza token basura con 401 (0.259644ms)
-  ✔ CP-BE-05 rechaza firmado con otro secreto con 401 (1.01668ms)
-  ✔ CP-BE-05 rechaza expirado con 401 (0.443836ms)
-  ✔ CP-BE-05 token válido → req.user con id y rol (0.713225ms)
-✔ CP-BE-05 middleware verifyToken (2.944723ms)
+  ✔ CP-BE-05 rechaza sin cabecera con 401 (0.104714ms)
+  ✔ CP-BE-05 rechaza esquema Basic con 401 (0.035269ms)
+  ✔ CP-BE-05 rechaza Bearer sin token con 401 (0.033715ms)
+  ✔ CP-BE-05 rechaza token basura con 401 (0.136644ms)
+  ✔ CP-BE-05 rechaza firmado con otro secreto con 401 (0.715242ms)
+  ✔ CP-BE-05 rechaza expirado con 401 (0.218896ms)
+  ✔ CP-BE-05 token válido → req.user con id y rol (0.49023ms)
+✔ CP-BE-05 middleware verifyToken (1.838857ms)
 ▶ CP-BE-06 requireRole y requirePermission
-  ✔ CP-BE-06 requireRole permite el rol indicado y bloquea los demás (0.155481ms)
-  ✔ CP-BE-06 cada permiso respeta config/permissions.js para los 3 roles (0.2442ms)
-  ✔ CP-BE-06 un permiso no definido produce un error de programación (0.110266ms)
-✔ CP-BE-06 requireRole y requirePermission (0.581144ms)
+  ✔ CP-BE-06 requireRole permite el rol indicado y bloquea los demás (0.132196ms)
+  ✔ CP-BE-06 cada permiso respeta config/permissions.js para los 3 roles (0.202091ms)
+  ✔ CP-BE-06 un permiso no definido produce un error de programación (0.11533ms)
+✔ CP-BE-06 requireRole y requirePermission (0.506053ms)
 ▶ CP-BE-07 errorHandler traduce cada tipo de error
-  ✔ CP-BE-07 AppError conserva su status, mensaje y details (0.218965ms)
-  ✖ CP-BE-07 JSON inválido → 400 'JSON inválido' (0.70082ms)
-  ✔ CP-BE-07 violación de unicidad de PostgreSQL (23505) → 409 (0.124657ms)
-  ✔ CP-BE-07 error inesperado → 500 sin filtrar el detalle interno (0.082083ms)
-  ✔ CP-BE-07 notFound → 404 JSON (0.052546ms)
-✖ CP-BE-07 errorHandler traduce cada tipo de error (1.289064ms)
-✔ CP-BE-08 OpenAPI documenta exactamente las rutas implementadas (29.317594ms)
+  ✔ CP-BE-07 AppError conserva su status, mensaje y details (0.147436ms)
+  ✔ CP-BE-07 JSON inválido → 400 'JSON inválido' (0.066062ms)
+  ✔ CP-BE-07 violación de unicidad de PostgreSQL (23505) → 409 (0.035785ms)
+  ✔ CP-BE-07 error inesperado → 500 sin filtrar el detalle interno (0.057249ms)
+  ✔ CP-BE-07 notFound → 404 JSON (0.041895ms)
+✔ CP-BE-07 errorHandler traduce cada tipo de error (0.452546ms)
+✔ CP-BE-08 OpenAPI documenta exactamente las rutas implementadas (23.787433ms)
 ▶ CP-FE-01 loginSchema
-  ✔ CP-FE-01 correo vacío → 'Ingresa tu correo.' (2.420757ms)
-  ✔ CP-FE-01 correo mal formado → 'Ingresa un correo válido.' (1.403913ms)
-  ✔ CP-FE-01 contraseña vacía → 'Ingresa tu contraseña.' (0.230924ms)
-  ✔ CP-FE-01 datos válidos se aceptan (0.164874ms)
-✔ CP-FE-01 loginSchema (5.038203ms)
+  ✔ CP-FE-01 correo vacío → 'Ingresa tu correo.' (1.869749ms)
+  ✔ CP-FE-01 correo mal formado → 'Ingresa un correo válido.' (1.250962ms)
+  ✔ CP-FE-01 contraseña vacía → 'Ingresa tu contraseña.' (0.264861ms)
+  ✔ CP-FE-01 datos válidos se aceptan (0.176579ms)
+✔ CP-FE-01 loginSchema (4.275467ms)
 ▶ CP-FE-02 registerSchema
-  ✔ CP-FE-02 contraseñas distintas → 'Las contraseñas no coinciden.' en confirmPassword (0.982156ms)
-  ✔ CP-FE-02 contraseña corta → 'La contraseña debe tener al menos 8 caracteres.' en password (0.20033ms)
-  ✔ CP-FE-02 contraseña de 73 → 'Máximo 72 caracteres.' en password (0.174633ms)
-  ✔ CP-FE-02 nombre de 51 → 'Máximo 50 caracteres.' en nombre (0.231325ms)
-  ✔ CP-FE-02 apellido vacío → 'Ingresa tu apellido.' en apellido (0.437506ms)
-  ✔ CP-FE-02 confirmación vacía → 'Confirma tu contraseña.' en confirmPassword (0.372775ms)
-  ✔ CP-FE-02 datos válidos se aceptan (0.203937ms)
-✔ CP-FE-02 registerSchema (2.895196ms)
-✔ CP-FE-03 frontend y backend aceptan/rechazan los mismos registros (2.943194ms)
+  ✔ CP-FE-02 contraseñas distintas → 'Las contraseñas no coinciden.' en confirmPassword (0.960032ms)
+  ✔ CP-FE-02 contraseña corta → 'La contraseña debe tener al menos 8 caracteres.' en password (0.169945ms)
+  ✔ CP-FE-02 contraseña de 73 → 'Máximo 72 caracteres.' en password (0.144097ms)
+  ✔ CP-FE-02 nombre de 51 → 'Máximo 50 caracteres.' en nombre (0.157618ms)
+  ✔ CP-FE-02 apellido vacío → 'Ingresa tu apellido.' en apellido (0.196952ms)
+  ✔ CP-FE-02 confirmación vacía → 'Confirma tu contraseña.' en confirmPassword (0.219538ms)
+  ✔ CP-FE-02 datos válidos se aceptan (0.095682ms)
+✔ CP-FE-02 registerSchema (2.182304ms)
+✔ CP-FE-03 frontend y backend aceptan/rechazan los mismos registros (1.63406ms)
 ℹ tests 44
 ℹ suites 8
-ℹ pass 43
-ℹ fail 1
+ℹ pass 44
+ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 472.608946
-
-✖ failing tests:
-
-test at unit/backend/backend_unitarias.test.mjs:186:3
-✖ CP-BE-07 JSON inválido → 400 'JSON inválido' (0.70082ms)
-  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
-  + actual - expected
-  
-  + 'Unexpected end of JSON input'
-  - 'JSON inválido'
-  
-      at TestContext.<anonymous> (file:///home/claude/v3/proyecto-grupo4/tests/unit/backend/backend_unitarias.test.mjs:193:12)
-      at Test.runInAsyncScope (node:async_hooks:214:14)
-      at Test.run (node:internal/test_runner/test:1047:25)
-      at Suite.processPendingSubtests (node:internal/test_runner/test:744:18)
-      at Test.postRun (node:internal/test_runner/test:1173:19)
-      at Test.run (node:internal/test_runner/test:1101:12)
-      at async Promise.all (index 0)
-      at async Suite.run (node:internal/test_runner/test:1442:7)
-      at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
-    generatedMessage: true,
-    code: 'ERR_ASSERTION',
-    actual: 'Unexpected end of JSON input',
-    expected: 'JSON inválido',
-    operator: 'strictEqual',
-    diff: 'simple'
-  }
+ℹ duration_ms 378.76567

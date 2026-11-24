@@ -33,8 +33,8 @@
         "CP-LOG-06",
         "CP-BE-07"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): errorHandler revisa err.type antes de err.status. Re-prueba del 24/11/2026: CP-LOG-06 y CP-BE-07 aprobados.",
       "descripcion": "En middlewares/errorHandler.js la primera condición es 'if (err.status)'. El error que produce express.json() ya trae status 400, así que entra por ahí y nunca llega a la rama 'entity.parse.failed'. Resultado: el cliente recibe el mensaje interno del parser.",
       "pasos": "POST /api/auth/login con el cuerpo '{\"email\": ' y Content-Type application/json.",
       "esperado": "400 { success:false, message:'JSON inválido' }",
@@ -54,8 +54,8 @@
       "casos": [
         "CP-VAL-14"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se valida que la raíz sea un objeto. Re-prueba del 24/11/2026: CP-VAL-14 aprobado; Daniel añadió test_invalid_json_root y test_cli_invalid_json_root.",
       "descripcion": "analyzer.py llama student_data.get(...) sin comprobar que sea un diccionario. Con [], \"texto\", 5 o null se lanza AttributeError, que main.py no captura (solo captura ValueError, KeyError, TypeError y JSONDecodeError). Se rompe el contrato de INTEGRATION.md (errores como JSON por stderr), y el backend no podrá interpretar el error.",
       "pasos": "echo [] | python main.py --stdin",
       "esperado": "Código 1 y {\"error\": \"...\"} en stderr.",
@@ -76,8 +76,8 @@
         "CP-VAL-09",
         "CP-VAL-15"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan Infinity y NaN y la salida usa allow_nan=False. Re-prueba del 24/11/2026: CP-VAL-09 y CP-VAL-15 aprobados.",
       "descripcion": "json.load de Python acepta Infinity/NaN. NaN se rechaza, pero Infinity pasa la validación (inf ≥ 0) y la salida contiene 'average_study_minutes: Infinity', que no es JSON estándar: JSON.parse en Node falla.",
       "pasos": "Enviar study_minutes: Infinity por --stdin.",
       "esperado": "Rechazo con código 1 y mensaje de datos inválidos.",
@@ -97,8 +97,8 @@
       "casos": [
         "CP-VAL-07"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): ValueError claro para student_id y topic. Re-prueba del 24/11/2026: CP-VAL-07 aprobado.",
       "descripcion": "Los seis campos de interacción se validan con un mensaje claro, pero student_id y topic se leen con student_data['...']. Sin ellos se lanza KeyError y la CLI responde {\"error\": \"'topic'\"}.",
       "pasos": "process_student({'student_id': 1, 'interactions': [...]})",
       "esperado": "ValueError 'Faltan campos obligatorios: topic'.",
@@ -118,8 +118,8 @@
       "casos": [
         "CP-VAL-10"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan booleanos. Re-prueba del 24/11/2026: CP-VAL-10 aprobado.",
       "descripcion": "pd.to_numeric convierte booleanos en 1/0. score_percentage=true se interpreta como 1 % y genera una recomendación de refuerzo con datos que no son una puntuación.",
       "pasos": "Interacción con score_percentage: true.",
       "esperado": "ValueError de datos inválidos.",
@@ -139,8 +139,8 @@
       "casos": [
         "CP-VAL-11"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): los conteos deben ser enteros. Re-prueba del 24/11/2026: CP-VAL-11 aprobado.",
       "descripcion": "errors, attempts, repetitions y navigation_count son conteos, pero se aceptan decimales. total_errors usa int(), así que 2.7 se convierte en 2 sin avisar y puede cambiar la regla aplicada.",
       "pasos": "Interacción con errors: 2.7.",
       "esperado": "ValueError: los conteos deben ser enteros.",
@@ -184,7 +184,7 @@
         "CP-CRUD-07"
       ],
       "estado": "Pendiente de desarrollo",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Re-prueba del 24/11/2026: sigue pendiente.",
       "descripcion": "Existen dtos/user.dto.js (changeRoleDto) y el permiso users:change-role, pero ninguna ruta los usa. El CRUD de usuarios disponible es solo Crear (registro) y Leer (/me).",
       "pasos": "PATCH /api/users/:id/role y DELETE /api/users/:id",
       "esperado": "Endpoints protegidos por permiso.",
@@ -271,8 +271,8 @@
       "casos": [
         "CP-BE-10"
       ],
-      "estado": "Abierta",
-      "historial": "Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio). Re-prueba del 24/11/2026: CP-BE-10 aprobado (413 en español).",
       "descripcion": "En errorHandler.js el bloque de 'entity.too.large' quedó después de res.status(500) y de un return implícito, así que nunca se alcanza. Además el error de body-parser trae status 413 y entra antes por 'if (err.status)', devolviendo el mensaje interno en inglés.",
       "pasos": "POST /api/auth/login con un cuerpo JSON de más de 100 KB.",
       "esperado": "413 'El cuerpo de la petición es demasiado grande'.",
@@ -292,8 +292,8 @@
       "casos": [
         "CP-BE-09"
       ],
-      "estado": "Abierta",
-      "historial": "Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): contentRoutes ya no exige token a rutas inexistentes. Re-prueba del 24/11/2026: CP-BE-09 aprobado (404).",
       "descripcion": "app.use('/api', contentRoutes) monta un router con router.use(verifyToken) para TODO /api. Cualquier ruta que no exista, sin token, responde 401 'Token requerido' en vez de 404, lo que confunde al depurar el frontend.",
       "pasos": "GET /api/no-existe sin cabecera Authorization.",
       "esperado": "404 'Ruta no encontrada'.",

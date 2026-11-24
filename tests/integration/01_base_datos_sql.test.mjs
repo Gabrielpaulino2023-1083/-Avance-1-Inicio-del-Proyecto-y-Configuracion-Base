@@ -70,6 +70,8 @@ describe("Pruebas SQL existentes del repositorio", { skip: BLOCKED }, () => {
     ["CP-BD-08", "pruebas_migracion_007.sql", /PRUEBAS 007 COMPLETADAS/, "lectura de contenido del estudiante (007)"],
     ["CP-BD-09", "pruebas_migracion_008.sql", /PRUEBAS 008 COMPLETADAS/, "consultas de integración y motor (008)"],
     ["CP-BD-10", "pruebas_seed_integracion_resultados.sql", /PRUEBAS SEED INTEGRACION COMPLETADAS/, "seed DEMO-SQL-007"],
+    ["CP-BD-11", "pruebas_migracion_009.sql", /PRUEBAS 009 COMPLETADAS/, "dificultad y candidatas de actividades (009)"],
+    ["CP-BD-12", "pruebas_seed_dificultad_009.sql", /PRUEBAS SEED 009 COMPLETADAS/, "seed de dificultad 009"],
   ]) {
     test(`${id} ${titulo}`, () => {
       const { code, output } = runSql(archivo);
@@ -78,6 +80,17 @@ describe("Pruebas SQL existentes del repositorio", { skip: BLOCKED }, () => {
       assert.match(output, /ROLLBACK/);
     });
   }
+
+  test("CP-BD-13 selección de actividad por dificultad (pruebas_seleccion_009.cjs)", () => {
+    // Sin NODE_TEST_CONTEXT, el proceso hijo informa en texto normal (TAP) y no al runner de esta prueba.
+    const env = { ...process.env };
+    delete env.NODE_TEST_CONTEXT;
+    const r = spawnSync(process.execPath, ["--test", "--test-reporter=tap", path.join(DATABASE_DIR, "test", "pruebas_seleccion_009.cjs")], { encoding: "utf8", env });
+    ensureDir(LOGS_DIR);
+    fs.writeFileSync(path.join(LOGS_DIR, "pruebas_seleccion_009.log"), `${r.stdout}\n${r.stderr}`, "utf8");
+    assert.equal(r.status, 0, r.stdout.slice(-800));
+    assert.match(r.stdout, /# fail 0/);
+  });
 
   test("CP-BD-05 permisos del rol plataforma_backend", () => {
     const { code, output } = runSql("pruebas_permisos.sql");

@@ -6,12 +6,12 @@ Matriz de casos de prueba, pruebas automatizadas, evidencias e incidencias de to
 
 | Casos | Aprobados | Fallidos |  Bloqueados |
 |---:|---:|---:|---:|
-| 130 | 118 | 10 | 2 |
+| 147 | 145 | 0 | 2 |
 
 - **Fallido:** se ejecutó y encontró un defecto.
 - **Bloqueado:** todavía no se puede probar porque falta una integración (por ejemplo, un endpoint que no existe). No cuenta como fallo.
 
-Cubre autenticación, roles y permisos, CRUD de cursos, módulos y temas contra PostgreSQL, los tres escenarios del motor por la API, un recorrido visual completo, estudiante sin intentos, datos inválidos, errores del motor y desconexión del backend. Incluye las pruebas SQL de `database/test/` y las 6 pruebas del motor de `adaptive-engine/tests/`.
+Cubre autenticación, roles y permisos, CRUD de cursos, módulos y temas contra PostgreSQL, los tres escenarios del motor por la API, un recorrido visual completo, estudiante sin intentos, datos inválidos, errores del motor y desconexión del backend. Incluye las pruebas SQL de `database/test/` (001–009) y las 20 pruebas del motor de `adaptive-engine/tests/`.
 
 ## Dónde está cada cosa
 
@@ -47,7 +47,7 @@ Desde la carpeta `tests`:
 npm test
 ```
 
-Este comando crea la base de datos de pruebas (migraciones 001–008 y todos los seeds), ejecuta todas las pruebas y actualiza la matriz, el reporte y las incidencias. Tarda unos 3 minutos. La base de pruebas (`motor_adaptativo_qa`) es aparte: no toca tu base de desarrollo.
+Este comando crea la base de datos de pruebas (migraciones 001–009 y todos los seeds), ejecuta todas las pruebas y actualiza la matriz, el reporte y las incidencias. Tarda unos 3 minutos. La base de pruebas (`motor_adaptativo_qa`) es aparte: no toca tu base de desarrollo.
 
 Usa las cuentas demo documentadas en `database/README.md` (estudiante, docente y administrador).
 
@@ -59,7 +59,7 @@ Otras opciones:
 | `npm run test:unit` | Solo pruebas unitarias |
 | `npm run test:integration` | Solo pruebas de integración |
 | `npm run test:e2e` | Solo pruebas en el navegador |
-| `npm run test:motor-equipo` | Solo las 6 pruebas del motor de Daniel |
+| `npm run test:motor-equipo` | Solo las pruebas del motor de Daniel |
 
 ## Agregar o actualizar casos
 

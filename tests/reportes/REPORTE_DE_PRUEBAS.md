@@ -1,6 +1,6 @@
 # Reporte de pruebas — Motor de Aprendizaje Adaptativo — Grupo 4
 
-**Fecha de ejecución:** 17 de noviembre de 2026 a las 7:52 p. m. · **Duración:** 188 s · **Casos:** 130 · **Verificaciones automatizadas:** 202
+**Fecha de ejecución:** 24 de noviembre de 2026 a las 1:23 p. m. · **Duración:** 186 s · **Casos:** 147 · **Verificaciones automatizadas:** 219
 
 > Archivo generado automáticamente con `npm test` (carpeta `tests/`). No editarlo a mano.
 
@@ -8,10 +8,10 @@
 
 | Estado | Casos | % |
 |---|---:|---:|
-| ✅ APROBADO | 118 | 91 % |
-| ❌ FALLIDO | 10 | 8 % |
-| ⛔ BLOQUEADO | 2 | 2 % |
-| **Total** | **130** | 100 % |
+| ✅ APROBADO | 145 | 99 % |
+| ❌ FALLIDO | 0 | 0 % |
+| ⛔ BLOQUEADO | 2 | 1 % |
+| **Total** | **147** | 100 % |
 
 **Criterio:** un caso es BLOQUEADO cuando no puede ejecutarse por falta de integración (endpoint o pantalla pendiente). No se cuenta como fallo.
 
@@ -19,28 +19,28 @@
 
 | Requisito | Descripción | ✅ | ❌ | ⛔ | Casos |
 |---|---|---:|---:|---:|---|
-| RF-01 | Autenticación: registro, inicio y cierre de sesión | 16 | 1 | 0 | CP-LOG-01, CP-LOG-02, CP-LOG-03, CP-LOG-04, CP-LOG-05, CP-LOG-06, CP-LOG-07, CP-LOG-08, CP-LOG-09, CP-LOG-10, CP-LOG-11, CP-LOG-12, CP-UI-01, CP-UI-02, CP-UI-03, CP-UI-06, CP-UI-08 |
+| RF-01 | Autenticación: registro, inicio y cierre de sesión | 17 | 0 | 0 | CP-LOG-01, CP-LOG-02, CP-LOG-03, CP-LOG-04, CP-LOG-05, CP-LOG-06, CP-LOG-07, CP-LOG-08, CP-LOG-09, CP-LOG-10, CP-LOG-11, CP-LOG-12, CP-UI-01, CP-UI-02, CP-UI-03, CP-UI-06, CP-UI-08 |
 | RF-02 | Roles y permisos (estudiante, docente, administrador) | 9 | 0 | 0 | CP-ROL-01, CP-ROL-02, CP-ROL-03, CP-ROL-04, CP-ROL-05, CP-CRUD-04, CP-BE-06, CP-UI-05, CP-UI-18 |
 | RF-03 | Gestión de usuarios | 3 | 0 | 2 | CP-CRUD-01, CP-CRUD-02, CP-CRUD-05, CP-CRUD-06, CP-CRUD-07 |
 | RF-04 | CRUD de cursos (administrador) | 7 | 0 | 0 | CP-CUR-01, CP-CUR-02, CP-CUR-03, CP-CUR-04, CP-CUR-05, CP-CUR-06, CP-UI-16 |
 | RF-05 | CRUD de módulos y temas (docente/administrador) | 10 | 0 | 0 | CP-MT-01, CP-MT-02, CP-MT-03, CP-MT-04, CP-MT-05, CP-MT-06, CP-MT-07, CP-MT-08, CP-UI-17, CP-UI-19 |
 | RF-06 | Actividades, intentos y resultados del estudiante | 1 | 0 | 0 | CP-CRUD-09 |
-| RF-07 | Motor adaptativo: recomendaciones según desempeño | 29 | 0 | 0 | CP-MOTD-01, CP-MOTD-02, CP-MOTD-03, CP-MOTD-04, CP-MOTD-05, CP-MOTD-06, CP-MOT-01, CP-MOT-02, CP-MOT-03, CP-MOT-04, CP-MOT-05, CP-MOT-06, CP-MOT-07, CP-MOT-08, CP-MOT-09, CP-MOT-10, CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03, CP-ADP-04, CP-ADP-05, CP-ADP-06, CP-ADP-07, CP-ADP-08, CP-ADP-09, CP-UI-10, CP-UI-11, CP-UI-12 |
+| RF-07 | Motor adaptativo: recomendaciones según desempeño | 32 | 0 | 0 | CP-BD-13, CP-MOTD-01, CP-MOTD-02, CP-MOTD-03, CP-MOTD-04, CP-MOTD-05, CP-MOTD-06, CP-MOTD-16, CP-MOTD-17, CP-MOT-01, CP-MOT-02, CP-MOT-03, CP-MOT-04, CP-MOT-05, CP-MOT-06, CP-MOT-07, CP-MOT-08, CP-MOT-09, CP-MOT-10, CP-MOT-11, CP-ADP-01, CP-ADP-02, CP-ADP-03, CP-ADP-04, CP-ADP-05, CP-ADP-06, CP-ADP-07, CP-ADP-08, CP-ADP-09, CP-UI-10, CP-UI-11, CP-UI-12 |
 | RF-08 | Dashboard y progreso del estudiante | 4 | 0 | 0 | CP-CRUD-08, CP-UI-09, CP-UI-13, CP-UI-20 |
 | RF-09 | Persistencia de datos en PostgreSQL | 4 | 0 | 0 | CP-PER-01, CP-PER-02, CP-PER-03, CP-PER-04 |
 | RNF-01 | Seguridad (tokens, contraseñas, límites, datos sensibles) | 4 | 0 | 0 | CP-SEG-01, CP-SEG-02, CP-BE-03, CP-BE-05 |
-| RNF-02 | Validación de datos y manejo de errores | 19 | 9 | 0 | CP-CRUD-03, CP-VAL-01, CP-VAL-02, CP-VAL-03, CP-VAL-04, CP-VAL-05, CP-VAL-06, CP-VAL-07, CP-VAL-08, CP-VAL-09, CP-VAL-10, CP-VAL-11, CP-VAL-12, CP-VAL-13, CP-VAL-14, CP-VAL-15, CP-BE-01, CP-BE-02, CP-BE-04, CP-BE-07, CP-BE-09, CP-BE-10, CP-FE-01, CP-FE-02, CP-FE-03, CP-UI-04, CP-UI-14, CP-UI-15 |
+| RNF-02 | Validación de datos y manejo de errores | 40 | 0 | 0 | CP-CRUD-03, CP-MOTD-07, CP-MOTD-08, CP-MOTD-09, CP-MOTD-10, CP-MOTD-11, CP-MOTD-12, CP-MOTD-13, CP-MOTD-14, CP-MOTD-15, CP-MOTD-18, CP-MOTD-19, CP-MOTD-20, CP-VAL-01, CP-VAL-02, CP-VAL-03, CP-VAL-04, CP-VAL-05, CP-VAL-06, CP-VAL-07, CP-VAL-08, CP-VAL-09, CP-VAL-10, CP-VAL-11, CP-VAL-12, CP-VAL-13, CP-VAL-14, CP-VAL-15, CP-BE-01, CP-BE-02, CP-BE-04, CP-BE-07, CP-BE-09, CP-BE-10, CP-FE-01, CP-FE-02, CP-FE-03, CP-UI-04, CP-UI-14, CP-UI-15 |
 | RNF-03 | Usabilidad y navegación del frontend | 1 | 0 | 0 | CP-UI-07 |
-| RNF-04 | Integridad y reglas de la base de datos | 10 | 0 | 0 | CP-BD-01, CP-BD-02, CP-BD-03, CP-BD-04, CP-BD-05, CP-BD-06, CP-BD-07, CP-BD-08, CP-BD-09, CP-BD-10 |
+| RNF-04 | Integridad y reglas de la base de datos | 12 | 0 | 0 | CP-BD-01, CP-BD-02, CP-BD-03, CP-BD-04, CP-BD-05, CP-BD-06, CP-BD-07, CP-BD-08, CP-BD-09, CP-BD-10, CP-BD-11, CP-BD-12 |
 | RNF-05 | Documentación de la API (OpenAPI) | 1 | 0 | 0 | CP-BE-08 |
 
 ## Por módulo y responsable
 
 | Módulo | Responsable | ✅ | ❌ | ⛔ | Total |
 |---|---|---:|---:|---:|---:|
-| Backend / API | Porfirio Ramírez | 51 | 4 | 2 | 57 |
-| Base de datos | Jeison Rosario | 11 | 0 | 0 | 11 |
-| Motor adaptativo | Daniel Beltre | 34 | 6 | 0 | 40 |
+| Backend / API | Porfirio Ramírez | 55 | 0 | 2 | 57 |
+| Base de datos | Jeison Rosario | 14 | 0 | 0 | 14 |
+| Motor adaptativo | Daniel Beltre | 54 | 0 | 0 | 54 |
 | Frontend | Yuleidy De Los Santos | 22 | 0 | 0 | 22 |
 
 ## Re-pruebas de incidencias corregidas
@@ -48,28 +48,25 @@
 | Incidencia | Título | Estado | Resultado de la re-prueba |
 |---|---|---|---|
 | INC-01 | El backend no tiene CORS: el login real desde el navegador falla | Verificada | CP-UI-01: APROBADO |
+| INC-02 | JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido' | Verificada | CP-LOG-06: APROBADO, CP-BE-07: APROBADO |
+| INC-03 | Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error | Verificada | CP-VAL-14: APROBADO |
+| INC-04 | Motor: acepta Infinity y devuelve un JSON que Node no puede leer | Verificada | CP-VAL-09: APROBADO, CP-VAL-15: APROBADO |
+| INC-05 | Motor: falta de student_id o topic produce KeyError sin mensaje claro | Verificada | CP-VAL-07: APROBADO |
+| INC-06 | Motor: acepta true/false como números (true = 1 %) | Verificada | CP-VAL-10: APROBADO |
+| INC-07 | Motor: los conteos con decimales se truncan en silencio | Verificada | CP-VAL-11: APROBADO |
 | INC-08 | Dashboard y Progreso en modo real usan endpoints que no existen | Verificada | CP-CRUD-08: APROBADO |
 | INC-10 | Las operaciones académicas de la base de datos no están expuestas por HTTP | Verificada | CP-CRUD-09: APROBADO |
 | INC-11 | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Verificada | CP-MOT-11: APROBADO, CP-ADP-01: APROBADO, CP-ADP-02: APROBADO, CP-ADP-03: APROBADO |
 | INC-12 | Los ejercicios no envían tiempo, intentos ni errores al backend | Verificada | CP-UI-11: APROBADO |
+| INC-13 | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Verificada | CP-BE-10: APROBADO |
+| INC-14 | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Verificada | CP-BE-09: APROBADO |
 | INC-15 | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Verificada | CP-UI-13: APROBADO, CP-UI-20: APROBADO |
 | INC-16 | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Verificada | CP-UI-09: APROBADO |
 | INC-17 | El docente debe escribir el ID numérico del curso para gestionar contenido | Verificada | CP-UI-19: APROBADO |
 
 ## Casos fallidos
 
-| Caso | Requisito | Título | Incidencia | Responsable | Resultado real |
-|---|---|---|---|---|---|
-| [CP-LOG-06](#cp-log-06) | RF-01 | Login con JSON mal formado | INC-02 | Porfirio Ramírez | 400 { success:false, message:'Unexpected end of JSON input' } (ver INC-02) |
-| [CP-VAL-07](#cp-val-07) | RNF-02 | Falta student_id o topic | INC-05 | Daniel Beltre | KeyError('topic'). (ver INC-05) |
-| [CP-VAL-09](#cp-val-09) | RNF-02 | Valores infinitos (Infinity) o NaN | INC-04 | Daniel Beltre | Código 0 y salida con 'Infinity'. (ver INC-04) |
-| [CP-VAL-10](#cp-val-10) | RNF-02 | Valores booleanos en campos numéricos | INC-06 | Daniel Beltre | Se procesa con promedio 1.0 y acción reinforce_topic. (ver INC-06) |
-| [CP-VAL-11](#cp-val-11) | RNF-02 | Conteos con decimales (errores, intentos, repeticiones, navegación) | INC-07 | Daniel Beltre | total_errors = 2. (ver INC-07) |
-| [CP-VAL-14](#cp-val-14) | RNF-02 | CLI: JSON válido cuya raíz no es un objeto | INC-03 | Daniel Beltre | Traceback de Python: AttributeError: 'list' object has no attribute 'get'. (ver INC-03) |
-| [CP-VAL-15](#cp-val-15) | RNF-02 | CLI: Infinity en la entrada no rompe el JSON de salida | INC-04 | Daniel Beltre | Código 0 y salida con 'Infinity'. (ver INC-04) |
-| [CP-BE-07](#cp-be-07) | RNF-02 | errorHandler traduce cada tipo de error | INC-02 | Porfirio Ramírez | 400 { success:false, message:'Unexpected end of JSON input' } (ver INC-02) |
-| [CP-BE-09](#cp-be-09) | RNF-02 | Health check y ruta inexistente | INC-14 | Porfirio Ramírez | 401. (ver INC-14) |
-| [CP-BE-10](#cp-be-10) | RNF-02 | Cuerpo demasiado grande (413) | INC-13 | Porfirio Ramírez | 413 'request entity too large'. (ver INC-13) |
+Ninguno.
 
 ## Casos bloqueados
 
@@ -85,19 +82,19 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 | ID | Título | Tipo | Severidad | Responsable | Estado |
 |---|---|---|---|---|---|
 | INC-01 | El backend no tiene CORS: el login real desde el navegador falla | Defecto | Alta | Porfirio Ramírez | Verificada |
-| INC-02 | JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido' | Defecto | Baja | Porfirio Ramírez | Abierta |
-| INC-03 | Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error | Defecto | Media | Daniel Beltre | Abierta |
-| INC-04 | Motor: acepta Infinity y devuelve un JSON que Node no puede leer | Defecto | Media | Daniel Beltre | Abierta |
-| INC-05 | Motor: falta de student_id o topic produce KeyError sin mensaje claro | Defecto | Baja | Daniel Beltre | Abierta |
-| INC-06 | Motor: acepta true/false como números (true = 1 %) | Defecto | Baja | Daniel Beltre | Abierta |
-| INC-07 | Motor: los conteos con decimales se truncan en silencio | Defecto | Baja | Daniel Beltre | Abierta |
+| INC-02 | JSON mal formado devuelve un mensaje técnico en inglés en vez de 'JSON inválido' | Defecto | Baja | Porfirio Ramírez | Verificada |
+| INC-03 | Motor: si el JSON no es un objeto, Python termina con traceback y no con JSON de error | Defecto | Media | Daniel Beltre | Verificada |
+| INC-04 | Motor: acepta Infinity y devuelve un JSON que Node no puede leer | Defecto | Media | Daniel Beltre | Verificada |
+| INC-05 | Motor: falta de student_id o topic produce KeyError sin mensaje claro | Defecto | Baja | Daniel Beltre | Verificada |
+| INC-06 | Motor: acepta true/false como números (true = 1 %) | Defecto | Baja | Daniel Beltre | Verificada |
+| INC-07 | Motor: los conteos con decimales se truncan en silencio | Defecto | Baja | Daniel Beltre | Verificada |
 | INC-08 | Dashboard y Progreso en modo real usan endpoints que no existen | Integración pendiente | Alta | Porfirio Ramírez (endpoints) y Yuleidy De Los Santos (pantalla) | Verificada |
 | INC-09 | No hay endpoints para listar, actualizar, cambiar el rol ni eliminar usuarios | Integración pendiente | Media | Porfirio Ramírez | Pendiente de desarrollo |
 | INC-10 | Las operaciones académicas de la base de datos no están expuestas por HTTP | Integración pendiente | Media | Porfirio Ramírez y Jeison Rosario | Verificada |
 | INC-11 | El backend todavía no llama al motor adaptativo (POST /api/adaptive/analyze) | Integración pendiente | Alta | Porfirio Ramírez y Daniel Beltre | Verificada |
 | INC-12 | Los ejercicios no envían tiempo, intentos ni errores al backend | Integración pendiente | Media | Yuleidy De Los Santos y Porfirio Ramírez | Verificada |
-| INC-13 | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Abierta |
-| INC-14 | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Abierta |
+| INC-13 | Cuerpo demasiado grande responde en inglés y su rama 413 nunca se ejecuta | Defecto | Baja | Porfirio Ramírez | Verificada |
+| INC-14 | Rutas inexistentes bajo /api responden 401 en lugar de 404 | Defecto | Baja | Porfirio Ramírez | Verificada |
 | INC-15 | El Dashboard se rompe cuando no hay recomendación (estudiante sin intentos o motor caído) | Defecto | Alta | Yuleidy De Los Santos | Verificada |
 | INC-16 | El Dashboard real se marca como 'Datos de ejemplo' y la actividad reciente es simulada | Defecto | Media | Yuleidy De Los Santos | Verificada |
 | INC-17 | El docente debe escribir el ID numérico del curso para gestionar contenido | Integración pendiente | Media | Yuleidy De Los Santos | Verificada |
@@ -171,7 +168,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-LOG-06
 
-**❌ FALLIDO** — Login con JSON mal formado
+**✅ APROBADO** — Login con JSON mal formado
 
 - **Requisito:** RF-01 — Autenticación: registro, inicio y cierre de sesión
 - **Módulo / área:** Backend / API · Login · Integración · prioridad Media
@@ -179,8 +176,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** POST /api/auth/login con un cuerpo que no es JSON válido.
 - **Datos:** {"email": 
 - **Resultado esperado:** 400 'JSON inválido' (no 500).
-- **Resultado real:** 400 { success:false, message:'Unexpected end of JSON input' } (ver INC-02)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-02
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 
@@ -838,6 +834,45 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Resultado real:** Coincide con el esperado.
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 
+### CP-BD-11
+
+**✅ APROBADO** — Pruebas de la migración 009 (dificultad y candidatas)
+
+- **Requisito:** RNF-04 — Integridad y reglas de la base de datos
+- **Módulo / área:** Base de datos · Pruebas SQL del equipo · SQL · prioridad Media
+- **Responsable:** Jeison Rosario
+- **Pasos:** Ejecutar database/test/pruebas_migracion_009.sql sobre la base de QA.
+- **Datos:** Seeds del repositorio
+- **Resultado esperado:** 'OK 009' y 'PRUEBAS 009 COMPLETADAS'.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
+
+### CP-BD-12
+
+**✅ APROBADO** — Pruebas del seed de dificultad 009
+
+- **Requisito:** RNF-04 — Integridad y reglas de la base de datos
+- **Módulo / área:** Base de datos · Pruebas SQL del equipo · SQL · prioridad Media
+- **Responsable:** Jeison Rosario
+- **Pasos:** Ejecutar database/test/pruebas_seed_dificultad_009.sql sobre la base de QA.
+- **Datos:** Seeds del repositorio
+- **Resultado esperado:** 'PRUEBAS SEED 009 COMPLETADAS'.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
+
+### CP-BD-13
+
+**✅ APROBADO** — Selección de actividad según el ajuste del motor (ejemplo JS de la 009)
+
+- **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
+- **Módulo / área:** Base de datos · Pruebas SQL del equipo · Unitaria · prioridad Media
+- **Responsable:** Jeison Rosario
+- **Pasos:** Ejecutar database/test/pruebas_seleccion_009.cjs sobre la base de QA.
+- **Datos:** Seeds del repositorio
+- **Resultado esperado:** node --test sin fallos: reduced→BAJA, current→MEDIA, increased→ALTA, límites y empates.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
+
 ### CP-MOTD-01
 
 **✅ APROBADO** — Prueba de Daniel: rendimiento bajo
@@ -913,6 +948,188 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** test_engine.py::test_missing_required_field
 - **Datos:** sin navigation_count
 - **Resultado esperado:** ValueError.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-07
+
+**✅ APROBADO** — Prueba de Daniel: json raíz que no es un objeto
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_invalid_json_root
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError (corrige INC-03).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-08
+
+**✅ APROBADO** — Prueba de Daniel: interactions con estructura inválida
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_invalid_interactions_structure
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-09
+
+**✅ APROBADO** — Prueba de Daniel: elemento de interactions que no es objeto
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_invalid_interaction_item
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-10
+
+**✅ APROBADO** — Prueba de Daniel: valores infinity
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_infinity_values
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError (corrige INC-04).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-11
+
+**✅ APROBADO** — Prueba de Daniel: valores nan
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_nan_values
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-12
+
+**✅ APROBADO** — Prueba de Daniel: falta student_id
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_missing_student_id
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError claro (corrige INC-05).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-13
+
+**✅ APROBADO** — Prueba de Daniel: falta topic
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_missing_topic
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError claro (corrige INC-05).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-14
+
+**✅ APROBADO** — Prueba de Daniel: booleanos en campos numéricos
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_boolean_numeric_fields
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError (corrige INC-06).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-15
+
+**✅ APROBADO** — Prueba de Daniel: decimales en conteos
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_decimal_integer_fields
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** ValueError (corrige INC-07).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-16
+
+**✅ APROBADO** — Prueba de Daniel: decimales válidos en minutos y puntuación
+
+- **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_valid_decimal_fields
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** Se aceptan y procesan.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-17
+
+**✅ APROBADO** — Prueba de Daniel: cli con json válido
+
+- **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_cli_valid_json
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** Código 0 y JSON en stdout.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-18
+
+**✅ APROBADO** — Prueba de Daniel: cli con raíz json inválida
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_cli_invalid_json_root
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** Código 1 y error JSON en stderr.
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-19
+
+**✅ APROBADO** — Prueba de Daniel: cli con infinity/nan
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_cli_invalid_constants
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** Código 1 y error JSON (sin Infinity en la salida).
+- **Resultado real:** Coincide con el esperado.
+- **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
+
+### CP-MOTD-20
+
+**✅ APROBADO** — Prueba de Daniel: cli con json mal formado
+
+- **Requisito:** RNF-02 — Validación de datos y manejo de errores
+- **Módulo / área:** Motor adaptativo · Pruebas del motor (Daniel) · Unitaria · prioridad Media
+- **Responsable:** Daniel Beltre
+- **Pasos:** adaptive-engine/tests/test_engine.py::test_cli_malformed_json
+- **Datos:** Datos de la prueba
+- **Resultado esperado:** Código 1 y error JSON en stderr.
 - **Resultado real:** Coincide con el esperado.
 - **Evidencia:** [02b_pruebas_motor_daniel.log](../evidencias/logs/02b_pruebas_motor_daniel.log)
 
@@ -1139,9 +1356,9 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Requisito:** RF-07 — Motor adaptativo: recomendaciones según desempeño
 - **Módulo / área:** Motor adaptativo · Escenarios por API · Integración · prioridad Alta
 - **Responsable:** Daniel Beltre
-- **Pasos:** GET /api/students/:id/progress.
-- **Datos:** Cuenta demo
-- **Resultado esperado:** Recomendación SQL JOIN, reinforce_topic, prioridad alta.
+- **Pasos:** GET /api/students/:id/progress y comparar con el tema de menor promedio calculado en PostgreSQL.
+- **Datos:** Cuenta demo (incluye el tema 'SQL JOIN (demo dificultad)' del seed 009)
+- **Resultado esperado:** Recomienda el tema con menor promedio real, con reinforce_topic y prioridad alta.
 - **Resultado real:** Coincide con el esperado.
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 
@@ -1255,7 +1472,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Responsable:** Daniel Beltre
 - **Pasos:** Enviar 'abc', '', None y listas en campos numéricos.
 - **Datos:** score_percentage='abc', errors=None…
-- **Resultado esperado:** ValueError 'Los datos deben ser numéricos y válidos.'
+- **Resultado esperado:** ValueError que indica que el valor debe ser numérico.
 - **Resultado real:** Coincide con el esperado. 5 verificaciones aprobadas.
 - **Evidencia:** [02_unitarias_motor.log](../evidencias/logs/02_unitarias_motor.log)
 - **Verificaciones (5):**
@@ -1301,7 +1518,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-VAL-07
 
-**❌ FALLIDO** — Falta student_id o topic
+**✅ APROBADO** — Falta student_id o topic
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Unitaria · prioridad Media
@@ -1309,13 +1526,12 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** process_student sin student_id y sin topic.
 - **Datos:** {topic, interactions} / {student_id, interactions}
 - **Resultado esperado:** ValueError con mensaje claro que nombre el campo (igual que los demás campos obligatorios).
-- **Resultado real:** KeyError('topic'). (ver INC-05)
-- **Detalle técnico:** 2 de 2 verificaciones fallaron. KeyError: 'student_id'
+- **Resultado real:** Coincide con el esperado. 2 verificaciones aprobadas.
 - **Incidencias:** INC-05
 - **Evidencia:** [02_unitarias_motor.log](../evidencias/logs/02_unitarias_motor.log)
 - **Verificaciones (2):**
-  - ❌ `test_CP_VAL_07_falta_student_id_o_topic[student_id]`
-  - ❌ `test_CP_VAL_07_falta_student_id_o_topic[topic]`
+  - ✅ `test_CP_VAL_07_falta_student_id_o_topic[student_id]`
+  - ✅ `test_CP_VAL_07_falta_student_id_o_topic[topic]`
 
 ### CP-VAL-08
 
@@ -1336,7 +1552,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-VAL-09
 
-**❌ FALLIDO** — Valores infinitos (Infinity) o NaN
+**✅ APROBADO** — Valores infinitos (Infinity) o NaN
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Unitaria · prioridad Media
@@ -1344,18 +1560,17 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Enviar float('inf') y float('nan') en campos numéricos.
 - **Datos:** study_minutes=inf, score=nan
 - **Resultado esperado:** ValueError: no son datos válidos.
-- **Resultado real:** Código 0 y salida con 'Infinity'. (ver INC-04)
-- **Detalle técnico:** 2 de 3 verificaciones fallaron. Failed: DID NOT RAISE ValueError
+- **Resultado real:** Coincide con el esperado. 3 verificaciones aprobadas.
 - **Incidencias:** INC-04
 - **Evidencia:** [02_unitarias_motor.log](../evidencias/logs/02_unitarias_motor.log)
 - **Verificaciones (3):**
-  - ❌ `test_CP_VAL_09_infinito_o_nan_se_rechazan[study_minutes-inf]`
+  - ✅ `test_CP_VAL_09_infinito_o_nan_se_rechazan[study_minutes-inf]`
   - ✅ `test_CP_VAL_09_infinito_o_nan_se_rechazan[score_percentage-nan]`
-  - ❌ `test_CP_VAL_09_infinito_o_nan_se_rechazan[navigation_count-inf]`
+  - ✅ `test_CP_VAL_09_infinito_o_nan_se_rechazan[navigation_count-inf]`
 
 ### CP-VAL-10
 
-**❌ FALLIDO** — Valores booleanos en campos numéricos
+**✅ APROBADO** — Valores booleanos en campos numéricos
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Unitaria · prioridad Baja
@@ -1363,17 +1578,16 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Enviar true/false en score_percentage y errors.
 - **Datos:** score_percentage=True
 - **Resultado esperado:** ValueError (true no es una puntuación).
-- **Resultado real:** Se procesa con promedio 1.0 y acción reinforce_topic. (ver INC-06)
-- **Detalle técnico:** 2 de 2 verificaciones fallaron. Failed: DID NOT RAISE ValueError
+- **Resultado real:** Coincide con el esperado. 2 verificaciones aprobadas.
 - **Incidencias:** INC-06
 - **Evidencia:** [02_unitarias_motor.log](../evidencias/logs/02_unitarias_motor.log)
 - **Verificaciones (2):**
-  - ❌ `test_CP_VAL_10_booleanos_se_rechazan[score_percentage]`
-  - ❌ `test_CP_VAL_10_booleanos_se_rechazan[errors]`
+  - ✅ `test_CP_VAL_10_booleanos_se_rechazan[score_percentage]`
+  - ✅ `test_CP_VAL_10_booleanos_se_rechazan[errors]`
 
 ### CP-VAL-11
 
-**❌ FALLIDO** — Conteos con decimales (errores, intentos, repeticiones, navegación)
+**✅ APROBADO** — Conteos con decimales (errores, intentos, repeticiones, navegación)
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Unitaria · prioridad Baja
@@ -1381,15 +1595,14 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Enviar errors=2.7.
 - **Datos:** errors=2.7
 - **Resultado esperado:** ValueError: los conteos deben ser enteros (hoy se truncan en silencio).
-- **Resultado real:** total_errors = 2. (ver INC-07)
-- **Detalle técnico:** 4 de 4 verificaciones fallaron. Failed: DID NOT RAISE ValueError
+- **Resultado real:** Coincide con el esperado. 4 verificaciones aprobadas.
 - **Incidencias:** INC-07
 - **Evidencia:** [02_unitarias_motor.log](../evidencias/logs/02_unitarias_motor.log)
 - **Verificaciones (4):**
-  - ❌ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[errors]`
-  - ❌ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[attempts]`
-  - ❌ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[repetitions]`
-  - ❌ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[navigation_count]`
+  - ✅ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[errors]`
+  - ✅ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[attempts]`
+  - ✅ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[repetitions]`
+  - ✅ `test_CP_VAL_11_conteos_con_decimales_se_rechazan[navigation_count]`
 
 ### CP-VAL-12
 
@@ -1419,7 +1632,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-VAL-14
 
-**❌ FALLIDO** — CLI: JSON válido cuya raíz no es un objeto
+**✅ APROBADO** — CLI: JSON válido cuya raíz no es un objeto
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Integración · prioridad Media
@@ -1427,19 +1640,18 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Enviar [], "texto", 5 y null a main.py --stdin.
 - **Datos:** [] / "x" / 5 / null
 - **Resultado esperado:** Código 1 y {"error": ...} en stderr (sin traceback de Python).
-- **Resultado real:** Traceback de Python: AttributeError: 'list' object has no attribute 'get'. (ver INC-03)
-- **Detalle técnico:** 4 de 4 verificaciones fallaron. main() ~~~~^^ File "/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py", line 20[Actual message: "Unexpected token 'T', "Traceback "... is not valid JSON""> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File "/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py", line 47, in <module> main() ~~~~^^ File "/home/claude/v3/proyecto-gr
+- **Resultado real:** Coincide con el esperado. 4 verificaciones aprobadas.
 - **Incidencias:** INC-03
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 - **Verificaciones (4):**
-  - ❌ `CP-VAL-14 CLI con raíz JSON que no es objeto: []`
-  - ❌ `CP-VAL-14 CLI con raíz JSON que no es objeto: "texto"`
-  - ❌ `CP-VAL-14 CLI con raíz JSON que no es objeto: 5`
-  - ❌ `CP-VAL-14 CLI con raíz JSON que no es objeto: null`
+  - ✅ `CP-VAL-14 CLI con raíz JSON que no es objeto: []`
+  - ✅ `CP-VAL-14 CLI con raíz JSON que no es objeto: "texto"`
+  - ✅ `CP-VAL-14 CLI con raíz JSON que no es objeto: 5`
+  - ✅ `CP-VAL-14 CLI con raíz JSON que no es objeto: null`
 
 ### CP-VAL-15
 
-**❌ FALLIDO** — CLI: Infinity en la entrada no rompe el JSON de salida
+**✅ APROBADO** — CLI: Infinity en la entrada no rompe el JSON de salida
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Motor adaptativo · Datos vacíos e incorrectos · Integración · prioridad Media
@@ -1447,8 +1659,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** Enviar study_minutes: Infinity (Python lo acepta al leer).
 - **Datos:** study_minutes: Infinity
 - **Resultado esperado:** Rechazo con código 1, o salida que JSON.parse de Node pueda leer.
-- **Resultado real:** Código 0 y salida con 'Infinity'. (ver INC-04)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. Got unwanted exception: Node no puede leer la salida:{"profile": {"student_id": 1, "topic": "SQL JOIN", "average_score": 75.0, "total_errors": 2, "average_attempts": 2.0, "total_repetitions": 1, "average_study_minutes": Infinity, "total_interactions": 1Actual message: "Unexpected token 'I', ..."minutes": Infinity, "... is not valid JSON"
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-04
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 
@@ -1562,7 +1773,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-BE-07
 
-**❌ FALLIDO** — errorHandler traduce cada tipo de error
+**✅ APROBADO** — errorHandler traduce cada tipo de error
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Backend / API · Errores · Unitaria · prioridad Media
@@ -1570,13 +1781,12 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** AppError, JSON inválido, código 23505 y error inesperado.
 - **Datos:** —
 - **Resultado esperado:** status propio, 400, 409 y 500 sin filtrar detalles internos.
-- **Resultado real:** 400 { success:false, message:'Unexpected end of JSON input' } (ver INC-02)
-- **Detalle técnico:** 1 de 5 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'
+- **Resultado real:** Coincide con el esperado. 5 verificaciones aprobadas.
 - **Incidencias:** INC-02
 - **Evidencia:** [01_unitarias_node.log](../evidencias/logs/01_unitarias_node.log)
 - **Verificaciones (5):**
   - ✅ `CP-BE-07 AppError conserva su status, mensaje y details`
-  - ❌ `CP-BE-07 JSON inválido → 400 'JSON inválido'`
+  - ✅ `CP-BE-07 JSON inválido → 400 'JSON inválido'`
   - ✅ `CP-BE-07 violación de unicidad de PostgreSQL (23505) → 409`
   - ✅ `CP-BE-07 error inesperado → 500 sin filtrar el detalle interno`
   - ✅ `CP-BE-07 notFound → 404 JSON`
@@ -1596,7 +1806,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 
 ### CP-BE-09
 
-**❌ FALLIDO** — Health check y ruta inexistente
+**✅ APROBADO** — Health check y ruta inexistente
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Backend / API · Errores · Integración · prioridad Baja
@@ -1604,14 +1814,13 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** GET /api/health y GET /api/no-existe.
 - **Datos:** —
 - **Resultado esperado:** 200 {status:'ok'}; una ruta que no existe responde 404 JSON 'Ruta no encontrada' (también sin token).
-- **Resultado real:** 401. (ver INC-14)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. respondió 401: Token requerido401 !== 404
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-14
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 
 ### CP-BE-10
 
-**❌ FALLIDO** — Cuerpo demasiado grande (413)
+**✅ APROBADO** — Cuerpo demasiado grande (413)
 
 - **Requisito:** RNF-02 — Validación de datos y manejo de errores
 - **Módulo / área:** Backend / API · Errores · Integración · prioridad Baja
@@ -1619,8 +1828,7 @@ Detalle completo con pasos de reproducción en [`tests/INCIDENCIAS.md`](../INCID
 - **Pasos:** POST /api/auth/login con un cuerpo de más de 100 KB.
 - **Datos:** email de 200.000 caracteres
 - **Resultado esperado:** 413 con el mensaje en español 'El cuerpo de la petición es demasiado grande'.
-- **Resultado real:** 413 'request entity too large'. (ver INC-13)
-- **Detalle técnico:** 1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'request entity too large'- 'El cuerpo de la petición es demasiado grande'
+- **Resultado real:** Coincide con el esperado.
 - **Incidencias:** INC-13
 - **Evidencia:** [03_integracion.log](../evidencias/logs/03_integracion.log)
 

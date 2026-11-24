@@ -1,0 +1,13 @@
+BEGIN
+SET
+SET
+         set_config          
+-----------------------------
+ estudiante.demo@example.com
+(1 row)
+
+SET
+DO
+ROLLBACK
+
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_seed_dificultad_009.sql:43: NOTICE:  PRUEBAS SEED 009 COMPLETADAS: referencia, niveles, lectura y candidatas.

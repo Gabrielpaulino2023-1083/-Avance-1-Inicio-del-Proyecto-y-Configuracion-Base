@@ -1,6 +1,6 @@
 // Crea desde cero la base de QA usando SOLO los archivos del repositorio,
 // en el orden que indica database/README.md (sección 4):
-//   001 → 002 → 003 → security/001 → 004 → 005 → 006 → 007 → 008 → seeds.
+//   001 → 002 → 003 → security/001 → 004 → 005 → 006 → 007 → 008 → 009 → seeds.
 //
 // Uso:  npm run preparar-bd
 // Requiere psql en el PATH y la cuenta administrativa de tests/.env.test.
@@ -65,6 +65,7 @@ try {
     "migrations/006_crud_modulos_temas.sql",
     "migrations/007_lectura_contenido_estudiantes.sql",
     "migrations/008_consultas_integracion.sql",
+    "migrations/009_dificultad_candidatas.sql",
     "seeds/datos_prueba.sql",
     "seeds/datos_prueba_modulos_temas.sql",
   ];
@@ -87,6 +88,11 @@ try {
   step("Aplicando database/seeds/datos_prueba_integracion_resultados.sql (curso DEMO-SQL-007)");
   psql(["-f", path.join(DATABASE_DIR, "seeds/datos_prueba_integracion_resultados.sql")], {
     label: "seeds/datos_prueba_integracion_resultados.sql",
+  });
+
+  step("Aplicando database/seeds/datos_prueba_dificultad_009.sql (dificultad de actividades)");
+  psql(["-f", path.join(DATABASE_DIR, "seeds/datos_prueba_dificultad_009.sql")], {
+    label: "seeds/datos_prueba_dificultad_009.sql",
   });
 
   if (config.appUser !== config.adminUser) {

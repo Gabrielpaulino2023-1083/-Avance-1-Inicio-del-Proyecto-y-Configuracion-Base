@@ -69,10 +69,19 @@ describe("Tres escenarios adaptativos por la API", { skip: BLOCKED }, () => {
   });
 
   test("CP-ADP-05 el Dashboard (progreso) recomienda reforzar el tema más débil", async () => {
+    // El tema más débil se calcula en PostgreSQL: menor promedio de intentos calificados.
+    const { rows } = await srv.admin.query(
+      `SELECT t.nombre, AVG(it.puntaje_obtenido * 100.0 / it.puntaje_maximo) AS p
+       FROM intentos it
+       JOIN actividades a ON a.id = it.actividad_id
+       JOIN temas t ON t.id = a.tema_id
+       JOIN inscripciones i ON i.id = it.inscripcion_id
+       WHERE i.estudiante_id = $1 AND it.estado = 'CALIFICADO'
+       GROUP BY t.nombre ORDER BY p ASC`, [E.user.id]);
     const r = await srv.api("GET", `/api/students/${E.user.id}/progress`, { token: E.token });
     assert.equal(r.status, 200);
     const rec = r.data.progress.recomendacion;
-    assert.equal(rec.tema, "SQL JOIN");
+    assert.equal(rec.tema, rows[0].nombre, `el tema con menor promedio es ${rows[0].nombre}`);
     assert.equal(rec.accion, "reinforce_topic");
     assert.equal(rec.prioridad, "alta");
   });

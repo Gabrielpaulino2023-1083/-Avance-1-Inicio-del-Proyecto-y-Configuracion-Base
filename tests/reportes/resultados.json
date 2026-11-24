@@ -1,29 +1,29 @@
 {
-  "generado": "2026-11-17T23:52:57.046Z",
+  "generado": "2026-11-24T17:23:46.212Z",
   "resumen": {
-    "total": 130,
-    "APROBADO": 118,
-    "FALLIDO": 10,
+    "total": 147,
+    "APROBADO": 145,
+    "FALLIDO": 0,
     "BLOQUEADO": 2
   },
   "porModulo": {
     "Backend / API": {
-      "APROBADO": 51,
-      "FALLIDO": 4,
+      "APROBADO": 55,
+      "FALLIDO": 0,
       "BLOQUEADO": 2,
       "total": 57
     },
     "Base de datos": {
-      "APROBADO": 11,
+      "APROBADO": 14,
       "FALLIDO": 0,
       "BLOQUEADO": 0,
-      "total": 11
+      "total": 14
     },
     "Motor adaptativo": {
-      "APROBADO": 34,
-      "FALLIDO": 6,
+      "APROBADO": 54,
+      "FALLIDO": 0,
       "BLOQUEADO": 0,
-      "total": 40
+      "total": 54
     },
     "Frontend": {
       "APROBADO": 22,
@@ -34,8 +34,8 @@
   },
   "porRequisito": {
     "RF-01": {
-      "APROBADO": 16,
-      "FALLIDO": 1,
+      "APROBADO": 17,
+      "FALLIDO": 0,
       "BLOQUEADO": 0,
       "total": 17,
       "casos": [
@@ -101,12 +101,24 @@
       ]
     },
     "RNF-02": {
-      "APROBADO": 19,
-      "FALLIDO": 9,
+      "APROBADO": 40,
+      "FALLIDO": 0,
       "BLOQUEADO": 0,
-      "total": 28,
+      "total": 40,
       "casos": [
         "CP-CRUD-03",
+        "CP-MOTD-07",
+        "CP-MOTD-08",
+        "CP-MOTD-09",
+        "CP-MOTD-10",
+        "CP-MOTD-11",
+        "CP-MOTD-12",
+        "CP-MOTD-13",
+        "CP-MOTD-14",
+        "CP-MOTD-15",
+        "CP-MOTD-18",
+        "CP-MOTD-19",
+        "CP-MOTD-20",
         "CP-VAL-01",
         "CP-VAL-02",
         "CP-VAL-03",
@@ -203,10 +215,10 @@
       ]
     },
     "RNF-04": {
-      "APROBADO": 10,
+      "APROBADO": 12,
       "FALLIDO": 0,
       "BLOQUEADO": 0,
-      "total": 10,
+      "total": 12,
       "casos": [
         "CP-BD-01",
         "CP-BD-02",
@@ -217,21 +229,26 @@
         "CP-BD-07",
         "CP-BD-08",
         "CP-BD-09",
-        "CP-BD-10"
+        "CP-BD-10",
+        "CP-BD-11",
+        "CP-BD-12"
       ]
     },
     "RF-07": {
-      "APROBADO": 29,
+      "APROBADO": 32,
       "FALLIDO": 0,
       "BLOQUEADO": 0,
-      "total": 29,
+      "total": 32,
       "casos": [
+        "CP-BD-13",
         "CP-MOTD-01",
         "CP-MOTD-02",
         "CP-MOTD-03",
         "CP-MOTD-04",
         "CP-MOTD-05",
         "CP-MOTD-06",
+        "CP-MOTD-16",
+        "CP-MOTD-17",
         "CP-MOT-01",
         "CP-MOT-02",
         "CP-MOT-03",
@@ -276,7 +293,7 @@
       ]
     }
   },
-  "totalPruebasAutomatizadas": 202,
+  "totalPruebasAutomatizadas": 219,
   "casos": [
     {
       "id": "CP-LOG-01",
@@ -430,8 +447,8 @@
       "datos": "{\"email\": ",
       "esperado": "400 'JSON inválido' (no 500).",
       "responsable": "Porfirio Ramírez",
-      "estado": "FALLIDO",
-      "motivo": "1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+      "estado": "APROBADO",
+      "motivo": "",
       "incidencias": [
         "INC-02"
       ],
@@ -442,8 +459,8 @@
       "pruebas": [
         {
           "prueba": "CP-LOG-06 login con JSON mal formado",
-          "status": "fail",
-          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         }
       ]
@@ -1857,6 +1874,90 @@
       ]
     },
     {
+      "id": "CP-BD-11",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Media",
+      "titulo": "Pruebas de la migración 009 (dificultad y candidatas)",
+      "pasos": "Ejecutar database/test/pruebas_migracion_009.sql sobre la base de QA.",
+      "datos": "Seeds del repositorio",
+      "esperado": "'OK 009' y 'PRUEBAS 009 COMPLETADAS'.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-11 dificultad y candidatas de actividades (009)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-12",
+      "requisito": "RNF-04",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "SQL",
+      "prioridad": "Media",
+      "titulo": "Pruebas del seed de dificultad 009",
+      "pasos": "Ejecutar database/test/pruebas_seed_dificultad_009.sql sobre la base de QA.",
+      "datos": "Seeds del repositorio",
+      "esperado": "'PRUEBAS SEED 009 COMPLETADAS'.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-12 seed de dificultad 009",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-BD-13",
+      "requisito": "RF-07",
+      "modulo": "Base de datos",
+      "area": "Pruebas SQL del equipo",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Selección de actividad según el ajuste del motor (ejemplo JS de la 009)",
+      "pasos": "Ejecutar database/test/pruebas_seleccion_009.cjs sobre la base de QA.",
+      "datos": "Seeds del repositorio",
+      "esperado": "node --test sin fallos: reduced→BAJA, current→MEDIA, increased→ALTA, límites y empates.",
+      "responsable": "Jeison Rosario",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/03_integracion.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "CP-BD-13 selección de actividad por dificultad (pruebas_seleccion_009.cjs)",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "integration.xml"
+        }
+      ]
+    },
+    {
       "id": "CP-MOTD-01",
       "requisito": "RF-07",
       "modulo": "Motor adaptativo",
@@ -2024,6 +2125,412 @@
       "pruebas": [
         {
           "prueba": "test_missing_required_field",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-07",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: json raíz que no es un objeto",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_invalid_json_root",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError (corrige INC-03).",
+      "prueba_externa": "test_invalid_json_root",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_invalid_json_root",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-08",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: interactions con estructura inválida",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_invalid_interactions_structure",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_invalid_interactions_structure",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_invalid_interactions_structure",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-09",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: elemento de interactions que no es objeto",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_invalid_interaction_item",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_invalid_interaction_item",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_invalid_interaction_item",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-10",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: valores infinity",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_infinity_values",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError (corrige INC-04).",
+      "prueba_externa": "test_infinity_values",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_infinity_values",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-11",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: valores nan",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_nan_values",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError.",
+      "prueba_externa": "test_nan_values",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_nan_values",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-12",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: falta student_id",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_missing_student_id",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError claro (corrige INC-05).",
+      "prueba_externa": "test_missing_student_id",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_missing_student_id",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-13",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: falta topic",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_missing_topic",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError claro (corrige INC-05).",
+      "prueba_externa": "test_missing_topic",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_missing_topic",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-14",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: booleanos en campos numéricos",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_boolean_numeric_fields",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError (corrige INC-06).",
+      "prueba_externa": "test_boolean_numeric_fields",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_boolean_numeric_fields",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-15",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: decimales en conteos",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_decimal_integer_fields",
+      "datos": "Datos de la prueba",
+      "esperado": "ValueError (corrige INC-07).",
+      "prueba_externa": "test_decimal_integer_fields",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_decimal_integer_fields",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-16",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: decimales válidos en minutos y puntuación",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_valid_decimal_fields",
+      "datos": "Datos de la prueba",
+      "esperado": "Se aceptan y procesan.",
+      "prueba_externa": "test_valid_decimal_fields",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_valid_decimal_fields",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-17",
+      "requisito": "RF-07",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: cli con json válido",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_cli_valid_json",
+      "datos": "Datos de la prueba",
+      "esperado": "Código 0 y JSON en stdout.",
+      "prueba_externa": "test_cli_valid_json",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_cli_valid_json",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-18",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: cli con raíz json inválida",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_cli_invalid_json_root",
+      "datos": "Datos de la prueba",
+      "esperado": "Código 1 y error JSON en stderr.",
+      "prueba_externa": "test_cli_invalid_json_root",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_cli_invalid_json_root",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-19",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: cli con infinity/nan",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_cli_invalid_constants",
+      "datos": "Datos de la prueba",
+      "esperado": "Código 1 y error JSON (sin Infinity en la salida).",
+      "prueba_externa": "test_cli_invalid_constants",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_cli_invalid_constants",
+          "status": "pass",
+          "mensaje": "",
+          "archivo": "motor_daniel.xml"
+        }
+      ]
+    },
+    {
+      "id": "CP-MOTD-20",
+      "requisito": "RNF-02",
+      "modulo": "Motor adaptativo",
+      "area": "Pruebas del motor (Daniel)",
+      "tipo": "Unitaria",
+      "prioridad": "Media",
+      "titulo": "Prueba de Daniel: cli con json mal formado",
+      "pasos": "adaptive-engine/tests/test_engine.py::test_cli_malformed_json",
+      "datos": "Datos de la prueba",
+      "esperado": "Código 1 y error JSON en stderr.",
+      "prueba_externa": "test_cli_malformed_json",
+      "responsable": "Daniel Beltre",
+      "estado": "APROBADO",
+      "motivo": "",
+      "incidencias": [],
+      "capturas": [],
+      "evidencia": [
+        "evidencias/logs/02b_pruebas_motor_daniel.log"
+      ],
+      "pruebas": [
+        {
+          "prueba": "test_cli_malformed_json",
           "status": "pass",
           "mensaje": "",
           "archivo": "motor_daniel.xml"
@@ -2532,9 +3039,9 @@
       "tipo": "Integración",
       "prioridad": "Alta",
       "titulo": "El progreso recomienda reforzar el tema más débil",
-      "pasos": "GET /api/students/:id/progress.",
-      "datos": "Cuenta demo",
-      "esperado": "Recomendación SQL JOIN, reinforce_topic, prioridad alta.",
+      "pasos": "GET /api/students/:id/progress y comparar con el tema de menor promedio calculado en PostgreSQL.",
+      "datos": "Cuenta demo (incluye el tema 'SQL JOIN (demo dificultad)' del seed 009)",
+      "esperado": "Recomienda el tema con menor promedio real, con reinforce_topic y prioridad alta.",
       "responsable": "Daniel Beltre",
       "estado": "APROBADO",
       "motivo": "",
@@ -2794,7 +3301,7 @@
       "titulo": "Valores no numéricos o nulos",
       "pasos": "Enviar 'abc', '', None y listas en campos numéricos.",
       "datos": "score_percentage='abc', errors=None…",
-      "esperado": "ValueError 'Los datos deben ser numéricos y válidos.'",
+      "esperado": "ValueError que indica que el valor debe ser numérico.",
       "responsable": "Daniel Beltre",
       "estado": "APROBADO",
       "motivo": "5 verificaciones aprobadas.",
@@ -2940,8 +3447,8 @@
       "datos": "{topic, interactions} / {student_id, interactions}",
       "esperado": "ValueError con mensaje claro que nombre el campo (igual que los demás campos obligatorios).",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "2 de 2 verificaciones fallaron. KeyError: 'student_id'",
+      "estado": "APROBADO",
+      "motivo": "2 verificaciones aprobadas.",
       "incidencias": [
         "INC-05"
       ],
@@ -2952,14 +3459,14 @@
       "pruebas": [
         {
           "prueba": "test_CP_VAL_07_falta_student_id_o_topic[student_id]",
-          "status": "fail",
-          "mensaje": "KeyError: 'student_id'",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
           "prueba": "test_CP_VAL_07_falta_student_id_o_topic[topic]",
-          "status": "fail",
-          "mensaje": "KeyError: 'topic'",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         }
       ]
@@ -3016,8 +3523,8 @@
       "datos": "study_minutes=inf, score=nan",
       "esperado": "ValueError: no son datos válidos.",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "2 de 3 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "estado": "APROBADO",
+      "motivo": "3 verificaciones aprobadas.",
       "incidencias": [
         "INC-04"
       ],
@@ -3028,8 +3535,8 @@
       "pruebas": [
         {
           "prueba": "test_CP_VAL_09_infinito_o_nan_se_rechazan[study_minutes-inf]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
@@ -3040,8 +3547,8 @@
         },
         {
           "prueba": "test_CP_VAL_09_infinito_o_nan_se_rechazan[navigation_count-inf]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         }
       ]
@@ -3058,8 +3565,8 @@
       "datos": "score_percentage=True",
       "esperado": "ValueError (true no es una puntuación).",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "2 de 2 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "estado": "APROBADO",
+      "motivo": "2 verificaciones aprobadas.",
       "incidencias": [
         "INC-06"
       ],
@@ -3070,14 +3577,14 @@
       "pruebas": [
         {
           "prueba": "test_CP_VAL_10_booleanos_se_rechazan[score_percentage]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
           "prueba": "test_CP_VAL_10_booleanos_se_rechazan[errors]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         }
       ]
@@ -3094,8 +3601,8 @@
       "datos": "errors=2.7",
       "esperado": "ValueError: los conteos deben ser enteros (hoy se truncan en silencio).",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "4 de 4 verificaciones fallaron. Failed: DID NOT RAISE ValueError",
+      "estado": "APROBADO",
+      "motivo": "4 verificaciones aprobadas.",
       "incidencias": [
         "INC-07"
       ],
@@ -3106,26 +3613,26 @@
       "pruebas": [
         {
           "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[errors]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
           "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[attempts]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
           "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[repetitions]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         },
         {
           "prueba": "test_CP_VAL_11_conteos_con_decimales_se_rechazan[navigation_count]",
-          "status": "fail",
-          "mensaje": "Failed: DID NOT RAISE ValueError",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_motor.xml"
         }
       ]
@@ -3198,8 +3705,8 @@
       "datos": "[] / \"x\" / 5 / null",
       "esperado": "Código 1 y {\"error\": ...} en stderr (sin traceback de Python).",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "4 de 4 verificaciones fallaron. main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+      "estado": "APROBADO",
+      "motivo": "4 verificaciones aprobadas.",
       "incidencias": [
         "INC-03"
       ],
@@ -3210,26 +3717,26 @@
       "pruebas": [
         {
           "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: []",
-          "status": "fail",
-          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         },
         {
           "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: \"texto\"",
-          "status": "fail",
-          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         },
         {
           "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: 5",
-          "status": "fail",
-          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         },
         {
           "prueba": "CP-VAL-14 CLI con raíz JSON que no es objeto: null",
-          "status": "fail",
-          "mensaje": "main() ~~~~^^ File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 20\u001b[Actual message: \"Unexpected token 'T', \"Traceback \"... is not valid JSON\"\"> [Error [ERR_TEST_FAILURE]: Got unwanted exception: stderr no es JSON: Traceback (most recent call last): File \"/home/claude/v3/proyecto-grupo4/adaptive-engine/main.py\", line 47, in <module> main() ~~~~^^ File \"/home/claude/v3/proyecto-gr",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         }
       ]
@@ -3246,8 +3753,8 @@
       "datos": "study_minutes: Infinity",
       "esperado": "Rechazo con código 1, o salida que JSON.parse de Node pueda leer.",
       "responsable": "Daniel Beltre",
-      "estado": "FALLIDO",
-      "motivo": "1 de 1 verificaciones fallaron. Got unwanted exception: Node no puede leer la salida:{\"profile\": {\"student_id\": 1, \"topic\": \"SQL JOIN\", \"average_score\": 75.0, \"total_errors\": 2, \"average_attempts\": 2.0, \"total_repetitions\": 1, \"average_study_minutes\": Infinity, \"total_interactions\": 1Actual message: \"Unexpected token 'I', ...\"minutes\": Infinity, \"... is not valid JSON\"",
+      "estado": "APROBADO",
+      "motivo": "",
       "incidencias": [
         "INC-04"
       ],
@@ -3258,8 +3765,8 @@
       "pruebas": [
         {
           "prueba": "CP-VAL-15 CLI con Infinity en la entrada no rompe el JSON de salida",
-          "status": "fail",
-          "mensaje": "Got unwanted exception: Node no puede leer la salida:{\"profile\": {\"student_id\": 1, \"topic\": \"SQL JOIN\", \"average_score\": 75.0, \"total_errors\": 2, \"average_attempts\": 2.0, \"total_repetitions\": 1, \"average_study_minutes\": Infinity, \"total_interactions\": 1Actual message: \"Unexpected token 'I', ...\"minutes\": Infinity, \"... is not valid JSON\"",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         }
       ]
@@ -3564,8 +4071,8 @@
       "datos": "—",
       "esperado": "status propio, 400, 409 y 500 sin filtrar detalles internos.",
       "responsable": "Porfirio Ramírez",
-      "estado": "FALLIDO",
-      "motivo": "1 de 5 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+      "estado": "APROBADO",
+      "motivo": "5 verificaciones aprobadas.",
       "incidencias": [
         "INC-02"
       ],
@@ -3582,8 +4089,8 @@
         },
         {
           "prueba": "CP-BE-07 JSON inválido → 400 'JSON inválido'",
-          "status": "fail",
-          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'Unexpected end of JSON input'- 'JSON inválido'",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "unit_node.xml"
         },
         {
@@ -3646,8 +4153,8 @@
       "datos": "—",
       "esperado": "200 {status:'ok'}; una ruta que no existe responde 404 JSON 'Ruta no encontrada' (también sin token).",
       "responsable": "Porfirio Ramírez",
-      "estado": "FALLIDO",
-      "motivo": "1 de 1 verificaciones fallaron. respondió 401: Token requerido401 !== 404",
+      "estado": "APROBADO",
+      "motivo": "",
       "incidencias": [
         "INC-14"
       ],
@@ -3658,8 +4165,8 @@
       "pruebas": [
         {
           "prueba": "CP-BE-09 health check y ruta inexistente",
-          "status": "fail",
-          "mensaje": "respondió 401: Token requerido401 !== 404",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         }
       ]
@@ -3676,8 +4183,8 @@
       "datos": "email de 200.000 caracteres",
       "esperado": "413 con el mensaje en español 'El cuerpo de la petición es demasiado grande'.",
       "responsable": "Porfirio Ramírez",
-      "estado": "FALLIDO",
-      "motivo": "1 de 1 verificaciones fallaron. Expected values to be strictly equal:+ actual - expected+ 'request entity too large'- 'El cuerpo de la petición es demasiado grande'",
+      "estado": "APROBADO",
+      "motivo": "",
       "incidencias": [
         "INC-13"
       ],
@@ -3688,8 +4195,8 @@
       "pruebas": [
         {
           "prueba": "CP-BE-10 cuerpo demasiado grande devuelve 413 con mensaje en español",
-          "status": "fail",
-          "mensaje": "Expected values to be strictly equal:+ actual - expected+ 'request entity too large'- 'El cuerpo de la petición es demasiado grande'",
+          "status": "pass",
+          "mensaje": "",
           "archivo": "integration.xml"
         }
       ]
@@ -4522,8 +5029,8 @@
         "CP-LOG-06",
         "CP-BE-07"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (errorHandler.js sin cambios en esa rama). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): errorHandler revisa err.type antes de err.status. Re-prueba del 24/11/2026: CP-LOG-06 y CP-BE-07 aprobados.",
       "descripcion": "En middlewares/errorHandler.js la primera condición es 'if (err.status)'. El error que produce express.json() ya trae status 400, así que entra por ahí y nunca llega a la rama 'entity.parse.failed'. Resultado: el cliente recibe el mensaje interno del parser.",
       "pasos": "POST /api/auth/login con el cuerpo '{\"email\": ' y Content-Type application/json.",
       "esperado": "400 { success:false, message:'JSON inválido' }",
@@ -4532,8 +5039,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-log-06"
       ],
       "sugerencia": "Mover la comprobación de err.type === 'entity.parse.failed' ANTES de 'if (err.status)', o usar 'if (err instanceof AppError)' en la primera rama.",
-      "verificacion": "CP-LOG-06: FALLIDO, CP-BE-07: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-LOG-06: APROBADO, CP-BE-07: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-03",
@@ -4545,8 +5052,8 @@
       "casos": [
         "CP-VAL-14"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se valida que la raíz sea un objeto. Re-prueba del 24/11/2026: CP-VAL-14 aprobado; Daniel añadió test_invalid_json_root y test_cli_invalid_json_root.",
       "descripcion": "analyzer.py llama student_data.get(...) sin comprobar que sea un diccionario. Con [], \"texto\", 5 o null se lanza AttributeError, que main.py no captura (solo captura ValueError, KeyError, TypeError y JSONDecodeError). Se rompe el contrato de INTEGRATION.md (errores como JSON por stderr), y el backend no podrá interpretar el error.",
       "pasos": "echo [] | python main.py --stdin",
       "esperado": "Código 1 y {\"error\": \"...\"} en stderr.",
@@ -4555,8 +5062,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-val-14"
       ],
       "sugerencia": "Al inicio de analyze_behavior: if not isinstance(student_data, dict): raise ValueError('Los datos del estudiante deben ser un objeto JSON.')",
-      "verificacion": "CP-VAL-14: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-VAL-14: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-04",
@@ -4569,8 +5076,8 @@
         "CP-VAL-09",
         "CP-VAL-15"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan Infinity y NaN y la salida usa allow_nan=False. Re-prueba del 24/11/2026: CP-VAL-09 y CP-VAL-15 aprobados.",
       "descripcion": "json.load de Python acepta Infinity/NaN. NaN se rechaza, pero Infinity pasa la validación (inf ≥ 0) y la salida contiene 'average_study_minutes: Infinity', que no es JSON estándar: JSON.parse en Node falla.",
       "pasos": "Enviar study_minutes: Infinity por --stdin.",
       "esperado": "Rechazo con código 1 y mensaje de datos inválidos.",
@@ -4579,8 +5086,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-val-15"
       ],
       "sugerencia": "En analyzer.py añadir: if not np.isfinite(df[required_columns]).all().all(): raise ValueError(...). En main.py usar json.dumps(..., allow_nan=False).",
-      "verificacion": "CP-VAL-09: FALLIDO, CP-VAL-15: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-VAL-09: APROBADO, CP-VAL-15: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-05",
@@ -4592,8 +5099,8 @@
       "casos": [
         "CP-VAL-07"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): ValueError claro para student_id y topic. Re-prueba del 24/11/2026: CP-VAL-07 aprobado.",
       "descripcion": "Los seis campos de interacción se validan con un mensaje claro, pero student_id y topic se leen con student_data['...']. Sin ellos se lanza KeyError y la CLI responde {\"error\": \"'topic'\"}.",
       "pasos": "process_student({'student_id': 1, 'interactions': [...]})",
       "esperado": "ValueError 'Faltan campos obligatorios: topic'.",
@@ -4602,8 +5109,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-val-07"
       ],
       "sugerencia": "Validar student_id y topic al inicio junto con interactions.",
-      "verificacion": "CP-VAL-07: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-VAL-07: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-06",
@@ -4615,8 +5122,8 @@
       "casos": [
         "CP-VAL-10"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): se rechazan booleanos. Re-prueba del 24/11/2026: CP-VAL-10 aprobado.",
       "descripcion": "pd.to_numeric convierte booleanos en 1/0. score_percentage=true se interpreta como 1 % y genera una recomendación de refuerzo con datos que no son una puntuación.",
       "pasos": "Interacción con score_percentage: true.",
       "esperado": "ValueError de datos inválidos.",
@@ -4625,8 +5132,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-val-10"
       ],
       "sugerencia": "Rechazar columnas con valores bool antes de to_numeric (p. ej. df[c].map(type).eq(bool).any()).",
-      "verificacion": "CP-VAL-10: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-VAL-10: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-07",
@@ -4638,8 +5145,8 @@
       "casos": [
         "CP-VAL-11"
       ],
-      "estado": "Abierta",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: sigue igual (engine.py y analysis/analyzer.py sin cambios; main.py solo cambió espacios). Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #21, Daniel): los conteos deben ser enteros. Re-prueba del 24/11/2026: CP-VAL-11 aprobado.",
       "descripcion": "errors, attempts, repetitions y navigation_count son conteos, pero se aceptan decimales. total_errors usa int(), así que 2.7 se convierte en 2 sin avisar y puede cambiar la regla aplicada.",
       "pasos": "Interacción con errors: 2.7.",
       "esperado": "ValueError: los conteos deben ser enteros.",
@@ -4648,8 +5155,8 @@
         "reportes/REPORTE_DE_PRUEBAS.md#cp-val-11"
       ],
       "sugerencia": "Comprobar (df[conteos] % 1 == 0).all().all() o acordar con el equipo que se redondea.",
-      "verificacion": "CP-VAL-11: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-VAL-11: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-08",
@@ -4687,7 +5194,7 @@
         "CP-CRUD-07"
       ],
       "estado": "Pendiente de desarrollo",
-      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "historial": "Registrada el 10/11/2026. Re-prueba del 16/11/2026: siguen sin existir PATCH /api/users/:id/role, DELETE /api/users/:id ni GET /api/students. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Re-prueba del 24/11/2026: sigue pendiente.",
       "descripcion": "Existen dtos/user.dto.js (changeRoleDto) y el permiso users:change-role, pero ninguna ruta los usa. El CRUD de usuarios disponible es solo Crear (registro) y Leer (/me).",
       "pasos": "PATCH /api/users/:id/role y DELETE /api/users/:id",
       "esperado": "Endpoints protegidos por permiso.",
@@ -4782,8 +5289,8 @@
       "casos": [
         "CP-BE-10"
       ],
-      "estado": "Abierta",
-      "historial": "Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026 al probar los cambios del avance 4. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio). Re-prueba del 24/11/2026: CP-BE-10 aprobado (413 en español).",
       "descripcion": "En errorHandler.js el bloque de 'entity.too.large' quedó después de res.status(500) y de un return implícito, así que nunca se alcanza. Además el error de body-parser trae status 413 y entra antes por 'if (err.status)', devolviendo el mensaje interno en inglés.",
       "pasos": "POST /api/auth/login con un cuerpo JSON de más de 100 KB.",
       "esperado": "413 'El cuerpo de la petición es demasiado grande'.",
@@ -4792,8 +5299,8 @@
         "evidencias/logs/03_integracion.log"
       ],
       "sugerencia": "Mover las comprobaciones de err.type ('entity.parse.failed', 'entity.too.large') al inicio del errorHandler, antes de 'if (err.status)'. Corrige también INC-02.",
-      "verificacion": "CP-BE-10: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-BE-10: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-14",
@@ -4805,8 +5312,8 @@
       "casos": [
         "CP-BE-09"
       ],
-      "estado": "Abierta",
-      "historial": "Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main).",
+      "estado": "Verificada",
+      "historial": "Detectada el 16/11/2026. Re-prueba del 17/11/2026: sigue igual (backend y motor sin cambios en main). Corregida en main (PR #20, Porfirio): contentRoutes ya no exige token a rutas inexistentes. Re-prueba del 24/11/2026: CP-BE-09 aprobado (404).",
       "descripcion": "app.use('/api', contentRoutes) monta un router con router.use(verifyToken) para TODO /api. Cualquier ruta que no exista, sin token, responde 401 'Token requerido' en vez de 404, lo que confunde al depurar el frontend.",
       "pasos": "GET /api/no-existe sin cabecera Authorization.",
       "esperado": "404 'Ruta no encontrada'.",
@@ -4815,8 +5322,8 @@
         "evidencias/logs/03_integracion.log"
       ],
       "sugerencia": "Aplicar verifyToken en cada ruta de contentRoutes (o montar el router en prefijos concretos como /api/modulos y /api/temas) en vez de router.use(verifyToken) sobre /api.",
-      "verificacion": "CP-BE-09: FALLIDO",
-      "todosAprobados": false
+      "verificacion": "CP-BE-09: APROBADO",
+      "todosAprobados": true
     },
     {
       "id": "INC-15",

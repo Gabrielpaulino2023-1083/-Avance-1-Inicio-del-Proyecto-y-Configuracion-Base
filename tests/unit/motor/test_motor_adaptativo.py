@@ -199,7 +199,8 @@ def test_CP_VAL_03_campo_obligatorio_faltante(campo):
 )
 def test_CP_VAL_04_valores_no_numericos_o_nulos(campo, valor):
     data = student(interaction(**{campo: valor}))
-    with pytest.raises(ValueError, match="numéricos"):
+    # Basta con un ValueError que hable de valores numéricos ("numérico" o "numéricos").
+    with pytest.raises(ValueError, match="numéric"):
         process_student(data)
 
 

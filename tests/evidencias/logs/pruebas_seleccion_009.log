@@ -1,0 +1,101 @@
+TAP version 13
+# Subtest: reduced desde MEDIA
+ok 1 - reduced desde MEDIA
+  ---
+  duration_ms: 0.809366
+  type: 'test'
+  ...
+# Subtest: current desde MEDIA
+ok 2 - current desde MEDIA
+  ---
+  duration_ms: 0.133445
+  type: 'test'
+  ...
+# Subtest: increased desde MEDIA
+ok 3 - increased desde MEDIA
+  ---
+  duration_ms: 0.065775
+  type: 'test'
+  ...
+# Subtest: limite inferior
+ok 4 - limite inferior
+  ---
+  duration_ms: 0.103443
+  type: 'test'
+  ...
+# Subtest: limite superior
+ok 5 - limite superior
+  ---
+  duration_ms: 1.166273
+  type: 'test'
+  ...
+# Subtest: empate favorece nivel inferior
+ok 6 - empate favorece nivel inferior
+  ---
+  duration_ms: 0.238674
+  type: 'test'
+  ...
+# Subtest: nivel cercano sin exacto
+ok 7 - nivel cercano sin exacto
+  ---
+  duration_ms: 0.134106
+  type: 'test'
+  ...
+# Subtest: otra actividad antes de repetir referencia
+ok 8 - otra actividad antes de repetir referencia
+  ---
+  duration_ms: 0.068451
+  type: 'test'
+  ...
+# Subtest: solo referencia permite repetir
+ok 9 - solo referencia permite repetir
+  ---
+  duration_ms: 0.17117
+  type: 'test'
+  ...
+# Subtest: desempate por ID
+ok 10 - desempate por ID
+  ---
+  duration_ms: 0.204284
+  type: 'test'
+  ...
+# Subtest: vacio conserva recomendacion del tema
+ok 11 - vacio conserva recomendacion del tema
+  ---
+  duration_ms: 0.130204
+  type: 'test'
+  ...
+# Subtest: ajuste desconocido no se interpreta como current
+ok 12 - ajuste desconocido no se interpreta como current
+  ---
+  duration_ms: 0.270355
+  type: 'test'
+  ...
+# Subtest: mezcla de referencias rechazada
+ok 13 - mezcla de referencias rechazada
+  ---
+  duration_ms: 0.073519
+  type: 'test'
+  ...
+# Subtest: referencia sin clasificar rechazada
+ok 14 - referencia sin clasificar rechazada
+  ---
+  duration_ms: 0.047561
+  type: 'test'
+  ...
+# Subtest: entrada no se ordena ni muta
+ok 15 - entrada no se ordena ni muta
+  ---
+  duration_ms: 0.059433
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 70.842751
+
