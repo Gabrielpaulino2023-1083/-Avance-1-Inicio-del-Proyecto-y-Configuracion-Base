@@ -160,7 +160,7 @@ export default function AttemptPanel({
 
   if (result) {
     return (
-      <section className="reinforce" aria-labelledby="result-title">
+      <section className="reinforce rc-stack" aria-labelledby="result-title">
         <h3 id="result-title" className="reinforce__title">
           Resultado · {title}
         </h3>

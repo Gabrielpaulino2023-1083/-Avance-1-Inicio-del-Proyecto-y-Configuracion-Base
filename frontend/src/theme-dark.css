@@ -933,3 +933,12 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Listas desplegables legibles en el tema oscuro */
+select {
+  color-scheme: dark;
+}
+select option {
+  background-color: #1b1b24;
+  color: #f2f2f5;
+}

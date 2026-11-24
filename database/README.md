@@ -213,3 +213,15 @@ El frontend debe enviar el curso seleccionado, no fijar ID 1. El backend adapta 
 Las pruebas SQL, el seed y el CRUD HTTP docente se verificaron. El recorrido desde frontend
 con el curso seleccionado sigue pendiente. No repetir el seed docente ya cargado.
 
+
+
+
+## Ampliación propuesta BD-009-v1 — 22 de noviembre de 2026
+
+Estado: validación embebida aprobada e instalación y pruebas en base nueva y base local confirmadas por Jeison; pendiente de aprobación del equipo e integración HTTP. Esta sección amplía el contenido anterior, cuyo estado histórico se conserva.
+
+La migración `009_dificultad_candidatas.sql` agrega `actividades.dificultad` (TEXT nullable, BAJA/MEDIA/ALTA, sin default) y `listar_candidatas_actividad(integer, integer, integer, integer DEFAULT NULL)`. Las actividades anteriores quedan sin clasificar; no se alteran notas, credenciales ni firmas de 007/008. La selección según reduced/current/increased se hace en el backend con referencia relativa y el ejemplo JavaScript suministrado.
+
+[Reglas, tipos devueltos, permisos, seed, instalación aislada y responsabilidades de integración](docs/DIFICULTAD_ACTIVIDADES_009.md). [Resultados de validación](test/RESULTADO_VALIDACION_009.md). No interpretar esta propuesta como funcionalidad ya disponible en endpoints o pantallas.
+
+La guía 009 incluye dos rutas de instalación: base nueva y actualización de una base local con 001–008. Si 009 ya se aplicó correctamente, no volver a ejecutarla.
