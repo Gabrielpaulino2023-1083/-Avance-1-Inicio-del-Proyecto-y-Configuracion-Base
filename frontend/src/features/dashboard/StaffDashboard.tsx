@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { listCursos } from "../../services/courseService";
-import { listModulos } from "../../services/curriculumService";
+import {
+  listManageableCourses,
+  listModulos,
+} from "../../services/curriculumService";
 import "./dashboard.css";
 import "../progress/progress.css";
 import "../manage/manage.css";
@@ -40,13 +43,20 @@ export default function StaffDashboard() {
           { label: "Archivados", value: count("ARCHIVADO") },
         ];
       }
-      const modulos = await listModulos(token);
+      // El docente solo ve los cursos donde es editor.
+      const cursos = (await listManageableCourses(token)).filter(
+        (c) => c.puedeEditarContenido
+      );
+      const listas = await Promise.all(
+        cursos.map((c) => listModulos(token, c.id))
+      );
+      const modulos = listas.flat();
       const count = (estado: string) =>
         modulos.filter((m) => m.estado === estado).length;
       return [
+        { label: "Cursos que editas", value: cursos.length },
         { label: "Módulos", value: modulos.length },
         { label: "Publicados", value: count("PUBLICADO") },
-        { label: "En borrador", value: count("BORRADOR") },
         {
           label: "Temas",
           value: modulos.reduce((sum, m) => sum + m.totalTemas, 0),
