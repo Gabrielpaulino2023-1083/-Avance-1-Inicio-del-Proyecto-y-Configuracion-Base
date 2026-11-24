@@ -8,6 +8,7 @@ import {
   type AttemptResult,
   type Question,
   type Questionnaire,
+  type SuggestedActivity,
 } from "../../services/learningService";
 import type { Recommendation, RecommendationEvidence } from "../../types";
 import RecommendationCard from "../dashboard/RecommendationCard";
@@ -30,6 +31,7 @@ interface Props {
   questionnaire: Questionnaire;
   onExit: () => void; // volver a la lista de actividades
   onSubmitted: () => void; // el intento ya no está en curso
+    onPractice?: (actividadId: number) => void; // iniciar la actividad sugerida
 }
 
 function formatTime(iso: string) {
@@ -48,6 +50,7 @@ export default function AttemptPanel({
   questionnaire,
   onExit,
   onSubmitted,
+  onPractice,
 }: Props) {
   const { user, token, logout } = useAuth();
   const [answers, setAnswers] = useState<Record<number, number[]>>(() =>
@@ -63,7 +66,8 @@ export default function AttemptPanel({
     evidence: RecommendationEvidence;
   } | null>(null);
   const [asking, setAsking] = useState(false);
-  const [noData, setNoData] = useState(false);
+  const [noData, setNoData] = useState(false);  
+  const [suggested, setSuggested] = useState<SuggestedActivity | null>(null);
 
   function fail(err: unknown, fallback: string) {
     if (err instanceof ApiError && err.status === 401) {
@@ -147,6 +151,7 @@ export default function AttemptPanel({
         },
         evidence: { mastery: r.mastery, errors: r.errors, attempts: r.attempts },
       });
+        setSuggested(r.actividadSugerida ?? null);
     } catch (err) {
       if (err instanceof ApiError && err.status === 404) {
         setNoData(true);
@@ -220,6 +225,32 @@ export default function AttemptPanel({
                   ? "Para seguir avanzando: elige otro tema o una actividad más retadora."
                   : "Sigue practicando este tema para mantener tu nivel."}
             </p>
+                        {suggested && onPractice && (
+              <div className="feedback__box feedback__box--hint rc-stack">
+                <p>
+                  <strong>Actividad sugerida:</strong> {suggested.titulo} ·
+                  dificultad {suggested.dificultad.toLowerCase()}
+                </p>
+                {!suggested.coincideNivel && (
+                  <p>
+                    No hay una actividad del nivel exacto que buscaba el motor;
+                    esta es la más cercana disponible.
+                  </p>
+                )}
+                {suggested.esRepeticion && (
+                  <p>Es la misma actividad que acabas de hacer.</p>
+                )}
+                <div className="exercise__actions">
+                  <button
+                    type="button"
+                    className="action"
+                    onClick={() => onPractice(suggested.actividadId)}
+                  >
+                    Practicar esta actividad
+                  </button>
+                </div>
+              </div>
+            )}
           </>
         )}
       </section>
