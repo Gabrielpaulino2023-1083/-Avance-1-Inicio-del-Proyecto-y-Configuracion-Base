@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/Layout/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginScreen from "./screens/Login/LoginScreen";
@@ -30,6 +30,7 @@ export default function App() {
           <Route path="/cursos" element={<CoursesScreen />} />
         </Route>
       </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
