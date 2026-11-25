@@ -129,10 +129,13 @@ Para detalle por inscripción, el frontend puede usar `/api/mis-inscripciones/:i
     "inscripcionId": 7, "temaId": 15, "tema": "SQL JOIN",
     "accion": "reinforce_topic", "dificultad": "reduced",
     "recomendacion": "Se recomienda reforzar el tema SQL JOIN ...",
-    "mastery": 16.67, "errors": 10, "attempts": 2
+    "mastery": 16.67, "errors": 10, "attempts": 2,
+    "actividadSugerida": null
   }
 }
 ```
+
+`actividadSugerida` es opcional. Cuando existe, trae `{ actividadId, titulo, dificultad, dificultadObjetivo, coincideNivel, esRepeticion, actividadReferenciaId }`; si no hay sugerencia es `null` y el resto de la respuesta no cambia. Se calcula con la migración 009 (`listar_candidatas_actividad`) y el selector `src/services/actividadSelector.js`: el ajuste del motor (`reduced`, `current` o `increased`) baja, mantiene o sube un nivel (BAJA, MEDIA, ALTA) respecto de la última actividad calificada del tema, y se prefiere otra actividad antes que repetir la de referencia. Solo hay sugerencia si esa referencia tiene dificultad asignada (las actividades anteriores a la 009 quedan sin clasificar). La sugerencia no inicia ningún intento: el frontend usa la ruta de iniciar intento con el `actividadId` recibido. Para probarla, aplicar `009_dificultad_candidatas.sql` y el seed `datos_prueba_dificultad_009.sql` (curso `DEMO-DIFICULTAD-009`, tema "SQL JOIN (demo dificultad)").
 
 * `mastery`: promedio de puntaje (0 a 100) de los intentos calificados.
 * `errors`: total de respuestas con puntaje 0.
