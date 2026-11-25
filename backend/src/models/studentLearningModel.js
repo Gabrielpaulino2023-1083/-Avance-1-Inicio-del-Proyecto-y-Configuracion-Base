@@ -88,8 +88,15 @@ const listMinutes = (actor, inscripcionId, desde, hasta) =>
      FROM public.listar_minutos_intentos_estudiante($1,$2,$3::date,$4::date)`,
     [actor, inscripcionId, desde, hasta]);
 
+// Candidatas para la actividad sugerida (migración 009). Sin referencia explícita,
+// la base usa el último intento calificado del estudiante en ese tema.
+const listCandidates = (actor, inscripcionId, temaId, actividadReferenciaId = null) =>
+  q('SELECT * FROM public.listar_candidatas_actividad($1,$2,$3,$4::INTEGER)',
+    [actor, inscripcionId, temaId, actividadReferenciaId]);
+
 module.exports = {
   listEnrollments, listPublishedModules, listPublishedTopics, listActivities,
   getQuestionnaire, startAttempt, saveSelection, submitAttempt,
-  listEngineInteractions, listResults, listRecentActivity, listProgress, listMinutes
+  listEngineInteractions, listResults, listRecentActivity, listProgress, listMinutes,
+  listCandidates
 };

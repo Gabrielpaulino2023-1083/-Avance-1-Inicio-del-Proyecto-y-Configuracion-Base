@@ -1134,6 +1134,8 @@ paths:
         Arma una interacción por cada intento calificado del estudiante en ese tema y esa inscripción, y la envía al motor (Python).
         No mezcla temas homónimos de otros cursos. `404` si aún no hay intentos calificados; `502` si el motor de Python no está disponible o falla.
         `mastery` es el promedio de puntaje, `errors` el total de respuestas con puntaje 0 y `attempts` el promedio del número de intento.
+
+        **`actividadSugerida`** (opcional, migración 009): una actividad del mismo tema y sección, publicada, disponible, con intentos restantes y sin intento abierto, elegida según el ajuste del motor (`reduced` baja un nivel, `current` mantiene, `increased` sube) respecto de la última actividad calificada del tema. Prefiere otra actividad antes que repetir la de referencia. Es `null` cuando no hay referencia clasificada, no hay candidata o falla la consulta; en ese caso el resto de la respuesta no cambia. No inicia ningún intento: para empezarla el frontend usa `POST /api/mis-inscripciones/{inscripcionId}/actividades/{actividadId}/intentos`.
       security:
         - bearerAuth: []
       parameters:
@@ -2321,6 +2323,43 @@ components:
           type: number
           description: Promedio del número de intento
           example: 2
+        actividadSugerida:
+          nullable: true
+          description: Actividad sugerida del mismo tema, o null si no hay sugerencia
+          allOf:
+            - $ref: '#/components/schemas/ActividadSugerida'
+
+    ActividadSugerida:
+      type: object
+      properties:
+        actividadId:
+          type: integer
+          example: 16
+        titulo:
+          type: string
+          example: "DEMO-009: Basico: significado de las uniones"
+        dificultad:
+          type: string
+          enum: [BAJA, MEDIA, ALTA]
+          description: Nivel de la actividad sugerida
+          example: BAJA
+        dificultadObjetivo:
+          type: string
+          enum: [BAJA, MEDIA, ALTA]
+          description: Nivel que buscaba la regla según el ajuste del motor
+          example: BAJA
+        coincideNivel:
+          type: boolean
+          description: true si la actividad sugerida tiene el nivel objetivo
+          example: true
+        esRepeticion:
+          type: boolean
+          description: true si la sugerida es la misma actividad de referencia
+          example: false
+        actividadReferenciaId:
+          type: integer
+          description: Última actividad calificada del tema, usada como referencia
+          example: 15
 
     RecommendationContextResponse:
       type: object
