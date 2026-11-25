@@ -167,6 +167,16 @@ export default function RealCourse() {
       setStarting(null);
     }
   }
+    // Inicia la actividad que sugirió el backend, usando el flujo normal.
+  function practiceSuggested(actividadId: number) {
+    const target = activities?.find((x) => x.id === actividadId);
+    if (!target) {
+      setAttempt(null);
+      setStartError("La actividad sugerida no está en la lista de este tema.");
+      return;
+    }
+    begin(target);
+  }
 
   if (error) {
     return (
@@ -262,6 +272,7 @@ export default function RealCourse() {
             questionnaire={attempt.questionnaire}
             onExit={() => setAttempt(null)}
             onSubmitted={() => clearSaved(attempt.key)}
+            onPractice={practiceSuggested}
           />
         ) : (
           <section className="reinforce" aria-labelledby="act-title">

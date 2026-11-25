@@ -93,6 +93,10 @@ export default function LoginForm() {
         {isSubmitting ? "Ingresando..." : "Iniciar sesión"}
         <ArrowIcon />
       </button>
+      
+            <p className="login-hint">
+        ¿Olvidaste tu contraseña? Contacta al administrador.
+      </p>
 
       {SHOW_TEST_HINT && (
         <p className="login-hint">

@@ -202,6 +202,17 @@ export async function submitAttempt(
 
 // ---------- Recomendación por inscripción y tema ----------
 
+// Actividad que el backend sugiere practicar (campo opcional, puede no llegar).
+export interface SuggestedActivity {
+  actividadId: number;
+  titulo: string;
+  dificultad: string;
+  dificultadObjetivo: string;
+  coincideNivel: boolean;
+  esRepeticion: boolean;
+  actividadReferenciaId: number;
+}
+
 export interface TopicRecommendation {
   inscripcionId: number;
   temaId: number;
@@ -212,6 +223,7 @@ export interface TopicRecommendation {
   mastery: number;
   errors: number;
   attempts: number;
+  actividadSugerida?: SuggestedActivity | null;
 }
 
 export async function getTopicRecommendation(
