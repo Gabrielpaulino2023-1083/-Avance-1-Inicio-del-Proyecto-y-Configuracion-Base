@@ -9,7 +9,7 @@ import ResultsScreen from "./screens/Results/ResultsScreen";
 import ProgressScreen from "./screens/Progress/ProgressScreen";
 import ManageScreen from "./screens/Manage/ManageScreen";
 import CoursesScreen from "./screens/Courses/CoursesScreen";
-
+import UsersScreen from "./screens/Users/UsersScreen";
 
 export default function App() {
   return (
@@ -28,6 +28,8 @@ export default function App() {
           <Route path="/progreso" element={<ProgressScreen />} />
           <Route path="/gestion" element={<ManageScreen />} />
           <Route path="/cursos" element={<CoursesScreen />} />
+          <Route path="/cursos" element={<CoursesScreen />} />
+          <Route path="/usuarios" element={<UsersScreen />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
