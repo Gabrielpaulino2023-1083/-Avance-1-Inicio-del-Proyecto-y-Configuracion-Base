@@ -1,0 +1,465 @@
+[
+  {
+    version: 'PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit'
+  }
+]
+PASS revision_v1/base/database/migrations/001_estructura_academica_inicial.sql notices 0
+PASS revision_v1/base/database/migrations/002_modulos_temas.sql notices 0
+PASS revision_v1/base/database/migrations/003_actividades_intentos_respuestas.sql notices 0
+PASS revision_v1/base/database/security/001_roles_permisos.sql notices 0
+PASS revision_v1/base/database/migrations/004_inscripcion_estudiantes.sql notices 0
+PASS revision_v1/base/database/migrations/005_crud_cursos.sql notices 0
+PASS revision_v1/base/database/migrations/006_crud_modulos_temas.sql notices 0
+PASS revision_v1/base/database/migrations/007_lectura_contenido_estudiantes.sql notices 0
+PASS revision_v1/base/database/migrations/008_consultas_integracion.sql notices 0
+PASS revision_v1/base/database/migrations/009_dificultad_candidatas.sql notices 0
+PASS revision009/base/database/seeds/datos_prueba.sql notices 0
+PASS revision009/base/database/seeds/datos_prueba_modulos_temas.sql notices 0
+PASS revision009/base/database/seeds/datos_prueba_actividades_intentos.sql notices 1
+Seed creado: estudiante 4, inscripción 2, curso 2.
+PASS revision009/base/database/seeds/datos_prueba_docente.sql notices 1
+Docente demo 5, curso 3, modulo 4 creados.
+PASS revision009/base/database/seeds/datos_prueba_integracion_resultados.sql notices 1
+Seed creado: estudiante 4, curso 4, inscripcion 3. Semana de referencia: 2026-11-23 00:00:00-04 (America/Santo_Domingo).
+(node:14) DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+PASS entrega010/database/migrations/010_gestion_actividades_cuestionarios.sql notices 0
+OK definiciones previas intactas
+OK 17 tablas sin cambios por migracion
+PASS entrega011/database/migrations/011_usuarios_roles.sql notices 0
+OK 011: definiciones y 17 tablas conservadas
+PASS entrega011/database/test/pruebas_migracion_011.sql notices 50
+OK 011: rol limitado
+OK 011: sin UPDATE/DELETE directo
+OK 011: resumen auxiliar privado
+OK 011: registro siempre estudiante y normaliza datos
+OK 011: no devuelve hash
+OK 011: email unico sin distinguir mayusculas esperado 23505, recibido 23505
+OK 011: correo invalido esperado 22023, recibido 22023
+OK 011: password plano rechazado esperado 22023, recibido 22023
+OK 011: nombre largo esperado 22023, recibido 22023
+OK 011: consulta propia
+OK 011: no consulta usuario ajeno esperado 42501, recibido 42501
+OK 011: no lista sin admin esperado 42501, recibido 42501
+OK 011: filtro de rol y busqueda
+OK 011: busqueda vacia
+OK 011: limite de paginacion esperado 22023, recibido 22023
+OK 011: no crear docente sin admin esperado 42501, recibido 42501
+OK 011: crear docente administrativo
+OK 011: asignar opuesto sin desactivar rechazado esperado 55000, recibido 55000
+OK 011: transicion academica atomica
+OK 011: multiples roles y prioridad
+OK 011: asignacion activa idempotente
+OK 011: cambio academico conserva ADMINISTRADOR
+OK 011: desactivar admin conserva otro administrador
+OK 011: perfil propio sin cambiar email ni rol
+OK 011: edicion administrativa
+OK 011: no cambiar password ajeno esperado 42501, recibido 42501
+OK 011: baja logica conserva roles e historial
+OK 011: inactivo sin acceso propio esperado 42501, recibido 42501
+OK 011: no asignar rol a cuenta inactiva esperado 55000, recibido 55000
+OK 011: admin consulta inactivo
+OK 011: reactivar sin cambiar historial
+OK 011: admin no es rol academico esperado 22023, recibido 22023
+OK 011: usuario inexistente esperado P0002, recibido P0002
+OK 011: activo obligatorio esperado 22023, recibido 22023
+OK 011: revocacion de asignaciones docentes
+OK 011: reactivar rol no restaura asignaciones
+OK 011: cambio con intento abierto rechazado esperado 55000, recibido 55000
+OK 011: transicion fallida conserva rol
+OK 011: se puede bloquear una cuenta con intento abierto
+OK 011: cambio conserva inscripcion e intento calificado
+OK 011: UPDATE masivo conserva administrador esperado 55000, recibido 55000
+OK 011: UPDATE masivo revertido completo
+OK 011: DELETE masivo conserva administrador esperado 55000, recibido 55000
+OK 011: ultimo administrador no se desactiva esperado 55000, recibido 55000
+OK 011: ultimo rol administrador no se desactiva esperado 55000, recibido 55000
+OK 011: trigger protege administrador ante SQL directo esperado 55000, recibido 55000
+OK 011: trigger protege DELETE del ultimo rol esperado 55000, recibido 55000
+OK 011: trigger impide rol academico opuesto por INSERT directo esperado 55000, recibido 55000
+PRUEBAS 011 COMPLETADAS.
+OK 011: aislamiento REPEATABLE READ rechazado
+PASS entrega011/database/test/pruebas_migracion_011.sql notices 50
+OK 011: rol limitado
+OK 011: sin UPDATE/DELETE directo
+OK 011: resumen auxiliar privado
+OK 011: registro siempre estudiante y normaliza datos
+OK 011: no devuelve hash
+OK 011: email unico sin distinguir mayusculas esperado 23505, recibido 23505
+OK 011: correo invalido esperado 22023, recibido 22023
+OK 011: password plano rechazado esperado 22023, recibido 22023
+OK 011: nombre largo esperado 22023, recibido 22023
+OK 011: consulta propia
+OK 011: no consulta usuario ajeno esperado 42501, recibido 42501
+OK 011: no lista sin admin esperado 42501, recibido 42501
+OK 011: filtro de rol y busqueda
+OK 011: busqueda vacia
+OK 011: limite de paginacion esperado 22023, recibido 22023
+OK 011: no crear docente sin admin esperado 42501, recibido 42501
+OK 011: crear docente administrativo
+OK 011: asignar opuesto sin desactivar rechazado esperado 55000, recibido 55000
+OK 011: transicion academica atomica
+OK 011: multiples roles y prioridad
+OK 011: asignacion activa idempotente
+OK 011: cambio academico conserva ADMINISTRADOR
+OK 011: desactivar admin conserva otro administrador
+OK 011: perfil propio sin cambiar email ni rol
+OK 011: edicion administrativa
+OK 011: no cambiar password ajeno esperado 42501, recibido 42501
+OK 011: baja logica conserva roles e historial
+OK 011: inactivo sin acceso propio esperado 42501, recibido 42501
+OK 011: no asignar rol a cuenta inactiva esperado 55000, recibido 55000
+OK 011: admin consulta inactivo
+OK 011: reactivar sin cambiar historial
+OK 011: admin no es rol academico esperado 22023, recibido 22023
+OK 011: usuario inexistente esperado P0002, recibido P0002
+OK 011: activo obligatorio esperado 22023, recibido 22023
+OK 011: revocacion de asignaciones docentes
+OK 011: reactivar rol no restaura asignaciones
+OK 011: cambio con intento abierto rechazado esperado 55000, recibido 55000
+OK 011: transicion fallida conserva rol
+OK 011: se puede bloquear una cuenta con intento abierto
+OK 011: cambio conserva inscripcion e intento calificado
+OK 011: UPDATE masivo conserva administrador esperado 55000, recibido 55000
+OK 011: UPDATE masivo revertido completo
+OK 011: DELETE masivo conserva administrador esperado 55000, recibido 55000
+OK 011: ultimo administrador no se desactiva esperado 55000, recibido 55000
+OK 011: ultimo rol administrador no se desactiva esperado 55000, recibido 55000
+OK 011: trigger protege administrador ante SQL directo esperado 55000, recibido 55000
+OK 011: trigger protege DELETE del ultimo rol esperado 55000, recibido 55000
+OK 011: trigger impide rol academico opuesto por INSERT directo esperado 55000, recibido 55000
+PRUEBAS 011 COMPLETADAS.
+OK 011: aislamiento REPEATABLE READ rechazado
+PASS entrega010/database/test/pruebas_migracion_010.sql notices 68
+OK 010: rol de pruebas limitado
+OK 010: sin escritura directa ni lectura directa de claves
+OK 010: auxiliar privado
+OK 010: estudiante no crea esperado 42501, recibido 42501
+OK 010: editor sin asignacion de seccion no crea esperado 42501, recibido 42501
+OK 010: docente no usa seccion ajena esperado 42501, recibido 42501
+OK 010: maximo de intentos positivo esperado 22023, recibido 22023
+OK 010: ventana de disponibilidad esperado 22023, recibido 22023
+OK 010: creacion docente en borrador y autoria
+OK 010: listar actividades propias
+OK 010: administrador consulta
+OK 010: estudiante no consulta editorial esperado 42501, recibido 42501
+OK 010: publicar sin nivel esperado 55000, recibido 55000
+OK 010: actualizar borrador
+OK 010: publicar sin preguntas esperado 55000, recibido 55000
+OK 010: puntaje redondeado a cero esperado 22023, recibido 22023
+OK 010: crear pregunta
+OK 010: orden duplicado pregunta esperado 23505, recibido 23505
+OK 010: publicacion sin opciones esperado 55000, recibido 55000
+OK 010: opcion insuficiente esperado 55000, recibido 55000
+OK 010: orden duplicado opcion esperado 23505, recibido 23505
+OK 010: lectura editorial autorizada con clave
+OK 010: estudiante no ve clave editorial esperado 42501, recibido 42501
+OK 010: reordenacion opciones sin colision
+OK 010: opcion correcta reordenada
+OK 010: permutacion repetida esperado 22023, recibido 22023
+OK 010: permutacion incompleta esperado 22023, recibido 22023
+OK 010: actualizar opcion
+OK 010: multiple requiere dos correctas esperado 55000, recibido 55000
+OK 010: reordenar preguntas
+OK 010: nuevo orden pregunta
+OK 010: puntaje total excesivo esperado 55000, recibido 55000
+OK 010: publicacion fallida no cambia estado
+OK 010: permutacion con ID ajeno esperado 22023, recibido 22023
+OK 010: publicacion valida
+OK 010: pregunta publicada inmutable esperado 55000, recibido 55000
+OK 010: configuracion publicada no editable por API esperado 55000, recibido 55000
+OK 010: no eliminar publicada esperado 55000, recibido 55000
+OK 010: volver borrador sin historial
+OK 010: compatible con 007
+OK 010: cuestionario no expone claves
+OK 010: cuestionario no expone claves
+OK 010: no archivar con intento abierto esperado 55000, recibido 55000
+OK 010: calificacion real 20/20
+OK 010: historial no vuelve a borrador esperado 55000, recibido 55000
+OK 010: archivar conserva historial
+OK 010: copia valida permisos de destino esperado 42501, recibido 42501
+OK 010: duplicacion sin intentos
+OK 010: copia de preguntas
+OK 010: IDs nuevos y opciones copiadas
+OK 010: eliminar opcion borrador
+OK 010: eliminar pregunta y opciones
+OK 010: borrado completo de borrador
+OK 010: republicar conserva nota
+OK 010: admin no necesita asignacion docente
+OK 010: dificultad invalida esperado 22023, recibido 22023
+OK 010: fecha infinita rechazada esperado 22023, recibido 22023
+OK 010: ID no positivo esperado 22023, recibido 22023
+OK 010: actividad inexistente esperado P0002, recibido P0002
+OK 010: asignacion revocada esperado 42501, recibido 42501
+OK 010: editor revocado esperado 42501, recibido 42501
+OK 010: cuenta inactiva esperado 42501, recibido 42501
+OK 010: rol inactivo esperado 42501, recibido 42501
+OK 010: curso archivado no se escribe esperado 55000, recibido 55000
+OK 010: lectura editorial historica permitida
+OK 010: trigger protege borrado directo esperado 55000, recibido 55000
+PRUEBAS 010 COMPLETADAS.
+OK 010: REPEATABLE READ rechazado
+PASS entrega010/database/test/pruebas_migracion_010.sql notices 68
+OK 010: rol de pruebas limitado
+OK 010: sin escritura directa ni lectura directa de claves
+OK 010: auxiliar privado
+OK 010: estudiante no crea esperado 42501, recibido 42501
+OK 010: editor sin asignacion de seccion no crea esperado 42501, recibido 42501
+OK 010: docente no usa seccion ajena esperado 42501, recibido 42501
+OK 010: maximo de intentos positivo esperado 22023, recibido 22023
+OK 010: ventana de disponibilidad esperado 22023, recibido 22023
+OK 010: creacion docente en borrador y autoria
+OK 010: listar actividades propias
+OK 010: administrador consulta
+OK 010: estudiante no consulta editorial esperado 42501, recibido 42501
+OK 010: publicar sin nivel esperado 55000, recibido 55000
+OK 010: actualizar borrador
+OK 010: publicar sin preguntas esperado 55000, recibido 55000
+OK 010: puntaje redondeado a cero esperado 22023, recibido 22023
+OK 010: crear pregunta
+OK 010: orden duplicado pregunta esperado 23505, recibido 23505
+OK 010: publicacion sin opciones esperado 55000, recibido 55000
+OK 010: opcion insuficiente esperado 55000, recibido 55000
+OK 010: orden duplicado opcion esperado 23505, recibido 23505
+OK 010: lectura editorial autorizada con clave
+OK 010: estudiante no ve clave editorial esperado 42501, recibido 42501
+OK 010: reordenacion opciones sin colision
+OK 010: opcion correcta reordenada
+OK 010: permutacion repetida esperado 22023, recibido 22023
+OK 010: permutacion incompleta esperado 22023, recibido 22023
+OK 010: actualizar opcion
+OK 010: multiple requiere dos correctas esperado 55000, recibido 55000
+OK 010: reordenar preguntas
+OK 010: nuevo orden pregunta
+OK 010: puntaje total excesivo esperado 55000, recibido 55000
+OK 010: publicacion fallida no cambia estado
+OK 010: permutacion con ID ajeno esperado 22023, recibido 22023
+OK 010: publicacion valida
+OK 010: pregunta publicada inmutable esperado 55000, recibido 55000
+OK 010: configuracion publicada no editable por API esperado 55000, recibido 55000
+OK 010: no eliminar publicada esperado 55000, recibido 55000
+OK 010: volver borrador sin historial
+OK 010: compatible con 007
+OK 010: cuestionario no expone claves
+OK 010: cuestionario no expone claves
+OK 010: no archivar con intento abierto esperado 55000, recibido 55000
+OK 010: calificacion real 20/20
+OK 010: historial no vuelve a borrador esperado 55000, recibido 55000
+OK 010: archivar conserva historial
+OK 010: copia valida permisos de destino esperado 42501, recibido 42501
+OK 010: duplicacion sin intentos
+OK 010: copia de preguntas
+OK 010: IDs nuevos y opciones copiadas
+OK 010: eliminar opcion borrador
+OK 010: eliminar pregunta y opciones
+OK 010: borrado completo de borrador
+OK 010: republicar conserva nota
+OK 010: admin no necesita asignacion docente
+OK 010: dificultad invalida esperado 22023, recibido 22023
+OK 010: fecha infinita rechazada esperado 22023, recibido 22023
+OK 010: ID no positivo esperado 22023, recibido 22023
+OK 010: actividad inexistente esperado P0002, recibido P0002
+OK 010: asignacion revocada esperado 42501, recibido 42501
+OK 010: editor revocado esperado 42501, recibido 42501
+OK 010: cuenta inactiva esperado 42501, recibido 42501
+OK 010: rol inactivo esperado 42501, recibido 42501
+OK 010: curso archivado no se escribe esperado 55000, recibido 55000
+OK 010: lectura editorial historica permitida
+OK 010: trigger protege borrado directo esperado 55000, recibido 55000
+PRUEBAS 010 COMPLETADAS.
+OK 010: REPEATABLE READ rechazado
+PASS revision009/base/database/test/pruebas_migracion_003.sql notices 47
+OK: No trasladar modulo a otro curso
+OK: Rechazar actividad con tema de otro curso
+OK: Publicacion sin preguntas
+OK: Publicacion con una opcion
+OK: Seleccion unica con dos correctas
+OK: Seleccion multiple con una correcta
+OK: Publicacion valida
+OK: Proteger pregunta publicada
+OK: Proteger opciones publicadas
+OK: Cuenta inactiva no inicia
+OK: Rol desactivado no inicia
+OK: Inscripcion retirada no inicia
+OK: Seccion incorrecta no inicia
+OK: Actividad en borrador no inicia
+OK: Disponibilidad futura no inicia
+OK: Disponibilidad terminada no inicia
+OK: Pruebas bajo el rol del backend
+OK: Escritura directa bloqueada
+OK: Clave de correccion no legible directamente
+OK: No iniciar para otro estudiante
+OK: Inicio, plazo y cuatro respuestas vacias
+OK: No duplicar intento abierto
+OK: No calificar intento abierto
+OK: Guardar seleccion unica
+OK: Reemplazar seleccion
+OK: Limpiar seleccion
+OK: No admitir varias en seleccion unica
+OK: No admitir opcion de otra pregunta
+OK: No admitir opciones repetidas
+OK: No admitir elementos NULL
+OK: No guardar respuesta ajena
+OK: Entrega manual repetible sin cambiar fecha
+OK: No guardar despues de entregar
+OK: Cero por incorrecta, incompleta, opciones extra y respuesta vacia
+OK: Recalificar conserva fecha y puntaje
+OK: Intento abierto excluido del promedio
+OK: Entregado sin calificar excluido del promedio
+OK: Seleccion exacta, promedio 50 y practica sin nota academica
+OK: Limite de intentos agotado
+OK: Evaluacion con nota academica 100
+OK: No volver a borrador con intentos
+OK: No cambiar maximo con intentos
+OK: Archivar actividad con intentos
+OK: No guardar despues del vencimiento
+OK: Entrega solicitada despues de vencer
+OK: Calificar entrega vencida sin respuestas
+PRUEBAS 003 COMPLETADAS: todos los casos incluidos pasaron.
+PASS revision009/base/database/test/pruebas_migracion_004.sql notices 8
+OK 1: rol y permisos basicos.
+OK 2: inscripcion autonoma.
+OK 3: duplicado rechazado; se conserva una inscripcion.
+OK 4: estudiante no puede inscribir a otra persona.
+OK 5: inscripcion administrativa.
+OK 6: cupo lleno rechazado incluso para administrador.
+OK 7: un cupo y una inscripcion activa; sin inscripciones residuales.
+PRUEBAS 004 COMPLETADAS: todos los casos basicos incluidos pasaron.
+PASS revision009/base/database/test/pruebas_migracion_005.sql notices 8
+OK 1: permisos restringidos y funcion auxiliar privada.
+OK 2: autorizacion y creacion en BORRADOR.
+OK 3: restricciones, consultas y paginacion.
+OK 4: edicion, activacion y repeticion.
+OK 5: archivado con edicion PLANIFICADA rechazado.
+OK 6: baja logica, historial conservado y bloqueos posteriores.
+OK 7: rol desactivado rechazado.
+PRUEBAS 005 COMPLETADAS: todos los casos incluidos pasaron.
+PASS revision009/base/database/test/pruebas_migracion_006.sql notices 4
+OK 1: permisos, creacion docente/admin, listados y total_temas.
+OK 2: rechazo estudiante en 12 operaciones, orden, campos, estados y dependencias.
+OK 3: revocacion de cuenta/rol/editor, dependencias y borrado valido.
+PRUEBAS 006 COMPLETADAS: todos los casos incluidos pasaron.
+PASS revision009/base/database/test/pruebas_migracion_007.sql notices 73
+OK 007: pruebas ejecutadas como backend
+OK 007: EXECUTE listar_modulos_publicados_estudiante(integer,integer)
+OK 007: EXECUTE listar_temas_publicados_estudiante(integer,integer)
+OK 007: EXECUTE listar_actividades_publicadas_estudiante(integer,integer,integer)
+OK 007: EXECUTE obtener_cuestionario_estudiante(integer,integer)
+OK 007: helper privado
+OK 007: sin lectura directa de es_correcta
+OK 007: sin nuevas escrituras directas
+OK 007: propietario, snapshot y search_path
+OK 007: sin EXECUTE a PUBLIC
+OK 007: solo modulos publicados sin duplicar por dos inscripciones
+OK 007: contador excluye borradores y archivados
+OK 007: modulo publicado sin temas
+OK 007: solo temas publicados
+OK 007: lista vacia valida
+OK 007: rechazo sin_inscripcion (esperado 42501, recibido 42501)
+OK 007: rechazo admin (esperado 42501, recibido 42501)
+OK 007: rechazo docente (esperado 42501, recibido 42501)
+OK 007: curso ajeno (esperado 42501, recibido 42501)
+OK 007: 006 sigue siendo administrativa (esperado 42501, recibido 42501)
+OK 007: padre no publicado modulo_borrador (esperado P0002, recibido P0002)
+OK 007: padre no publicado modulo_archivado (esperado P0002, recibido P0002)
+OK 007: tema oculto tema_borrador (esperado P0002, recibido P0002)
+OK 007: tema oculto tema_archivado (esperado P0002, recibido P0002)
+OK 007: tema oculto tema_padre_oculto (esperado P0002, recibido P0002)
+OK 007: actividades limitadas a la seccion de inscripcion
+OK 007: ventana actual
+OK 007: metadatos visibles, ventana no disponible futura
+OK 007: metadatos visibles, ventana no disponible cerrada
+OK 007: tema sin actividades
+OK 007: aislamiento entre ediciones del mismo estudiante
+OK 007: inscripcion de otro estudiante (esperado 42501, recibido 42501)
+OK 007: parametro invalido (esperado 22023, recibido 22023)
+OK 007: parametro invalido (esperado 22023, recibido 22023)
+OK 007: parametro invalido (esperado 22023, recibido 22023)
+OK 007: parametro invalido (esperado 22023, recibido 22023)
+OK 007: modulo inexistente (esperado P0002, recibido P0002)
+OK 007: intento inexistente (esperado P0002, recibido P0002)
+OK 007: cuestionario y respuestas reales de iniciar_intento
+OK 007: opciones unica
+OK 007: opciones multiple
+OK 007: selecciones inicialmente vacias
+OK 007: lista cerrada de campos del cuestionario
+OK 007: opciones sin claves de correccion
+OK 007: no filtra explicaciones
+OK 007: intento ajeno (esperado 42501, recibido 42501)
+OK 007: recupera seleccion guardada propia
+OK 007: cuenta inactiva invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: cuenta inactiva invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: cuenta inactiva invalida listado de modulos (esperado 42501, recibido 42501)
+OK 007: cuenta inactiva invalida listado de temas (esperado 42501, recibido 42501)
+OK 007: rol inactivo invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: rol inactivo invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: rol inactivo invalida listado de modulos (esperado 42501, recibido 42501)
+OK 007: rol inactivo invalida listado de temas (esperado 42501, recibido 42501)
+OK 007: curso archivado invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: curso archivado invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: curso archivado invalida listado de modulos (esperado 42501, recibido 42501)
+OK 007: curso archivado invalida listado de temas (esperado 42501, recibido 42501)
+OK 007: seccion cancelada invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: seccion cancelada invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: edicion cancelada invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: edicion cancelada invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: inscripcion retirada invalida cuestionario (esperado 42501, recibido 42501)
+OK 007: inscripcion retirada invalida listado de actividades (esperado 42501, recibido 42501)
+OK 007: modulo archivado invalida cuestionario (esperado P0002, recibido P0002)
+OK 007: tema archivado invalida cuestionario (esperado P0002, recibido P0002)
+OK 007: actividad archivada invalida cuestionario (esperado P0002, recibido P0002)
+OK 007: sin ninguna inscripcion activa (esperado 42501, recibido 42501)
+OK 007: intento vencido (esperado 55000, recibido 55000)
+OK 007: intento entregado (esperado 55000, recibido 55000)
+OK 007: intento calificado (esperado 55000, recibido 55000)
+PRUEBAS 007 COMPLETADAS: todos los casos incluidos pasaron.
+PASS revision009/base/database/test/pruebas_migracion_008.sql notices 1
+PRUEBAS 008 COMPLETADAS: selector, contexto, tablero, motor y permisos.
+PASS revision_v1/base/database/test/pruebas_migracion_009.sql notices 35
+OK 009: sin historial no hay referencia
+OK 009: referencia sin intento propio esperado 42501, recibido 42501
+OK 009: solo referencia y tres niveles, sin futuras/cerradas/agotadas/abiertas/ocultas/ajenas
+OK 009: referencia media y repeticion ilimitada
+OK 009: candidata distinta sin intentos
+OK 009: referencia automatica ultimo calificado aun agotada
+OK 009: lecturas no crean intentos
+OK 009: EXECUTE backend
+OK 009: sin escritura directa nueva
+OK 009: sin soluciones directas
+OK 009: propietario y search_path
+OK 009: sin EXECUTE PUBLIC
+OK 009: actor ajeno esperado 42501, recibido 42501
+OK 009: inscripcion ajena esperado 42501, recibido 42501
+OK 009: referencia otro tema esperado 42501, recibido 42501
+OK 009: actor nulo esperado 22023, recibido 22023
+OK 009: inscripcion nula esperado 22023, recibido 22023
+OK 009: tema invalido esperado 22023, recibido 22023
+OK 009: referencia invalida esperado 22023, recibido 22023
+OK 009: tema inexistente esperado P0002, recibido P0002
+OK 009: nivel desconocido esperado 23514, recibido 23514
+OK 009: reclasificacion con intentos esperado 55000, recibido 55000
+OK 009: borrar nivel con intentos esperado 55000, recibido 55000
+OK 009: editable sin intentos
+OK 009: intento vencido abierto no es candidato
+OK 009: cuenta inactiva esperado 42501, recibido 42501
+OK 009: rol inactivo esperado 42501, recibido 42501
+OK 009: inscripcion retirada esperado 42501, recibido 42501
+OK 009: curso archivado esperado 42501, recibido 42501
+OK 009: padre oculto esperado P0002, recibido P0002
+OK 009: ultimo sin clasificar no reemplazado por referencia vieja
+OK 009: primera clasificacion unica con historial esperado 55000, recibido 55000
+OK 009: primera clasificacion habilita referencia
+OK 009: sin candidatas lista vacia
+PRUEBAS 009 COMPLETADAS.
+PASS entrega010/database/seeds/datos_prueba_gestion_cuestionarios_010.sql notices 1
+DEMO 010 creada: curso 18, seccion 21, tema 24, docente 5, estudiante 4. Sin intentos iniciales.
+OK usuarios y hashes intactos por seed
+PASS entrega010/database/seeds/datos_prueba_gestion_cuestionarios_010.sql notices 1
+Demo 010 existente: no se reinician contenido, intentos ni permisos.
+PASS entrega010/database/test/pruebas_seed_010.sql notices 1
+PRUEBAS SEED 010 COMPLETADAS: docente autorizado y lectura estudiante.
+OK seed reejecutable sin cambios
+PASS entrega011/database/security/002_cerrar_registro_directo.sql notices 0
+OK 011: cierre opcional y registro controlado
+PASS entrega011/database/test/pruebas_cierre_registro_011.sql notices 1
+PRUEBAS CIERRE 011 COMPLETADAS: registro controlado sin INSERT directo.

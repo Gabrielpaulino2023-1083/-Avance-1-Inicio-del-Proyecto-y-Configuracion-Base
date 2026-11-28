@@ -1,0 +1,74 @@
+Destino 010: base=bd_test009_sin010; usuario=postgres; search_path=pg_catalog, public
+Servidor: PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+ PREVALIDACION 010: la base bd_test009_sin010 no contiene las firmas requeridas: public.crear_actividad(INTEGER,INTEGER,INTEGER,TEXT,TEXT,TEXT,TEXT,INTEGER,INTEGER,TIMESTAMPTZ,TIMESTAMPTZ); public.listar_actividades_gestion(INTEGER,INTEGER,INTEGER); public.obtener_actividad_gestion(INTEGER,INTEGER); public.actualizar_actividad(INTEGER,INTEGER,TEXT,TEXT,TEXT,TEXT,INTEGER,INTEGER,TIMESTAMPTZ,TIMESTAMPTZ); public.publicar_actividad(INTEGER,INTEGER); public.cambiar_estado_actividad(INTEGER,INTEGER,TEXT); public.eliminar_actividad(INTEGER,INTEGER); public.crear_pregunta(INTEGER,INTEGER,TEXT,TEXT,INTEGER,NUMERIC,TEXT); public.listar_preguntas_gestion(INTEGER,INTEGER); public.obtener_pregunta_gestion(INTEGER,INTEGER); public.actualizar_pregunta(INTEGER,INTEGER,TEXT,TEXT,INTEGER,NUMERIC,TEXT); public.eliminar_pregunta(INTEGER,INTEGER); public.crear_opcion_respuesta(INTEGER,INTEGER,TEXT,INTEGER,BOOLEAN); public.listar_opciones_gestion(INTEGER,INTEGER); public.obtener_opcion_gestion(INTEGER,INTEGER); public.actualizar_opcion_respuesta(INTEGER,INTEGER,TEXT,INTEGER,BOOLEAN); public.eliminar_opcion_respuesta(INTEGER,INTEGER); public.reordenar_preguntas(INTEGER,INTEGER,INTEGER[]); public.reordenar_opciones(INTEGER,INTEGER,INTEGER[]); public.duplicar_actividad(INTEGER,INTEGER,INTEGER,INTEGER,TEXT,TIMESTAMPTZ,TIMESTAMPTZ). No se crearon fixtures. Use una base nueva instalada con instalar_revision_010.sql; no reinstale sobre una base ya completada.
+
+VERIFICADO: 010 bd_test009_sin010 rechazo esperado sin ejecutar carreras
+Destino 010: base=bd_test011_corregida; usuario=postgres; search_path=pg_catalog, public
+Servidor: PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+ La carrera 010 debe ejecutarse en una base aislada instalada SOLO hasta 010. La 011 protege al ultimo administrador y cambia la limpieza de fixtures. El lanzador prepara bases separadas. No quite triggers.
+
+VERIFICADO: 010 bd_test011_corregida rechazo esperado sin ejecutar carreras
+/workspace/scratch/77d5a1d10717/entrega011/database/test/comprobar_entorno_concurrencia.cjs:5
+  if(!database) throw Error(`Falta DB_NAME. Las instrucciones anteriores podian usar $baseNueva sin definir. Use el lanzador ejecutar_concurrencia_010_011.ps1.`);
+                ^
+
+Error: Falta DB_NAME. Las instrucciones anteriores podian usar $baseNueva sin definir. Use el lanzador ejecutar_concurrencia_010_011.ps1.
+    at configuracionPrueba (/workspace/scratch/77d5a1d10717/entrega011/database/test/comprobar_entorno_concurrencia.cjs:5:23)
+    at Object.<anonymous> (/workspace/scratch/77d5a1d10717/entrega011/database/test/pruebas_concurrencia_011.cjs:9:11)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.3
+
+VERIFICADO: 011 bd_test011_corregida rechazo esperado sin ejecutar carreras
+/workspace/scratch/77d5a1d10717/entrega011/database/test/comprobar_entorno_concurrencia.cjs:7
+  if(process.env[flag]!=='SI') throw Error(`Falta ${flag}=SI para la prueba ${version}. Cada prueba usa su propia confirmacion. Use el lanzador.`);
+                               ^
+
+Error: Falta BD011_VALIDACION_AISLADA=SI para la prueba 011. Cada prueba usa su propia confirmacion. Use el lanzador.
+    at configuracionPrueba (/workspace/scratch/77d5a1d10717/entrega011/database/test/comprobar_entorno_concurrencia.cjs:7:38)
+    at Object.<anonymous> (/workspace/scratch/77d5a1d10717/entrega011/database/test/pruebas_concurrencia_011.cjs:9:11)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.3
+
+VERIFICADO: 011 bd_test011_corregida rechazo esperado sin ejecutar carreras
+Destino 010: base=bd_test010_corregida; usuario=postgres; search_path=pg_catalog, public
+Servidor: PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+OK CONCURRENCIA 010: Editar antes de publicar: serializacion correcta
+OK CONCURRENCIA 010: publicacion conserva la edicion confirmada
+OK CONCURRENCIA 010: Iniciar impide archivo concurrente: esperado 55000, recibido 55000
+OK CONCURRENCIA 010: Publicar impide nueva pregunta concurrente: esperado 55000, recibido 55000
+OK CONCURRENCIA 010: Revocacion antes de editar: esperado 42501, recibido 42501
+OK CONCURRENCIA 010: edicion revocada no cambia contenido
+PRUEBAS CONCURRENCIA 010 COMPLETADAS: cuatro carreras y dos verificaciones de contenido.
+Fixtures concurrentes eliminados. Las secuencias pueden avanzar.
+
+VERIFICADO: 010 bd_test010_corregida carreras aprobadas
+Destino 011: base=bd_test011_corregida; usuario=postgres; search_path=pg_catalog, public
+Servidor: PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+OK CONCURRENCIA 011: Desactivar dos administradores conserva uno: 55000, esperado 55000
+OK CONCURRENCIA 011: un administrador efectivo permanece
+OK CONCURRENCIA 011: Desactivar los dos roles conserva uno: 55000, esperado 55000
+OK CONCURRENCIA 011: Asignacion academica opuesta serializada: 55000, esperado 55000
+OK CONCURRENCIA 011: no existen dos roles academicos simultaneos
+OK CONCURRENCIA 011: Registro duplicado concurrente: 23505, esperado 23505
+OK CONCURRENCIA 011: un solo registro confirmado
+OK CONCURRENCIA 011: Bloquear cuenta impide cambio de perfil posterior: 42501, esperado 42501
+OK CONCURRENCIA 011: no cambia el perfil tras bloquear la cuenta
+PRUEBAS CONCURRENCIA 011 COMPLETADAS: cinco carreras y cuatro comprobaciones.
+Fixtures conservados en la base aislada. No usar sus cuentas para login ni reutilizar esta base para repetir la prueba.
+
+VERIFICADO: 011 bd_test011_corregida carreras aprobadas
+CORRECCION VERIFICADA: dos suites y cuatro rechazos de precondiciones.

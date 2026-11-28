@@ -1,227 +1,121 @@
-# Base de datos — Plataforma educativa
+# Base de datos — plataforma educativa
 
-Estado documental: **13 de noviembre de 2026, BD-008-v1**.
-Este paquete cierra el SQL del Avance 3: lectura del estudiante, seed de integración
-y consultas para selector, dashboard y motor. Las migraciones 001–006 están en main.
-La 007, el seed y la 008 se verificaron localmente. El paquete está listo para revisión y publicación mediante PR.
+Entrega consolidada **010/011 para revisión**, posterior a la base main a8accad8f494c5050564e9dbd97535479e98d407. Los archivos de esta entrega se prepararon localmente; no se publicaron ni se ejecutaron sobre el servidor del equipo.
 
-## Referencias para el equipo
+**Estado comprobado:** 010 y 011 tienen pruebas funcionales y concurrentes locales aprobadas, confirmadas por Jeison. Las operaciones SQL están disponibles tras instalarlas; los endpoints y pantallas de gestión editorial y de INC-09 necesitan integración del backend/frontend. El cierre del registro directo está preparado, pero no se aplica todavía.
 
-| Documento | Uso |
+## Documentos vigentes
+
+| Documento | Contenido |
 |---|---|
-| [Lectura del estudiante](docs/LECTURA_ESTUDIANTES_007.md) | Módulos, temas, actividades y cuestionarios |
-| [Consultas de integración](docs/CONSULTAS_INTEGRACION_008.md) | Selector, resultados, progreso, minutos y motor |
-| [Seed SQL](docs/SEED_INTEGRACION_RESULTADOS.md) | Datos y pasos para reproducir el escenario SQL JOIN |
-| [Evidencia HTTP](test/RESULTADO_VALIDACION_SEED_INTEGRACION.md) | Validación local del seed y solicitud desde navegador |
-| [Contrato de integración](docs/CONTRATO_INTEGRACION_BD.md) | Reglas, funciones, permisos, límites e instrucciones para agentes |
-| [Diccionario de datos](docs/DICCIONARIO_DATOS_BD.md) | Tipos exactos, nulabilidad, defaults, restricciones y propuestas de serialización |
-| [CRUD de módulos y temas](docs/CRUD_MODULOS_TEMAS_AVANCE_3.md) | Funciones de 006, permisos por curso y seed docente |
-| [Evidencia de 006](test/RESULTADO_VALIDACION_006.md) | Regresiones, prueba del seed y límites |
-| [CRUD de cursos](docs/CRUD_CURSOS_AVANCE_3.md) | Firmas SQL, estados, errores y ejemplos para Express |
-| [Evidencia de 005](test/RESULTADO_VALIDACION_005.md) | Validación automatizada y verificaciones locales reportadas |
+| [Contrato de integración](docs/CONTRATO_INTEGRACION_BD.md) | Permisos, operaciones, seguridad y responsabilidades |
+| [Diccionario](docs/DICCIONARIO_DATOS_BD.md) | Tipos y restricciones; incluido el retorno seguro de 011 |
+| [Cuestionarios 010](docs/GESTION_CUESTIONARIOS_010.md) | Gestión editorial, publicación, copia, estados y claves |
+| [Firmas 010](docs/FIRMAS_010.md) | Parámetros y retornos exactos |
+| [Usuarios 011](docs/USUARIOS_ROLES_011.md) | INC-09, roles, transiciones y registro en dos fases |
+| [Firmas 011](docs/FIRMAS_USUARIOS_011.md) | Parámetros y retornos exactos |
+| [Entrega 010/011](docs/ENTREGA_010_011.md) | Qué se validó y qué falta integrar |
 
-Las migraciones son la fuente del esquema. El contrato explica el comportamiento.
-El diccionario SQL no sustituye los DTOs ni la especificación OpenAPI del backend.
+Las guías de 005–009 ya presentes en el repositorio siguen siendo referencias operativas para sus funciones. El contrato histórico 009 se conserva separado y no es la fuente del estado actual.
 
-## Qué existe
+## Estructura y migraciones
 
-Tras aplicar 001–006 y seguridad: **17 tablas, 1 vista, 31 funciones propias y 9 triggers**,
-sin contar extensiones ni objetos auxiliares de pruebas. Hay 22 funciones operativas,
-seis funciones de trigger y tres auxiliares privadas.
+Después de instalar 001–011 y seguridad: **17 tablas, 94 funciones propias, 15 triggers, una vista de resultados y un tipo compuesto de retorno creado en 011**. No se cuentan extensiones, tipos fila automáticos ni auxiliares temporales de pruebas.
 
-- Usuarios, roles múltiples y asignaciones.
-- Cursos, ediciones, secciones, docentes, editores e inscripciones.
-- Módulos y temas.
-- Actividades, preguntas de selección única/múltiple y opciones.
-- Intentos, respuestas, entrega, calificación exacta y promedio de calificados.
-- Inscripción autónoma/administrativa mediante función y control de cupos.
-- Cursos: crear, listar, consultar, editar, activar y archivar mediante funciones.
-
-008 deriva el progreso de las actividades publicadas/calificadas; no lo almacena en otra tabla.
-No hay aún navegación, historial de recomendaciones ni cierre programado de intentos.
-La vista de resultados por actividad no equivale a una nota final del curso.
-
-## Estado y evidencia
-
-| Elemento | Estado |
+| Migración | Responsabilidad |
 |---|---|
-| Migraciones 001–004 | Publicadas en main; PR #7 integró 004 el 9 de noviembre |
-| Migración 005, seed admin y documentación | Publicados en main mediante PR #9 |
-| Migración 006 y seed docente | Publicados en main; instalación, login y CRUD HTTP docente comprobados localmente |
-| 007 y seed SQL | Pruebas locales aprobadas |
-| Recomendación SQL JOIN | HTTP 200 desde el navegador; métricas de tarjeta pendientes de corrección |
-| 008 | Pruebas SQL aprobadas en PGlite y PostgreSQL local; integración HTTP pendiente |
-| Instalación 001–005 y regresiones 003–005 | Ejecutadas sin errores inesperados en PostgreSQL embebido PGlite |
-| 005 y pruebas en PostgreSQL local | Ejecución correcta confirmada por el responsable |
-| Seed administrativo | Ejecución correcta confirmada por el responsable |
-| Login y /api/auth/me de estudiante y administrador | Respuestas success=true con sus roles, compartidas por el responsable |
-| Cuenta de conexión Express | Cambio reportado a plataforma_backend; verificar current_user desde el pool para evidencia directa |
-| Endpoints HTTP y pantallas de cursos | Pendientes de integración y prueba conjunta |
-| Instalación local desde cero de todo 001–005 | Prueba completada correctamente |
+| 001 | Usuarios, roles, cursos, ediciones, secciones, asignaciones e inscripciones |
+| 002 | Módulos y temas |
+| 003 | Actividades, cuestionarios, intentos, respuestas, entrega y calificación |
+| Seguridad 001 | Roles PostgreSQL y privilegios iniciales |
+| 004 | Inscripción autónoma/administrativa y cupos |
+| 005 | Administración de cursos |
+| 006 | Gestión de módulos y temas |
+| 007 | Lecturas del estudiante sin claves |
+| 008 | Selector, resultados, progreso, minutos e interacciones del motor |
+| 009 | Dificultad y candidatas autorizadas |
+| 010 | Gestión docente de actividades, preguntas y opciones |
+| 011 | Gestión de usuarios/roles, registro controlado y protecciones de identidad |
 
-Validación local confirmada: la migración 006, sus pruebas y el seed docente se ejecutaron correctamente en PostgreSQL local. El login y /api/auth/me de docente.demo@example.com devolvieron el resultado esperado con rol DOCENTE. El CRUD docente por HTTP se verificó con un curso autorizado; sigue pendiente el recorrido completo desde frontend con el selector real.
+No reescribir migraciones publicadas. La secuencia nueva es **001 → 002 → 003 → seguridad → 004 → … → 011**. Las migraciones se aplican una vez por base. No existe un ejecutor automático de versiones ni un script que adivine el historial aplicado; registrarlo por entorno. El merge no ejecuta SQL.
 
 ## Instalación
 
-Requisitos: PostgreSQL en ejecución, psql y una cuenta administrativa para instalar.
-Registrar `SELECT version();`. No se declara una versión mínima probada en múltiples versiones.
-Ejecutar desde la raíz del repositorio y usar archivos UTF-8.
+Requiere PostgreSQL, psql, Node para concurrencia y pg instalado como dependencia del backend. Instalar como cuenta administradora; Express usa plataforma_backend.
 
-En una base nueva, conectarse como administrador y ejecutar en este orden:
+### Base nueva
+
+El instalador encadena 001–011 en orden y rechaza una base con tablas públicas. No carga seeds ni cierra el registro antiguo.
+
+```powershell
+$baseNueva = 'proyectofinal_revision011_' + (Get-Date -Format 'yyyyMMdd_HHmmss')
+createdb -U postgres $baseNueva
+if ($LASTEXITCODE -ne 0) { throw 'No se pudo crear la base.' }
+psql -X -U postgres -d $baseNueva -v ON_ERROR_STOP=1 -f database/test/instalar_revision_011.sql
+if ($LASTEXITCODE -ne 0) { throw 'La instalacion fallo; revisar antes de seguir.' }
+```
+
+### Base existente
+
+Respaldar antes de actualizar y aplicar solo lo pendiente. Si ya se validaron 010 y 011, no reinstalarlas. Consultar los objetos de la base de destino y seguir LEEME_010.md / LEEME_011.md para las dependencias; comprobar firmas no sustituye pasar las pruebas.
 
 ```sql
-\set ON_ERROR_STOP on
-\encoding UTF8
-SET search_path = public;
-\i 'database/migrations/001_estructura_academica_inicial.sql'
-\i 'database/migrations/002_modulos_temas.sql'
-\i 'database/migrations/003_actividades_intentos_respuestas.sql'
-\i 'database/security/001_roles_permisos.sql'
-\i 'database/migrations/004_inscripcion_estudiantes.sql'
-\i 'database/migrations/005_crud_cursos.sql'
-\i 'database/migrations/006_crud_modulos_temas.sql'
-\i 'database/migrations/007_lectura_contenido_estudiantes.sql'
-\i 'database/migrations/008_consultas_integracion.sql'
+SELECT current_database(), current_user, version();
+SELECT to_regprocedure('public.publicar_actividad(integer,integer)') AS funcion_010,
+       to_regtype('public.usuario_resumen_011') AS tipo_011,
+       to_regprocedure('public.registrar_estudiante(text,text,text,text)') AS registro_011;
 ```
 
-004–008 requieren los roles del script de seguridad. No ejecutar todos los archivos de
-migrations antes de seguridad. Las migraciones estructurales se aplican una sola vez por base.
-No existe aún un ejecutor ni tabla de versiones: registrar los archivos aplicados por entorno.
-
-En la base de desarrollo ya validada hasta 007, aplicar solo 008:
-
-```powershell
-psql -X -U postgres -d proyectofinal_db -v ON_ERROR_STOP=1 -f database/migrations/008_consultas_integracion.sql
-```
-
-No reinstalar migraciones que ya terminaron correctamente. Si un archivo falla, detenerse;
-en una sesión interactiva con transacción abortada ejecutar ROLLBACK. Los archivos
-anteriores confirmados siguen aplicados. No borrar la base habitual para validar:
-crear una base independiente si se necesita repetir la instalación completa.
-
-## Datos de prueba
-
-| Archivo | Dependencia y propósito |
-|---|---|
-| seeds/datos_prueba.sql | Roles, usuarios ficticios, curso CALC-PRUEBA, ediciones, secciones e inscripción |
-| seeds/datos_prueba_modulos_temas.sql | Depende del anterior; dos módulos y cuatro temas |
-| seeds/datos_prueba_actividades_intentos.sql | Requiere administrador activo y rol ESTUDIANTE; crea demo autenticable y resultados |
-| seeds/datos_prueba_docente.sql | Después de 006; requiere administrador y rol DOCENTE, crea curso DEMO-006 y editor |
-| seeds/datos_prueba_integracion_resultados.sql | Después de 007, usa el estudiante demo existente y agrega DEMO-SQL-007; reejecución sin duplicados |
-| seeds/datos_prueba_administrador.sql | Requiere administrador activo y rol ADMINISTRADOR; crea demo administrativa |
-
-Ejecutar los seeds como administrador; solo el seed SQL ampliado es reejecutable sin cambios. No forman parte de las migraciones ni
-deben ejecutarse automáticamente al iniciar Express. Los IDs se consultan; no se fijan.
-Las cuentas iniciales con HASH_FICTICIO_NO_USAR no sirven para login.
-
-Para generar hashes, desde backend con dependencias instaladas:
-
-```powershell
-node -e "console.log(require('bcryptjs').hashSync('DemoEquipo-2026!', 10))"
-node -e "console.log(require('bcryptjs').hashSync('AdminDemo-2026!', 10))"
-node -e "console.log(require('bcryptjs').hashSync('DocenteDemo-2026!', 10))"
-```
-
-Desde la raíz, solo para el seed todavía no cargado:
-
-```powershell
-chcp 65001
-$env:PGCLIENTENCODING = 'UTF8'
-psql -X -U postgres -d proyectofinal_db -f database/seeds/datos_prueba_actividades_intentos.sql
-psql -X -U postgres -d proyectofinal_db -f database/seeds/datos_prueba_administrador.sql
-psql -X -U postgres -d proyectofinal_db -f database/seeds/datos_prueba_docente.sql
-```
-
-Pegar el hash correspondiente cuando lo solicite cada archivo. No pegar todo el script
-interactivamente: el prompt puede consumir líneas. No confundir el hash con la contraseña de postgres.
-
-- Estudiante: estudiante.demo@example.com / DemoEquipo-2026!
-- Administrador: administrador.demo@example.com / AdminDemo-2026!
-- Docente: docente.demo@example.com / DocenteDemo-2026!
-
-Estas contraseñas son públicas, exclusivas de desarrollo, y solo corresponden si se usaron
-al generar los hashes. Los seeds no sobrescriben cuentas existentes ni son scripts de reinicio.
-No crean una cuenta docente con login. No usar datos reales ni estos seeds en producción.
-
-La demo académica crea DEMO-003, tres actividades con dos preguntas cada una: práctica con
-promedio 50, evaluación con nota 100 y práctica sin intentos. Nuevos intentos cambian los
-resultados. La disponibilidad dura un año desde la carga y los intentos 30 minutos.
-Las actividades sin intentos no aparecen en resultados_actividades: usar LEFT JOIN para listados completos.
-
-## Conexión de Express
-
-Usar plataforma_backend, nunca postgres como conexión habitual. Definir la contraseña del rol
-con `\password plataforma_backend` desde psql administrativo y configurar localmente
-DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD y JWT_SECRET según los archivos de backend.
-Reiniciar el proceso al cambiar .env. No compartir .env, tokens ni contraseñas de infraestructura.
-Los roles SQL pertenecen al servidor; cada compañero debe configurar y aplicar el esquema en su entorno.
-
-La cuenta administradora de la aplicación es un usuario de usuarios con rol ADMINISTRADOR.
-No es una cuenta PostgreSQL ni un superusuario. Express pasa el actor tomado del JWT verificado;
-la función comprueba cuenta y asignación activas. El frontend no puede elegir ese actor.
-
-El registro público permanece ESTUDIANTE. Los roles existentes admiten múltiples asignaciones,
-pero su política de alternancia estudiante/docente aún debe cerrarse. No conceder permisos
-amplios ni usar postgres para resolver una operación faltante.
+Usar siempre -h/-p/-d explícitos si hay varios servidores. psql y Node deben apuntar al mismo destino. Un error de tipo o función ausente en otra base no se corrige repitiendo una migración ya instalada en la primera.
 
 ## Pruebas
 
-Como postgres, sin una transacción abierta:
+Pruebas funcionales propias de 010/011: fixtures SQL y ROLLBACK; no requieren seeds. Las secuencias pueden avanzar. Usar postgres sin transacción abierta; las pruebas cambian internamente a plataforma_backend.
 
-```sql
-\set ON_ERROR_STOP on
-\i 'database/test/pruebas_migracion_003.sql'
-\i 'database/test/pruebas_migracion_004.sql'
-\i 'database/test/pruebas_migracion_005.sql'
-\i 'database/test/pruebas_migracion_006.sql'
+```powershell
+psql -X -U postgres -d TU_BASE -v ON_ERROR_STOP=1 -f database/test/pruebas_migracion_010.sql
+# Continuar solo si termino correctamente:
+psql -X -U postgres -d TU_BASE -v ON_ERROR_STOP=1 -f database/test/pruebas_migracion_011.sql
 ```
 
-003 y 004 deben ejecutarse con los fixtures/seeds que esperan sus archivos. 005 y 006 crean sus
-propios fixtures y no depende de seeds. Las pruebas consolidadas revierten los cambios al
-terminar; las secuencias pueden avanzar. Se conservan también pruebas_restricciones.sql,
-pruebas_temas_modulos.sql y pruebas_permisos.sql; revisar sus instrucciones y errores esperados.
-No confundir errores esperados de pruebas manuales con un fallo inesperado de la regresión.
+Concurrencia: usar únicamente el lanzador corregido. Crea bases separadas, instala 010/011 según el caso y configura las variables. No depende de $baseNueva ni reutiliza desarrollo.
 
-006 debe imprimir `PRUEBAS 006 COMPLETADAS: todos los casos incluidos pasaron.` y ROLLBACK.
-Si falla, conservar el error y corregir la causa antes de continuar. No deshabilitar triggers.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\database\test\ejecutar_concurrencia_010_011.ps1
+```
 
-## Cierre e integración
+La política de ejecución se aplica solo a ese proceso. Se piden credenciales con Get-Credential y se restauran las variables del entorno al finalizar. La prueba 010 limpia sus fixtures; la 011 los conserva en su base descartable para respetar al último administrador. No desactivar triggers para limpiarla.
 
-- Publicar este paquete mediante PR; la prueba local de 008 ya pasó.
-- Backend: conectar lecturas 007, operaciones de intentos de 003 y consultas de 008.
-- Frontend: usar las métricas reales de recomendación, el selector de curso y los contratos HTTP.
-- Fuera del avance: historial de recomendaciones, navegación, cierre de intentos abandonados y concurrencia.
+Regresiones 003–009: conservar sus fixtures/seeds y seguir las instrucciones de cada archivo. Las pruebas funcionales, concurrentes y la integración HTTP son evidencias distintas. Logs del asistente: test/concurrencia_postgresql_18_6.log, test/validacion_postgresql_18_6.log y test/correccion_prevalidacion_linux.log. La validación Windows está registrada como confirmación de Jeison; guardar los logs finales de su equipo por separado.
 
-## Cambios y mantenimiento
+## Datos de demostración
 
-No reescribir migraciones ya adoptadas; usar cambios incrementales. Mantener SECURITY DEFINER,
-propietario y search_path al modificar funciones. Preservar las restricciones y el historial.
-Los textos dañados por codificación se repararon localmente: ese procedimiento excepcional
-no forma parte del despliegue. Cambiar client_encoding no repara texto previamente dañado.
+| Seed | Dependencia / propósito |
+|---|---|
+| datos_prueba.sql | Catálogos y escenario inicial; hashes ficticios de algunas cuentas no sirven para login |
+| datos_prueba_modulos_temas.sql | Módulos/temas del escenario inicial |
+| datos_prueba_actividades_intentos.sql | Estudiante autenticable, actividades e intentos; requiere hash bcrypt |
+| datos_prueba_administrador.sql | Administrador demo autenticable |
+| datos_prueba_docente.sql | Docente demo y curso DEMO-006 |
+| datos_prueba_integracion_resultados.sql | Tres temas SQL y resultados históricos |
+| datos_prueba_dificultad_009.sql | Referencia y actividades BAJA/MEDIA/ALTA; reutiliza estudiante |
+| datos_prueba_gestion_cuestionarios_010.sql | Curso separado, doble asignación docente y prácticas creadas por funciones |
 
-El merge no ejecuta SQL. Cada integrante aplica solo lo pendiente y prueba su entorno.
+No cargar todos automáticamente al iniciar Express. Seguir dependencias y prompts de cada seed; ejecutar como administrador. Los seeds reejecutables conservan contenido e intentos y no son herramientas de reinicio. No asumir IDs fijos. Elegir y verificar el escenario oficial antes de centralizar.
 
-## Entrega 006 — alcance inmediato
+Las cuentas demo siguen siendo las existentes; 010/011 no cambian sus contraseñas. Generar hashes con bcryptjs siguiendo las guías anteriores; no publicar .env, tokens, passwords PostgreSQL o hashes reales de usuarios.
 
-La guía [CRUD_MODULOS_TEMAS_AVANCE_3.md](docs/CRUD_MODULOS_TEMAS_AVANCE_3.md) detalla las doce
-funciones nuevas, SQLSTATE, tipos de retorno y ejemplos. El administrador opera sobre todos los
-cursos y el docente solo con curso_editores activo. Borrado físico solo en borrador sin hijos;
-23505 en orden repetido y 55000 en dependencias. Las escrituras en curso archivado se rechazan.
+## Seguridad y transición de registro
 
-El frontend debe enviar el curso seleccionado, no fijar ID 1. El backend adapta total_temas
-(BIGINT) a totalTemas y mantiene el actor del JWT. No se crearon endpoints ni pantallas.
-Las pruebas SQL, el seed y el CRUD HTTP docente se verificaron. El recorrido desde frontend
-con el curso seleccionado sigue pendiente. No repetir el seed docente ya cargado.
+- Roles de aplicación: ESTUDIANTE, DOCENTE, ADMINISTRADOR; distintos de los roles PostgreSQL.
+- Express: plataforma_backend; propietario operativo de funciones: plataforma_operaciones NOLOGIN. No usar postgres como cuenta habitual de Express.
+- Las funciones editoriales 010 exigen editor del curso y docente de la sección; un rol docente aislado no basta.
+- 011 bloquea ESTUDIANTE+DOCENTE activos y protege al último administrador efectivo, también frente a SQL directo. ADMINISTRADOR puede coexistir con uno académico.
+- No se amplían escrituras directas sobre cuestionarios. La lectura editorial de claves requiere autorización; 007 no las devuelve.
+- 011 mantiene temporalmente INSERT de registro para compatibilidad. security/002_cerrar_registro_directo.sql solo se aplica cuando backend ya usa registrar_estudiante y registro/login se comprobaron. No forma parte del instalador.
+- Tras el cierre, no reaplicar security/001_roles_permisos.sql como si fuera un script idempotente de permisos: volvería a habilitar los INSERT antiguos.
+- No hay RLS: el rol compartido y las funciones no sustituyen la autenticación del backend. Revalidar cuenta/roles actuales, no confiar solo en un JWT anterior a una revocación.
 
+## Lo que sigue pendiente
 
-
-
-## Ampliación propuesta BD-009-v1 — 22 de noviembre de 2026
-
-Estado: validación embebida aprobada e instalación y pruebas en base nueva y base local confirmadas por Jeison; pendiente de aprobación del equipo e integración HTTP. Esta sección amplía el contenido anterior, cuyo estado histórico se conserva.
-
-La migración `009_dificultad_candidatas.sql` agrega `actividades.dificultad` (TEXT nullable, BAJA/MEDIA/ALTA, sin default) y `listar_candidatas_actividad(integer, integer, integer, integer DEFAULT NULL)`. Las actividades anteriores quedan sin clasificar; no se alteran notas, credenciales ni firmas de 007/008. La selección según reduced/current/increased se hace en el backend con referencia relativa y el ejemplo JavaScript suministrado.
-
-[Reglas, tipos devueltos, permisos, seed, instalación aislada y responsabilidades de integración](docs/DIFICULTAD_ACTIVIDADES_009.md). [Resultados de validación](test/RESULTADO_VALIDACION_009.md). No interpretar esta propuesta como funcionalidad ya disponible en endpoints o pantallas.
-
-La guía 009 incluye dos rutas de instalación: base nueva y actualización de una base local con 001–008. Si 009 ya se aplicó correctamente, no volver a ejecutarla.
+Integración HTTP de 010/INC-09 y sus evidencias; cierre de registro cuando corresponda; operaciones de ediciones/secciones/asignaciones e inscripciones; consistencia/cierre de intentos y métricas; base central por red privada; datos oficiales; respaldo y restauración comprobados en otra computadora. Los pendientes se enumeran en esta sección. No se declara completada toda la BD v1 ni desplegada la base central.
