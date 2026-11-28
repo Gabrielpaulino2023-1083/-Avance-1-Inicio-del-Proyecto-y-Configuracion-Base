@@ -1,0 +1,132 @@
+\set ON_ERROR_STOP on
+\encoding UTF8
+BEGIN;
+SET LOCAL search_path=pg_catalog,public,pg_temp;
+CREATE TEMP TABLE contexto011(k TEXT PRIMARY KEY,v INTEGER) ON COMMIT DROP;
+GRANT SELECT,INSERT ON contexto011 TO plataforma_backend;
+CREATE FUNCTION pg_temp.id011(x TEXT) RETURNS INTEGER LANGUAGE sql AS 'SELECT v FROM pg_temp.contexto011 WHERE k=x';
+CREATE FUNCTION pg_temp.hash011() RETURNS TEXT LANGUAGE sql AS $$SELECT '$2b$10$'||repeat('A',53)$$;
+CREATE FUNCTION pg_temp.ok011(b BOOLEAN,m TEXT) RETURNS VOID LANGUAGE plpgsql AS $$BEGIN IF b IS DISTINCT FROM TRUE THEN RAISE EXCEPTION 'FALLO 011: %',m; END IF;RAISE NOTICE 'OK 011: %',m;END;$$;
+CREATE FUNCTION pg_temp.error011(q TEXT,c TEXT,m TEXT) RETURNS VOID LANGUAGE plpgsql AS $$DECLARE actual TEXT; BEGIN BEGIN EXECUTE q;EXCEPTION WHEN OTHERS THEN GET STACKED DIAGNOSTICS actual=RETURNED_SQLSTATE;END;PERFORM pg_temp.ok011(actual IS NOT DISTINCT FROM c,m||' esperado '||c||', recibido '||coalesce(actual,'sin error'));END;$$;
+INSERT INTO roles(codigo,nombre) VALUES('ADMINISTRADOR','Administrador'),('DOCENTE','Docente'),('ESTUDIANTE','Estudiante') ON CONFLICT(codigo) DO NOTHING;
+DO $$DECLARE uid INTEGER;BEGIN
+ INSERT INTO usuarios(nombre,apellido,email,password_hash) VALUES('Admin','Fixture','qa011-admin-'||txid_current()||'@example.com','FICTICIO_NO_LOGIN') RETURNING usuarios.id INTO uid;
+ INSERT INTO usuario_roles(usuario_id,rol_id,asignado_por) SELECT uid,r.id,uid FROM roles r WHERE codigo='ADMINISTRADOR';
+ INSERT INTO contexto011 VALUES('admin',uid);
+END;$$;
+SET LOCAL ROLE plataforma_backend;
+DO $$
+DECLARE ad INTEGER:=pg_temp.id011('admin');u public.usuario_resumen_011;v public.usuario_resumen_011;w public.usuario_resumen_011;mail TEXT:='qa011-'||txid_current()||'@example.com';ts TIMESTAMPTZ;
+BEGIN
+ PERFORM pg_temp.ok011(current_user='plataforma_backend','rol limitado');
+ PERFORM pg_temp.ok011(NOT has_table_privilege(current_user,'usuarios','UPDATE') AND NOT has_table_privilege(current_user,'usuario_roles','DELETE'),'sin UPDATE/DELETE directo');
+ PERFORM pg_temp.ok011(NOT has_function_privilege(current_user,'public.g011_resumen(integer)','EXECUTE'),'resumen auxiliar privado');
+ u:=registrar_estudiante(' Nuevo ',' Usuario ',upper(mail),pg_temp.hash011());
+ INSERT INTO contexto011 VALUES('usuario',u.id);
+ PERFORM pg_temp.ok011(u.nombre='Nuevo' AND u.email=mail AND u.roles_activos=ARRAY['ESTUDIANTE']::TEXT[] AND u.rol_principal='ESTUDIANTE','registro siempre estudiante y normaliza datos');
+ PERFORM pg_temp.ok011(NOT (to_jsonb(u)?'password_hash') AND NOT (to_jsonb(u)?'passwordHash'),'no devuelve hash');
+ PERFORM pg_temp.error011(format('SELECT registrar_estudiante(''N'',''A'',%L,%L)',upper(mail),pg_temp.hash011()),'23505','email unico sin distinguir mayusculas');
+ PERFORM pg_temp.error011(format('SELECT registrar_estudiante(''N'',''A'',''sin-correo'',%L)',pg_temp.hash011()),'22023','correo invalido');
+ PERFORM pg_temp.error011(format('SELECT registrar_estudiante(''N'',''A'',''otro@example.com'',''texto-plano'')'),'22023','password plano rechazado');
+ PERFORM pg_temp.error011(format('SELECT registrar_estudiante(%L,''A'',''otro@example.com'',%L)',repeat('N',51),pg_temp.hash011()),'22023','nombre largo');
+ PERFORM pg_temp.ok011((obtener_usuario(u.id,u.id)).id=u.id,'consulta propia');
+ PERFORM pg_temp.error011(format('SELECT obtener_usuario(%s,%s)',u.id,ad),'42501','no consulta usuario ajeno');
+ PERFORM pg_temp.error011(format('SELECT * FROM listar_usuarios_admin(%s)',u.id),'42501','no lista sin admin');
+ PERFORM pg_temp.ok011((SELECT count(*)=1 FROM listar_usuarios_admin(ad,NULL,'ESTUDIANTE',mail,10,0)),'filtro de rol y busqueda');
+ PERFORM pg_temp.ok011((SELECT count(*)=0 FROM listar_usuarios_admin(ad,NULL,NULL,'QA011-NO-EXISTE',10,0)),'busqueda vacia');
+ PERFORM pg_temp.error011(format('SELECT * FROM listar_usuarios_admin(%s,NULL,NULL,NULL,201,0)',ad),'22023','limite de paginacion');
+ PERFORM pg_temp.error011(format('SELECT crear_usuario_admin(%s,''N'',''A'',''noadmin@example.com'',%L,''DOCENTE'')',u.id,pg_temp.hash011()),'42501','no crear docente sin admin');
+ v:=crear_usuario_admin(ad,'Docente','Fixture','qa011-doc-'||txid_current()||'@example.com',pg_temp.hash011(),'DOCENTE');
+ INSERT INTO contexto011 VALUES('docente',v.id);
+ PERFORM pg_temp.ok011(v.rol_principal='DOCENTE','crear docente administrativo');
+ PERFORM pg_temp.error011(format('SELECT asignar_rol_usuario(%s,%s,''DOCENTE'')',ad,u.id),'55000','asignar opuesto sin desactivar rechazado');
+ u:=cambiar_rol_academico(ad,u.id,'DOCENTE');
+ PERFORM pg_temp.ok011(u.roles_activos=ARRAY['DOCENTE']::TEXT[],'transicion academica atomica');
+ u:=asignar_rol_usuario(ad,u.id,'ADMINISTRADOR');
+ PERFORM pg_temp.ok011(u.roles_activos=ARRAY['ADMINISTRADOR','DOCENTE']::TEXT[] AND u.rol_principal='ADMINISTRADOR','multiples roles y prioridad');
+ SELECT asignado_en INTO ts FROM usuario_roles WHERE usuario_id=u.id AND rol_id=(SELECT id FROM roles WHERE codigo='ADMINISTRADOR');
+ PERFORM asignar_rol_usuario(ad,u.id,'ADMINISTRADOR');
+ PERFORM pg_temp.ok011((SELECT asignado_en=ts FROM usuario_roles WHERE usuario_id=u.id AND rol_id=(SELECT id FROM roles WHERE codigo='ADMINISTRADOR')),'asignacion activa idempotente');
+ u:=cambiar_rol_academico(ad,u.id,'ESTUDIANTE');
+ PERFORM pg_temp.ok011(u.roles_activos=ARRAY['ADMINISTRADOR','ESTUDIANTE']::TEXT[],'cambio academico conserva ADMINISTRADOR');
+ u:=desactivar_rol_usuario(ad,u.id,'ADMINISTRADOR');
+ PERFORM pg_temp.ok011(u.rol_principal='ESTUDIANTE','desactivar admin conserva otro administrador');
+ u:=actualizar_mi_perfil(u.id,' Mi nombre ','Mi apellido');
+ PERFORM pg_temp.ok011(u.nombre='Mi nombre' AND u.email=mail,'perfil propio sin cambiar email ni rol');
+ u:=actualizar_usuario_admin(ad,u.id,'Nombre admin','Apellido admin','qa011-edit-'||txid_current()||'@example.com');
+ PERFORM pg_temp.ok011(u.nombre='Nombre admin','edicion administrativa');
+ PERFORM actualizar_hash_usuario(u.id,u.id,pg_temp.hash011());
+ PERFORM pg_temp.error011(format('SELECT actualizar_hash_usuario(%s,%s,%L)',v.id,u.id,pg_temp.hash011()),'42501','no cambiar password ajeno');
+ u:=cambiar_estado_usuario_admin(ad,u.id,FALSE);
+ PERFORM pg_temp.ok011(NOT u.activo AND u.roles_activos=ARRAY['ESTUDIANTE']::TEXT[],'baja logica conserva roles e historial');
+ PERFORM pg_temp.error011(format('SELECT obtener_usuario(%s,%s)',u.id,u.id),'42501','inactivo sin acceso propio');
+ PERFORM pg_temp.error011(format('SELECT asignar_rol_usuario(%s,%s,''ADMINISTRADOR'')',ad,u.id),'55000','no asignar rol a cuenta inactiva');
+ PERFORM pg_temp.ok011(NOT (obtener_usuario(ad,u.id)).activo,'admin consulta inactivo');
+ u:=cambiar_estado_usuario_admin(ad,u.id,TRUE);
+ PERFORM pg_temp.ok011(u.activo,'reactivar sin cambiar historial');
+ PERFORM pg_temp.error011(format('SELECT cambiar_rol_academico(%s,%s,''ADMINISTRADOR'')',ad,u.id),'22023','admin no es rol academico');
+ PERFORM pg_temp.error011(format('SELECT obtener_usuario(%s,2147483647)',ad),'P0002','usuario inexistente');
+ PERFORM pg_temp.error011(format('SELECT cambiar_estado_usuario_admin(%s,%s,NULL)',ad,u.id),'22023','activo obligatorio');
+END;$$;
+RESET ROLE;
+-- Asociaciones docentes: desactivar DOCENTE revoca, reactivar no recupera permisos.
+DO $$DECLARE c INTEGER;e INTEGER;s INTEGER;ad INTEGER:=pg_temp.id011('admin');d INTEGER:=pg_temp.id011('docente');BEGIN
+ INSERT INTO cursos(codigo,nombre,descripcion,estado,creado_por) VALUES('QA011-'||txid_current(),'QA','QA','ACTIVO',ad) RETURNING id INTO c;
+ INSERT INTO contexto011 VALUES('curso',c);
+ INSERT INTO ediciones_curso(curso_id,codigo,nombre,fecha_inicio,fecha_fin,inscripcion_desde,inscripcion_hasta,estado,creado_por) VALUES(c,'E','E',now()-interval '1 day',now()+interval '1 year',now()-interval '1 day',now()+interval '1 month','ABIERTA',ad) RETURNING id INTO e;
+ INSERT INTO secciones(edicion_id,codigo,cupo_maximo,estado,creado_por) VALUES(e,'S',10,'ABIERTA',ad) RETURNING id INTO s;
+ INSERT INTO contexto011 VALUES('seccion',s);
+ INSERT INTO curso_editores(curso_id,usuario_id,asignado_por) VALUES(c,d,ad);
+ INSERT INTO seccion_docentes(seccion_id,usuario_id,asignado_por) VALUES(s,d,ad);
+END;$$;
+SET LOCAL ROLE plataforma_backend;
+SELECT desactivar_rol_usuario(pg_temp.id011('admin'),pg_temp.id011('docente'),'DOCENTE');
+SELECT pg_temp.ok011(NOT EXISTS(SELECT 1 FROM curso_editores WHERE usuario_id=pg_temp.id011('docente') AND activo) AND NOT EXISTS(SELECT 1 FROM seccion_docentes WHERE usuario_id=pg_temp.id011('docente') AND activo),'revocacion de asignaciones docentes');
+SELECT asignar_rol_usuario(pg_temp.id011('admin'),pg_temp.id011('docente'),'DOCENTE');
+SELECT pg_temp.ok011(NOT EXISTS(SELECT 1 FROM curso_editores WHERE usuario_id=pg_temp.id011('docente') AND activo),'reactivar rol no restaura asignaciones');
+RESET ROLE;
+-- Intentos abiertos: no retirar ESTUDIANTE ni cambiarlo a DOCENTE.
+DO $$DECLARE ad INTEGER:=pg_temp.id011('admin');u INTEGER:=pg_temp.id011('usuario');s INTEGER:=pg_temp.id011('seccion');m INTEGER;t INTEGER;i INTEGER;a public.actividades;q public.preguntas;it INTEGER;BEGIN
+ SELECT id INTO m FROM crear_modulo(ad,pg_temp.id011('curso'),'M','M',1,'PUBLICADO');
+ SELECT id INTO t FROM crear_tema(ad,m,'T','T',1,'PUBLICADO');
+ SELECT id INTO i FROM inscribir_estudiante(s,u,ad);
+ a:=crear_actividad(ad,s,t,'A','I','PRACTICA','BAJA',3,30,now()-interval '1 minute',now()+interval '1 day');
+ q:=crear_pregunta(ad,a.id,'Q','SELECCION_UNICA',1,10,NULL);
+ PERFORM crear_opcion_respuesta(ad,q.id,'A',1,TRUE);PERFORM crear_opcion_respuesta(ad,q.id,'B',2,FALSE);PERFORM publicar_actividad(ad,a.id);
+ it:=iniciar_intento(a.id,i,u);
+ INSERT INTO contexto011 VALUES('intento',it);
+END;$$;
+SET LOCAL ROLE plataforma_backend;
+SELECT pg_temp.error011(format('SELECT cambiar_rol_academico(%s,%s,''DOCENTE'')',pg_temp.id011('admin'),pg_temp.id011('usuario')),'55000','cambio con intento abierto rechazado');
+SELECT pg_temp.ok011((obtener_usuario(pg_temp.id011('admin'),pg_temp.id011('usuario'))).rol_principal='ESTUDIANTE','transicion fallida conserva rol');
+SELECT cambiar_estado_usuario_admin(pg_temp.id011('admin'),pg_temp.id011('usuario'),FALSE);
+SELECT pg_temp.ok011(NOT (obtener_usuario(pg_temp.id011('admin'),pg_temp.id011('usuario'))).activo,'se puede bloquear una cuenta con intento abierto');
+SELECT cambiar_estado_usuario_admin(pg_temp.id011('admin'),pg_temp.id011('usuario'),TRUE);
+SELECT entregar_intento(pg_temp.id011('intento'),pg_temp.id011('usuario'));
+SELECT calificar_intento(pg_temp.id011('intento'));
+SELECT cambiar_rol_academico(pg_temp.id011('admin'),pg_temp.id011('usuario'),'DOCENTE');
+SELECT pg_temp.ok011((obtener_usuario(pg_temp.id011('admin'),pg_temp.id011('usuario'))).rol_principal='DOCENTE' AND EXISTS(SELECT 1 FROM intentos WHERE id=pg_temp.id011('intento') AND estado='CALIFICADO'),'cambio conserva inscripcion e intento calificado');
+RESET ROLE;
+-- Hacer al admin del fixture el unico administrador activo; todo se revierte.
+UPDATE usuarios u SET activo=FALSE WHERE u.id<>pg_temp.id011('admin') AND u.activo AND EXISTS(SELECT 1 FROM usuario_roles ur JOIN roles r ON r.id=ur.rol_id WHERE ur.usuario_id=u.id AND ur.activo AND r.codigo='ADMINISTRADOR');
+-- Un UPDATE/DELETE masivo no puede eliminar todos los administradores.
+DO $$DECLARE ad INTEGER:=pg_temp.id011('admin');v public.usuario_resumen_011;BEGIN
+ v:=crear_usuario_admin(ad,'Segundo','Admin','qa011-bulk-'||txid_current()||'@example.com',pg_temp.hash011(),'ADMINISTRADOR');
+ PERFORM pg_temp.error011(format('UPDATE usuarios SET activo=FALSE WHERE id IN (%s,%s)',ad,v.id),'55000','UPDATE masivo conserva administrador');
+ PERFORM pg_temp.ok011((SELECT count(*)=2 FROM usuarios WHERE id IN(ad,v.id) AND activo),'UPDATE masivo revertido completo');
+ PERFORM pg_temp.error011(format('DELETE FROM usuario_roles WHERE usuario_id IN (%s,%s) AND rol_id=(SELECT id FROM roles WHERE codigo=''ADMINISTRADOR'')',ad,v.id),'55000','DELETE masivo conserva administrador');
+ PERFORM cambiar_estado_usuario_admin(ad,v.id,FALSE);
+END;$$;
+SET LOCAL ROLE plataforma_backend;
+SELECT pg_temp.error011(format('SELECT cambiar_estado_usuario_admin(%s,%s,FALSE)',pg_temp.id011('admin'),pg_temp.id011('admin')),'55000','ultimo administrador no se desactiva');
+SELECT pg_temp.error011(format('SELECT desactivar_rol_usuario(%s,%s,''ADMINISTRADOR'')',pg_temp.id011('admin'),pg_temp.id011('admin')),'55000','ultimo rol administrador no se desactiva');
+RESET ROLE;
+SELECT pg_temp.error011(format('UPDATE usuarios SET activo=FALSE WHERE id=%s',pg_temp.id011('admin')),'55000','trigger protege administrador ante SQL directo');
+SELECT pg_temp.error011(format('DELETE FROM usuario_roles WHERE usuario_id=%s AND rol_id=(SELECT id FROM roles WHERE codigo=''ADMINISTRADOR'')',pg_temp.id011('admin')),'55000','trigger protege DELETE del ultimo rol');
+SELECT pg_temp.error011(format('INSERT INTO usuario_roles(usuario_id,rol_id,asignado_por) SELECT %s,id,%s FROM roles WHERE codigo=''ESTUDIANTE''',pg_temp.id011('docente'),pg_temp.id011('admin')),'55000','trigger impide rol academico opuesto por INSERT directo');
+DO $$BEGIN RAISE NOTICE 'PRUEBAS 011 COMPLETADAS.';END;$$;
+ROLLBACK;
+BEGIN ISOLATION LEVEL REPEATABLE READ;
+SET LOCAL ROLE plataforma_backend;
+DO $$ BEGIN BEGIN PERFORM registrar_estudiante('N','A','no@example.com','$2b$10$'||repeat('A',53));RAISE EXCEPTION 'FALLO 011 aislamiento';EXCEPTION WHEN SQLSTATE '25000' THEN RAISE NOTICE 'OK 011: aislamiento REPEATABLE READ rechazado';END;END;$$;
+ROLLBACK;

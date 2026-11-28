@@ -1,6 +1,6 @@
-# Diccionario de datos — BD-005-v1
+# Diccionario de datos — consolidación 010/011
 
-Referencia: migraciones 001–005 y seguridad. Fecha: 10 de noviembre de 2026.
+Base de las tablas: migraciones 001–005 y seguridad; ampliaciones 009–011 documentadas al final. La estructura de esas tablas se conserva; 009 añade dificultad y 011 un tipo compuesto de retorno.
 Los tipos, nulabilidad, defaults, restricciones e índices siguientes se extrajeron del catálogo
 PostgreSQL después de instalar los scripts en PGlite; no se dedujeron de ejemplos JSON.
 
@@ -51,7 +51,7 @@ El ID del actor nunca procede del body. No se fijan aquí rutas HTTP como implem
 ### Campos internos y acceso
 
 - usuarios.password_hash: solo autenticación interna, nunca respuestas de API.
-- opciones_respuestas.es_correcta: el rol backend no tiene lectura directa de esa columna.
+- opciones_respuestas.es_correcta: el rol backend no tiene lectura directa de esa columna. 010 permite su lectura mediante funciones editoriales autorizadas; 007 no la devuelve al estudiante.
 - preguntas.explicacion: el backend puede leerla, pero debe evitar exponer la solución antes del momento autorizado.
 - Puntajes: el navegador no los asigna; las funciones de calificación los calculan.
 - Intentos, inscripciones y resultados: filtrar por identidad y autorización; no hay RLS.
@@ -621,12 +621,14 @@ Los DTOs definitivos deben acordarse con backend/frontend y validarse con ejempl
 
 
 
-## Ampliación propuesta BD-009-v1 — 22 de noviembre de 2026
 
-Estado: validación embebida aprobada e instalación y pruebas en base nueva y base local confirmadas por Jeison; pendiente de aprobación del equipo e integración HTTP. Esta sección amplía el contenido anterior, cuyo estado histórico se conserva.
 
-La migración `009_dificultad_candidatas.sql` agrega `actividades.dificultad` (TEXT nullable, BAJA/MEDIA/ALTA, sin default) y `listar_candidatas_actividad(integer, integer, integer, integer DEFAULT NULL)`. Las actividades anteriores quedan sin clasificar; no se alteran notas, credenciales ni firmas de 007/008. La selección según reduced/current/increased se hace en el backend con referencia relativa y el ejemplo JavaScript suministrado.
+## Ampliaciones vigentes 009–011
 
-[Reglas, tipos devueltos, permisos, seed, instalación aislada y responsabilidades de integración](DIFICULTAD_ACTIVIDADES_009.md). [Resultados de validación](../test/RESULTADO_VALIDACION_009.md). No interpretar esta propuesta como funcionalidad ya disponible en endpoints o pantallas.
+009 agrega actividades.dificultad TEXT nullable, sin default, con BAJA/MEDIA/ALTA. NULL es sin clasificar; no se cambia contenido antiguo automáticamente. Véase su guía para referencia y candidatas.
 
-La guía 009 incluye dos rutas de instalación: base nueva y actualización de una base local con 001–008. Si 009 ya se aplicó correctamente, no volver a ejecutarla.
+010 no cambia las columnas: sus operaciones usan los tipos fila de actividades, preguntas y opciones_respuestas. La lectura editorial autorizada de opciones sí incluye es_correcta; el cuestionario estudiante 007 nunca lo incluye.
+
+011 crea public.usuario_resumen_011: id INTEGER; nombre/apellido VARCHAR(50); email TEXT; activo BOOLEAN; creado_en/actualizado_en TIMESTAMPTZ; roles_activos TEXT[] y rol_principal TEXT nullable. No contiene password_hash. Roles activos describe asignaciones, no acceso efectivo de una cuenta bloqueada. Orden principal ADMINISTRADOR > DOCENTE > ESTUDIANTE.
+
+Las pruebas funcionales y concurrentes 010/011 fueron confirmadas localmente por Jeison. La integración HTTP y el cierre del registro antiguo siguen pendientes. [Contrato vigente](CONTRATO_INTEGRACION_BD.md), [firmas 010](FIRMAS_010.md) y [firmas 011](FIRMAS_USUARIOS_011.md).

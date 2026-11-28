@@ -1,0 +1,12 @@
+PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+OK CONCURRENCIA 011: Desactivar dos administradores conserva uno: 55000, esperado 55000
+OK CONCURRENCIA 011: un administrador efectivo permanece
+OK CONCURRENCIA 011: Desactivar los dos roles conserva uno: 55000, esperado 55000
+OK CONCURRENCIA 011: Asignacion academica opuesta serializada: 55000, esperado 55000
+OK CONCURRENCIA 011: no existen dos roles academicos simultaneos
+OK CONCURRENCIA 011: Registro duplicado concurrente: 23505, esperado 23505
+OK CONCURRENCIA 011: un solo registro confirmado
+OK CONCURRENCIA 011: Bloquear cuenta impide cambio de perfil posterior: 42501, esperado 42501
+OK CONCURRENCIA 011: no cambia el perfil tras bloquear la cuenta
+PRUEBAS CONCURRENCIA 011 COMPLETADAS: cinco carreras y cuatro comprobaciones.
+Fixtures conservados en la base aislada. No usar sus cuentas para login ni reutilizar esta base para repetir la prueba.
