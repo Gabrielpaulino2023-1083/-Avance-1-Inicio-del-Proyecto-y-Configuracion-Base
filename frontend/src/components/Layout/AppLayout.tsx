@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { CapIcon, LogoutIcon } from "../../features/auth/icons";
 import "./nav.css";
+import { USER_ADMIN_ENABLED } from "../../services/userAdminService";
 
 const baseLinks = [
   { to: "/", label: "Dashboard" },
@@ -23,17 +24,13 @@ export default function AppLayout() {
 
     // Cada rol ve solo las secciones que usa.
   const links =
-    user?.rol === "ADMINISTRADOR"
+        user?.rol === "ADMINISTRADOR"
       ? [
           { to: "/", label: "Inicio" },
           { to: "/cursos", label: "Cursos" },
           { to: "/gestion", label: "Contenido" },
+          ...(USER_ADMIN_ENABLED ? [{ to: "/usuarios", label: "Usuarios" }] : []),
         ]
-      : user?.rol === "DOCENTE"
-        ? [
-            { to: "/", label: "Inicio" },
-            { to: "/gestion", label: "Contenido" },
-          ]
         : baseLinks;
 
   function handleLogout() {
