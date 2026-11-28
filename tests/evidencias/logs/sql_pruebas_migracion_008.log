@@ -1,0 +1,8 @@
+BEGIN
+SET
+UPDATE 1
+SET
+DO
+ROLLBACK
+
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_008.sql:63: NOTICE:  PRUEBAS 008 COMPLETADAS: selector, contexto, tablero, motor y permisos.

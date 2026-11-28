@@ -1,0 +1,39 @@
+◇ injected env (0) from .env
+▶ Frontend E2E — autenticación y navegación
+  ✔ CP-UI-01 login real desde el navegador contra el backend (CORS) (32060.439104ms)
+  ✔ CP-UI-02 login válido en la pantalla (2506.689281ms)
+  ✔ CP-UI-03 login inválido en la pantalla (2404.958675ms)
+  ✔ CP-UI-04 validación de campos vacíos e inválidos en el formulario (3216.6929ms)
+  ✔ CP-UI-05 rutas protegidas sin sesión redirigen a /login (2860.102271ms)
+  ✔ CP-UI-06 registro desde la pantalla y login con la cuenta nueva (3812.119286ms)
+  ✔ CP-UI-07 navegación entre pantallas sin recarga (2616.998597ms)
+  ✔ CP-UI-08 la sesión se conserva al recargar y se borra al cerrar sesión (3314.798907ms)
+  ✔ CP-UI-18 el menú muestra solo las secciones de cada rol (6886.867311ms)
+✔ Frontend E2E — autenticación y navegación (60207.753274ms)
+▶ Frontend E2E — motor adaptativo y datos reales
+  ✔ CP-UI-09 Dashboard con datos reales del backend (33405.51573ms)
+  ✔ CP-UI-10 cuestionario real de Contenido: responder y entregar (4511.754163ms)
+  ✔ CP-UI-11 las respuestas del estudiante se envían y guardan en el backend (2847.319347ms)
+  ✔ CP-UI-12 recorrido visual completo del estudiante con recomendación real (7844.145724ms)
+  ✔ CP-UI-13 estudiante sin intentos ni cursos ve avisos, no errores (4617.673853ms)
+  ✔ CP-UI-14 error del motor: la pantalla informa sin romperse (3626.73285ms)
+✔ Frontend E2E — motor adaptativo y datos reales (56869.032891ms)
+▶ Frontend E2E — administración de cursos y contenido
+  ✔ CP-UI-16 el administrador crea un curso desde la pantalla (4103.907711ms)
+  ✔ CP-UI-17 el docente crea un módulo de su curso desde la pantalla (3329.449938ms)
+✔ Frontend E2E — administración de cursos y contenido (7433.703379ms)
+▶ Frontend E2E — pendientes de integración y robustez
+  ✔ CP-UI-19 el docente elige su curso de una lista (cursos administrables) (2171.917172ms)
+  ✔ CP-UI-20 el Dashboard sigue funcionando cuando el motor falla (34369.114562ms)
+✔ Frontend E2E — pendientes de integración y robustez (36541.380327ms)
+▶ Frontend E2E — desconexión del backend
+  ✔ CP-UI-15 el frontend avisa cuando el backend se desconecta (5708.20753ms)
+✔ Frontend E2E — desconexión del backend (5708.404472ms)
+ℹ tests 20
+ℹ suites 5
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 167407.194103

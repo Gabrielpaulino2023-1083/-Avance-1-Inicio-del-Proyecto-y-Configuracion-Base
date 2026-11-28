@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /home/claude/v4/proyecto-grupo4/adaptive-engine
+plugins: platformdirs-4.13.5, anyio-4.15.1
+collecting ... collected 20 items
+
+tests/test_engine.py::TestAdaptiveEngine::test_boolean_numeric_fields 
+tests/test_engine.py::TestAdaptiveEngine::test_boolean_numeric_fields PASSED [  5%]
+tests/test_engine.py::TestAdaptiveEngine::test_cli_invalid_constants 
+tests/test_engine.py::TestAdaptiveEngine::test_cli_invalid_constants PASSED [ 10%]
+tests/test_engine.py::TestAdaptiveEngine::test_cli_invalid_json_root PASSED [ 15%]
+tests/test_engine.py::TestAdaptiveEngine::test_cli_malformed_json PASSED [ 20%]
+tests/test_engine.py::TestAdaptiveEngine::test_cli_valid_json PASSED     [ 25%]
+tests/test_engine.py::TestAdaptiveEngine::test_decimal_integer_fields 
+tests/test_engine.py::TestAdaptiveEngine::test_decimal_integer_fields PASSED [ 30%]
+tests/test_engine.py::TestAdaptiveEngine::test_empty_interactions PASSED [ 35%]
+tests/test_engine.py::TestAdaptiveEngine::test_high_performance PASSED   [ 40%]
+tests/test_engine.py::TestAdaptiveEngine::test_infinity_values 
+tests/test_engine.py::TestAdaptiveEngine::test_infinity_values PASSED    [ 45%]
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_interaction_item PASSED [ 50%]
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_interactions_structure PASSED [ 55%]
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_json_root 
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_json_root PASSED  [ 60%]
+tests/test_engine.py::TestAdaptiveEngine::test_invalid_score PASSED      [ 65%]
+tests/test_engine.py::TestAdaptiveEngine::test_low_performance PASSED    [ 70%]
+tests/test_engine.py::TestAdaptiveEngine::test_medium_performance PASSED [ 75%]
+tests/test_engine.py::TestAdaptiveEngine::test_missing_required_field PASSED [ 80%]
+tests/test_engine.py::TestAdaptiveEngine::test_missing_student_id PASSED [ 85%]
+tests/test_engine.py::TestAdaptiveEngine::test_missing_topic PASSED      [ 90%]
+tests/test_engine.py::TestAdaptiveEngine::test_nan_values PASSED         [ 95%]
+tests/test_engine.py::TestAdaptiveEngine::test_valid_decimal_fields PASSED [100%]
+
+- generated xml file: /home/claude/v4/proyecto-grupo4/tests/reportes/junit/motor_daniel.xml -
+==================== 20 passed, 26 subtests passed in 1.56s ====================

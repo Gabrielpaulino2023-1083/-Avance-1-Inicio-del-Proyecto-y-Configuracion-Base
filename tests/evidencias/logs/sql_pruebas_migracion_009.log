@@ -1,0 +1,149 @@
+BEGIN
+SET
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+INSERT 0 0
+DO
+GRANT
+SET
+DO
+RESET
+ error009 
+----------
+ 
+(1 row)
+
+ error009 
+----------
+ 
+(1 row)
+
+ error009 
+----------
+ 
+(1 row)
+
+UPDATE 1
+UPDATE 1
+ ok009 
+-------
+ 
+(1 row)
+
+UPDATE 1
+SET
+ ok009 
+-------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+ error009 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ error009 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ error009 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ error009 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ error009 
+----------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+SET
+DO
+RESET
+UPDATE 1
+ error009 
+----------
+ 
+(1 row)
+
+SET
+ ok009 
+-------
+ 
+(1 row)
+
+RESET
+UPDATE 11
+SET
+ ok009 
+-------
+ 
+(1 row)
+
+RESET
+DO
+ROLLBACK
+
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: sin historial no hay referencia
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: referencia sin intento propio esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: solo referencia y tres niveles, sin futuras/cerradas/agotadas/abiertas/ocultas/ajenas
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: referencia media y repeticion ilimitada
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: candidata distinta sin intentos
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: referencia automatica ultimo calificado aun agotada
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: lecturas no crean intentos
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: EXECUTE backend
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: sin escritura directa nueva
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: sin soluciones directas
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: propietario y search_path
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: sin EXECUTE PUBLIC
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: actor ajeno esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: inscripcion ajena esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: referencia otro tema esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: actor nulo esperado 22023, recibido 22023
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: inscripcion nula esperado 22023, recibido 22023
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: tema invalido esperado 22023, recibido 22023
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: referencia invalida esperado 22023, recibido 22023
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:113: NOTICE:  OK 009: tema inexistente esperado P0002, recibido P0002
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:115: NOTICE:  OK 009: nivel desconocido esperado 23514, recibido 23514
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:116: NOTICE:  OK 009: reclasificacion con intentos esperado 55000, recibido 55000
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:117: NOTICE:  OK 009: borrar nivel con intentos esperado 55000, recibido 55000
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:120: NOTICE:  OK 009: editable sin intentos
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:123: NOTICE:  OK 009: intento vencido abierto no es candidato
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:128: NOTICE:  OK 009: cuenta inactiva esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:133: NOTICE:  OK 009: rol inactivo esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:138: NOTICE:  OK 009: inscripcion retirada esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:143: NOTICE:  OK 009: curso archivado esperado 42501, recibido 42501
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:148: NOTICE:  OK 009: padre oculto esperado P0002, recibido P0002
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:159: NOTICE:  OK 009: ultimo sin clasificar no reemplazado por referencia vieja
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:163: NOTICE:  OK 009: primera clasificacion unica con historial esperado 55000, recibido 55000
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:165: NOTICE:  OK 009: primera clasificacion habilita referencia
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:169: NOTICE:  OK 009: sin candidatas lista vacia
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_009.sql:171: NOTICE:  PRUEBAS 009 COMPLETADAS.

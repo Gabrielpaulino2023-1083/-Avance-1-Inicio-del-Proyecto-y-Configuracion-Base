@@ -1,0 +1,72 @@
+BEGIN
+SET
+CREATE TABLE
+INSERT 0 0
+DO
+GRANT
+CREATE FUNCTION
+SET
+DO
+RESET
+UPDATE 1
+SET
+ esperar_error_006 
+-------------------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ esperar_error_006 
+-------------------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+UPDATE 1
+SET
+ esperar_error_006 
+-------------------
+ 
+(1 row)
+
+RESET
+UPDATE 1
+DO
+SET
+ esperar_error_006 
+-------------------
+ 
+(1 row)
+
+RESET
+DELETE 1
+SET
+DO
+RESET
+                                              cambiar_estado_curso_admin                                              
+----------------------------------------------------------------------------------------------------------------------
+ (11,T006-OTRO-2948,"Otro curso",Prueba,ARCHIVADO,14,"2026-11-24 17:20:45.203232+00","2026-11-24 17:20:45.232439+00")
+(1 row)
+
+SET
+ esperar_error_006 
+-------------------
+ 
+(1 row)
+
+ id | curso_id | nombre | descripcion | orden |  estado  | creado_por |           creado_en           |        actualizado_en         | total_temas 
+----+----------+--------+-------------+-------+----------+------------+-------------------------------+-------------------------------+-------------
+ 10 |       11 | Otro   | Descripcion |     1 | BORRADOR |         14 | 2026-11-24 17:20:45.203232+00 | 2026-11-24 17:20:45.203232+00 |           0
+(1 row)
+
+DO
+ROLLBACK
+
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_006.sql:101: NOTICE:  OK 1: permisos, creacion docente/admin, listados y total_temas.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_006.sql:101: NOTICE:  OK 2: rechazo estudiante en 12 operaciones, orden, campos, estados y dependencias.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_006.sql:150: NOTICE:  OK 3: revocacion de cuenta/rol/editor, dependencias y borrado valido.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_006.sql:157: NOTICE:  PRUEBAS 006 COMPLETADAS: todos los casos incluidos pasaron.

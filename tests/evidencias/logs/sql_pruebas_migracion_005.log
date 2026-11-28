@@ -1,0 +1,30 @@
+BEGIN
+SET
+CREATE TABLE
+INSERT 0 0
+DO
+GRANT
+SET
+DO
+RESET
+INSERT 0 1
+SET
+DO
+RESET
+UPDATE 1
+SET
+DO
+RESET
+UPDATE 1
+SET
+DO
+ROLLBACK
+
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:112: NOTICE:  OK 1: permisos restringidos y funcion auxiliar privada.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:112: NOTICE:  OK 2: autorizacion y creacion en BORRADOR.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:112: NOTICE:  OK 3: restricciones, consultas y paginacion.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:112: NOTICE:  OK 4: edicion, activacion y repeticion.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:129: NOTICE:  OK 5: archivado con edicion PLANIFICADA rechazado.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:152: NOTICE:  OK 6: baja logica, historial conservado y bloqueos posteriores.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:166: NOTICE:  OK 7: rol desactivado rechazado.
+psql:/home/claude/v4/proyecto-grupo4/database/test/pruebas_migracion_005.sql:166: NOTICE:  PRUEBAS 005 COMPLETADAS: todos los casos incluidos pasaron.
